@@ -48,7 +48,7 @@ CREATE SEQUENCE seq_ingredientes
 
 CREATE TABLE categoria_receitas (
 	id_categoria_receita NUMBER(11) NOT NULL,
-	nome_categoria NUMBER(11) NOT NULL,
+	nome_categoria VARCHAR2(80) NOT NULL,
 	id_super_categoria NUMBER(11) NULL,
 	selecionavel NUMBER(1) NOT NULL,
 	slug VARCHAR2(80) NOT NULL,
