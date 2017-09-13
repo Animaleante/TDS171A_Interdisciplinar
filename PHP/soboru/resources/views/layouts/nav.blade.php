@@ -58,7 +58,8 @@
         
         <nav class="user-nav" role="navigation">
             <ul>
-                <li class="light current-menu-item">
+                {{-- <li class="light current-menu-item"> --}}
+                <li class="light">
                     <a href="find_recipe.html" title="Search for recipes">
                         <i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span>
                     </a>
