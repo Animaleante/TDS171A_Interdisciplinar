@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <main class="main" role="main">
+    <main class="main errorPage" role="main">
         <!--wrap-->
         <div class="wrap clearfix">
             <!--row-->

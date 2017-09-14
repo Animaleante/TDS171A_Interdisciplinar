@@ -1,34 +1,11 @@
 @extends('layouts.master')
 
 @section('content')
-{{-- <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
-
     <main class="main" role="main">
-        <!--intro-->
         <div class="intro">
             <figure class="bg"><img src="images/intro.jpg" alt="" /></figure>
-            
-            <!--wrap-->
+
             <div class="wrap clearfix">
-                <!--row-->
                 <div class="row">
                     <article class="three-fourth text">
                         <h1>Welcome to SocialChef!</h1>
@@ -38,7 +15,6 @@
                         <p>Already a member? Click <a href="login.html">here</a> to login.</p>
                     </article>
                     
-                    <!--search recipes widget-->
                     <div class="one-fourth">
                         <div class="widget container">
                             <div class="textwrap">
@@ -69,28 +45,19 @@
                             </form>
                         </div>
                     </div>
-                    <!--//search recipes widget-->
                 </div>
-                <!--//row-->
             </div>
-            <!--//wrap-->
         </div>
-        <!--//intro-->
         
-        <!--wrap-->
         <div class="wrap clearfix">
-            <!--row-->
             <div class="row">
-                <!--content-->
                 <section class="content full-width">
                     <div class="icons dynamic-numbers">
                         <header class="s-title">
                             <h2 class="ribbon large">SocialChef in numbers</h2>
                         </header>
                         
-                        <!--row-->
                         <div class="row">
-                            <!--item-->
                             <div class="one-sixth">
                                 <div class="container">
                                     <i class="icon icon-themeenergy_chef-hat"></i>
@@ -98,9 +65,7 @@
                                     <span class="subtitle">members</span>
                                 </div>
                             </div>
-                            <!--//item-->
                             
-                            <!--item-->
                             <div class="one-sixth">
                                 <div class="container">
                                     <i class="icon icon-themeenergy_pan"></i>
@@ -108,9 +73,7 @@
                                     <span class="subtitle">recipes</span>
                                 </div>
                             </div>
-                            <!--//item-->
                             
-                            <!--item-->
                             <div class="one-sixth">
                                 <div class="container">
                                     <i class="icon icon-themeenergy_image"></i>
@@ -118,9 +81,7 @@
                                     <span class="subtitle">photos</span>
                                 </div>
                             </div>
-                            <!--//item-->
                             
-                            <!--item-->
                             <div class="one-sixth">
                                 <div class="container">
                                     <i class="icon icon-themeenergy_pencil"></i>
@@ -128,9 +89,7 @@
                                     <span class="subtitle">forum posts</span>
                                 </div>
                             </div>
-                            <!--//item-->
                             
-                            <!--item-->
                             <div class="one-sixth">
                                 <div class="container">
                                     <i class="icon icon-themeenergy_chat-bubbles"></i>
@@ -138,9 +97,7 @@
                                     <span class="subtitle">comments</span>
                                 </div>
                             </div>
-                            <!--//item-->
                             
-                            <!--item-->
                             <div class="one-sixth">
                                 <div class="container">
                                     <i class="icon icon-themeenergy_stars"></i>
@@ -148,24 +105,17 @@
                                     <span class="subtitle">articles</span>
                                 </div>
                             </div>
-                            <!--//item-->
                         
                             <div class="cta">
                                 <a href="login.html" class="button big">Join us!</a>
                             </div>
                         </div>
-                        <!--//row-->
                     </div>
                 </section>
-                <!--//content-->
             
-                <!--content-->
                 <section class="content three-fourth">
-                    <!--cwrap-->
                     <div class="cwrap">
-                        <!--entries-->
                         <div class="entries row">
-                            <!--featured recipe-->
                             <div class="featured two-third">
                                 <header class="s-title">
                                     <h2 class="ribbon">Recipe of the Day</h2>
@@ -187,9 +137,7 @@
                                     </div>
                                 </article>
                             </div>
-                            <!--//featured recipe-->
                             
-                            <!--featured member-->
                             <div class="featured one-third">
                                 <header class="s-title">
                                     <h2 class="ribbon star">Featured member</h2>
@@ -211,21 +159,15 @@
                                     </div>
                                 </article>
                             </div>
-                            <!--//featured member-->
                         </div>
-                        <!--//entries-->
                     </div>
-                    <!--//cwrap-->
                 
-                    <!--cwrap-->
                     <div class="cwrap">
                         <header class="s-title">
                             <h2 class="ribbon bright">Latest recipes</h2>
                         </header>
                         
-                        <!--entries-->
                         <div class="entries row">
-                            <!--item-->
                             <div class="entry one-third">
                                 <figure>
                                     <img src="images/img6.jpg" alt="" />
@@ -242,9 +184,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--item-->
                             
-                            <!--item-->
                             <div class="entry one-third">
                                 <figure>
                                     <img src="images/img5.jpg" alt="" />
@@ -261,9 +201,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--item-->
                             
-                            <!--item-->
                             <div class="entry one-third">
                                 <figure>
                                     <img src="images/img8.jpg" alt="" />
@@ -280,9 +218,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--item-->
                             
-                            <!--item-->
                             <div class="entry one-third">
                                 <figure>
                                     <img src="images/img7.jpg" alt="" />
@@ -299,9 +235,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--item-->
                             
-                            <!--item-->
                             <div class="entry one-third">
                                 <figure>
                                     <img src="images/img3.jpg" alt="" />
@@ -318,9 +252,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--item-->
                             
-                            <!--item-->
                             <div class="entry one-third">
                                 <figure>
                                     <img src="images/img4.jpg" alt="" />
@@ -337,25 +269,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--item-->
                             
                             <div class="quicklinks">
                                 <a href="#" class="button">More recipes</a>
                                 <a href="javascript:void(0)" class="button scroll-to-top">Back to top</a>
                             </div>
                         </div>
-                        <!--//entries-->
                     </div>
-                    <!--//cwrap-->
                 
-                    <!--cwrap-->
                     <div class="cwrap">
                         <header class="s-title">
                             <h2 class="ribbon bright">Latest articles</h2>
                         </header>
-                        <!--entries-->
                         <div class="entries row">
-                            <!--item-->
                             <div class="entry one-third">
                                 <figure>
                                     <img src="images/img12.jpg" alt="" />
@@ -374,9 +300,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--item-->
                             
-                            <!--item-->
                             <div class="entry one-third">
                                 <figure>
                                     <img src="images/img11.jpg" alt="" />
@@ -395,9 +319,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--item-->
                             
-                            <!--item-->
                             <div class="entry one-third">
                                 <figure>
                                     <img src="images/img10.jpg" alt="" />
@@ -416,21 +338,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--item-->
                             
                             <div class="quicklinks">
                                 <a href="#" class="button">More posts</a>
                                 <a href="javascript:void(0)" class="button scroll-to-top">Back to top</a>
                             </div>
                         </div>
-                        <!--//entries-->
                     </div>
-                    <!--//cwrap-->
                 </section>
-                <!--//content-->
         
             
-                <!--right sidebar-->
                 <aside class="sidebar one-fourth">
                     <div class="widget">
                         <h3>Recipe Categories</h3>
@@ -523,13 +440,9 @@
                     </div>
                 </aside>
             </div>
-            <!--//right sidebar-->
         </div>
-        <!--//wrap-->
     </main>
-    <!--//main-->
     
-    <!--call to action-->
     <section class="cta">
         <div class="wrap clearfix">
             <a href="http://themeforest.net/item/socialchef-social-recipe-html-template/8568727?ref=themeenergy" class="button big white right">Purchase theme</a>
