@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-	<!-- <div class="container">
+	<div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
@@ -135,7 +135,7 @@
                 </div>
             </div>
         </div>
-    </div>-->
+    </div>
 	
     <main class="main" role="main">
         <div class="wrap clearfix">
@@ -162,24 +162,33 @@
 							
 							<div class="f-row">
 								<label>
-									<input type="date" placeholder="Retype password" name="nasc" />
-									Data de Nascimento
+									Data de Nascimento: 
+                                    <input type="date" placeholder="Retype password" name="nasc" />
 								</label>
 							</div>
 							<div class="f-row">
-								<label style="margin-right: 10px;">
+                                <label>
+                                    Sexo: 
+                                </label>
+								{{-- <label style="margin-right: 10px;">
 									<input type="radio" name="sexo_id" checked />
 									Feminino
 								</label>
 								<label>
 									<input type="radio" name="sexo_id" />
 									Masculino
-								</label>
+								</label> --}}
+                                @foreach ($sexos as $sexo)
+                                    <label>
+                                        <input type="radio" name="sexo_id" value="{{ $sexo->id }}" />
+                                        {{ $sexo->nome_sexo }}
+                                    </label>
+                                @endforeach
 							</div>
 							<div class="f-row">
 								<label>
-									<input type="checkbox" name="notificacao_email" /> 
-									Receber notificações por e-mail
+									Receber notificações por e-mail:
+                                    <input type="checkbox" name="notificacao_email" /> 
 								</label>
 							</div>
 							

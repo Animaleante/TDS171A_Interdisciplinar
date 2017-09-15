@@ -40,6 +40,17 @@ class RegisterController extends Controller
     }
 
     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        $sexos = \App\Models\Sexo::all();
+        return view('auth.register', compact("sexos"));
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
