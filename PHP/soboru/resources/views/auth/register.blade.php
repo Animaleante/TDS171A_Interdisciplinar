@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container">
+	<!-- <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
@@ -135,40 +135,62 @@
                 </div>
             </div>
         </div>
-    </div>
-
+    </div>-->
+	
     <main class="main" role="main">
-        <!--wrap-->
         <div class="wrap clearfix">
-            <!--row-->
             <div class="row">
-            <!--content-->
                 <section class="content center full-width">
                     <div class="modal container">
                         <h3>Register</h3>
-                        <div class="f-row">
-                            <input type="text" placeholder="Your name" />
-                        </div>
-                        <div class="f-row">
-                            <input type="email" placeholder="Your email" />
-                        </div>
-                        <div class="f-row">
-                            <input type="password" placeholder="Your password" />
-                        </div>
-                        <div class="f-row">
-                            <input type="password" placeholder="Retype password" />
-                        </div>
-                        
-                        <div class="f-row bwrap">
-                            <input type="submit" value="register" />
-                        </div>
+						
+                        <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                            {{ csrf_field() }}
+							
+							<div class="f-row">
+								<input type="text" placeholder="Your name" name="nome_usuario" />
+							</div>
+							<div class="f-row">
+								<input type="email" placeholder="Your email" name="email" />
+							</div>
+							<div class="f-row">
+								<input type="password" placeholder="Your password" name="password" />
+							</div>
+							<div class="f-row">
+								<input type="password" placeholder="Retype password" name="password_confirmation" />
+							</div>
+							
+							<div class="f-row">
+								<label>
+									<input type="date" placeholder="Retype password" name="nasc" />
+									Data de Nascimento
+								</label>
+							</div>
+							<div class="f-row">
+								<label style="margin-right: 10px;">
+									<input type="radio" name="sexo_id" checked />
+									Feminino
+								</label>
+								<label>
+									<input type="radio" name="sexo_id" />
+									Masculino
+								</label>
+							</div>
+							<div class="f-row">
+								<label>
+									<input type="checkbox" name="notificacao_email" /> 
+									Receber notificações por e-mail
+								</label>
+							</div>
+							
+							<div class="f-row bwrap">
+								<input type="submit" value="register" />
+							</div>
+						</form>
                         <p>Already have an account yet? <a href="login.html">Log in.</a></p>
                     </div>
                 </section>
-                <!--//content-->
             </div>
-            <!--//row-->
         </div>
-        <!--//wrap-->
     </main>
 @endsection
