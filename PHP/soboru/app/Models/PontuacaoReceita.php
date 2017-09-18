@@ -6,5 +6,11 @@ namespace App\Models;
 
 class PontuacaoReceita extends Model
 {
-    //
+    public function user() {
+    	return $this->belongsTo(User::class);
+    }
+    
+    public function receita() {
+    	return $this->belongsTo(Receita::class);
+    }
 }

@@ -57,7 +57,9 @@ class User extends Authenticatable
     }
 
     public function pontuacao() {
-        return $this->hasMany(PontuacaoReceita::class);
+        // return $this->hasMany(PontuacaoReceita::class);
+        // return $this->belongsToMany(PontuacaoReceita::class);
+        return $this->belongsToMany(Receita::class, 'pontuacao_receitas')->withPivot('qty');
     }
 
     public function comentarios() {
