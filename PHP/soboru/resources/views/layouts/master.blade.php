@@ -15,6 +15,8 @@
         <link href="http://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700,800" rel="stylesheet">
         <script src="https://use.fontawesome.com/e808bf9397.js"></script>
         <link rel="shortcut icon" href="images/favicon.ico" />
+
+        @yield('styles')
         
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -42,6 +44,8 @@
         <script src="{{ asset('js/jquery.uniform.min.js') }}"></script>
         <script src="{{ asset('js/jquery.slicknav.min.js') }}"></script>
         <script src="{{ asset('js/scripts.js') }}"></script>
+
+        @yield('scripts')
     </body>
 </html>
 

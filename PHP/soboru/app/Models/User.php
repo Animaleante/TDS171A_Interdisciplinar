@@ -85,7 +85,7 @@ class User extends Authenticatable
     /**
      * Criar receita com esse usuario
     */
-    public function publish(Receita $receita) {
+    /*public function publish(Receita $receita) {
         $this->receitas()->save($receita);
-    }
+    }*/
 }

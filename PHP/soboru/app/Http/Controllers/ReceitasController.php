@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Receita;
 use App\Models\Categoria;
 use App\Models\Ingrediente;
+use App\Models\MedidasIngrediente;
 
 class ReceitasController extends Controller
 {
@@ -20,8 +21,9 @@ class ReceitasController extends Controller
 
     public function create() {
     	$categorias = Categoria::all();
-    	$ingredientes = Ingrediente::all();
-    	return view('receita.create', compact('categorias', 'ingredientes'));
+        $ingredientes = Ingrediente::all();
+    	$medidas = MedidasIngrediente::all();
+    	return view('receita.create', compact('categorias', 'ingredientes', 'medidas'));
     }
 
     public function store() {
@@ -37,13 +39,29 @@ class ReceitasController extends Controller
             'img_path' => 'required',
         ]);
 
-        auth()->user()->publish(
+        /*auth()->user()->publish(
         	new Receita(request(['nome_receita', 'categoria_id', 'porcao', 'tempo_preparo', 'modo_preparo', 'img_path']))
-        );
+        );*/
 
-        /*Receita::create(request([
+        /*
+            $postCategories = [];
+            foreach ($categories as $category) {
+                if (!is_numeric($category)) {
+                    $postCategories[] = Category::create([
+                        'name' => $category,
+                        'slug' => str_slug($category)
+                    ])->id;
+                } else {
+                    $postCategories[] = $category;
+                }
+            }
 
-        ]));*/
+            $post->categories()->attach($postCategories);
+         */
+
+        $receita = Receita::create(request([
+
+        ]));
 
         return redirect('/');
     }

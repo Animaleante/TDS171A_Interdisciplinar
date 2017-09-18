@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('styles')
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+@endsection
+
 @section('content')
 	<main class="main" role="main">
 		<div class="wrap clearfix">
@@ -38,8 +42,8 @@
 									<div class="third"><input type="text" placeholder="Preparation time" name="tempo_preparo" /></div>
 									{{-- <div class="third"><input type="text" placeholder="Cooking time" /></div> --}}
 									{{-- <div class="third"><input type="text" placeholder="Difficulty" /></div> --}}
-								</div>
-								<div class="f-row">
+								{{-- </div> --}}
+								{{-- <div class="f-row"> --}}
 									<div class="third"><input type="text" placeholder="Serves how many people?" name="porcao" /></div>
 									<div class="third">
 										<select name="categoria_id">
@@ -47,7 +51,7 @@
 											<optgroup label="Bla">
 												@foreach($categorias as $categoria)
 													@if(!$categoria->selecionavel)
-
+														{{-- <optgroup> --}}
 													@else
 														<option value="{{ $categoria->id }}">{{ $categoria->nome_categoria }}</option>
 													@endif
@@ -73,23 +77,37 @@
 							<section>
 								<h2>Ingredients</h2>
 								<div class="f-row ingredient">
-									<div class="long"><input type="text" placeholder="Ingredient" name="nome_ingrediente[]" /></div>
-									<div class="small"><input type="text" placeholder="SubSession" name="subsessao" /></div>
-									<div class="small"><input type="text" placeholder="Quantity" name="qty" /></div>
-									<div class="small"><input type="text" placeholder="Medida" name="medida_id" /></div>
-									{{-- <div class="third"><select><option selected="selected">Select a category</option></select></div> --}}
-									<button class="remove">-</button>
-								</div>
-								<div class="f-row ingredient" name="ingrediente[]">
-									<div class="long"><input type="text" placeholder="Ingredient" name="nome_ingrediente[]" /></div>
-									<div class="small"><input type="text" placeholder="SubSession" name="subsessao[]" /></div>
-									<div class="small"><input type="text" placeholder="Quantity" name="qty[]" /></div>
-									<div class="small"><input type="text" placeholder="Medida" name="medida_id[]" /></div>
+									{{-- <div class="long"><input type="text" placeholder="Ingredient" name="nome_ingrediente[]" /></div> --}}
+									<div class="large">
+										{{-- <select class="ingrediente" multiple="multiple" name="nome_ingrediente[]"> --}}
+										<select class="ingrediente" name="nome_ingrediente[]">
+											<option value=""></option>
+											@foreach($ingredientes as $ingrediente)
+												<option value="{{ $ingrediente->id }}">{{ $ingrediente->nome_ingrediente }}</option>
+											@endforeach
+											{{-- <option selected="selected">Orange</option>
+											<option>Banana</option>
+											<option selected="selected">Apple</option> --}}
+										</select>
+									</div>
+									<div class="small"><input type="text" placeholder="SubSession" name="receita_ingrediente[subsessao]" /></div>
+									<div class="small"><input type="text" placeholder="Quantity" name="receita_ingrediente[qty]" /></div>
+									<div class="small"><input type="text" placeholder="Medida" name="receita_ingrediente[medida_id]" /></div>
 									{{-- <div class="third"><select><option selected="selected">Select a category</option></select></div> --}}
 									<button class="remove">-</button>
 								</div>
 								<div class="f-row full">
 									<button class="add">Add an ingredient</button>
+								</div>
+								<div class="f-row full">
+									<div class="large">
+										<select class="test-select">
+											<option value=""></option>
+											<option>Orange</option>
+											<option>Banana</option>
+											<option>Apple</option>
+										</select>
+									</div>
 								</div>
 							</section>	
 							
@@ -139,4 +157,25 @@
 				</section>
 			</div>
 		</div>
+	@endsection
+
+	@section('scripts')
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+				/*$('.ingrediente').select2({
+					placeholder: "Select",
+					allowClear: true,
+					tags: true
+				});*/
+				$('.test-select').select2({
+					placeholder: "Select",
+					allowClear: true,
+					tags: true
+				});
+				// $('.ingrediente').select2();
+				// $('.test-select').select2();
+			});
+		</script>
 	@endsection
