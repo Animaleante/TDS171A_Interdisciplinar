@@ -19,3 +19,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/receita', 'ReceitasController@index');
+Route::get('/receita/create', 'ReceitasController@create');
+Route::post('/receita/create', 'ReceitasController@store');
+Route::get('/receita/{receita}/show', 'ReceitasController@show');
+Route::get('/receita/{receita}/edit', 'ReceitasController@edit');
+Route::post('/receita/{receita}/edit', 'ReceitasController@update');
+Route::get('/receita/{receita}/delete', 'ReceitasController@delete');
+Route::post('/receita/{receita}/delete', 'ReceitasController@destroy');

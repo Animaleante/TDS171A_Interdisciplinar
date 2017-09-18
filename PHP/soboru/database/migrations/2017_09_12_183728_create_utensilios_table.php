@@ -20,7 +20,7 @@ class CreateUtensiliosTable extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('receitas_utensilios', function (Blueprint $table) {
+        Schema::create('receita_utensilio', function (Blueprint $table) {
             $table->integer('receita_id');
             $table->integer('utensilio_id');
             $table->primary(['receita_id', 'utensilio_id']);
@@ -36,5 +36,6 @@ class CreateUtensiliosTable extends Migration
     public function down()
     {
         Schema::dropIfExists('utensilios');
+        Schema::dropIfExists('receita_utensilio');
     }
 }

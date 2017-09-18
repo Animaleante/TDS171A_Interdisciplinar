@@ -46,8 +46,9 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        $sexos = \App\Models\Sexo::all();
-        return view('auth.register', compact("sexos"));
+        // $sexos = \App\Models\Sexo::all();
+        // return view('auth.register', compact("sexos"));
+        return view('auth.register');
     }
 
     /**

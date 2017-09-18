@@ -1,7 +1,7 @@
 <header class="head" role="banner">
     <!--wrap-->
     <div class="wrap clearfix">
-        <a href="index.html" title="SocialChef" class="logo"><img src="images/ico/logo.png" alt="SocialChef logo" /></a>
+        <a href="index.html" title="SocialChef" class="logo"><img src="/images/ico/logo.png" alt="SocialChef logo" /></a>
         
         <nav class="main-nav" role="navigation" id="menu">
             <ul>
@@ -70,7 +70,7 @@
                     </a>
                 </li>
                 <li class="dark">
-                    <a href="submit_recipe.html" title="Submit a recipe">
+                    <a href="{{ url('receita/create')}}" title="Submit a recipe">
                         <i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span>
                     </a>
                 </li>

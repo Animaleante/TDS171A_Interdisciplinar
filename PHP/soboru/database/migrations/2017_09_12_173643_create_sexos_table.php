@@ -13,12 +13,12 @@ class CreateSexosTable extends Migration
      */
     public function up()
     {
-        Schema::create('sexos', function (Blueprint $table) {
+        /*Schema::create('sexos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome_sexo')->unique();
             $table->timestamps();
             $table->softDeletes();
-        });
+        });*/
     }
 
     /**
@@ -28,6 +28,6 @@ class CreateSexosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sexos');
+        // Schema::dropIfExists('sexos');
     }
 }

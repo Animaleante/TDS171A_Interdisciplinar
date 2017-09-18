@@ -20,7 +20,7 @@ class CreateTagsTable extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('receitas_tags', function (Blueprint $table) {
+        Schema::create('receita_tag', function (Blueprint $table) {
             $table->integer('receita_id');
             $table->integer('tag_id');
             $table->primary(['receita_id', 'tag_id']);

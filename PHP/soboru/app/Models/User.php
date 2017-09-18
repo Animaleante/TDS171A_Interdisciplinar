@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Receita;
 
 class User extends Authenticatable
 {
@@ -36,21 +37,23 @@ class User extends Authenticatable
      */
     protected $dates = ['deleted_at'];
 
-    public function sexo() {
+    /*public function sexo() {
         return $this->belongsTo(Sexo::class);
-    }
+    }*/
 
     public function role() {
         return $this->belongsTo(Role::class);
     }
 
     public function receitas() {
-        return $this->belongsToMany(Receita::class);
+        // return $this->belongsToMany(Receita::class);
+        return $this->hasMany(Receita::class);
     }
 
     public function reports() {
         // return $this->belongsToMany(Report::class);
-        return $this->hasMany(Receita::class);
+        // return $this->belongsToMany(Receita::class);
+        return $this->belongsToMany(Receita::class)->withTimestamps();
     }
 
     public function pontuacao() {
@@ -75,5 +78,12 @@ class User extends Authenticatable
 
     public function receitas_excluidos() {
         return $this->hasMany(Receita::class, 'receitas_exc');
+    }
+
+    /**
+     * Criar receita com esse usuario
+    */
+    public function publish(Receita $receita) {
+        $this->receitas()->save($receita);
     }
 }

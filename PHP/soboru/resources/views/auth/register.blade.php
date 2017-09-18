@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-	<div class="container">
+	{{-- <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
@@ -85,14 +85,14 @@
                                 <label for="sexo_id" class="col-md-4 control-label">Sexo</label>
 
                                 <div class="col-md-6">
-                                    {{-- <label class="radio-inline">
+                                    <label class="radio-inline">
                                         <input type="radio" name="sexo_id" checked value="0">
                                         Feminino
                                     </label>
                                     <label class="radio-inline">
                                         <input type="radio" name="sexo_id" value="1">
                                         Masculino
-                                    </label> --}}
+                                    </label>
 
                                     @foreach ($sexos as $sexo)
                                         <label class="radio-inline">
@@ -135,7 +135,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 	
     <main class="main" role="main">
         <div class="wrap clearfix">
@@ -144,6 +144,14 @@
                     <div class="modal container">
                         <h3>Register</h3>
 						
+                        @if($errors->any())
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
+
                         <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                             {{ csrf_field() }}
 							
@@ -163,27 +171,27 @@
 							<div class="f-row">
 								<label>
 									Data de Nascimento: 
-                                    <input type="date" placeholder="Retype password" name="nasc" />
 								</label>
+                                <input type="date" placeholder="Retype password" name="nasc" style="border: 1px solid #ddd; color: #666; font-size: 13  font-weight: 400; padding: 9px 10px; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px;"/>
 							</div>
 							<div class="f-row">
                                 <label>
                                     Sexo: 
                                 </label>
-								{{-- <label style="margin-right: 10px;">
-									<input type="radio" name="sexo_id" checked />
+								<label style="margin-right: 10px;">
+									<input type="radio" name="sexo_id" value="1" checked />
 									Feminino
 								</label>
 								<label>
-									<input type="radio" name="sexo_id" />
+									<input type="radio" name="sexo_id" value="2" />
 									Masculino
-								</label> --}}
-                                @foreach ($sexos as $sexo)
+								</label>
+                                {{-- @foreach ($sexos as $sexo)
                                     <label>
                                         <input type="radio" name="sexo_id" value="{{ $sexo->id }}" />
                                         {{ $sexo->nome_sexo }}
                                     </label>
-                                @endforeach
+                                @endforeach --}}
 							</div>
 							<div class="f-row">
 								<label>
