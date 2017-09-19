@@ -47,16 +47,26 @@
 									<div class="third"><input type="text" placeholder="Serves how many people?" name="porcao" /></div>
 									<div class="third">
 										<select name="categoria_id">
-											<option selected="selected" value="0">Select a category</option>
-											<optgroup label="Bla">
-												@foreach($categorias as $categoria)
+											<option selected="selected" value="0" disabled>Select a category</option>
+											{{-- <optgroup label="Bla"> --}}
+												{{-- @foreach($categorias as $categoria)
 													@if(!$categoria->selecionavel)
 														{{-- <optgroup> --}}
+													{{-- @else
+														<option value="{{ $categoria->id }}">{{ $categoria->nome_categoria }}</option>
+													@endif
+												@endforeach --}}
+
+												@foreach($categorias as $categoria)
+													@if($categoria->children()->count())
+														<optgroup label="{{ $categoria->nome_categoria }}">
+															@include('receita/_categoria_children', ['children' => $categoria->children])
+														</optgroup>
 													@else
 														<option value="{{ $categoria->id }}">{{ $categoria->nome_categoria }}</option>
 													@endif
 												@endforeach
-											</optgroup>
+											{{-- </optgroup> --}}
 										</select>
 										{{-- <select name="month">
 											<optgroup label="Month:">

@@ -20,7 +20,10 @@ class ReceitasController extends Controller
     }
 
     public function create() {
-    	$categorias = Categoria::all();
+    	$categorias = Categoria::where('id_super_categoria', '=', null)->get();
+
+        // dd($categorias);
+
         $ingredientes = Ingrediente::all();
     	$medidas = MedidasIngrediente::all();
     	return view('receita.create', compact('categorias', 'ingredientes', 'medidas'));

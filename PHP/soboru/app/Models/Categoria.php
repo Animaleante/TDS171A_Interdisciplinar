@@ -6,5 +6,7 @@ namespace App\Models;
 
 class Categoria extends Model
 {
-    //
+    public function children() {
+        return $this->hasMany(Categoria::class, 'id_super_categoria', 'id');
+    }
 }
