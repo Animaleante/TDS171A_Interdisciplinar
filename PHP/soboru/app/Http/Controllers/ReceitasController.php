@@ -24,14 +24,16 @@ class ReceitasController extends Controller
 
         // dd($categorias);
 
-        $ingredientes = Ingrediente::all();
-    	$medidas = MedidasIngrediente::all();
+        // $ingredientes = Ingrediente::all();
+        $ingredientes = Ingrediente::pluck('nome_ingrediente', 'id');
+        // $medidas = MedidasIngrediente::all();
+        $medidas = MedidasIngrediente::pluck('nome_medida', 'id');
     	return view('receita.create', compact('categorias', 'ingredientes', 'medidas'));
     }
 
     public function store() {
     	// echo auth()->id();
-    	// dd(request()->all());
+    	dd(request()->all());
 
     	$this->validate(request(), [
             'nome_receita' => 'required|string|max:255',

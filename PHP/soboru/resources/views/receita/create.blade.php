@@ -87,37 +87,34 @@
 							<section>
 								<h2>Ingredients</h2>
 								<div class="f-row ingredient">
-									{{-- <div class="long"><input type="text" placeholder="Ingredient" name="nome_ingrediente[]" /></div> --}}
 									<div class="large">
-										{{-- <select class="ingrediente" multiple="multiple" name="nome_ingrediente[]"> --}}
+										<input class="ingrediente-input" type="text" placeholder="Ingrediente" name="nome_ingrediente[]" />
+										{{-- <input type="text" placeholder="Ingredient" name="nome_ingrediente[]" data-provide="typeahead" data-source="['teste', 'teste2']"/> --}}
+									</div>
+									{{-- <div class="large">
 										<select class="ingrediente" name="nome_ingrediente[]">
 											<option value=""></option>
 											@foreach($ingredientes as $ingrediente)
 												<option value="{{ $ingrediente->id }}">{{ $ingrediente->nome_ingrediente }}</option>
 											@endforeach
-											{{-- <option selected="selected">Orange</option>
-											<option>Banana</option>
-											<option selected="selected">Apple</option> --}}
 										</select>
-									</div>
+									</div> --}}
 									<div class="small"><input type="text" placeholder="SubSession" name="receita_ingrediente[subsessao]" /></div>
 									<div class="small"><input type="text" placeholder="Quantity" name="receita_ingrediente[qty]" /></div>
-									<div class="small"><input type="text" placeholder="Medida" name="receita_ingrediente[medida_id]" /></div>
+									<div class="small">
+										{{-- <input type="text" placeholder="Medida" name="receita_ingrediente[medida_id]" /> --}}
+										<select name="receita_ingrediente[medida_id]">
+											<option selected="selected" disabled value="0">Medida</option>
+											@foreach($medidas as $medidaId=>$medidaNome)
+												<option value="{{ $medidaId }}">{{ $medidaNome }}</option>
+											@endforeach
+										</select>
+									</div>
 									{{-- <div class="third"><select><option selected="selected">Select a category</option></select></div> --}}
 									<button class="remove">-</button>
 								</div>
 								<div class="f-row full">
 									<button class="add">Add an ingredient</button>
-								</div>
-								<div class="f-row full">
-									<div class="large">
-										<select class="test-select">
-											<option value=""></option>
-											<option>Orange</option>
-											<option>Banana</option>
-											<option>Apple</option>
-										</select>
-									</div>
 								</div>
 							</section>	
 							
@@ -173,19 +170,79 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
 		<script type="text/javascript">
+        	{{-- var ingredientes = '{!! $ingredientes !!}'; --}}
+        	{{-- var ingredientes = JSON.parse('{!! $ingredientes !!}'); --}}
+        	var ingredientes = @json($ingredientes);
+        	var medidas = @json($medidas);
+
 			$(document).ready(function() {
 				/*$('.ingrediente').select2({
 					placeholder: "Select",
 					allowClear: true,
 					tags: true
 				});*/
-				$('.test-select').select2({
+				/*$('.test-select').select2({
 					placeholder: "Select",
 					allowClear: true,
 					tags: true
-				});
+				});*/
 				// $('.ingrediente').select2();
 				// $('.test-select').select2();
+
+				console.log(ingredientes);
+
+				$('.ingrediente-input').typeahead({
+					source: Object.keys(ingredientes).map(function(val) {
+						return {
+							id: val,
+							name: ingredientes[val]
+						}
+					})
+				});
+
+
+				// <div class="f-row ingredient">
+				// 	<div class="large">
+				// 		<input class="ingrediente-input" type="text" placeholder="Ingrediente" name="nome_ingrediente[]" />
+				// 	</div>
+				// 	<div class="small"><input type="text" placeholder="SubSession" name="receita_ingrediente[subsessao]" /></div>
+				// 	<div class="small"><input type="text" placeholder="Quantity" name="receita_ingrediente[qty]" /></div>
+				// 	<div class="small"><input type="text" placeholder="Medida" name="receita_ingrediente[medida_id]" /></div>
+				// 	<button class="remove">-</button>
+				// </div>
+
+				$('button.add').click(function(event) {
+					event.stopPropagation();
+					event.preventDefault();
+
+					$('.f-row.ingredient:last').after(
+						$('<div/>').addClass('f-row ingredient').append(
+							$('<div/>').addClass('large').append(
+								$('<input/>').addClass('ingrediente-input').attr({'type':'text', 'placeholder':'Ingrediente', 'name':'nome_ingrediente[]'})
+							),
+							$('<div/>').addClass('small').append(
+								$('<input/>').addClass('ingrediente-input').attr({'type':'text', 'placeholder':'SubSession', 'name':'receita_ingrediente[subsessao]'})
+							),
+							$('<div/>').addClass('small').append(
+								$('<input/>').addClass('ingrediente-input').attr({'type':'text', 'placeholder':'Quantity', 'name':'receita_ingrediente[qty]'})
+							),
+							$('<div/>').addClass('small').append(
+								$('<input/>').addClass('ingrediente-input').attr({'type':'text', 'placeholder':'Medida', 'name':'receita_ingrediente[medida_id]'})
+							),
+							$('<button/>').addClass('remove').text('-')
+						)
+					);
+				});
+
+				$('body').on('click', '.ingredient button.remove', function(event) {
+					event.stopPropagation();
+					event.preventDefault();
+
+					console.log($(event.target).closest('.ingredient'));
+
+					if($('.ingredient').length > 1)
+						$(event.target).closest('.ingredient').remove();
+				});
 			});
 		</script>
 	@endsection

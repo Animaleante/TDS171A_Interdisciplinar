@@ -41,6 +41,7 @@
         @include('layouts.footer')
         
         <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/bootstrap3-typeahead.min.js') }}"></script>
         <script src="{{ asset('js/jquery.uniform.min.js') }}"></script>
         <script src="{{ asset('js/jquery.slicknav.min.js') }}"></script>
         <script src="{{ asset('js/scripts.js') }}"></script>

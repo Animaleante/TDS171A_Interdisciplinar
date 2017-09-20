@@ -10,8 +10,11 @@
 
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
-                        <div class="f-row">
+                        {{-- <div class="f-row">
                             <input type="email" name="email" placeholder="Your e-mail" />
+                        </div> --}}
+                        <div class="f-row">
+                            <input type="text" name="nome_usuario" placeholder="Your username" />
                         </div>
                         <div class="f-row">
                             <input type="password" name="password" placeholder="Your password" />
