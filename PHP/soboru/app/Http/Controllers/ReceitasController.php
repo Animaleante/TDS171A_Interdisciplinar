@@ -42,6 +42,7 @@ class ReceitasController extends Controller
             'tempo_preparo' => 'required',
             'modo_preparo' => 'required',
             'img_path' => 'required',
+            'nome_ingrediente' => 'required',
         ]);
 
         /*auth()->user()->publish(
