@@ -42,7 +42,8 @@ class ReceitasController extends Controller
             'tempo_preparo' => 'required',
             'modo_preparo' => 'required',
             'img_path' => 'required',
-            'nome_ingrediente' => 'required',
+            // 'nome_ingrediente' => 'required|array|min:3',
+            'nome_ingrediente' => 'required|array',
         ]);
 
         /*auth()->user()->publish(
@@ -65,9 +66,23 @@ class ReceitasController extends Controller
             $post->categories()->attach($postCategories);
          */
 
-        $receita = Receita::create(request([
+        $receita = Receita::create([
 
-        ]));
+        ]);
+
+        // $ar = collect([['nome_ingrediente'=>'Bisteca'],['nome_ingrediente'=>'Mel']]);
+        // foreach($ar as $ingrediente) { 
+            // App\Models\Ingrediente::create($ingrediente); 
+        // }
+
+        //App\Models\Receita::create(['nome_receita'=>'Teste 1', 'categoria_id'=>2, 'user_id'=>1, 'porcao'=>1, 'tempo_preparo'=>2.5, 'modo_preparo'=>'Texto de preparo.', 'img_path'=>'none']);
+
+        // $receita->ingredientes()->attach(2, ['medida_id' => 1, 'subsessao' => 'bla', 'qty' => 1]);
+        // Attach several ingredientes
+        // $receita->ingredientes()->attach(['3' => ['medida_id' => 1, 'subsessao' => 'bla', 'qty' => 1], '4' => ['medida_id' => 1, 'subsessao' => 'bla', 'qty' => 1]]);
+
+        // Get quantity used in first ingredient
+        // $receita->ingredientes->first()->pivot->qty
 
         return redirect('/');
     }

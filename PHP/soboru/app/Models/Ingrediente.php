@@ -11,6 +11,8 @@ class Ingrediente extends Model
     }
 
     public function receitas() {
-        return $this->belongsToMany(ReceitasIngrediente::class);
+        return $this->belongsToMany(Receita::class, 'receitas_ingredientes')
+        // ->withTimestamps()
+        ->withPivot(['medida_id', 'subsessao', 'qty']);
     }
 }

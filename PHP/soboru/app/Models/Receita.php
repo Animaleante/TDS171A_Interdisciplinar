@@ -13,4 +13,14 @@ class Receita extends Model
     public function user() {
     	return $this->belongsTo(User::class);
     }
+    
+    /*public function ingredientes() {
+        return $this->hasManyThrough(Ingrediente::class, ReceitasIngrediente::class);
+    }*/
+
+    public function ingredientes() {
+        return $this->belongsToMany(Ingrediente::class, 'receitas_ingredientes')
+        // ->withTimestamps()
+        ->withPivot(['medida_id', 'subsessao', 'qty']);
+    }
 }

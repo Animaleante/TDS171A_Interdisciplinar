@@ -18,7 +18,7 @@ class CreateReceitasIngredientesTable extends Migration
             $table->integer('receita_id');
             $table->integer('ingrediente_id');
             $table->integer('medida_id');
-            $table->string('subsessao');
+            $table->string('subsessao')->nullable();
             $table->decimal('qty', 5, 2);
             $table->timestamps();
             $table->softDeletes();
