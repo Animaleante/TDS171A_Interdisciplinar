@@ -7,7 +7,7 @@ namespace App\Models;
 class Receita extends Model
 {
     public function utensilios() {
-        return $this->belongsToMany(Utensilios::class);
+        return $this->belongsToMany(Utensilio::class);
     }
 
     public function user() {

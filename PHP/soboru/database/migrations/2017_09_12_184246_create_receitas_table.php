@@ -21,7 +21,7 @@ class CreateReceitasTable extends Migration
             $table->string('porcao');
             $table->decimal('tempo_preparo', 5, 2);
             $table->text('modo_preparo');
-            $table->string('img_path');
+            $table->string('img_path')->nullable();
             $table->decimal('pontuacao_media', 5, 2)->default('0.0');
             $table->integer('views')->default('0');
             $table->integer('favs')->default('0');
