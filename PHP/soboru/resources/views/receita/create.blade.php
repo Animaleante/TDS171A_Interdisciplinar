@@ -1,9 +1,5 @@
 @extends('layouts.master')
 
-@section('styles')
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
-@endsection
-
 @section('content')
 	<main class="main" role="main">
 		<div class="wrap clearfix">
@@ -33,131 +29,90 @@
                             {{ csrf_field() }}
 
 							<section>
-								<h2>Basics</h2>
-								<p>All fields are required.</p>
+								<h2>Informações</h2>
+								<p>Todos os campos são obrigatórios.</p>
 								<div class="f-row">
-									<div class="full"><input type="text" placeholder="Recipe title" name="nome_receita" /></div>
+									<div class="full">
+										<input type="text" placeholder="Nome da Receita" name="nome_receita" value="{{ old('nome_receita') }}" />
+									</div>
 								</div>
 								<div class="f-row">
-									<div class="third"><input type="text" placeholder="Preparation time" name="tempo_preparo" /></div>
-									{{-- <div class="third"><input type="text" placeholder="Cooking time" /></div> --}}
-									{{-- <div class="third"><input type="text" placeholder="Difficulty" /></div> --}}
-								{{-- </div> --}}
-								{{-- <div class="f-row"> --}}
-									<div class="third"><input type="text" placeholder="Serves how many people?" name="porcao" /></div>
+									<div class="third">
+										<input type="text" placeholder="Tempo de preparo" name="tempo_preparo" value="{{ old('tempo_preparo') }}" />
+									</div>
+									<div class="third">
+										<input type="text" placeholder="Serve quantas porções?" name="porcao" value="{{ old('porcao') }}" />
+									</div>
 									<div class="third">
 										<select name="categoria_id">
-											<option selected="selected" value="0" disabled>Select a category</option>
-											{{-- <optgroup label="Bla"> --}}
-												{{-- @foreach($categorias as $categoria)
-													@if(!$categoria->selecionavel)
-														{{-- <optgroup> --}}
-													{{-- @else
-														<option value="{{ $categoria->id }}">{{ $categoria->nome_categoria }}</option>
-													@endif
-												@endforeach --}}
-
-												@foreach($categorias as $categoria)
-													@if($categoria->children()->count())
-														<optgroup label="{{ $categoria->nome_categoria }}">
-															@include('receita/_categoria_children', ['children' => $categoria->children])
-														</optgroup>
-													@else
-														<option value="{{ $categoria->id }}">{{ $categoria->nome_categoria }}</option>
-													@endif
-												@endforeach
-											{{-- </optgroup> --}}
+	                                        @if(!old('categoria_id'))
+												<option selected="selected" value="0" disabled>Selecione uma categoria</option>
+											@endif
+											@foreach($categorias as $categoria)
+												@if($categoria->children()->count())
+													<optgroup label="{{ $categoria->nome_categoria }}">
+														@include('receita/_categoria_children', ['children' => $categoria->children])
+													</optgroup>
+												@else
+													<option value="{{ $categoria->id }}" {{ (old('categoria_id') == $categoria->id) ? 'selected="selected"' : '' }}>{{ $categoria->nome_categoria }}</option>
+												@endif
+											@endforeach
 										</select>
-										{{-- <select name="month">
-											<optgroup label="Month:">
-												<option value="January">January</option>
-											</optgroup>
-										</select> --}}
 									</div>
 								</div>
 							</section>
-							
-							{{-- <section>
-								<h2>Description</h2>
-								<div class="f-row">
-									<div class="full"><textarea placeholder="Recipe description"></textarea></div>
-								</div>
-							</section> --}}	
-							
-							<section>
-								<h2>Ingredients</h2>
-								<div class="f-row ingredient">
-									<div class="large">
-										<input class="ingrediente-input" type="text" placeholder="Ingrediente" name="nome_ingrediente[]" />
-										{{-- <input type="text" placeholder="Ingredient" name="nome_ingrediente[]" data-provide="typeahead" data-source="['teste', 'teste2']"/> --}}
-									</div>
-									{{-- <div class="large">
-										<select class="ingrediente" name="nome_ingrediente[]">
-											<option value=""></option>
-											@foreach($ingredientes as $ingrediente)
-												<option value="{{ $ingrediente->id }}">{{ $ingrediente->nome_ingrediente }}</option>
-											@endforeach
-										</select>
-									</div> --}}
-									<div class="small"><input type="text" placeholder="SubSession" name="receita_ingrediente[subsessao]" /></div>
-									<div class="small"><input type="text" placeholder="Quantity" name="receita_ingrediente[qty]" /></div>
-									<div class="small">
-										{{-- <input type="text" placeholder="Medida" name="receita_ingrediente[medida_id]" /> --}}
-										<select name="receita_ingrediente[medida_id]">
-											<option selected="selected" disabled value="0">Medida</option>
-											@foreach($medidas as $medidaId=>$medidaNome)
-												<option value="{{ $medidaId }}">{{ $medidaNome }}</option>
-											@endforeach
-										</select>
-									</div>
-									{{-- <div class="third"><select><option selected="selected">Select a category</option></select></div> --}}
-									<button class="remove">-</button>
-								</div>
-								<div class="f-row full">
-									<button class="add">Add an ingredient</button>
+
+							<section id="ingredientes">
+								<h2>Ingredientes</h2>
+								@for ($i = 0; $i < count(old('nome_ingrediente')); $i++)
+									<div class="f-row ingredient">
+	                                    <div class="large">
+	                                        <input class="ingrediente-input" type="text" placeholder="Ingrediente" name="nome_ingrediente[]" value="{{ old('nome_ingrediente')[$i] }}" />
+	                                    </div>
+	                                    <div class="small">
+	                                        <input type="text" placeholder="SubSession" name="receita_ingrediente[subsessao][]" value="{{ old('receita_ingrediente')['subsessao'][$i] }}" />
+	                                    </div>
+	                                    <div class="small">
+	                                        <input type="text" placeholder="Quantity" name="receita_ingrediente[qty][]" value="{{ old('receita_ingrediente')['qty'][$i] }}" />
+	                                    </div>
+	                                    <div class="small">
+	                                        <select name="receita_ingrediente[medida_id][]">
+	                                            @if(!array_key_exists('medida_id', old('receita_ingrediente')) || !array_key_exists(''.$i, old('receita_ingrediente')['medida_id']))
+	                                            	<option selected="selected" disabled value="0">Medida</option>
+                                                @endif
+	                                            
+	                                            @foreach($medidas as $medidaId=>$medidaNome)
+                                                	<option value="{{ $medidaId }}" {{ array_key_exists('medida_id', old('receita_ingrediente')) && (array_key_exists(''.$i, old('receita_ingrediente')['medida_id']) && old('receita_ingrediente')['medida_id'][$i] == $medidaId) ? 'selected="selected"' : '' }}>{{ $medidaNome }}</option>
+	                                            @endforeach
+	                                        </select>
+	                                    </div>
+	                                    <button class="remove">-</button>
+	                                </div>
+                                @endfor
+								<div class="f-row full add-ingredient">
+									<button class="add">Adicionar um ingrediente</button>
 								</div>
 							</section>	
 							
 							<section>
-								{{-- <h2>Instructions <span>(enter instructions, each step at a time)</span></h2>
-								<div class="f-row instruction">
-									<div class="full">
-										<input type="text" placeholder="Instructions" name="modo_preparo" />
-									</div>
-									<button class="remove">-</button>
-								</div>
-								<div class="f-row full">
-									<button class="add">Add a step</button>
-								</div> --}}
-								<h2>Instructions</h2>
+								<h2>Modo de Preparo</h2>
 								<div class="full">
 									<div class="f-row instruction">
-										<input type="text" placeholder="Instructions" name="modo_preparo" />
+										<input type="text" name="modo_preparo" value="{{ old('modo_preparo') }}" />
 									</div>
 								</div>
 							</section>
 							
 							<section>
-								<h2>Photo</h2>
+								<h2>Foto</h2>
 								<div class="f-row full">
-									<input type="file" name="img_path" />
+  									<label for="receita-foto" class="btn">Selecionar uma foto</label>
+									<input id="receita-foto" type="file" name="img_path" style="display: none;" value="{{ old('img_path') }}" />
 								</div>
-							</section>	
-							
-							{{-- <section>
-								<h2>Status <span>(would you like to further edit this recipe or are you ready to publish it?)</span></h2>
-								<div class="f-row full">
-									<input type="radio" id="r1" name="radio"/>
-									<label for="r1">I am still working on it</label>
-								</div>
-								<div class="f-row full">
-									<input type="radio" id="r2" name="radio"/>
-									<label for="r2">I am ready to publish this recipe</label>
-								</div>
-							</section> --}}
-							
+							</section>
+
 							<div class="f-row full">
-								<input type="submit" class="button" id="submitRecipe" value="Publish this recipe" />
+								<input type="submit" class="button" id="submitRecipe" value="Publicar essa receita" />
 							</div>
 						</form>
 					</div>
@@ -167,82 +122,69 @@
 	@endsection
 
 	@section('scripts')
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-
 		<script type="text/javascript">
-        	{{-- var ingredientes = '{!! $ingredientes !!}'; --}}
-        	{{-- var ingredientes = JSON.parse('{!! $ingredientes !!}'); --}}
         	var ingredientes = @json($ingredientes);
         	var medidas = @json($medidas);
 
 			$(document).ready(function() {
-				/*$('.ingrediente').select2({
-					placeholder: "Select",
-					allowClear: true,
-					tags: true
-				});*/
-				/*$('.test-select').select2({
-					placeholder: "Select",
-					allowClear: true,
-					tags: true
-				});*/
-				// $('.ingrediente').select2();
-				// $('.test-select').select2();
-
-				console.log(ingredientes);
-
-				$('.ingrediente-input').typeahead({
-					source: Object.keys(ingredientes).map(function(val) {
-						return {
-							id: val,
-							name: ingredientes[val]
-						}
-					})
-				});
-
-
-				// <div class="f-row ingredient">
-				// 	<div class="large">
-				// 		<input class="ingrediente-input" type="text" placeholder="Ingrediente" name="nome_ingrediente[]" />
-				// 	</div>
-				// 	<div class="small"><input type="text" placeholder="SubSession" name="receita_ingrediente[subsessao]" /></div>
-				// 	<div class="small"><input type="text" placeholder="Quantity" name="receita_ingrediente[qty]" /></div>
-				// 	<div class="small"><input type="text" placeholder="Medida" name="receita_ingrediente[medida_id]" /></div>
-				// 	<button class="remove">-</button>
-				// </div>
-
 				$('button.add').click(function(event) {
 					event.stopPropagation();
 					event.preventDefault();
 
-					$('.f-row.ingredient:last').after(
-						$('<div/>').addClass('f-row ingredient').append(
-							$('<div/>').addClass('large').append(
-								$('<input/>').addClass('ingrediente-input').attr({'type':'text', 'placeholder':'Ingrediente', 'name':'nome_ingrediente[]'})
-							),
-							$('<div/>').addClass('small').append(
-								$('<input/>').addClass('ingrediente-input').attr({'type':'text', 'placeholder':'SubSession', 'name':'receita_ingrediente[subsessao]'})
-							),
-							$('<div/>').addClass('small').append(
-								$('<input/>').addClass('ingrediente-input').attr({'type':'text', 'placeholder':'Quantity', 'name':'receita_ingrediente[qty]'})
-							),
-							$('<div/>').addClass('small').append(
-								$('<input/>').addClass('ingrediente-input').attr({'type':'text', 'placeholder':'Medida', 'name':'receita_ingrediente[medida_id]'})
-							),
-							$('<button/>').addClass('remove').text('-')
-						)
-					);
+					addIngredientRow();
 				});
 
 				$('body').on('click', '.ingredient button.remove', function(event) {
 					event.stopPropagation();
 					event.preventDefault();
 
-					console.log($(event.target).closest('.ingredient'));
-
 					if($('.ingredient').length > 1)
 						$(event.target).closest('.ingredient').remove();
 				});
+
+				function addIngredientRow() {
+					var inputEl = $('<div/>').addClass('f-row ingredient').append(
+						$('<div/>').addClass('large').append(
+							$('<input/>').addClass('ingrediente-input').attr({'type':'text', 'placeholder':'Ingrediente', 'name':'nome_ingrediente[]'})
+						),
+						$('<div/>').addClass('small').append(
+							$('<input/>').attr({'type':'text', 'placeholder':'Sub-Sessão', 'name':'receita_ingrediente[subsessao][]'})
+						),
+						$('<div/>').addClass('small').append(
+							$('<input/>').attr({'type':'text', 'placeholder':'Quantidade', 'name':'receita_ingrediente[qty][]'})
+						),
+						$('<div/>').addClass('small').append(
+							$('<select/>').attr({'name':'receita_ingrediente[medida_id][]'}).append(
+								$('<option/>').attr({'selected':'selected', 'value':0, 'disabled':'disabled'}).text('Medida')
+							)
+						),
+						$('<button/>').addClass('remove').text('-')
+					);
+
+					for(var medidaId in medidas) {
+						inputEl.find('select').append(
+							$('<option/>').attr('value', medidaId).text(medidas[medidaId])
+						);
+					};
+
+					$('.f-row.add-ingredient').before(
+						inputEl
+					);
+
+					inputEl.find('.ingrediente-input').typeahead({
+						source: Object.keys(ingredientes).map(function(val) {
+							return {
+								id: val,
+								name: ingredientes[val]
+							}
+						})
+					});
+
+					inputEl.find('select').uniform();
+				}
+
+				if($('.f-row.ingredient').length === 0)
+					addIngredientRow();
 			});
 		</script>
 	@endsection

@@ -32,9 +32,6 @@ class ReceitasController extends Controller
     }
 
     public function store() {
-    	// echo auth()->id();
-    	dd(request()->all());
-
     	$this->validate(request(), [
             'nome_receita' => 'required|string|max:255',
             'categoria_id' => 'required|not_in:0',
@@ -45,6 +42,41 @@ class ReceitasController extends Controller
             // 'nome_ingrediente' => 'required|array|min:3',
             'nome_ingrediente' => 'required|array',
         ]);
+
+        // TODO - Create Ingrediente(s)
+        $ingredientes = [];
+        foreach(request('nome_ingrediente') as $index=>$ingrediente) {
+            $ingrediente_id = $ingrediente;
+
+            if(!is_numeric($ingrediente)) {
+                $ingrediente_id = Ingrediente::create([
+                    'nome_ingrediente' => $ingrediente
+                ])->id;
+            }
+            
+            $ingredientes[$ingrediente_id] = [
+                'subsessao' => request('receita_ingrediente')['subsessao'][$index],
+                'qty' => request('receita_ingrediente')['qty'][$index],
+                'medida_id' => request('receita_ingrediente')['medida_id'][$index]
+            ];
+        }
+
+        // dd($ingredientes);
+
+        $receita = Receita::create([
+            'nome_receita' => request('nome_receita'),
+            'categoria_id' => request('categoria_id'),
+            'user_id' => auth()->id(),
+            'porcao' => request('porcao'),
+            'tempo_preparo' => request('tempo_preparo'),
+            'modo_preparo' => request('modo_preparo'),
+            'img_path' => request('img_path'),
+            'slug' => str_slug(request('nome_receita'), '-')
+        ]);
+
+        $receita->ingredientes()->attach($ingredientes);
+
+        // TODO - Attach Ingrediente to Receita through ReceitasIngrediente
 
         /*auth()->user()->publish(
         	new Receita(request(['nome_receita', 'categoria_id', 'porcao', 'tempo_preparo', 'modo_preparo', 'img_path']))
@@ -64,11 +96,7 @@ class ReceitasController extends Controller
             }
 
             $post->categories()->attach($postCategories);
-         */
-
-        $receita = Receita::create([
-
-        ]);
+        */
 
         // $ar = collect([['nome_ingrediente'=>'Bisteca'],['nome_ingrediente'=>'Mel']]);
         // foreach($ar as $ingrediente) { 
