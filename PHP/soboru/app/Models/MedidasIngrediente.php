@@ -6,7 +6,7 @@ namespace App\Models;
 
 class MedidasIngrediente extends Model
 {
-    /*public function receitasIngredientes() {
-        return $this->belongsToMany(ReceitasIngredientes::class);
-    }*/
+    public function receitasIngredientes() {
+        return $this->hasMany(ReceitasIngrediente::class, 'medida_id', 'id');
+    }
 }

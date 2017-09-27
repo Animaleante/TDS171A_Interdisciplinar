@@ -18,6 +18,10 @@ class Receita extends Model
         return $this->hasManyThrough(Ingrediente::class, ReceitasIngrediente::class);
     }*/
 
+    public function receitasIngredientes() {
+        return $this->hasMany(ReceitasIngrediente::class);
+    }
+
     public function ingredientes() {
         return $this->belongsToMany(Ingrediente::class, 'receitas_ingredientes')
         // ->withTimestamps()

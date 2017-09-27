@@ -38,20 +38,26 @@ class ReceitasController extends Controller
             'porcao' => 'required',
             'tempo_preparo' => 'required',
             'modo_preparo' => 'required',
-            'img_path' => 'required',
+            'img_path' => 'required|mimes:jpeg, png',
             // 'nome_ingrediente' => 'required|array|min:3',
             'nome_ingrediente' => 'required|array',
         ]);
 
-        // TODO - Create Ingrediente(s)
         $ingredientes = [];
         foreach(request('nome_ingrediente') as $index=>$ingrediente) {
             $ingrediente_id = $ingrediente;
 
             if(!is_numeric($ingrediente)) {
-                $ingrediente_id = Ingrediente::create([
-                    'nome_ingrediente' => $ingrediente
-                ])->id;
+                $ingrediente = Ingrediente::where('nome_ingrediente', $ingrediente)->first();
+                if($ingrediente != null) {
+                    $ingrediente_id = $ingrediente->id;
+                } else {
+                    $ingrediente_id = Ingrediente::create([
+                        'nome_ingrediente' => $ingrediente_id
+                    ])->id;
+                }
+            } else {
+
             }
             
             $ingredientes[$ingrediente_id] = [
@@ -61,8 +67,6 @@ class ReceitasController extends Controller
             ];
         }
 
-        // dd($ingredientes);
-
         $receita = Receita::create([
             'nome_receita' => request('nome_receita'),
             'categoria_id' => request('categoria_id'),
@@ -70,47 +74,24 @@ class ReceitasController extends Controller
             'porcao' => request('porcao'),
             'tempo_preparo' => request('tempo_preparo'),
             'modo_preparo' => request('modo_preparo'),
-            'img_path' => request('img_path'),
+            // 'img_path' => request('img_path'),
             'slug' => str_slug(request('nome_receita'), '-')
         ]);
 
         $receita->ingredientes()->attach($ingredientes);
 
-        // TODO - Attach Ingrediente to Receita through ReceitasIngrediente
+        $imageName = $receita->id . '.' . request()->file('img_path')->getClientOriginalExtension();
 
-        /*auth()->user()->publish(
-        	new Receita(request(['nome_receita', 'categoria_id', 'porcao', 'tempo_preparo', 'modo_preparo', 'img_path']))
-        );*/
+        request()->file('img_path')->move(
+            base_path() . '/public/images/receitas/', $imageName
+        );
 
-        /*
-            $postCategories = [];
-            foreach ($categories as $category) {
-                if (!is_numeric($category)) {
-                    $postCategories[] = Category::create([
-                        'name' => $category,
-                        'slug' => str_slug($category)
-                    ])->id;
-                } else {
-                    $postCategories[] = $category;
-                }
-            }
-
-            $post->categories()->attach($postCategories);
-        */
-
-        // $ar = collect([['nome_ingrediente'=>'Bisteca'],['nome_ingrediente'=>'Mel']]);
-        // foreach($ar as $ingrediente) { 
-            // App\Models\Ingrediente::create($ingrediente); 
-        // }
-
-        //App\Models\Receita::create(['nome_receita'=>'Teste 1', 'categoria_id'=>2, 'user_id'=>1, 'porcao'=>1, 'tempo_preparo'=>2.5, 'modo_preparo'=>'Texto de preparo.', 'img_path'=>'none']);
-
-        // $receita->ingredientes()->attach(2, ['medida_id' => 1, 'subsessao' => 'bla', 'qty' => 1]);
-        // Attach several ingredientes
-        // $receita->ingredientes()->attach(['3' => ['medida_id' => 1, 'subsessao' => 'bla', 'qty' => 1], '4' => ['medida_id' => 1, 'subsessao' => 'bla', 'qty' => 1]]);
+        $receita->img_path = 'images/receitas/' . $imageName;
+        $receita->save();
 
         // Get quantity used in first ingredient
         // $receita->ingredientes->first()->pivot->qty
+        // App\Models\Receita::with('receitasIngredientes.medida', 'receitasIngredientes.ingrediente')->first();
 
         return redirect('/');
     }

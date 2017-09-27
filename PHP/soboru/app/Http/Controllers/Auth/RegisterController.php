@@ -83,7 +83,8 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'role_id' => \App\Models\Role::first()->id,
             // 'nasc' => $data['nasc'],
-            'nasc' => \Carbon\Carbon::parse($data['nasc']),
+            // 'nasc' => \Carbon\Carbon::parse($data['nasc']),
+            'nasc' => $data['nasc'],
             'sexo_id' => $data['sexo_id'],
             'notificacao_email' => isset($data['notificacao_email']) ? 1 : 0,
         ]);

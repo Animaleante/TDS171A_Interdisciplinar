@@ -35,7 +35,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = ['nasc', 'deleted_at'];
 
     /*public function sexo() {
         return $this->belongsTo(Sexo::class);

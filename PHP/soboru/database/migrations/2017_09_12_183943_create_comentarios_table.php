@@ -19,6 +19,7 @@ class CreateComentariosTable extends Migration
             $table->integer('user_id');
             $table->primary(['receita_id', 'user_id']);
             $table->text('body');
+            $table->boolean('aprovado')->default('0');
             $table->timestamps();
             $table->softDeletes();
         });

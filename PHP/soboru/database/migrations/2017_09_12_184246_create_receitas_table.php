@@ -26,6 +26,7 @@ class CreateReceitasTable extends Migration
             $table->integer('views')->default('0');
             $table->integer('favs')->default('0');
             $table->string('slug')->default('');
+            $table->boolean('aprovado')->default('0');
             $table->timestamps();
             $table->softDeletes();
         });
