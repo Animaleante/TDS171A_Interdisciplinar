@@ -20,11 +20,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/receita', 'ReceitasController@index');
-Route::get('/receita/create', 'ReceitasController@create');
-Route::post('/receita/create', 'ReceitasController@store');
-Route::get('/receita/{receita}/show', 'ReceitasController@show');
-Route::get('/receita/{receita}/edit', 'ReceitasController@edit');
-Route::post('/receita/{receita}/edit', 'ReceitasController@update');
-Route::get('/receita/{receita}/delete', 'ReceitasController@delete');
-Route::post('/receita/{receita}/delete', 'ReceitasController@destroy');
+Route::get('/receitas', 'ReceitasController@index');
+Route::get('/receitas/create', 'ReceitasController@create');
+Route::post('/receitas/create', 'ReceitasController@store');
+Route::get('/receitas/{receita}/show', 'ReceitasController@show');
+Route::get('/receitas/{receita}/edit', 'ReceitasController@edit');
+Route::post('/receitas/{receita}/edit', 'ReceitasController@update');
+Route::get('/receitas/{receita}/delete', 'ReceitasController@delete');
+Route::post('/receitas/{receita}/delete', 'ReceitasController@destroy');

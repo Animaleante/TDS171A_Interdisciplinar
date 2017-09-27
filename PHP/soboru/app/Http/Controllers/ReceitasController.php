@@ -16,7 +16,7 @@ class ReceitasController extends Controller
     }
 
     public function index() {
-    	return view('receita.index');
+    	return view('receitas.index');
     }
 
     public function create() {
@@ -28,7 +28,7 @@ class ReceitasController extends Controller
         $ingredientes = Ingrediente::pluck('nome_ingrediente', 'id');
         // $medidas = MedidasIngrediente::all();
         $medidas = MedidasIngrediente::pluck('nome_medida', 'id');
-    	return view('receita.create', compact('categorias', 'ingredientes', 'medidas'));
+    	return view('receitas.create', compact('categorias', 'ingredientes', 'medidas'));
     }
 
     public function store() {
@@ -92,16 +92,17 @@ class ReceitasController extends Controller
         // Get quantity used in first ingredient
         // $receita->ingredientes->first()->pivot->qty
         // App\Models\Receita::with('receitasIngredientes.medida', 'receitasIngredientes.ingrediente')->first();
+        // App\Models\Receita::with('receitasIngredientes.medida', 'receitasIngredientes.ingrediente', 'utensilios')->first();
 
         return redirect('/');
     }
 
     public function show() {
-    	return view('receita.show');
+    	return view('receitas.show');
     }
 
     public function edit($receitaId) {
-    	return view('receita.edit');
+    	return view('receitas.edit');
     }
 
     public function update(Receita $receita) {
@@ -109,7 +110,7 @@ class ReceitasController extends Controller
     }
 
     public function delete($receitaId) {
-
+        return view('receitas.delete');
     }
 
     public function destroy(Receita $receita) {

@@ -25,7 +25,7 @@
 
 			<section class="content full-width">
 				<div class="submit_recipe container">
-					<form method="POST" action="/receita/create" enctype="multipart/form-data">
+					<form method="POST" action="/receitas/create" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
 						<section>
