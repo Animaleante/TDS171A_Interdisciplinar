@@ -11,20 +11,26 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     // return view('welcome');
     return view('index');
+});*/
+
+// Auth::routes();
+
+Route::group(['as' => 'site.'], function () {
+    Route::get('', ['uses' => 'HomeController@index', 'as' => 'index']);
+
+    Auth::routes();
+
+    Route::group(['prefix' => 'receitas', 'as' => 'receitas.'], function () {
+        Route::get('', ['uses' => 'ReceitasController@index', 'as' => 'index']);
+        Route::get('create', ['uses' => 'ReceitasController@create', 'as' => 'create']);
+        Route::post('create', ['uses' => 'ReceitasController@store', 'as' => 'store']);
+        Route::get('{receita}/show', ['uses' => 'ReceitasController@show', 'as' => 'show']);
+        Route::get('{receita}/edit', ['uses' => 'ReceitasController@edit', 'as' => 'edit']);
+        Route::post('{receita}/edit', ['uses' => 'ReceitasController@update', 'as' => 'update']);
+        Route::get('{receita}/delete', ['uses' => 'ReceitasController@delete', 'as' => 'delete']);
+        Route::post('{receita}/delete', ['uses' => 'ReceitasController@destroy', 'as' => 'destroy']);
+    });
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/receitas', 'ReceitasController@index');
-Route::get('/receitas/create', 'ReceitasController@create');
-Route::post('/receitas/create', 'ReceitasController@store');
-Route::get('/receitas/{receita}/show', 'ReceitasController@show');
-Route::get('/receitas/{receita}/edit', 'ReceitasController@edit');
-Route::post('/receitas/{receita}/edit', 'ReceitasController@update');
-Route::get('/receitas/{receita}/delete', 'ReceitasController@delete');
-Route::post('/receitas/{receita}/delete', 'ReceitasController@destroy');

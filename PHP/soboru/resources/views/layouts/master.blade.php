@@ -26,7 +26,8 @@
         <![endif]-->
     </head>
     {{-- <body> --}}
-    <body class="{{Route::is('home') ? 'home' : ''}}">
+    {{-- <body class="{{Route::is('home') ? 'home' : ''}}"> --}}
+    <body class="{{Route::is('site.index') ? 'home' : ''}}">
         <!--preloader-->
         <div class="preloader">
             <div class="spinner"></div>

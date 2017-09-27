@@ -16,7 +16,7 @@ class ReceitasController extends Controller
     }
 
     public function index() {
-    	return view('receitas.index');
+    	return view('site.receitas.index');
     }
 
     public function create() {
@@ -28,7 +28,7 @@ class ReceitasController extends Controller
         $ingredientes = Ingrediente::pluck('nome_ingrediente', 'id');
         // $medidas = MedidasIngrediente::all();
         $medidas = MedidasIngrediente::pluck('nome_medida', 'id');
-    	return view('receitas.create', compact('categorias', 'ingredientes', 'medidas'));
+    	return view('site.receitas.create', compact('categorias', 'ingredientes', 'medidas'));
     }
 
     public function store() {
@@ -98,11 +98,11 @@ class ReceitasController extends Controller
     }
 
     public function show() {
-    	return view('receitas.show');
+    	return view('site.receitas.show');
     }
 
     public function edit($receitaId) {
-    	return view('receitas.edit');
+    	return view('site.receitas.edit');
     }
 
     public function update(Receita $receita) {
@@ -110,7 +110,7 @@ class ReceitasController extends Controller
     }
 
     public function delete($receitaId) {
-        return view('receitas.delete');
+        return view('site.receitas.delete');
     }
 
     public function destroy(Receita $receita) {
