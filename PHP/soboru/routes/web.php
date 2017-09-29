@@ -33,4 +33,7 @@ Route::group(['as' => 'site.'], function () {
         Route::get('{receita}/delete', ['uses' => 'ReceitasController@delete', 'as' => 'delete']);
         Route::post('{receita}/delete', ['uses' => 'ReceitasController@destroy', 'as' => 'destroy']);
     });
+
+    Route::get('suporte', ['uses' => 'SuporteController@index', 'as' => 'index']);
+    Route::post('suporte', ['uses' => 'SuporteController@send', 'as' => 'send']);
 });

@@ -6,7 +6,9 @@
             <div class="row">
                 <section class="content center full-width">
                     <div class="modal container">
-                        <form method="post" action="contact_form_message.php" name="contactform" id="contactform">
+                        <form method="post" action="/suporte">
+                            {{ csrf_field() }}
+
                             <h3>Suporte</h3>
                             <div id="message" class="alert alert-danger"></div>
                             <div class="f-row">
