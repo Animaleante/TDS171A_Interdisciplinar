@@ -6,7 +6,7 @@
         <nav class="main-nav" role="navigation" id="menu">
             <ul>
                 <li class="current-menu-item">
-                    <a href="index.html" title="Home"><span>Home</span></a>
+                    <a href="/" title="Home"><span>Home</span></a>
                 </li>
                 <li>
                     <a href="recipes.html" title="Recipes"><span>Recipes</span></a>
@@ -70,7 +70,7 @@
                     </a>
                 </li>
                 <li class="dark">
-                    <a href="{{ url('receita/create')}}" title="Submit a recipe">
+                    <a href="{{ url('receitas/create')}}" title="Submit a recipe">
                         <i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span>
                     </a>
                 </li>

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.site.master')
 
 @section('content')
     <main class="main" role="main">
@@ -7,7 +7,7 @@
             <!--breadcrumbs-->
             <nav class="breadcrumbs">
                 <ul>
-                    <li><a href="index.html" title="Home">Home</a></li>
+                    <li><a href="/" title="Home">Home</a></li>
                     <li>Search for Recipes</li>
                 </ul>
             </nav>

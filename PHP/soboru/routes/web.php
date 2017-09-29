@@ -16,12 +16,12 @@
     return view('index');
 });*/
 
-// Auth::routes();
+Auth::routes();
 
 Route::group(['as' => 'site.'], function () {
     Route::get('', ['uses' => 'HomeController@index', 'as' => 'index']);
 
-    Auth::routes();
+    // Auth::routes();
 
     Route::group(['prefix' => 'receitas', 'as' => 'receitas.'], function () {
         Route::get('', ['uses' => 'ReceitasController@index', 'as' => 'index']);

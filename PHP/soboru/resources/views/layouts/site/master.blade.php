@@ -25,21 +25,21 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
     </head>
-    {{-- <body> --}}
+    <body>
     {{-- <body class="{{Route::is('home') ? 'home' : ''}}"> --}}
-    <body class="{{Route::is('site.index') ? 'home' : ''}}">
+    {{-- <body class="{{Route::is('site.index') ? 'home' : ''}}"> --}}
         <!--preloader-->
         <div class="preloader">
             <div class="spinner"></div>
         </div>
         <!--//preloader-->
         
-        @include('layouts.nav')
+        @include('layouts.site.nav')
         
         
         @yield('content')
 
-        @include('layouts.footer')
+        @include('layouts.site.footer')
         
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/bootstrap3-typeahead.min.js') }}"></script>

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.site.master')
 
 @section('content')
 	{{-- <div class="container">
