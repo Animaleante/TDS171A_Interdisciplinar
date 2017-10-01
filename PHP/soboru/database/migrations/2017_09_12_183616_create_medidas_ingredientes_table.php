@@ -16,6 +16,7 @@ class CreateMedidasIngredientesTable extends Migration
         Schema::create('medidas_ingredientes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome_medida')->unique();
+            $table->string('abreviacao');
             $table->timestamps();
             $table->softDeletes();
         });

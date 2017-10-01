@@ -9,17 +9,17 @@
                     <a href="/" title="Home"><span>Home</span></a>
                 </li>
                 <li>
-                    <a href="recipes.html" title="Recipes"><span>Recipes</span></a>
-                    <ul>
+                    <a href="/receitas" title="Recipes"><span>Receitas</span></a>
+                    {{-- <ul>
                         <li>
                             <a href="recipes2.html" title="Recipes 2">Recipes 2</a>
                         </li>
                         <li>
                             <a href="recipe.html" title="Recipe">Recipe</a>
                         </li>
-                    </ul>
+                    </ul> --}}
                 </li>
-                <li>
+                {{-- <li>
                     <a href="blog.html" title="Blog"><span>Blog</span></a>
                     <ul>
                         <li>
@@ -52,7 +52,7 @@
                 </li>
                 <li>
                     <a href="http://themeforest.net/item/socialchef-social-recipe-html-template/8568727?ref=themeenergy" title="Buy now"><span>Buy now</span></a>
-                </li>
+                </li> --}}
             </ul>
         </nav>
         
@@ -61,17 +61,17 @@
                 {{-- <li class="light current-menu-item"> --}}
                 <li class="light">
                     <a href="find_recipe.html" title="Search for recipes">
-                        <i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span>
+                        <i class="icon icon-themeenergy_search"></i> <span>Procurar receitas</span>
                     </a>
                 </li>
                 <li class="medium">
                     <a href="my_profile.html" title="My account">
-                        <i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span>
+                        <i class="icon icon-themeenergy_chef-hat"></i> <span>Minha conta</span>
                     </a>
                 </li>
                 <li class="dark">
                     <a href="{{ url('receitas/create')}}" title="Submit a recipe">
-                        <i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span>
+                        <i class="icon icon-themeenergy_fork-spoon"></i> <span>Enviar receita</span>
                     </a>
                 </li>
             </ul>

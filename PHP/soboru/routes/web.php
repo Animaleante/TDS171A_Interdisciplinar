@@ -27,11 +27,14 @@ Route::group(['as' => 'site.'], function () {
         Route::get('', ['uses' => 'ReceitasController@index', 'as' => 'index']);
         Route::get('create', ['uses' => 'ReceitasController@create', 'as' => 'create']);
         Route::post('create', ['uses' => 'ReceitasController@store', 'as' => 'store']);
-        Route::get('{receita}/show', ['uses' => 'ReceitasController@show', 'as' => 'show']);
+        Route::get('search', ['uses' => 'ReceitasController@search', 'as' => 'search']);
+        Route::get('{receita}', ['uses' => 'ReceitasController@show', 'as' => 'show']);
         Route::get('{receita}/edit', ['uses' => 'ReceitasController@edit', 'as' => 'edit']);
         Route::post('{receita}/edit', ['uses' => 'ReceitasController@update', 'as' => 'update']);
         Route::get('{receita}/delete', ['uses' => 'ReceitasController@delete', 'as' => 'delete']);
         Route::post('{receita}/delete', ['uses' => 'ReceitasController@destroy', 'as' => 'destroy']);
+
+        Route::post('{receita}/comments', ['uses' => 'ComentariosController@store', 'as' => 'store']);
     });
 
     Route::get('suporte', ['uses' => 'SuporteController@index', 'as' => 'index']);

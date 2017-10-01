@@ -51,7 +51,7 @@
 										@foreach($categorias as $categoria)
 											@if($categoria->children()->count())
 												<optgroup label="{{ $categoria->nome_categoria }}">
-													@include('receita/_categoria_children', ['children' => $categoria->children])
+													@include('site.receitas._categoria_children', ['children' => $categoria->children])
 												</optgroup>
 											@else
 												<option value="{{ $categoria->id }}" {{ (old('categoria_id') == $categoria->id) ? 'selected="selected"' : '' }}>{{ $categoria->nome_categoria }}</option>
@@ -67,7 +67,7 @@
 							@for ($i = 0; $i < count(old('nome_ingrediente')); $i++)
 								<div class="f-row ingredient">
                                     <div class="large">
-                                        <input class="ingrediente-input" type="text" placeholder="Ingrediente" name="nome_ingrediente[]" value="{{ old('nome_ingrediente')[$i] }}" />
+                                        <input class="ingrediente-input" type="text" placeholder="Ingrediente" name="nome_ingrediente[]" autocomplete="off" value="{{ old('nome_ingrediente')[$i] }}" />
                                     </div>
                                     <div class="small">
                                         <input type="text" placeholder="SubSession" name="receita_ingrediente[subsessao][]" value="{{ old('receita_ingrediente')['subsessao'][$i] }}" />
@@ -98,7 +98,7 @@
 							<h2>Modo de Preparo</h2>
 							<div class="full">
 								<div class="f-row instruction">
-									<input type="text" name="modo_preparo" value="{{ old('modo_preparo') }}" />
+									<textarea type="text" name="modo_preparo" value="{{ old('modo_preparo') }}"></textarea>
 								</div>
 							</div>
 						</section>
@@ -145,7 +145,7 @@
 			function addIngredientRow() {
 				var inputEl = $('<div/>').addClass('f-row ingredient').append(
 					$('<div/>').addClass('large').append(
-						$('<input/>').addClass('ingrediente-input').attr({'type':'text', 'placeholder':'Ingrediente', 'name':'nome_ingrediente[]'})
+						$('<input/>').addClass('ingrediente-input').attr({'type':'text', 'placeholder':'Ingrediente', 'name':'nome_ingrediente[]', 'autocomplete':"off"})
 					),
 					$('<div/>').addClass('small').append(
 						$('<input/>').attr({'type':'text', 'placeholder':'Sub-Sessão', 'name':'receita_ingrediente[subsessao][]'})
@@ -186,5 +186,7 @@
 			if($('.f-row.ingredient').length === 0)
 				addIngredientRow();
 		});
+
+		// TODO - Se usuario tirar foco do input do ingrediente, ja criar outro elemento de ingrediente vazio, caso ainda não tenha um
 	</script>
 @endsection

@@ -6,8 +6,8 @@
 
             <nav class="breadcrumbs">
                 <ul>
-                    <li><a href="index.html" title="Home">Home</a></li>
-                    <li>Recipes</li>
+                    <li><a href="/">Home</a></li>
+                    <li>Receitas</li>
                 </ul>
             </nav>
 
@@ -46,7 +46,37 @@
                 
                 <section class="content full-width">
                     <div class="entries row">
-                        <div class="entry one-fourth">
+
+                        @foreach($receitas as $receita)
+                            <div class="entry one-fourth">
+                                <figure>
+                                    <img src="/{{ $receita->img_path }}" alt="" />
+                                    <figcaption>
+                                        <a href="receitas/{{ $receita->id }}">
+                                            <i class="icon icon-themeenergy_eye2"></i> <span>Ver receita</span>
+                                        </a>
+                                    </figcaption>
+                                </figure>
+                                <div class="container">
+                                    <h2><a href="receitas/{{ $receita->id }}">{{ $receita->nome_receita }}</a></h2> 
+                                    <div class="actions">
+                                        <div>
+                                            {{-- <div class="difficulty"><i class="ico i-medium"></i><a href="#">medium</a></div> --}}
+                                            <div class="likes">
+                                                <i class="fa fa-heart"></i>
+                                                <a href="#">{{ $receita->pontuacao_media }}</a>
+                                            </div>
+                                            <div class="comments">
+                                                <i class="fa fa-comment"></i>
+                                                <a href="receitas/{{ $receita->id }}#comments">{{ count($receita->comentarios) }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
+                        {{-- <div class="entry one-fourth">
                             <figure>
                                 <img src="images/img6.jpg" alt="" />
                                 <figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
@@ -248,7 +278,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         
                         <div class="quicklinks">
                             <a href="#" class="button">More recipes</a>

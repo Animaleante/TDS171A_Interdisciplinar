@@ -16,13 +16,12 @@ class ReceitasController extends Controller
     }
 
     public function index() {
-    	return view('site.receitas.index');
+    	$receitas = Receita::all();
+    	return view('site.receitas.index', compact('receitas'));
     }
 
     public function create() {
     	$categorias = Categoria::where('id_super_categoria', '=', null)->get();
-
-        // dd($categorias);
 
         // $ingredientes = Ingrediente::all();
         $ingredientes = Ingrediente::pluck('nome_ingrediente', 'id');
@@ -97,8 +96,11 @@ class ReceitasController extends Controller
         return redirect('/');
     }
 
-    public function show() {
-    	return view('site.receitas.show');
+    // public function show(Receita $receita) {
+    public function show($receitaId) {
+    	// $receita = Receita::with('receitasIngredientes.medida', 'receitasIngredientes.ingrediente', 'utensilios')->find($receita->id);
+    	$receita = Receita::with('receitasIngredientes.medida', 'receitasIngredientes.ingrediente', 'utensilios')->find($receitaId);
+    	return view('site.receitas.show', compact('receita'));
     }
 
     public function edit($receitaId) {
@@ -106,7 +108,7 @@ class ReceitasController extends Controller
     }
 
     public function update(Receita $receita) {
-
+    	// TODO
     }
 
     public function delete($receitaId) {
@@ -114,6 +116,17 @@ class ReceitasController extends Controller
     }
 
     public function destroy(Receita $receita) {
+    	// TODO
+    }
 
+    public function search(Request $request) {
+    	$nome_receita = $request->get('nome');
+
+    	$query = Receita::whereRaw("lower(nome_receita) like lower('%".$nome_receita."%')");
+
+    	$receitas = $query->orderBy('pontuacao_media', 'DESC')->paginate(5);
+    	// $receitas = $query->orderBy('pontuacao_media', 'DESC')->get();
+
+    	dd($receitas);
     }
 }
