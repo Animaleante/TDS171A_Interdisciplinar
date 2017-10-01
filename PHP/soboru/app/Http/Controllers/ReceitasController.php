@@ -124,7 +124,7 @@ class ReceitasController extends Controller
 
     	$query = Receita::whereRaw("lower(nome_receita) like lower('%".$nome_receita."%')");
 
-    	$receitas = $query->orderBy('pontuacao_media', 'DESC')->paginate(5);
+    	$receitas = $query->orderBy('pontuacao_media', 'DESC')->paginate(1);
     	// $receitas = $query->orderBy('pontuacao_media', 'DESC')->get();
 
     	dd($receitas);
