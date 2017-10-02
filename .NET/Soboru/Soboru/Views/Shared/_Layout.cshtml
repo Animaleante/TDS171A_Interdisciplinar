@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8" />
+    <title>@ViewBag.Title</title>
+
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" />
+    @RenderSection("styles", false)
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="page-header">
+                <h1>Soboru</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                @RenderPage("~/Views/Shared/_Nav.cshtml")
+            </div>
+            <div class="col-md-9">
+                <br />
+                @RenderBody()
+            </div>
+        </div>
+
+        <div class="row">
+            @RenderPage("~/Views/Shared/_Footer.cshtml")
+        </div>
+    </div>
+
+    <script src="@Url.Content("~/Scripts/jquery-3.2.1.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    @RenderSection("scripts", false)
+</body>
+</html>
