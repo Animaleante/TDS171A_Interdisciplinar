@@ -65,6 +65,8 @@ namespace Soboru.Controllers
                     context.SaveChanges();
                     return RedirectToAction("Index");
                 }
+
+                return View(ingrediente);
             }
             catch {
                 return View(ingrediente);
