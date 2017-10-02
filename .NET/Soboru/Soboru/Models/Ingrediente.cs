@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace Soboru.Models
 {
     public class Ingrediente
     {
+        [Key]
         public int IngredienteId { get; set; }
         public string NomeIngrediente { get; set; }
         public DateTime CreatedAt { get; set; }

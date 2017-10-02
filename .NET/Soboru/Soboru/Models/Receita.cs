@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,6 +8,7 @@ namespace Soboru.Models
 {
     public class Receita
     {
+        [Key]
         public int ReceitaID { get; set; }
         public int IdUsuario { get; set; }
         public string NomeReceita { get; set; }
@@ -21,6 +23,6 @@ namespace Soboru.Models
         public string Slug { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-        public DateTime DeletedAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
     }
 }

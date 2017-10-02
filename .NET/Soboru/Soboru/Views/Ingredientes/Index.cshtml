@@ -20,7 +20,6 @@
             <thead>
                 <tr>
                     <th>
-                        @*@Html.DisplayNameFor(model => model.NomeIngrediente)*@
                         Nome
                     </th>
                     <th>Actions</th>
@@ -35,8 +34,7 @@
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.IngredienteId }) |
                             @Html.ActionLink("Details", "Details", new { id = item.IngredienteId }) |
-                            @*@Html.ActionLink("Delete", "Delete", new { id = item.IngredienteId })*@
-                            <a class="modelItemRemove" href="#" class="btn btn-info" data-toggle="modal" 
+                            <a href="#" class="modelItemRemove" data-toggle="modal" 
                                data-target="#deleteConfirmationModal" data-modelitemid="@item.IngredienteId" data-modelitemname="@item.NomeIngrediente">Remover</a>
                         </td>
                     </tr>
@@ -51,44 +49,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="deleteConfirmationModal" tabindex="-1"
-     role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-ELTEismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-                <h4 class="modal-title">
-                    Confirmação de exclusão de Ingrediente
-                </h4>
-            </div>
-            <div class="modal-body">
-                <p>
-                    Você está prestes a remover o ingrediente <span class="modelItemName"></span> do cadastro.
-                </p>
-                <p>
-                    <strong>
-                        Você está certo que deseja prosseguir?
-                    </strong>
-                </p>
-                @using (Html.BeginForm("Delete", "Ingrediente", FormMethod.Post, new { @id = "delete-form", role = "form" })) {
-                    @Html.AntiForgeryToken()
-                    <input type="hidden" name="IngredienteId" />
-                }
-            </div>
-            <div class="modal-footer">
-                <button id="submit" type="button" class="btn btn-default" onclick="$('#delete-form').submit()">
-                    Sim, exclua este produto.
-                </button>
-                <button type="button" class="btn btn-primary"
-                        data-dismiss="modal">
-                    Não, não exclua este produto.
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+@Html.Partial("~/Views/Shared/_DeleteModal.cshtml")
 
 @section Scripts {
 <script src="@Url.Content("~/Scripts/DataTables/jquery.dataTables.min.js")"></script>

@@ -8,13 +8,31 @@ using System.Web.Mvc;
 
 namespace Soboru.Controllers
 {
-    public class IngredienteController : Controller
+    public class IngredientesController : Controller
     {
         private EFContext context = new EFContext();
 
         public ActionResult Index()
         {
+            ViewBag.ControllerName = "Ingredientes";
+            ViewBag.ItemIdName = "IngredienteId";
+
             return View(context.Ingredientes.OrderBy(i => i.NomeIngrediente));
+        }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            //Ingrediente ingrediente = context.Ingredientes.Where(i => i.IngredienteId == id).First();
+            Ingrediente ingrediente = context.Ingredientes.Find(id);
+            if (ingrediente == null) {
+                return HttpNotFound();
+            }
+
+            return View(ingrediente);
         }
 
         public ActionResult Create()
@@ -61,6 +79,8 @@ namespace Soboru.Controllers
         {
             try {
                 if(ModelState.IsValid) {
+                    ingrediente.UpdatedAt = DateTime.Now;
+
                     context.Entry(ingrediente).State = EntityState.Modified;
                     context.SaveChanges();
                     return RedirectToAction("Index");
@@ -73,37 +93,19 @@ namespace Soboru.Controllers
             }
         }
 
-        public ActionResult Details(int? id)
-        {
-            if(id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            Ingrediente ingrediente = context.Ingredientes.Where(i => i.IngredienteId == id).First();
-            if(ingrediente == null) {
-                return HttpNotFound();
-            }
-
-            return View(ingrediente);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete()
         {
             int id = int.Parse(Request["IngredienteId"]);
+            
+            Ingrediente ingrediente = context.Ingredientes.Find(id);
+            if (ingrediente != null) {
+                context.Ingredientes.Remove(ingrediente);
+                context.SaveChanges();
 
-            try {
-                Ingrediente ingrediente = context.Ingredientes.Find(id);
-                if (ingrediente != null) {
-                    context.Ingredientes.Remove(ingrediente);
-                    context.SaveChanges();
-
-                    TempData["Message"] = "Ingrediente " + ingrediente.NomeIngrediente + " foi removido!";
-                } else {
-                    TempData["Message"] = "Não foi encontrado um Ingrediente com esse id.";
-                }
-            } catch {
+                TempData["Message"] = "Ingrediente " + ingrediente.NomeIngrediente + " foi removido!";
+            } else {
                 TempData["Message"] = "Não foi encontrado um Ingrediente com esse id.";
             }
 
