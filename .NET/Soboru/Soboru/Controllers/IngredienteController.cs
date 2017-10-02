@@ -77,20 +77,15 @@ namespace Soboru.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Ingrediente ingrediente)
         {
-            try {
-                if(ModelState.IsValid) {
-                    ingrediente.UpdatedAt = DateTime.Now;
+            if(ModelState.IsValid) {
+                ingrediente.UpdatedAt = DateTime.Now;
 
-                    context.Entry(ingrediente).State = EntityState.Modified;
-                    context.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                context.Entry(ingrediente).State = EntityState.Modified;
+                context.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
-                return View(ingrediente);
-            }
-            catch {
-                return View(ingrediente);
-            }
+            return View(ingrediente);
         }
 
         [HttpPost]

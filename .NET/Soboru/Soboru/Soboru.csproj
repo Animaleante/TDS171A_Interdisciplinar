@@ -363,8 +363,18 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Contexts\EFContext.cs" />
+    <Compile Include="Controllers\CategoriaReceitasController.cs" />
+    <Compile Include="Controllers\ComentariosController.cs" />
     <Compile Include="Controllers\IngredienteController.cs" />
+    <Compile Include="Controllers\IngredienteMedidasController.cs" />
+    <Compile Include="Controllers\PontuacaoReceitasController.cs" />
+    <Compile Include="Controllers\ReceitaIngredientesController.cs" />
+    <Compile Include="Controllers\ReceitasController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\SexosController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Controllers\UtensiliosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -395,10 +405,6 @@
     <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.2.1.min.map" />
     <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\Tags\Create.cshtml" />
-    <Content Include="Views\Tags\Details.cshtml" />
-    <Content Include="Views\Tags\Edit.cshtml" />
-    <Content Include="Views\Tags\Index.cshtml" />
     <Content Include="Views\Shared\_DeleteModal.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -409,6 +415,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\CategoriaReceitas\" />
+    <Folder Include="Views\Comentarios\" />
+    <Folder Include="Views\IngredienteMedidas\" />
+    <Folder Include="Views\PontuacaoReceitas\" />
+    <Folder Include="Views\ReceitaIngredientes\" />
+    <Folder Include="Views\Receitas\" />
+    <Folder Include="Views\Roles\" />
+    <Folder Include="Views\Sexos\" />
+    <Folder Include="Views\Usuarios\" />
+    <Folder Include="Views\Utensilios\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
