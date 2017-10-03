@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Soboru.Contexts;
+using Soboru.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,14 +8,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Soboru.Contexts;
-using Soboru.Models;
+
 
 namespace Soboru.Controllers
 {
     public class UtensiliosController : Controller
     {
-        private EFContext db = new EFContext();
+        private EFContext context = new EFContext();
 
         // GET: Utensilios
         public ActionResult Index()
@@ -21,7 +22,7 @@ namespace Soboru.Controllers
             ViewBag.ControllerName = "Utensilios";
             ViewBag.ItemIdName = "UtensilioId";
 
-            return View(db.Utensilios.ToList());
+            return View(context.Utensilios.OrderBy(i => i.NomeUtensilio));
         }
 
         // GET: Utensilios/Details/5
@@ -31,7 +32,7 @@ namespace Soboru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Utensilio utensilio = db.Utensilios.Find(id);
+            Utensilio utensilio = context.Utensilios.Find(id);
             if (utensilio == null)
             {
                 return HttpNotFound();
@@ -46,8 +47,7 @@ namespace Soboru.Controllers
         }
 
         // POST: Utensilios/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "NomeUtensilio")] Utensilio utensilio)
@@ -56,8 +56,8 @@ namespace Soboru.Controllers
                 utensilio.CreatedAt = DateTime.Now;
                 utensilio.UpdatedAt = DateTime.Now;
 
-                db.Utensilios.Add(utensilio);
-                db.SaveChanges();
+                context.Utensilios.Add(utensilio);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -71,7 +71,7 @@ namespace Soboru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Utensilio utensilio = db.Utensilios.Find(id);
+            Utensilio utensilio = context.Utensilios.Find(id);
             if (utensilio == null)
             {
                 return HttpNotFound();
@@ -80,40 +80,43 @@ namespace Soboru.Controllers
         }
 
         // POST: Utensilios/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "NomeUtensilio")] Utensilio utensilio)
+        public ActionResult Edit(Utensilio utensilio)
         {
             if (ModelState.IsValid) {
                 utensilio.UpdatedAt = DateTime.Now;
 
-                db.Entry(utensilio).State = EntityState.Modified;
-                db.SaveChanges();
+                context.Entry(utensilio).State = EntityState.Modified;
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(utensilio);
         }
 
         // POST: Utensilios/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete()
         {
-            Utensilio utensilio = db.Utensilios.Find(id);
-            db.Utensilios.Remove(utensilio);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+            int id = int.Parse(Request["UtensilioId"]);
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            Utensilio utensilio = context.Utensilios.Find(id);
+            if (utensilio != null)
             {
-                db.Dispose();
+                utensilio.DeletedAt = DateTime.Now;
+
+                context.Utensilios.Remove(utensilio);
+                context.SaveChanges();
+
+                TempData["Message"] = "Utensilio " + utensilio.NomeUtensilio + " foi removido!";
             }
-            base.Dispose(disposing);
+            else
+            {
+                TempData["Message"] = "Não foi encontrado um Utensilio com esse id.";
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

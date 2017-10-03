@@ -1,9 +1,12 @@
 ﻿using Soboru.Contexts;
 using Soboru.Models;
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Soboru.Controllers
@@ -40,6 +43,7 @@ namespace Soboru.Controllers
             return View();
         }
 
+        // POST: Ingredientes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Ingrediente ingrediente)

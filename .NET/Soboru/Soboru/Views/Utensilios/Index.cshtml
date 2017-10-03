@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Soboru.Models.Utensilio>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Utensilios";
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Message"]
+    </div>
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3>Utensilios</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-stiped table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        Nome
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NomeUtensilio)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.UtensilioId }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.UtensilioId }) |
+                            <a href="#" class="modelItemRemove" data-toggle="modal"
+                               data-target="#deleteConfirmationModal" data-modelitemid="@item.UtensilioId" data-modelitemname="@item.NomeUtensilio">Remover</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer panel-info">
+        <p>
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+        </p>
+    </div>
+</div>
+
+@Html.Partial("~/Views/Shared/_DeleteModal.cshtml")
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/DataTables/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/DataTables/dataTables.bootstrap.min.js")"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".nav li").removeClass("active");
+            $("#nav_Utensilios").addClass("active");
+
+            $(".table").dataTable({
+                "order": [[1, "asc"]]
+            });
+
+            $(".modelItemRemove").click(function (event) {
+                $('.modal').find('.modelItemName').text($(event.target).data('modelitemname'));
+                $('.modal').find('input[name="UtensilioId"]').val($(event.target).data('modelitemid'));
+            });
+        });
+    </script>
+}
