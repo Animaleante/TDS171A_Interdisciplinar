@@ -5,8 +5,7 @@
     ViewBag.Title = "Utensilios";
 }
 
-@if (TempData["Message"] != null)
-{
+@if (TempData["Message"] != null) {
     <div class="alert alert-success" role="alert">
         @TempData["Message"]
     </div>
@@ -27,8 +26,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
-                {
+                @foreach (var item in Model) {
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.NomeUtensilio)
@@ -59,17 +57,13 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $(".nav li").removeClass("active");
-            $("#nav_Utensilios").addClass("active");
+            setActivePage("nav_utensilios");
 
             $(".table").dataTable({
                 "order": [[1, "asc"]]
             });
 
-            $(".modelItemRemove").click(function (event) {
-                $('.modal').find('.modelItemName').text($(event.target).data('modelitemname'));
-                $('.modal').find('input[name="UtensilioId"]').val($(event.target).data('modelitemid'));
-            });
+            registerDeleteModalInfo();
         });
     </script>
 }

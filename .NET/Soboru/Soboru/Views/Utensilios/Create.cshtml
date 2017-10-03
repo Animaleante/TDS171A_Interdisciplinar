@@ -10,8 +10,7 @@
         <h3>Utensilios</h3>
     </div>
     <div class="panel-body">
-        @using (Html.BeginForm())
-        {
+        @using (Html.BeginForm()) {
             @Html.AntiForgeryToken()
 
             <div class="form-horizontal">
@@ -44,4 +43,10 @@
 @section scripts {
     <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+
+    <script type="text/javascript">
+                $(document).ready(function () {
+                    setActivePage("nav_utensilios");
+                });
+    </script>
 }

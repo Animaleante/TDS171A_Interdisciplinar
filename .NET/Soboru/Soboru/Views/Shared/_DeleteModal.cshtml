@@ -25,7 +25,7 @@
                 </p>
                 @using (Html.BeginForm("Delete", controllerName, FormMethod.Post, new { @id = "delete-form", role = "form" })) {
                     @Html.AntiForgeryToken()
-                    <input type="hidden" name="@ViewBag.ItemIdName"/>
+                    <input type="hidden" class="modelItemId" name="@ViewBag.ItemIdName"/>
                 }
             </div>
             <div class="modal-footer">

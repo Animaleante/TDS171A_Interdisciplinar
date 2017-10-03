@@ -33,6 +33,20 @@
 
     <script src="@Url.Content("~/Scripts/jquery-3.2.1.min.js")"></script>
     <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <script type="text/javascript">
+        function setActivePage(pageId) {
+            $(".nav li").removeClass("active");
+            $("#" + pageId).addClass("active");
+        }
+
+        function registerDeleteModalInfo() {
+            $(".modelItemRemove").click(function (event) {
+                var $el = $(event.target);
+                $('.modal').find('.modelItemName').text($el.data('modelitemname'));
+                $('.modal').find('form input.modelItemId').val($el.data('modelitemid'));
+            });
+        }
+    </script>
     @RenderSection("scripts", false)
 </body>
 </html>
