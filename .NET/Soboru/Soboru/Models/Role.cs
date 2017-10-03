@@ -10,6 +10,7 @@ namespace Soboru.Models
     {
         [Key]
         public int RoleId { get; set; }
+        [Display(Name = "Nome")]
         public String NomeRole { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

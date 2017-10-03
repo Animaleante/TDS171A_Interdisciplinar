@@ -410,6 +410,7 @@
     <Content Include="Views\Utensilios\Details.cshtml" />
     <Content Include="Views\Utensilios\Create.cshtml" />
     <Content Include="Views\Utensilios\Edit.cshtml" />
+    <Content Include="Views\Tags\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

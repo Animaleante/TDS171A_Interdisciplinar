@@ -10,6 +10,7 @@ namespace Soboru.Models
     {
         [Key]
         public int SexoId { get; set; }
+        [Display(Name = "Nome")]
         public string NomeSexo { get; set; }
     }
 }

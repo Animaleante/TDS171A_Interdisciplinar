@@ -10,6 +10,7 @@ namespace Soboru.Models
     {
         [Key]
         public int CategoriaReceitaId { get; set; }
+        [Display(Name = "Nome")]
         public string NomeCategoria { get; set; }
         public int SuperCategoriaId { get; set; }
         public bool Selecionavel { get; set; }

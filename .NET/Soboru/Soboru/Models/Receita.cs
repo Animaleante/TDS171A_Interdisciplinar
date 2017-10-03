@@ -10,8 +10,9 @@ namespace Soboru.Models
     {
         [Key]
         public int ReceitaId { get; set; }
+        [Display(Name = "Nome")]
         public string NomeReceita { get; set; }
-        public int UsuarioId { get; set; }
+        public int? UsuarioId { get; set; }
         public int CategoriaReceitaId { get; set; }
         public int Porcao { get; set; }
         public float TempoPreparo { get; set; }

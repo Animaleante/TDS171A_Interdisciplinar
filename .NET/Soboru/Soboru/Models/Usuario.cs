@@ -14,6 +14,7 @@ namespace Soboru.Models
         public string Email { get; set; }
         public string Senha { get; set; }
         public int Role { get; set; }
+        [DataType(DataType.Date)]
         public DateTime Nasc { get; set; }
         public int Sexo { get; set; }
         public bool NotificacaoEmail { get; set; }

@@ -10,6 +10,7 @@ namespace Soboru.Models
     {
         [Key]
         public int TagId { get; set; }
+        [Display(Name = "Nome")]
         public string NomeTag { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
