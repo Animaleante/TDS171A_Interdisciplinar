@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Soboru.Contexts
 {
@@ -24,5 +25,9 @@ namespace Soboru.Contexts
         public DbSet<ReceitaIngrediente> ReceitaIngredientes { get; set; }
         public DbSet<Comentario> Comentarios { get; set; }
         public DbSet<PontuacaoReceita> PontuacaoReceitas { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+        moldelBuilder.Conventions.Remove<PluralizingTableNameConventon>();
+        }
     }
 }
