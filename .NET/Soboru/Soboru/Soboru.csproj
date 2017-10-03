@@ -95,6 +95,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Asp_Net_MVC_DB.mdf" />
+    <Content Include="App_Data\Asp_Net_MVC_DB_log.ldf">
+      <DependentUpon>Asp_Net_MVC_DB.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -256,6 +260,7 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\styles.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -365,6 +370,7 @@
     <Compile Include="Contexts\EFContext.cs" />
     <Compile Include="Controllers\CategoriaReceitasController.cs" />
     <Compile Include="Controllers\ComentariosController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngredienteController.cs" />
     <Compile Include="Controllers\IngredienteMedidasController.cs" />
     <Compile Include="Controllers\PontuacaoReceitasController.cs" />
@@ -411,6 +417,7 @@
     <Content Include="Views\Utensilios\Create.cshtml" />
     <Content Include="Views\Utensilios\Edit.cshtml" />
     <Content Include="Views\Tags\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -419,7 +426,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\CategoriaReceitas\" />
     <Folder Include="Views\Comentarios\" />
     <Folder Include="Views\IngredienteMedidas\" />
