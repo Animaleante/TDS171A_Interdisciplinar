@@ -25,6 +25,7 @@ namespace Soboru.Contexts
         public DbSet<ReceitaIngrediente> ReceitaIngredientes { get; set; }
         public DbSet<Comentario> Comentarios { get; set; }
         public DbSet<PontuacaoReceita> PontuacaoReceitas { get; set; }
+        //Linha que evita a pluralização em inglês.
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
         moldelBuilder.Conventions.Remove<PluralizingTableNameConventon>();
