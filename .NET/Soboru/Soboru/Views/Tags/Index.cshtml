@@ -1,52 +1,67 @@
 ﻿@model IEnumerable<Soboru.Models.Tag>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tags";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NomeTag)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DeletedAt)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NomeTag)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeletedAt)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TagId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TagId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TagId })
-        </td>
-    </tr>
+@if (TempData["Message"] != null) {
+    <div class="alert alert-success" role="alert">
+        @TempData["Message"]
+    </div>
 }
 
-</table>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3>Tags</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.NomeTag)
+                </th>
+                <th>Actions</th>
+            </tr>
+
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeTag)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.TagId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.TagId }) |
+                        <a href="#" class="modelItemRemove" data-toggle="modal"
+                           data-target="#deleteConfirmationModal" data-modelitemid="@item.TagId" data-modelitemname="@item.NomeTag">Remover</a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div class="panel-footer panel-info">
+        <p>
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+        </p>
+    </div>
+</div>
+
+@Html.Partial("~/Views/Shared/_DeleteModal.cshtml")
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/DataTables/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/DataTables/dataTables.bootstrap.min.js")"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setActivePage("nav_tags");
+
+            $(".table").dataTable({
+                "order": [[1, "asc"]]
+            });
+
+            registerDeleteModalInfo();
+        });
+    </script>
+}
