@@ -13,12 +13,14 @@ namespace Soboru.Controllers
 {
     public class RolesController : Controller
     {
-        private EFContext db = new EFContext();
+        private EFContext context = new EFContext();
 
         // GET: Roles
         public ActionResult Index()
         {
-            return View(db.Roles.ToList());
+            ViewBag.ControllerName = "Roles";
+            ViewBag.ItemIdName = "RoleId";
+            return View(context.Roles.OrderBy(i => i.NomeRole));
         }
 
         // GET: Roles/Details/5
@@ -28,7 +30,7 @@ namespace Soboru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Role role = db.Roles.Find(id);
+            Role role = context.Roles.Find(id);
             if (role == null)
             {
                 return HttpNotFound();
@@ -47,12 +49,14 @@ namespace Soboru.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RoleId,NomeRole,CreatedAt,UpdatedAt,DeletedAt")] Role role)
+        public ActionResult Create(Role role)
         {
-            if (ModelState.IsValid)
-            {
-                db.Roles.Add(role);
-                db.SaveChanges();
+            if (ModelState.IsValid) {
+                role.CreatedAt = DateTime.Now;
+                role.UpdatedAt = DateTime.Now;
+
+                context.Roles.Add(role);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +70,7 @@ namespace Soboru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Role role = db.Roles.Find(id);
+            Role role = context.Roles.Find(id);
             if (role == null)
             {
                 return HttpNotFound();
@@ -79,40 +83,34 @@ namespace Soboru.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RoleId,NomeRole,CreatedAt,UpdatedAt,DeletedAt")] Role role)
+        public ActionResult Edit(Role role)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(role).State = EntityState.Modified;
-                db.SaveChanges();
+            if (ModelState.IsValid) {
+                role.UpdatedAt = DateTime.Now;
+
+                context.Entry(role).State = EntityState.Modified;
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(role);
         }
 
-        // GET: Roles/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Role role = db.Roles.Find(id);
-            if (role == null)
-            {
-                return HttpNotFound();
-            }
-            return View(role);
-        }
-
         // POST: Roles/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete()
         {
-            Role role = db.Roles.Find(id);
-            db.Roles.Remove(role);
-            db.SaveChanges();
+            int id = int.Parse(Request["RoleId"]);
+
+            Role role = context.Roles.Find(id);
+            if (role != null) {
+                context.Roles.Remove(role);
+                context.SaveChanges();
+
+                TempData["Message"] = "Role " + role.NomeRole + " foi removido!";
+            } else {
+                TempData["Message"] = "Não foi encontrado um Role com esse id.";
+            }
             return RedirectToAction("Index");
         }
 
@@ -120,7 +118,7 @@ namespace Soboru.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                context.Dispose();
             }
             base.Dispose(disposing);
         }

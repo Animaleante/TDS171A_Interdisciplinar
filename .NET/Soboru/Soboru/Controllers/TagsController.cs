@@ -13,7 +13,7 @@ namespace Soboru.Controllers
 {
     public class TagsController : Controller
     {
-        private EFContext db = new EFContext();
+        private EFContext context = new EFContext();
 
         // GET: Tags
         public ActionResult Index()
@@ -21,7 +21,7 @@ namespace Soboru.Controllers
             ViewBag.ControllerName = "Tags";
             ViewBag.ItemIdName = "IngredienteId";
 
-            return View(db.Tags.ToList());
+            return View(context.Tags.ToList());
         }
 
         // GET: Tags/Details/5
@@ -31,7 +31,7 @@ namespace Soboru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tag tag = db.Tags.Find(id);
+            Tag tag = context.Tags.Find(id);
             if (tag == null)
             {
                 return HttpNotFound();
@@ -50,15 +50,15 @@ namespace Soboru.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "NomeTag")] Tag tag)
+        public ActionResult Create(Tag tag)
         {
             if (ModelState.IsValid)
             {
                 tag.CreatedAt = DateTime.Now;
                 tag.UpdatedAt = DateTime.Now;
 
-                db.Tags.Add(tag);
-                db.SaveChanges();
+                context.Tags.Add(tag);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -72,7 +72,7 @@ namespace Soboru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tag tag = db.Tags.Find(id);
+            Tag tag = context.Tags.Find(id);
             if (tag == null)
             {
                 return HttpNotFound();
@@ -85,14 +85,14 @@ namespace Soboru.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "NomeTag")] Tag tag)
+        public ActionResult Edit(Tag tag)
         {
             if (ModelState.IsValid)
             {
                 tag.UpdatedAt = DateTime.Now;
 
-                db.Entry(tag).State = EntityState.Modified;
-                db.SaveChanges();
+                context.Entry(tag).State = EntityState.Modified;
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(tag);
@@ -104,9 +104,9 @@ namespace Soboru.Controllers
         public ActionResult Delete()
         {
             int id = int.Parse(Request["TagId"]);
-            Tag tag = db.Tags.Find(id);
-            db.Tags.Remove(tag);
-            db.SaveChanges();
+            Tag tag = context.Tags.Find(id);
+            context.Tags.Remove(tag);
+            context.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -114,7 +114,7 @@ namespace Soboru.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                context.Dispose();
             }
             base.Dispose(disposing);
         }

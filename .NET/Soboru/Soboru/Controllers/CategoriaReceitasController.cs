@@ -13,12 +13,14 @@ namespace Soboru.Controllers
 {
     public class CategoriaReceitasController : Controller
     {
-        private EFContext db = new EFContext();
+        private EFContext context = new EFContext();
 
         // GET: CategoriaReceitas
         public ActionResult Index()
         {
-            return View(db.CategoriaReceitas.ToList());
+            ViewBag.ControllerName = "CategoriaReceitas";
+            ViewBag.ItemIdName = "CategoriaReceitaId";
+            return View(context.CategoriaReceitas.OrderBy(i => i.NomeCategoria));
         }
 
         // GET: CategoriaReceitas/Details/5
@@ -28,7 +30,7 @@ namespace Soboru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CategoriaReceita categoriaReceita = db.CategoriaReceitas.Find(id);
+            CategoriaReceita categoriaReceita = context.CategoriaReceitas.Find(id);
             if (categoriaReceita == null)
             {
                 return HttpNotFound();
@@ -47,12 +49,14 @@ namespace Soboru.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoriaReceitaId,NomeCategoria,IdSuperCategoria,Selecionavel,Slug,CreatedAt,updatedAt,DeletedAt")] CategoriaReceita categoriaReceita)
+        public ActionResult Create(CategoriaReceita categoriaReceita)
         {
-            if (ModelState.IsValid)
-            {
-                db.CategoriaReceitas.Add(categoriaReceita);
-                db.SaveChanges();
+            if (ModelState.IsValid) {
+                categoriaReceita.CreatedAt = DateTime.Now;
+                categoriaReceita.UpdatedAt = DateTime.Now;
+
+                context.CategoriaReceitas.Add(categoriaReceita);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +70,7 @@ namespace Soboru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CategoriaReceita categoriaReceita = db.CategoriaReceitas.Find(id);
+            CategoriaReceita categoriaReceita = context.CategoriaReceitas.Find(id);
             if (categoriaReceita == null)
             {
                 return HttpNotFound();
@@ -79,40 +83,35 @@ namespace Soboru.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoriaReceitaId,NomeCategoria,IdSuperCategoria,Selecionavel,Slug,CreatedAt,updatedAt,DeletedAt")] CategoriaReceita categoriaReceita)
+        public ActionResult Edit(CategoriaReceita categoriaReceita)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(categoriaReceita).State = EntityState.Modified;
-                db.SaveChanges();
+            if (ModelState.IsValid) {
+                categoriaReceita.UpdatedAt = DateTime.Now;
+
+                context.Entry(categoriaReceita).State = EntityState.Modified;
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(categoriaReceita);
         }
 
-        // GET: CategoriaReceitas/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CategoriaReceita categoriaReceita = db.CategoriaReceitas.Find(id);
-            if (categoriaReceita == null)
-            {
-                return HttpNotFound();
-            }
-            return View(categoriaReceita);
-        }
-
         // POST: CategoriaReceitas/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete()
         {
-            CategoriaReceita categoriaReceita = db.CategoriaReceitas.Find(id);
-            db.CategoriaReceitas.Remove(categoriaReceita);
-            db.SaveChanges();
+            int id = int.Parse(Request["CategoriaReceitaId"]);
+
+            CategoriaReceita categoriaReceita = context.CategoriaReceitas.Find(id);
+            if (categoriaReceita != null) {
+                context.CategoriaReceitas.Remove(categoriaReceita);
+                context.SaveChanges();
+
+                TempData["Message"] = "Categoria " + categoriaReceita.NomeCategoria + " foi removida!";
+            } else {
+                TempData["Message"] = "Não foi encontrado uma Categoria com esse id.";
+            }
+
             return RedirectToAction("Index");
         }
 
@@ -120,7 +119,7 @@ namespace Soboru.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                context.Dispose();
             }
             base.Dispose(disposing);
         }

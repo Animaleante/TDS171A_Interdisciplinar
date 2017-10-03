@@ -48,7 +48,7 @@ namespace Soboru.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Ingrediente ingrediente)
         {
-            try {
+            if (ModelState.IsValid) {
                 ingrediente.CreatedAt = DateTime.Now;
                 ingrediente.UpdatedAt = DateTime.Now;
 
@@ -57,9 +57,8 @@ namespace Soboru.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch {
-                return View(ingrediente);
-            }
+
+            return View(ingrediente);
         }
 
         public ActionResult Edit(int? id)

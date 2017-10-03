@@ -13,12 +13,14 @@ namespace Soboru.Controllers
 {
     public class IngredienteMedidasController : Controller
     {
-        private EFContext db = new EFContext();
+        private EFContext context = new EFContext();
 
         // GET: IngredienteMedidas
         public ActionResult Index()
         {
-            return View(db.IngredienteMedidas.ToList());
+            ViewBag.ControllerName = "IngredienteMedidas";
+            ViewBag.ItemIdName = "IngredienteMedidaId";
+            return View(context.IngredienteMedidas.OrderBy(i => i.NomeMedida));
         }
 
         // GET: IngredienteMedidas/Details/5
@@ -28,7 +30,7 @@ namespace Soboru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IngredienteMedida ingredienteMedida = db.IngredienteMedidas.Find(id);
+            IngredienteMedida ingredienteMedida = context.IngredienteMedidas.Find(id);
             if (ingredienteMedida == null)
             {
                 return HttpNotFound();
@@ -47,12 +49,14 @@ namespace Soboru.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IngredienteMedidaId,NomeTag,CreatedAt,UpdatedAt,DeletedAt")] IngredienteMedida ingredienteMedida)
+        public ActionResult Create(IngredienteMedida ingredienteMedida)
         {
-            if (ModelState.IsValid)
-            {
-                db.IngredienteMedidas.Add(ingredienteMedida);
-                db.SaveChanges();
+            if (ModelState.IsValid) {
+                ingredienteMedida.CreatedAt = DateTime.Now;
+                ingredienteMedida.UpdatedAt = DateTime.Now;
+
+                context.IngredienteMedidas.Add(ingredienteMedida);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +70,7 @@ namespace Soboru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IngredienteMedida ingredienteMedida = db.IngredienteMedidas.Find(id);
+            IngredienteMedida ingredienteMedida = context.IngredienteMedidas.Find(id);
             if (ingredienteMedida == null)
             {
                 return HttpNotFound();
@@ -79,40 +83,34 @@ namespace Soboru.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IngredienteMedidaId,NomeTag,CreatedAt,UpdatedAt,DeletedAt")] IngredienteMedida ingredienteMedida)
+        public ActionResult Edit(IngredienteMedida ingredienteMedida)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(ingredienteMedida).State = EntityState.Modified;
-                db.SaveChanges();
+            if (ModelState.IsValid) {
+                ingredienteMedida.UpdatedAt = DateTime.Now;
+
+                context.Entry(ingredienteMedida).State = EntityState.Modified;
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(ingredienteMedida);
         }
 
-        // GET: IngredienteMedidas/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            IngredienteMedida ingredienteMedida = db.IngredienteMedidas.Find(id);
-            if (ingredienteMedida == null)
-            {
-                return HttpNotFound();
-            }
-            return View(ingredienteMedida);
-        }
-
         // POST: IngredienteMedidas/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete()
         {
-            IngredienteMedida ingredienteMedida = db.IngredienteMedidas.Find(id);
-            db.IngredienteMedidas.Remove(ingredienteMedida);
-            db.SaveChanges();
+            int id = int.Parse(Request["IngredienteMedidaId"]);
+
+            IngredienteMedida ingredienteMedida = context.IngredienteMedidas.Find(id);
+            if (ingredienteMedida != null) {
+                context.IngredienteMedidas.Remove(ingredienteMedida);
+                context.SaveChanges();
+
+                TempData["Message"] = "Medida " + ingredienteMedida.NomeMedida + " foi removida!";
+            } else {
+                TempData["Message"] = "Não foi encontrado uma Medida com esse id.";
+            }
             return RedirectToAction("Index");
         }
 
@@ -120,7 +118,7 @@ namespace Soboru.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                context.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -13,12 +13,14 @@ namespace Soboru.Controllers
 {
     public class SexosController : Controller
     {
-        private EFContext db = new EFContext();
+        private EFContext context = new EFContext();
 
         // GET: Sexoes
         public ActionResult Index()
         {
-            return View(db.Sexos.ToList());
+            ViewBag.ControllerName = "Sexos";
+            ViewBag.ItemIdName = "SexoId";
+            return View(context.Sexos.OrderBy(i => i.NomeSexo));
         }
 
         // GET: Sexoes/Details/5
@@ -28,7 +30,7 @@ namespace Soboru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Sexo sexo = db.Sexos.Find(id);
+            Sexo sexo = context.Sexos.Find(id);
             if (sexo == null)
             {
                 return HttpNotFound();
@@ -47,12 +49,11 @@ namespace Soboru.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "NomeSexo")] Sexo sexo)
+        public ActionResult Create(Sexo sexo)
         {
-            if (ModelState.IsValid)
-            {
-                db.Sexos.Add(sexo);
-                db.SaveChanges();
+            if (ModelState.IsValid) {
+                context.Sexos.Add(sexo);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +67,7 @@ namespace Soboru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Sexo sexo = db.Sexos.Find(id);
+            Sexo sexo = context.Sexos.Find(id);
             if (sexo == null)
             {
                 return HttpNotFound();
@@ -79,25 +80,32 @@ namespace Soboru.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "NomeSexo")] Sexo sexo)
+        public ActionResult Edit(Sexo sexo)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sexo).State = EntityState.Modified;
-                db.SaveChanges();
+                context.Entry(sexo).State = EntityState.Modified;
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(sexo);
         }
 
         // POST: Sexoes/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete()
         {
-            Sexo sexo = db.Sexos.Find(id);
-            db.Sexos.Remove(sexo);
-            db.SaveChanges();
+            int id = int.Parse(Request["SexoId"]);
+            Sexo sexo = context.Sexos.Find(id);
+            if (sexo != null) {
+                context.Sexos.Remove(sexo);
+                context.SaveChanges();
+
+                TempData["Message"] = "Sexo " + sexo.NomeSexo + " foi removido!";
+            } else {
+                TempData["Message"] = "Não foi encontrado um Sexo com esse id.";
+            }
             return RedirectToAction("Index");
         }
 
@@ -105,7 +113,7 @@ namespace Soboru.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                context.Dispose();
             }
             base.Dispose(disposing);
         }

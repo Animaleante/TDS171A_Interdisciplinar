@@ -13,12 +13,14 @@ namespace Soboru.Controllers
 {
     public class ComentariosController : Controller
     {
-        private EFContext db = new EFContext();
+        private EFContext context = new EFContext();
 
         // GET: Comentarios
         public ActionResult Index()
         {
-            return View(db.Comentarios.ToList());
+            ViewBag.ControllerName = "Comentarios";
+            ViewBag.ItemIdName = "ComentarioId";
+            return View(context.Comentarios.ToList());
         }
 
         // GET: Comentarios/Details/5
@@ -28,7 +30,7 @@ namespace Soboru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comentario comentario = db.Comentarios.Find(id);
+            Comentario comentario = context.Comentarios.Find(id);
             if (comentario == null)
             {
                 return HttpNotFound();
@@ -47,12 +49,14 @@ namespace Soboru.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ComentarioId,IdReceita,IdUsuario,BodyComentario,CreatedAt,UpdatedAt,DeletedAt")] Comentario comentario)
+        public ActionResult Create(Comentario comentario)
         {
-            if (ModelState.IsValid)
-            {
-                db.Comentarios.Add(comentario);
-                db.SaveChanges();
+            if (ModelState.IsValid) {
+                comentario.CreatedAt = DateTime.Now;
+                comentario.UpdatedAt = DateTime.Now;
+
+                context.Comentarios.Add(comentario);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +70,7 @@ namespace Soboru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Comentario comentario = db.Comentarios.Find(id);
+            Comentario comentario = context.Comentarios.Find(id);
             if (comentario == null)
             {
                 return HttpNotFound();
@@ -79,40 +83,35 @@ namespace Soboru.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ComentarioId,IdReceita,IdUsuario,BodyComentario,CreatedAt,UpdatedAt,DeletedAt")] Comentario comentario)
+        public ActionResult Edit(Comentario comentario)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(comentario).State = EntityState.Modified;
-                db.SaveChanges();
+            if (ModelState.IsValid) {
+                comentario.UpdatedAt = DateTime.Now;
+
+                context.Entry(comentario).State = EntityState.Modified;
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(comentario);
         }
 
-        // GET: Comentarios/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Comentario comentario = db.Comentarios.Find(id);
-            if (comentario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(comentario);
-        }
-
         // POST: Comentarios/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete()
         {
-            Comentario comentario = db.Comentarios.Find(id);
-            db.Comentarios.Remove(comentario);
-            db.SaveChanges();
+            int id = int.Parse(Request["ComentarioId"]);
+
+            Comentario comentario = context.Comentarios.Find(id);
+            if (comentario != null) {
+                context.Comentarios.Remove(comentario);
+                context.SaveChanges();
+
+                TempData["Message"] = "Comentario #" + id + " foi removido!";
+            } else {
+                TempData["Message"] = "Não foi encontrado um Comentario com esse id.";
+            }
+
             return RedirectToAction("Index");
         }
 
@@ -120,7 +119,7 @@ namespace Soboru.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                context.Dispose();
             }
             base.Dispose(disposing);
         }

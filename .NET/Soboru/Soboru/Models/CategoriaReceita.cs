@@ -11,11 +11,11 @@ namespace Soboru.Models
         [Key]
         public int CategoriaReceitaId { get; set; }
         public string NomeCategoria { get; set; }
-        public int IdSuperCategoria { get; set; }
+        public int SuperCategoriaId { get; set; }
         public bool Selecionavel { get; set; }
         public string Slug { get; set; }
         public DateTime CreatedAt { get; set; }
-        public DateTime updatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
     }
 }
