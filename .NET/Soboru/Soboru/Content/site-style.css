@@ -3037,7 +3037,7 @@ div.uploader.disabled.active span.action {
 }
 
 /*CONTACT PAGE*/
-.modal {
+/*.modal {
     display: inline-block;
     width: 48%;
     margin: 25px auto;
@@ -3070,7 +3070,7 @@ div.uploader.disabled.active span.action {
 .modal p {
     font-size: 13px;
     padding: 0 0 5px;
-}
+}*/
 
 .center {
     text-align: center;
@@ -3751,9 +3751,9 @@ div.uploader.disabled.active span.action {
         width: 33.33%;
     }
 
-    .modal {
+    /*.modal {
         width: 55%;
-    }
+    }*/
 }
 
 @media (max-width:880px) {
@@ -3877,9 +3877,9 @@ div.uploader.disabled.active span.action {
         width: 100%;
     }
 
-    .modal {
+    /*.modal {
         width: 60%;
-    }
+    }*/
 
     #about .one-third,
     #about .two-third {
@@ -3914,10 +3914,10 @@ div.uploader.disabled.active span.action {
         width: 16.66%;
     }
 
-    .modal, 
+    /*.modal, 
     .modal .bwrap {
         width: 100%;
-    }
+    }*/
 
     .content table, .content thead, .content tbody, .content th, .content td, .content tr {
         display: block;
