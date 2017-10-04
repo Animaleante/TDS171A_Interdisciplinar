@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8" />
     <title>@ViewBag.Title</title>
 
-    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
+    @*<link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />*@
     @*<link href="@Url.Content("~/Content/styles.css")" rel="stylesheet" />*@
     <link href="@Url.Content("~/Content/site-style.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Content/icons.css")" rel="stylesheet" />
@@ -30,7 +30,6 @@
 
     <script src="@Url.Content("~/Scripts/jquery-3.2.1.min.js")"></script>
     <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/bootstrap3-typeahead.min.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery.uniform.min.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery.slicknav.min.js")"></script>
     <script src="@Url.Content("~/Scripts/scripts.js")"></script>
@@ -41,9 +40,9 @@
             //$("#" + pageId).addClass("active");
             $('nav ul li').removeClass('current-menu-item');
             if (pageId === "nav_home")
-                $('nav ul li.nav_home').addClass("current-menu-item");
+                $('nav ul li#nav_home').addClass("current-menu-item");
             else
-                $('nav ul li.nav_cadastro').addClass("current-menu-item");
+                $('nav ul li#nav_cadastro').addClass("current-menu-item");
         }
 
         function registerDeleteModalInfo() {
