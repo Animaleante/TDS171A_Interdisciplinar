@@ -6,36 +6,44 @@
     <title>@ViewBag.Title</title>
 
     <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/styles.css")" rel="stylesheet" />
+    @*<link href="@Url.Content("~/Content/styles.css")" rel="stylesheet" />*@
+    <link href="@Url.Content("~/Content/site-style.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/icons.css")" rel="stylesheet" />
+
+    <link href="http://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700,800" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/e808bf9397.js"></script>
+
+    <link rel="shortcut icon" href="images/favicon.ico" />
+
     @RenderSection("styles", false)
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="page-header">
-                <h1>Soboru</h1>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3">
-                @RenderPage("~/Views/Shared/_Nav.cshtml")
-            </div>
-            <div class="col-md-9">
-                <br />
-                @RenderBody()
-            </div>
-        </div>
+    <div class="preloader">
+        <div class="spinner"></div>
     </div>
+
+    @RenderPage("~/Views/Shared/_Nav.cshtml")
+
+    @RenderBody()
 
     @RenderPage("~/Views/Shared/_Footer.cshtml")
 
     <script src="@Url.Content("~/Scripts/jquery-3.2.1.min.js")"></script>
     <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap3-typeahead.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.uniform.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.slicknav.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/scripts.js")"></script>
+
     <script type="text/javascript">
         function setActivePage(pageId) {
-            $(".nav li").removeClass("active");
-            $("#" + pageId).addClass("active");
+            //$(".nav li").removeClass("active");
+            //$("#" + pageId).addClass("active");
+            $('nav ul li').removeClass('current-menu-item');
+            if (pageId === "nav_home")
+                $('nav ul li.nav_home').addClass("current-menu-item");
+            else
+                $('nav ul li.nav_cadastro').addClass("current-menu-item");
         }
 
         function registerDeleteModalInfo() {
@@ -46,6 +54,7 @@
             });
         }
     </script>
+
     @RenderSection("scripts", false)
 </body>
 </html>

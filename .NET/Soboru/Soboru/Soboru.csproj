@@ -95,6 +95,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Asp_Net_MVC_DB.mdf" />
+    <Content Include="App_Data\Asp_Net_MVC_DB_log.ldf">
+      <DependentUpon>Asp_Net_MVC_DB.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -256,6 +260,8 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\icons.css" />
+    <Content Include="Content\site-style.css" />
     <Content Include="Content\styles.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -271,9 +277,42 @@
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="images\avatar1.jpg" />
+    <Content Include="images\avatar2.jpg" />
+    <Content Include="images\avatar3.jpg" />
+    <Content Include="images\avatar4.jpg" />
+    <Content Include="images\avatar5.jpg" />
+    <Content Include="images\avatar6.jpg" />
+    <Content Include="images\avatar7.jpg" />
+    <Content Include="images\avatar8.jpg" />
+    <Content Include="images\avatar9.jpg" />
+    <Content Include="images\bgr\body.jpg" />
+    <Content Include="images\bgr\ribbons.png" />
+    <Content Include="images\favicon.ico" />
+    <Content Include="images\ico\icons.png" />
+    <Content Include="images\ico\logo.png" />
+    <Content Include="images\img10.jpg" />
+    <Content Include="images\img11.jpg" />
+    <Content Include="images\img12.jpg" />
+    <Content Include="images\img13.jpg" />
+    <Content Include="images\img14.jpg" />
+    <Content Include="images\img15.jpg" />
+    <Content Include="images\img16.jpg" />
+    <Content Include="images\img17.jpg" />
+    <Content Include="images\img18.jpg" />
+    <Content Include="images\img2.jpg" />
+    <Content Include="images\img3.jpg" />
+    <Content Include="images\img4.jpg" />
+    <Content Include="images\img5.jpg" />
+    <Content Include="images\img6.jpg" />
+    <Content Include="images\img7.jpg" />
+    <Content Include="images\img8.jpg" />
+    <Content Include="images\img9.jpg" />
+    <Content Include="images\intro.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap3-typeahead.min.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap4.js" />
@@ -355,10 +394,13 @@
     <Content Include="Scripts\jquery-3.2.1.slim.js" />
     <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.slicknav.min.js" />
+    <Content Include="Scripts\jquery.uniform.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\scripts.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -422,7 +464,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\CategoriaReceitas\" />
     <Folder Include="Views\Comentarios\" />
     <Folder Include="Views\IngredienteMedidas\" />

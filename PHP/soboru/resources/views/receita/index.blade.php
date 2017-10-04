@@ -27,7 +27,7 @@
                         <li class="dark"><a href="recipes.html" title="Events"><i class="icon icon-themeenergy_turkey"></i> <span>Events</span></a></li>
                     
                         <li class="light"><a href="recipes.html" title="Fish"><i class="icon icon-themeenergy_fish2"></i> <span>Fish</span></a></li>
-                        <li class="medium"><a href="recipes.html" title="Ftness"><i class="icon icon-themeenergy_biceps"></i> <span>Fitness</span></a></li>
+                        <li class="medium"><a href="recipes.html" title="Fitness"><i class="icon icon-themeenergy_biceps"></i> <span>Fitness</span></a></li>
                         <li class="dark"><a href="recipes.html" title="Healthy"><i class="icon icon-themeenergy_apple2"></i> <span>Healthy</span></a></li>
                         
                         <li class="medium"><a href="recipes.html" title="Asian"><i class="icon icon-themeenergy_sushi"></i> <span>Asian</span></a></li>
