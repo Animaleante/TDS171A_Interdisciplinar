@@ -1,20 +1,10 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = ViewBag.ControllerName;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 
 <main class="main" role="main">
     <div class="wrap clearfix">
         <div class="row"></div>
     </div>
 </main>
-
-@section Scripts {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            setActivePage("nav_home");
-        });
-    </script>
-}

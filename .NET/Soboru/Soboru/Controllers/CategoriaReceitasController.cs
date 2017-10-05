@@ -20,6 +20,7 @@ namespace Soboru.Controllers
         {
             ViewBag.ControllerName = "CategoriaReceitas";
             ViewBag.ItemIdName = "CategoriaReceitaId";
+
             return View(context.CategoriaReceitas.OrderBy(i => i.NomeCategoria));
         }
 
@@ -35,12 +36,18 @@ namespace Soboru.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.ControllerName = "CategoriaReceitas";
+
             return View(categoriaReceita);
         }
 
         // GET: CategoriaReceitas/Create
         public ActionResult Create()
         {
+
+            ViewBag.ControllerName = "CategoriaReceitas";
+
             return View();
         }
 
@@ -75,6 +82,9 @@ namespace Soboru.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.ControllerName = "CategoriaReceitas";
+
             return View(categoriaReceita);
         }
 
@@ -92,6 +102,7 @@ namespace Soboru.Controllers
                 context.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             return View(categoriaReceita);
         }
 
@@ -121,6 +132,7 @@ namespace Soboru.Controllers
             {
                 context.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }

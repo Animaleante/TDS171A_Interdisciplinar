@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<Soboru.Models.Tag>
 
 @{
-    ViewBag.Title = "Tags";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = ViewBag.ControllerName;
 }
 
 @if (TempData["Message"] != null) {
@@ -11,41 +11,55 @@
     </div>
 }
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <h3>Tags</h3>
-    </div>
-    <div class="panel-body">
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.NomeTag)
-                </th>
-                <th>Actions</th>
-            </tr>
+<main class="main" role="main">
+    <div class="wrap clearfix">
+        <nav class="breadcrumbs">
+            <ul>
+                <li><a href="/" title="Home">Home</a></li>
+                <li><a href="#">Cadastro</a></li>
+                <li>Tags</li>
+            </ul>
+        </nav>
 
-            @foreach (var item in Model) {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NomeTag)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.TagId }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.TagId }) |
-                        <a href="#" class="modelItemRemove" data-toggle="modal"
-                           data-target="#deleteConfirmationModal" data-modelitemid="@item.TagId" data-modelitemname="@item.NomeTag">Remover</a>
-                    </td>
-                </tr>
-            }
+        <div class="row">
+            <header class="s-title">
+                <h1>Tags</h1>
+            </header>
 
-        </table>
+            <section class="content full-width">
+                <div class="container">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NomeTag)
+                            </th>
+                            <th>Ações</th>
+                        </tr>
+
+                        @foreach (var item in Model) {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NomeTag)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Editar", "Edit", new { id = item.TagId }) |
+                                    @Html.ActionLink("Detalhes", "Details", new { id = item.TagId }) |
+                                    <a href="#" class="modelItemRemove" data-toggle="modal"
+                                       data-target="#deleteConfirmationModal" data-modelitemid="@item.TagId" data-modelitemname="@item.NomeTag">Remover</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+
+                    <p class="bwrap">
+                        @Html.ActionLink("Criar Novo", "Create", null, new { @class = "button" })
+                    </p>
+                </div>
+            </section>
+        </div>
     </div>
-    <div class="panel-footer panel-info">
-        <p>
-            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
-        </p>
-    </div>
-</div>
+</main>
 
 @Html.Partial("~/Views/Shared/_DeleteModal.cshtml")
 

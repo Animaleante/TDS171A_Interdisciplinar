@@ -35,12 +35,17 @@ namespace Soboru.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.ControllerName = "IngredienteMedidas";
+
             return View(ingredienteMedida);
         }
 
         // GET: IngredienteMedidas/Create
         public ActionResult Create()
         {
+            ViewBag.ControllerName = "IngredienteMedidas";
+
             return View();
         }
 
@@ -75,6 +80,9 @@ namespace Soboru.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.ControllerName = "IngredienteMedidas";
+
             return View(ingredienteMedida);
         }
 

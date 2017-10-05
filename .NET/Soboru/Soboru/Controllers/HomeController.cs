@@ -11,6 +11,7 @@ namespace Soboru.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            ViewBag.ControllerName = "Home";
             return View();
         }
     }
