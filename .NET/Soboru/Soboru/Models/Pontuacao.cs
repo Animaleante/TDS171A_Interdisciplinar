@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Soboru.Models
 {
-    public class PontuacaoReceita
+    [Table("Pontuacoes")]
+    public class Pontuacao
     {
         [Key]
-        public int PontuacaoReceitaId { get; set; }
+        public int Id { get; set; }
         public int ReceitaId { get; set; }
         public int UsuarioId { get; set; }
         public int QtyPontuacaoReceita { get; set; }

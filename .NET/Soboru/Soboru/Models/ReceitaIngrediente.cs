@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Soboru.Models
 {
     public class ReceitaIngrediente
     {
         [Key]
-        public int ReceitaIngredienteId { get; set; }
+        public int Id { get; set; }
         public int? ReceitaId { get; set; }
         public int? IngredienteId { get; set; }
-        public int? IngredienteMedidaId { get; set; }
+        public int? MedidaId { get; set; }
         public string SubSessao { get; set; }
         public float QtyReceitaIngrediente { get; set; }
         public DateTime CreatedAt { get; set; }
@@ -21,6 +18,6 @@ namespace Soboru.Models
 
         public Receita Receita { get; set; }
         public Ingrediente Ingrediente { get; set; }
-        public IngredienteMedida IngredienteMedida { get; set; }
+        public Medida IngredienteMedida { get; set; }
     }
 }

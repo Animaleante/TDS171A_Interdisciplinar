@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Soboru.Models
 {
-    public class CategoriaReceita
+    public class Categoria
     {
         [Key]
-        public int CategoriaReceitaId { get; set; }
-        [Display(Name = "Nome")]
-        public string NomeCategoria { get; set; }
+        public int Id { get; set; }
+        public string Nome { get; set; }
         public int SuperCategoriaId { get; set; }
         public bool Selecionavel { get; set; }
         public string Slug { get; set; }

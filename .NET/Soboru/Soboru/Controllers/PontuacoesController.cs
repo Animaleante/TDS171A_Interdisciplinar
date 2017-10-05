@@ -11,14 +11,14 @@ using Soboru.Models;
 
 namespace Soboru.Controllers
 {
-    public class PontuacaoReceitasController : Controller
+    public class PontuacoesController : Controller
     {
         private EFContext db = new EFContext();
 
         // GET: PontuacaoReceitas
         public ActionResult Index()
         {
-            return View(db.PontuacaoReceitas.ToList());
+            return View(db.Pontuacoes.ToList());
         }
 
         // GET: PontuacaoReceitas/Details/5
@@ -28,7 +28,7 @@ namespace Soboru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PontuacaoReceita pontuacaoReceita = db.PontuacaoReceitas.Find(id);
+            Pontuacao pontuacaoReceita = db.Pontuacoes.Find(id);
             if (pontuacaoReceita == null)
             {
                 return HttpNotFound();
@@ -47,11 +47,11 @@ namespace Soboru.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PontuacaoReceitaId,IdReceita,IdUsuario,QtyPontuacaoReceita,CreatedAt,UpdatedAt,DeletedAt")] PontuacaoReceita pontuacaoReceita)
+        public ActionResult Create([Bind(Include = "PontuacaoReceitaId,IdReceita,IdUsuario,QtyPontuacaoReceita,CreatedAt,UpdatedAt,DeletedAt")] Pontuacao pontuacaoReceita)
         {
             if (ModelState.IsValid)
             {
-                db.PontuacaoReceitas.Add(pontuacaoReceita);
+                db.Pontuacoes.Add(pontuacaoReceita);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,7 +66,7 @@ namespace Soboru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PontuacaoReceita pontuacaoReceita = db.PontuacaoReceitas.Find(id);
+            Pontuacao pontuacaoReceita = db.Pontuacoes.Find(id);
             if (pontuacaoReceita == null)
             {
                 return HttpNotFound();
@@ -79,7 +79,7 @@ namespace Soboru.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PontuacaoReceitaId,IdReceita,IdUsuario,QtyPontuacaoReceita,CreatedAt,UpdatedAt,DeletedAt")] PontuacaoReceita pontuacaoReceita)
+        public ActionResult Edit([Bind(Include = "PontuacaoReceitaId,IdReceita,IdUsuario,QtyPontuacaoReceita,CreatedAt,UpdatedAt,DeletedAt")] Pontuacao pontuacaoReceita)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace Soboru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PontuacaoReceita pontuacaoReceita = db.PontuacaoReceitas.Find(id);
+            Pontuacao pontuacaoReceita = db.Pontuacoes.Find(id);
             if (pontuacaoReceita == null)
             {
                 return HttpNotFound();
@@ -110,8 +110,8 @@ namespace Soboru.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            PontuacaoReceita pontuacaoReceita = db.PontuacaoReceitas.Find(id);
-            db.PontuacaoReceitas.Remove(pontuacaoReceita);
+            Pontuacao pontuacaoReceita = db.Pontuacoes.Find(id);
+            db.Pontuacoes.Remove(pontuacaoReceita);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

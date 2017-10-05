@@ -33,7 +33,7 @@
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.NomeUtensilio)
+                                    @Html.DisplayNameFor(model => model.Nome)
                                 </th>
                                 <th>Ações</th>
                             </tr>
@@ -42,13 +42,13 @@
                             @foreach (var item in Model) {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.NomeUtensilio)
+                                        @Html.DisplayFor(modelItem => item.Nome)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Editar", "Edit", new { id = item.UtensilioId }) |
-                                        @Html.ActionLink("Detalhes", "Details", new { id = item.UtensilioId }) |
+                                        @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                                        @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
                                         <a href="#" class="modelItemRemove" data-toggle="modal"
-                                           data-target="#deleteConfirmationModal" data-modelitemid="@item.UtensilioId" data-modelitemname="@item.NomeUtensilio">Remover</a>
+                                           data-target="#deleteConfirmationModal" data-modelitemid="@item.Id" data-modelitemname="@item.Nome">Remover</a>
                                     </td>
                                 </tr>
                             }

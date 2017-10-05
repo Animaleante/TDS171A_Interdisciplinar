@@ -2,7 +2,6 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    //ViewBag.Title = "Ingredientes";
     ViewBag.Title = ViewBag.ControllerName;
 }
 
@@ -33,7 +32,7 @@
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.NomeIngrediente)
+                                    @Html.DisplayNameFor(model => model.Nome)
                                 </th>
                                 <th>Ações</th>
                             </tr>
@@ -42,13 +41,13 @@
                             @foreach (var item in Model) {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.NomeIngrediente)
+                                        @Html.DisplayFor(modelItem => item.Nome)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Editar", "Edit", new { id = item.IngredienteId }) |
-                                        @Html.ActionLink("Detalhes", "Details", new { id = item.IngredienteId }) |
+                                        @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                                        @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
                                         <a href="#" class="modelItemRemove" data-toggle="modal"
-                                           data-target="#deleteConfirmationModal" data-modelitemid="@item.IngredienteId" data-modelitemname="@item.NomeIngrediente">Remover</a>
+                                           data-target="#deleteConfirmationModal" data-modelitemid="@item.Id" data-modelitemname="@item.Nome">Remover</a>
                                     </td>
                                 </tr>
                             }

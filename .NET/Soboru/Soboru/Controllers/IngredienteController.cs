@@ -1,12 +1,10 @@
 ﻿using Soboru.Contexts;
 using Soboru.Models;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Soboru.Controllers
@@ -20,9 +18,7 @@ namespace Soboru.Controllers
         public ActionResult Index()
         {
             ViewBag.ControllerName = controllerName;
-            ViewBag.ItemIdName = "IngredienteId";
-
-            return View(context.Ingredientes.OrderBy(i => i.NomeIngrediente));
+            return View(context.Ingredientes.OrderBy(i => i.Nome));
         }
 
         public ActionResult Details(int? id)
@@ -38,14 +34,12 @@ namespace Soboru.Controllers
             }
 
             ViewBag.ControllerName = controllerName;
-
             return View(ingrediente);
         }
 
         public ActionResult Create()
         {
             ViewBag.ControllerName = controllerName;
-
             return View();
         }
 
@@ -80,7 +74,6 @@ namespace Soboru.Controllers
             }
 
             ViewBag.ControllerName = controllerName;
-
             return View(ingrediente);
         }
 
@@ -103,14 +96,14 @@ namespace Soboru.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete()
         {
-            int id = int.Parse(Request["IngredienteId"]);
+            int id = int.Parse(Request["Id"]);
             
             Ingrediente ingrediente = context.Ingredientes.Find(id);
             if (ingrediente != null) {
                 context.Ingredientes.Remove(ingrediente);
                 context.SaveChanges();
 
-                TempData["Message"] = "Ingrediente " + ingrediente.NomeIngrediente + " foi removido!";
+                TempData["Message"] = "Ingrediente " + ingrediente.Nome + " foi removido!";
             } else {
                 TempData["Message"] = "Não foi encontrado um Ingrediente com esse id.";
             }

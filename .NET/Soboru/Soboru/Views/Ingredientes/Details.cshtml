@@ -2,7 +2,6 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    //ViewBag.Title = "Ingredientes - Detalhes";
     ViewBag.Title = ViewBag.ControllerName + " - Detalhes";
 }
 
@@ -25,16 +24,16 @@
                 @*<div class="container">*@
                     <dl class="basic">
                         <dt>
-                            @Html.DisplayNameFor(model => model.NomeIngrediente)
+                            @Html.DisplayNameFor(model => model.Nome)
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.NomeIngrediente)
+                            @Html.DisplayFor(model => model.Nome)
                         </dd>
                     </dl>
 
                     <div class="bwrap">
-                        @Html.ActionLink("Editar", "Edit", new { id = Model.IngredienteId }, new { @class = "button" })
+                        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "button" })
                     </div>
                 @*</div>*@
             </section>

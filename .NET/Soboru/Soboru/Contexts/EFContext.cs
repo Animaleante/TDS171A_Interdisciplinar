@@ -17,13 +17,13 @@ namespace Soboru.Contexts
         public DbSet<Utensilio> Utensilios { get; set; }
         public DbSet<Sexo> Sexos { get; set; }
         public DbSet<Role> Roles { get; set; }
-        public DbSet<IngredienteMedida> IngredienteMedidas { get; set; }
+        public DbSet<Medida> Medidas { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
 
-        public DbSet<CategoriaReceita> CategoriaReceitas { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Receita> Receitas { get; set; }
         public DbSet<ReceitaIngrediente> ReceitaIngredientes { get; set; }
         public DbSet<Comentario> Comentarios { get; set; }
-        public DbSet<PontuacaoReceita> PontuacaoReceitas { get; set; }
+        public DbSet<Pontuacao> Pontuacoes { get; set; }
     }
 }

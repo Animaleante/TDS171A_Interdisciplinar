@@ -2,7 +2,6 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    //ViewBag.Title = "Ingredientes - Editar";
     ViewBag.Title = ViewBag.ControllerName + " - Editar";
 }
 
@@ -28,15 +27,15 @@
 
                         <section>
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            @Html.HiddenFor(model => model.IngredienteId)
+                            @Html.HiddenFor(model => model.Id)
                             @Html.HiddenFor(model => model.CreatedAt)
                             @Html.HiddenFor(model => model.DeletedAt)
 
                             <div class="f-row">
-                                @Html.LabelFor(model => model.NomeIngrediente, htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="full">
-                                    @Html.EditorFor(model => model.NomeIngrediente, null)
-                                    @Html.ValidationMessageFor(model => model.NomeIngrediente, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.Nome, null)
+                                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 

@@ -396,12 +396,12 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Contexts\EFContext.cs" />
-    <Compile Include="Controllers\CategoriaReceitasController.cs" />
+    <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\ComentariosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngredienteController.cs" />
-    <Compile Include="Controllers\IngredienteMedidasController.cs" />
-    <Compile Include="Controllers\PontuacaoReceitasController.cs" />
+    <Compile Include="Controllers\MedidasController.cs" />
+    <Compile Include="Controllers\PontuacoesController.cs" />
     <Compile Include="Controllers\ReceitaIngredientesController.cs" />
     <Compile Include="Controllers\ReceitasController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
@@ -412,11 +412,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CategoriaReceita.cs" />
+    <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\Comentario.cs" />
     <Compile Include="Models\Ingrediente.cs" />
-    <Compile Include="Models\IngredienteMedida.cs" />
-    <Compile Include="Models\PontuacaoReceita.cs" />
+    <Compile Include="Models\Medida.cs" />
+    <Compile Include="Models\Pontuacao.cs" />
     <Compile Include="Models\Receita.cs" />
     <Compile Include="Models\ReceitaIngrediente.cs" />
     <Compile Include="Models\Role.cs" />
@@ -454,9 +454,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\CategoriaReceitas\" />
+    <Folder Include="Views\Categorias\" />
     <Folder Include="Views\Comentarios\" />
-    <Folder Include="Views\IngredienteMedidas\" />
+    <Folder Include="Views\Medidas\" />
     <Folder Include="Views\PontuacaoReceitas\" />
     <Folder Include="Views\ReceitaIngredientes\" />
     <Folder Include="Views\Receitas\" />

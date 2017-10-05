@@ -11,114 +11,118 @@ using Soboru.Models;
 
 namespace Soboru.Controllers
 {
-    public class IngredienteMedidasController : Controller
+    public class CategoriasController : Controller
     {
         private EFContext context = new EFContext();
+        private string controllerName = "Categorias";
 
-        // GET: IngredienteMedidas
+        // GET: CategoriaReceitas
         public ActionResult Index()
         {
-            ViewBag.ControllerName = "IngredienteMedidas";
-            ViewBag.ItemIdName = "IngredienteMedidaId";
-            return View(context.IngredienteMedidas.OrderBy(i => i.NomeMedida));
+            ViewBag.ControllerName = controllerName;
+
+            return View(context.Categorias.OrderBy(i => i.Nome));
         }
 
-        // GET: IngredienteMedidas/Details/5
+        // GET: CategoriaReceitas/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IngredienteMedida ingredienteMedida = context.IngredienteMedidas.Find(id);
-            if (ingredienteMedida == null)
+            Categoria categoriaReceita = context.Categorias.Find(id);
+            if (categoriaReceita == null)
             {
                 return HttpNotFound();
             }
 
-            ViewBag.ControllerName = "IngredienteMedidas";
+            ViewBag.ControllerName = controllerName;
 
-            return View(ingredienteMedida);
+            return View(categoriaReceita);
         }
 
-        // GET: IngredienteMedidas/Create
+        // GET: CategoriaReceitas/Create
         public ActionResult Create()
         {
-            ViewBag.ControllerName = "IngredienteMedidas";
+
+            ViewBag.ControllerName = controllerName;
 
             return View();
         }
 
-        // POST: IngredienteMedidas/Create
+        // POST: CategoriaReceitas/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IngredienteMedida ingredienteMedida)
+        public ActionResult Create(Categoria categoriaReceita)
         {
             if (ModelState.IsValid) {
-                ingredienteMedida.CreatedAt = DateTime.Now;
-                ingredienteMedida.UpdatedAt = DateTime.Now;
+                categoriaReceita.CreatedAt = DateTime.Now;
+                categoriaReceita.UpdatedAt = DateTime.Now;
 
-                context.IngredienteMedidas.Add(ingredienteMedida);
+                context.Categorias.Add(categoriaReceita);
                 context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(ingredienteMedida);
+            return View(categoriaReceita);
         }
 
-        // GET: IngredienteMedidas/Edit/5
+        // GET: CategoriaReceitas/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IngredienteMedida ingredienteMedida = context.IngredienteMedidas.Find(id);
-            if (ingredienteMedida == null)
+            Categoria categoriaReceita = context.Categorias.Find(id);
+            if (categoriaReceita == null)
             {
                 return HttpNotFound();
             }
 
-            ViewBag.ControllerName = "IngredienteMedidas";
+            ViewBag.ControllerName = controllerName;
 
-            return View(ingredienteMedida);
+            return View(categoriaReceita);
         }
 
-        // POST: IngredienteMedidas/Edit/5
+        // POST: CategoriaReceitas/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(IngredienteMedida ingredienteMedida)
+        public ActionResult Edit(Categoria categoriaReceita)
         {
             if (ModelState.IsValid) {
-                ingredienteMedida.UpdatedAt = DateTime.Now;
+                categoriaReceita.UpdatedAt = DateTime.Now;
 
-                context.Entry(ingredienteMedida).State = EntityState.Modified;
+                context.Entry(categoriaReceita).State = EntityState.Modified;
                 context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(ingredienteMedida);
+
+            return View(categoriaReceita);
         }
 
-        // POST: IngredienteMedidas/Delete/5
+        // POST: CategoriaReceitas/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete()
         {
-            int id = int.Parse(Request["IngredienteMedidaId"]);
+            int id = int.Parse(Request["CategoriaReceitaId"]);
 
-            IngredienteMedida ingredienteMedida = context.IngredienteMedidas.Find(id);
-            if (ingredienteMedida != null) {
-                context.IngredienteMedidas.Remove(ingredienteMedida);
+            Categoria categoriaReceita = context.Categorias.Find(id);
+            if (categoriaReceita != null) {
+                context.Categorias.Remove(categoriaReceita);
                 context.SaveChanges();
 
-                TempData["Message"] = "Medida " + ingredienteMedida.NomeMedida + " foi removida!";
+                TempData["Message"] = "Categoria " + categoriaReceita.Nome + " foi removida!";
             } else {
-                TempData["Message"] = "Não foi encontrado uma Medida com esse id.";
+                TempData["Message"] = "Não foi encontrado uma Categoria com esse id.";
             }
+
             return RedirectToAction("Index");
         }
 
@@ -128,6 +132,7 @@ namespace Soboru.Controllers
             {
                 context.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }

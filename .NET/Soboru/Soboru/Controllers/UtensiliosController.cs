@@ -22,7 +22,7 @@ namespace Soboru.Controllers
             ViewBag.ControllerName = "Utensilios";
             ViewBag.ItemIdName = "UtensilioId";
 
-            return View(context.Utensilios.OrderBy(i => i.NomeUtensilio));
+            return View(context.Utensilios.OrderBy(i => i.Nome));
         }
 
         // GET: Utensilios/Details/5
@@ -109,7 +109,7 @@ namespace Soboru.Controllers
                 context.Utensilios.Remove(utensilio);
                 context.SaveChanges();
 
-                TempData["Message"] = "Utensilio " + utensilio.NomeUtensilio + " foi removido!";
+                TempData["Message"] = "Utensilio " + utensilio.Nome + " foi removido!";
             }
             else
             {
