@@ -51,6 +51,8 @@
                 $('.modal').find('form input.modelItemId').val($el.data('modelitemid'));
             });
         }
+
+        setActivePage('nav_' + ('@(ViewBag.ControllerName)').toLowerCase());
     </script>
 
     @RenderSection("scripts", false)
