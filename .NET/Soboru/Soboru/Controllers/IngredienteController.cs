@@ -49,8 +49,8 @@ namespace Soboru.Controllers
         public ActionResult Create(Ingrediente ingrediente)
         {
             if (ModelState.IsValid) {
-                ingrediente.CreatedAt = DateTime.Now;
-                ingrediente.UpdatedAt = DateTime.Now;
+                //ingrediente.CreatedAt = DateTime.Now;
+                //ingrediente.UpdatedAt = DateTime.Now;
 
                 context.Ingredientes.Add(ingrediente);
                 context.SaveChanges();
@@ -82,7 +82,7 @@ namespace Soboru.Controllers
         public ActionResult Edit(Ingrediente ingrediente)
         {
             if(ModelState.IsValid) {
-                ingrediente.UpdatedAt = DateTime.Now;
+                //ingrediente.UpdatedAt = DateTime.Now;
 
                 context.Entry(ingrediente).State = EntityState.Modified;
                 context.SaveChanges();
