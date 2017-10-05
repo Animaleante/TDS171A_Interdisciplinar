@@ -2,7 +2,8 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Utensilios";
+    //ViewBag.Title = "Utensilios";
+    ViewBag.Title = ViewBag.ControllerName;
 }
 
 @if (TempData["Message"] != null) {
@@ -11,43 +12,57 @@
     </div>
 }
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <h3>Utensilios</h3>
+<main class="main" role="main">
+    <div class="wrap clearfix">
+        <nav class="breadcrumbs">
+            <ul>
+                <li><a href="/" title="Home">Home</a></li>
+                <li><a href="#">Cadastro</a></li>
+                <li>Utensilios</li>
+            </ul>
+        </nav>
+
+        <div class="row">
+            <header class="s-title">
+                <h1>Utensilios</h1>
+            </header>
+
+            <section class="content full-width">
+                <div class="container">
+                    <table class="table table-stiped table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.NomeUtensilio)
+                                </th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model) {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NomeUtensilio)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Editar", "Edit", new { id = item.UtensilioId }) |
+                                        @Html.ActionLink("Detalhes", "Details", new { id = item.UtensilioId }) |
+                                        <a href="#" class="modelItemRemove" data-toggle="modal"
+                                           data-target="#deleteConfirmationModal" data-modelitemid="@item.UtensilioId" data-modelitemname="@item.NomeUtensilio">Remover</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <p class="bwrap">
+                        @Html.ActionLink("Criar Novo", "Create", null, new { @class = "button" })
+                    </p>
+                </div>
+            </section>
+        </div>
     </div>
-    <div class="panel-body">
-        <table class="table table-stiped table-hover">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.NomeUtensilio)
-                    </th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model) {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NomeUtensilio)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.UtensilioId }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.UtensilioId }) |
-                            <a href="#" class="modelItemRemove" data-toggle="modal"
-                               data-target="#deleteConfirmationModal" data-modelitemid="@item.UtensilioId" data-modelitemname="@item.NomeUtensilio">Remover</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <div class="panel-footer panel-info">
-        <p>
-            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
-        </p>
-    </div>
-</div>
+</main>
 
 @Html.Partial("~/Views/Shared/_DeleteModal.cshtml")
 
@@ -57,11 +72,9 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            setActivePage("nav_utensilios");
-
-            $(".table").dataTable({
-                "order": [[1, "asc"]]
-            });
+            //$(".table").dataTable({
+            //    "order": [[1, "asc"]]
+            //});
 
             registerDeleteModalInfo();
         });

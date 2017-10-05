@@ -2,7 +2,8 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Ingredientes";
+    //ViewBag.Title = "Ingredientes";
+    ViewBag.Title = ViewBag.ControllerName;
 }
 
 @if (TempData["Message"] != null) {

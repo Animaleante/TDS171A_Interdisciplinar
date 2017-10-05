@@ -35,6 +35,8 @@ namespace Soboru.Controllers
                 return HttpNotFound();
             }
 
+            ViewBag.ControllerName = "Ingredientes";
+
             return View(ingrediente);
         }
 
@@ -72,6 +74,9 @@ namespace Soboru.Controllers
             if(ingrediente == null) {
                 return HttpNotFound();
             }
+
+
+            ViewBag.ControllerName = "Ingredientes";
 
             return View(ingrediente);
         }
