@@ -10,7 +10,11 @@ namespace Soboru.Contexts
 {
     public class EFContext : DbContext
     {
-        public EFContext() : base("Asp_Net_MVC_CS") { }
+        public EFContext() : base("Asp_Net_MVC_CS")
+        {
+            Database.SetInitializer<EFContext>(
+            new DropCreateDatabaseIfModelChanges<EFContext>());
+        }
 
         public DbSet<Ingrediente> Ingredientes { get; set; }
         public DbSet<Tag> Tags { get; set; }
