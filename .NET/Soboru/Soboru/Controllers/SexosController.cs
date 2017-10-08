@@ -96,7 +96,7 @@ namespace Soboru.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete()
         {
-            int id = int.Parse(Request["SexoId"]);
+            int id = int.Parse(Request["Id"]);
             Sexo sexo = context.Sexos.Find(id);
             if (sexo != null) {
                 context.Sexos.Remove(sexo);

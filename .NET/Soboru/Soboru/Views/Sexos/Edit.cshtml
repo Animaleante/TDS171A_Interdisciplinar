@@ -1,4 +1,4 @@
-﻿@model Soboru.Models.Categoria
+﻿@model Soboru.Models.Sexo
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,7 +11,7 @@
             <ul>
                 <li><a href="/" title="Home">Home</a></li>
                 <li><a href="#">Cadastro</a></li>
-                <li>Categoria</li>
+                <li>Sexo</li>
             </ul>
         </nav>
 
@@ -29,8 +29,6 @@
                         <section>
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.Id)
-                            @Html.HiddenFor(model => model.CreatedAt)
-                            @Html.HiddenFor(model => model.DeletedAt)
 
                             <div class="f-row">
                                 @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -42,7 +40,7 @@
 
                             <div class="f-row full">
                                 <input type="submit" value="Salvar" class="button" />
-                                @Html.ActionLink("Voltar", "Index")
+                                @Html.ActionLink("Cancelar", "Index")
                             </div>
                         </section>
                     }

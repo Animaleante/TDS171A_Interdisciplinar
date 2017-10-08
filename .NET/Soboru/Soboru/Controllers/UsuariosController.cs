@@ -13,10 +13,10 @@ namespace Soboru.Controllers
 {
     public class UsuariosController : Controller
     {
-        private EFContext db = new EFContext();
+        private EFContext context = new EFContext();
 
         private string controllerName = "Usuarios";
-        private string categoria = "Cadastro";
+        private string categoria = "Cadastro";        
                
 
         // GET: Usuarios
@@ -24,7 +24,7 @@ namespace Soboru.Controllers
         {
             ViewBag.ControllerName = controllerName;
             ViewBag.Categoria = categoria;
-            return View(db.Usuarios.ToList());
+            return View(context.Usuarios.ToList());
         }
 
         // GET: Usuarios/Details/5
@@ -35,7 +35,7 @@ namespace Soboru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuarios.Find(id);
+            Usuario usuario = context.Usuarios.Find(id);
             if (usuario == null)
             {
                 return HttpNotFound();
@@ -46,7 +46,7 @@ namespace Soboru.Controllers
         // GET: Usuarios/Create
         public ActionResult Create()
         {
-            ViewBag.Categoria = categoria;
+            ViewBag.Categoria = categoria;             
             return View();
         }
 
@@ -55,12 +55,14 @@ namespace Soboru.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UsuarioId,NomeUsuario,Email,Senha,Role,Nasc,Sexo,NotificacaoEmail,CreatedAt,UpdatedAt,DeletedAt")] Usuario usuario)
+        //REtirado [Bind(Include = "UsuarioId,NomeUsuario,Email,Senha,Role,Nasc,Sexo,NotificacaoEmail,CreatedAt,UpdatedAt,DeletedAt")]
+        //pois estava gravando dados como null.
+        public ActionResult Create( Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                db.Usuarios.Add(usuario);
-                db.SaveChanges();
+                context.Usuarios.Add(usuario);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -75,7 +77,7 @@ namespace Soboru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuarios.Find(id);
+            Usuario usuario = context.Usuarios.Find(id);
             if (usuario == null)
             {
                 return HttpNotFound();
@@ -88,17 +90,20 @@ namespace Soboru.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UsuarioId,NomeUsuario,Email,Senha,Role,Nasc,Sexo,NotificacaoEmail,CreatedAt,UpdatedAt,DeletedAt")] Usuario usuario)
+        //Retirado [Bind(Include = "UsuarioId,NomeUsuario,Email,Senha,Role,Nasc,Sexo,NotificacaoEmail,CreatedAt,UpdatedAt,DeletedAt")]
+        //pois estava gravando como null
+        public ActionResult Edit( Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(usuario).State = EntityState.Modified;
-                db.SaveChanges();
+                context.Entry(usuario).State = EntityState.Modified;
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(usuario);
         }
 
+        /*
         // GET: Usuarios/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -106,7 +111,7 @@ namespace Soboru.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuarios.Find(id);
+            Usuario usuario = context.Usuarios.Find(id);
             if (usuario == null)
             {
                 return HttpNotFound();
@@ -119,9 +124,29 @@ namespace Soboru.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Usuario usuario = db.Usuarios.Find(id);
-            db.Usuarios.Remove(usuario);
-            db.SaveChanges();
+            Usuario usuario = context.Usuarios.Find(id);
+            context.Usuarios.Remove(usuario);
+            context.SaveChanges();
+            return RedirectToAction("Index");
+        }*/
+
+        public ActionResult Delete()
+        {
+            int id = int.Parse(Request["Id"]);
+
+            Usuario usuario = context.Usuarios.Find(id);
+            if (usuario != null)
+            {
+                context.Usuarios.Remove(usuario);
+                context.SaveChanges();
+
+                TempData["Message"] = "Usuário " + usuario.Nome + " foi removido!";
+            }
+            else
+            {
+                TempData["Message"] = "Não foi encontrado um Usuário com esse id.";
+            }
+
             return RedirectToAction("Index");
         }
 
@@ -129,7 +154,7 @@ namespace Soboru.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                context.Dispose();
             }
             base.Dispose(disposing);
         }

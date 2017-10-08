@@ -111,7 +111,7 @@ namespace Soboru.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete()
         {
-            int id = int.Parse(Request["IngredienteMedidaId"]);
+            int id = int.Parse(Request["Id"]);
 
             Medida ingredienteMedida = context.Medidas.Find(id);
             if (ingredienteMedida != null) {

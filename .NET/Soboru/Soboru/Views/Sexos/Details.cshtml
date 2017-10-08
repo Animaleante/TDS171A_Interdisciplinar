@@ -1,4 +1,4 @@
-﻿@model Soboru.Models.Utensilio
+﻿@model Soboru.Models.Sexo
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,7 +11,7 @@
             <ul>
                 <li><a href="/" title="Home">Home</a></li>
                 <li><a href="#">Cadastro</a></li>
-                <li>Utensilio</li>
+                <li>Sexo</li>
             </ul>
         </nav>
 
@@ -31,25 +31,6 @@
                         @Html.DisplayFor(model => model.Nome)
                     </dd>
                 </dl>
-
-                <dl class="basic">
-                    <dt>
-                        Criado em:
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.CreatedAt)
-                    </dd>
-                </dl>
-
-                <dl class="basic">
-                    <dt>
-                        Modificado em:
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.UpdatedAt)
-                    </dd>
-                </dl>
-
                 <div class="bwrap">
                     @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "button" })
                     @Html.ActionLink("Voltar", "Index")

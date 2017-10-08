@@ -1,4 +1,4 @@
-﻿@model Soboru.Models.Utensilio
+﻿@model Soboru.Models.Usuario
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,7 +11,7 @@
             <ul>
                 <li><a href="/" title="Home">Home</a></li>
                 <li><a href="#">Cadastro</a></li>
-                <li>Utensilio</li>
+                <li>Usuario</li>
             </ul>
         </nav>
 
@@ -29,6 +29,56 @@
 
                     <dd>
                         @Html.DisplayFor(model => model.Nome)
+                    </dd>
+                </dl>
+
+                <dl class="basic">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+                </dl>
+
+                <dl class="basic">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Nasc)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Nasc)
+                    </dd>
+                </dl>
+
+                <dl class="basic">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Sexo)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Sexo)
+                    </dd>
+                </dl>
+
+                <dl class="basic">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NotificacaoEmail)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.NotificacaoEmail)
+                    </dd>
+                </dl>
+
+                <dl class="basic">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Role)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Role)
                     </dd>
                 </dl>
 

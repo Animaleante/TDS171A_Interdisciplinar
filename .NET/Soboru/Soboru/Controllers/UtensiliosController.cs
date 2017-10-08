@@ -56,7 +56,9 @@ namespace Soboru.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "NomeUtensilio")] Utensilio utensilio)
+        //retirado [Bind(Include = "NomeUtensilio")] pois não estava gravando
+        //o nome.
+        public ActionResult Create( Utensilio utensilio)
         {
             if (ModelState.IsValid) {
                 utensilio.CreatedAt = DateTime.Now;
@@ -105,7 +107,7 @@ namespace Soboru.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete()
         {
-            int id = int.Parse(Request["UtensilioId"]);
+            int id = int.Parse(Request["Id"]);
 
             Utensilio utensilio = context.Utensilios.Find(id);
             if (utensilio != null)

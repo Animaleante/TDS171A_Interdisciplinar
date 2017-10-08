@@ -1,4 +1,4 @@
-﻿@model Soboru.Models.Utensilio
+﻿@model Soboru.Models.Medida
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,7 +11,7 @@
             <ul>
                 <li><a href="/" title="Home">Home</a></li>
                 <li><a href="#">Cadastro</a></li>
-                <li>Utensilio</li>
+                <li>Medida</li>
             </ul>
         </nav>
 
@@ -29,6 +29,15 @@
 
                     <dd>
                         @Html.DisplayFor(model => model.Nome)
+                    </dd>
+                </dl>
+                <dl class="basic">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Abreviação)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Abreviação)
                     </dd>
                 </dl>
 
@@ -51,9 +60,9 @@
                 </dl>
 
                 <div class="bwrap">
-                    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "button" })
-                    @Html.ActionLink("Voltar", "Index")
-                </div>
+                    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "button" })                    
+                        @Html.ActionLink("Voltar", "Index")
+                    </div>
                 @*</div>*@
             </section>
         </div>

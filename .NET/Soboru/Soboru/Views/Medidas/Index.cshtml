@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Soboru.Models.Utensilio>
+﻿@model IEnumerable<Soboru.Models.Medida>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,13 +19,13 @@
             <ul>
                 <li><a href="/" title="Home">Home</a></li>
                 <li><a href="#">Cadastro</a></li>
-                <li>Utensilio</li>
+                <li>Medida</li>
             </ul>
         </nav>
 
         <div class="row">
             <header class="s-title">
-                <h1>Utensilios</h1>
+                <h1>Medidas</h1>
             </header>
 
             <section class="content full-width">
@@ -36,6 +36,9 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Nome)
                                 </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Abreviação)
+                                </th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -45,6 +48,9 @@
                                 <tr>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Nome)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Abreviação)
                                     </td>
                                     <td>
                                         @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |

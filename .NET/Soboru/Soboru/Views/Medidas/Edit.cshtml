@@ -1,4 +1,4 @@
-﻿@model Soboru.Models.Categoria
+﻿@model Soboru.Models.Medida
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,7 +11,7 @@
             <ul>
                 <li><a href="/" title="Home">Home</a></li>
                 <li><a href="#">Cadastro</a></li>
-                <li>Categoria</li>
+                <li>Medida</li>
             </ul>
         </nav>
 
@@ -39,11 +39,19 @@
                                     @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
                                 </div>
                             </div>
+                            <div class="f-row">
+                                @Html.LabelFor(model => model.Abreviação, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="full">
+                                    @Html.EditorFor(model => model.Abreviação, null)
+                                    @Html.ValidationMessageFor(model => model.Abreviação, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
 
                             <div class="f-row full">
                                 <input type="submit" value="Salvar" class="button" />
-                                @Html.ActionLink("Voltar", "Index")
+                                @Html.ActionLink("Cancelar", "Index")
                             </div>
+                            
                         </section>
                     }
                 </div>
