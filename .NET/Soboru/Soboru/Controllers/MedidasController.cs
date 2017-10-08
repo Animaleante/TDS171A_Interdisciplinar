@@ -15,11 +15,13 @@ namespace Soboru.Controllers
     {
         private EFContext context = new EFContext();
         private string controllerName = "Medidas";
+        private string categoria = "Cadastro";
 
         // GET: IngredienteMedidas
         public ActionResult Index()
         {
             ViewBag.ControllerName = controllerName;
+            ViewBag.Categoria = categoria;
             return View(context.Medidas.OrderBy(i => i.Nome));
         }
 
@@ -35,7 +37,7 @@ namespace Soboru.Controllers
             {
                 return HttpNotFound();
             }
-
+            ViewBag.Categoria = categoria;
             ViewBag.ControllerName = controllerName;
 
             return View(ingredienteMedida);
@@ -45,6 +47,7 @@ namespace Soboru.Controllers
         public ActionResult Create()
         {
             ViewBag.ControllerName = controllerName;
+            ViewBag.Categoria = categoria;
 
             return View();
         }
@@ -80,7 +83,7 @@ namespace Soboru.Controllers
             {
                 return HttpNotFound();
             }
-
+            ViewBag.Categoria = categoria;
             ViewBag.ControllerName = controllerName;
 
             return View(ingredienteMedida);

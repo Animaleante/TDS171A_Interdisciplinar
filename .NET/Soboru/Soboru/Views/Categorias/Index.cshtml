@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Soboru.Models.Ingrediente>
+﻿@model IEnumerable<Soboru.Models.Categoria>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,7 +6,8 @@
     ViewBag.Categoria = ViewBag.categoria;
 }
 
-@if (TempData["Message"] != null) {
+@if (TempData["Message"] != null)
+{
     <div class="alert alert-success" role="alert">
         @TempData["Message"]
     </div>
@@ -18,13 +19,13 @@
             <ul>
                 <li><a href="/" title="Home">Home</a></li>
                 <li><a href="#">Cadastro</a></li>
-                <li>Ingrediente</li>
+                <li>Categoria</li>
             </ul>
         </nav>
 
         <div class="row">
             <header class="s-title">
-                <h1>Ingredientes</h1>
+                <h1>Categorias</h1>
             </header>
 
             <section class="content full-width">
@@ -39,7 +40,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model) {
+                            @foreach (var item in Model)
+                            {
                                 <tr>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Nome)

@@ -15,18 +15,21 @@ namespace Soboru.Controllers
     {
         private EFContext context = new EFContext();
 
+        private string controllerName = "Tags";
+        private string categoria = "Cadastro";
         // GET: Tags
         public ActionResult Index()
         {
-            ViewBag.ControllerName = "Tags";
+            ViewBag.ControllerName = controllerName;
+            ViewBag.Categoria = categoria;
             ViewBag.ItemIdName = "IngredienteId";
 
-            return View(context.Tags.ToList());
+            return View(context.Tags.OrderBy(i => i.Nome));
         }
 
         // GET: Tags/Details/5
         public ActionResult Details(int? id)
-        {
+        {   
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -36,12 +39,16 @@ namespace Soboru.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Categoria = categoria;
+            ViewBag.ControllerName = controllerName;
             return View(tag);
         }
 
         // GET: Tags/Create
         public ActionResult Create()
         {
+            ViewBag.Categoria = categoria;
+            ViewBag.ControllerName = controllerName;
             return View();
         }
 
@@ -68,6 +75,7 @@ namespace Soboru.Controllers
         // GET: Tags/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.Categoria = categoria;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

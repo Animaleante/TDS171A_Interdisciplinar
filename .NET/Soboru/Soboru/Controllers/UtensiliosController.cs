@@ -16,11 +16,15 @@ namespace Soboru.Controllers
     {
         private EFContext context = new EFContext();
 
+        private string controllerName = "Utensilios";
+        private string categoria = "Cadastro";
         // GET: Utensilios
         public ActionResult Index()
         {
-            ViewBag.ControllerName = "Utensilios";
+            ViewBag.ControllerName = controllerName;
+            ViewBag.Categoria = categoria;
             ViewBag.ItemIdName = "UtensilioId";
+
 
             return View(context.Utensilios.OrderBy(i => i.Nome));
         }
@@ -28,6 +32,7 @@ namespace Soboru.Controllers
         // GET: Utensilios/Details/5
         public ActionResult Details(int? id)
         {
+            ViewBag.Categoria = categoria;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -43,6 +48,7 @@ namespace Soboru.Controllers
         // GET: Utensilios/Create
         public ActionResult Create()
         {
+            ViewBag.Categoria = categoria;
             return View();
         }
 

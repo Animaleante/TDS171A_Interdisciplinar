@@ -37,11 +37,18 @@
         function setActivePage(pageId) {
             //$(".nav li").removeClass("active");
             //$("#" + pageId).addClass("active");
+
+            //criado variável que recebe a categoria e concatena
+            //com os parâmetros esperados para setactivepage
+            var bag = 'nav ul li#nav_' + ('@(ViewBag.categoria)').toLowerCase();
+
             $('nav ul li').removeClass('current-menu-item');
             if (pageId === "nav_home")
                 $('nav ul li#nav_home').addClass("current-menu-item");
             else
-                $('nav ul li#nav_cadastro').addClass("current-menu-item");
+                //alterado else pois tudo que não fosse home ia para cadastro,
+                //e contatos é outra categoria.
+                $(bag).addClass("current-menu-item");
         }
 
         function registerDeleteModalInfo() {

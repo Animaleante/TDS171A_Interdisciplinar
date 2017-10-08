@@ -15,15 +15,22 @@ namespace Soboru.Controllers
     {
         private EFContext db = new EFContext();
 
+        private string controllerName = "Usuarios";
+        private string categoria = "Cadastro";
+               
+
         // GET: Usuarios
         public ActionResult Index()
         {
+            ViewBag.ControllerName = controllerName;
+            ViewBag.Categoria = categoria;
             return View(db.Usuarios.ToList());
         }
 
         // GET: Usuarios/Details/5
         public ActionResult Details(int? id)
         {
+            ViewBag.Categoria = categoria;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,6 +46,7 @@ namespace Soboru.Controllers
         // GET: Usuarios/Create
         public ActionResult Create()
         {
+            ViewBag.Categoria = categoria;
             return View();
         }
 
@@ -62,6 +70,7 @@ namespace Soboru.Controllers
         // GET: Usuarios/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.Categoria = categoria;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

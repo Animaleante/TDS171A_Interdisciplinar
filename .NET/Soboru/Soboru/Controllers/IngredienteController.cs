@@ -1,11 +1,11 @@
-﻿using Soboru.Contexts;
-using Soboru.Models;
-using System;
+﻿using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Soboru.Contexts;
+using Soboru.Models;
 
 namespace Soboru.Controllers
 {
@@ -14,10 +14,12 @@ namespace Soboru.Controllers
         private EFContext context = new EFContext();
 
         private string controllerName = "Ingredientes";
+        private string categoria = "Cadastro";
 
         public ActionResult Index()
         {
             ViewBag.ControllerName = controllerName;
+            ViewBag.Categoria = categoria;
             return View(context.Ingredientes.OrderBy(i => i.Nome));
         }
 
@@ -33,12 +35,14 @@ namespace Soboru.Controllers
                 return HttpNotFound();
             }
 
+            ViewBag.Categoria = categoria;
             ViewBag.ControllerName = controllerName;
             return View(ingrediente);
         }
 
         public ActionResult Create()
         {
+            ViewBag.Categoria = categoria;
             ViewBag.ControllerName = controllerName;
             return View();
         }
@@ -49,8 +53,8 @@ namespace Soboru.Controllers
         public ActionResult Create(Ingrediente ingrediente)
         {
             if (ModelState.IsValid) {
-                //ingrediente.CreatedAt = DateTime.Now;
-                //ingrediente.UpdatedAt = DateTime.Now;
+                ingrediente.CreatedAt = DateTime.Now;
+                ingrediente.UpdatedAt = DateTime.Now;
 
                 context.Ingredientes.Add(ingrediente);
                 context.SaveChanges();
@@ -63,7 +67,8 @@ namespace Soboru.Controllers
 
         public ActionResult Edit(int? id)
         {
-            if(id == null) {
+            ViewBag.Categoria = categoria;
+            if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
@@ -82,7 +87,7 @@ namespace Soboru.Controllers
         public ActionResult Edit(Ingrediente ingrediente)
         {
             if(ModelState.IsValid) {
-                //ingrediente.UpdatedAt = DateTime.Now;
+                ingrediente.UpdatedAt = DateTime.Now;
 
                 context.Entry(ingrediente).State = EntityState.Modified;
                 context.SaveChanges();

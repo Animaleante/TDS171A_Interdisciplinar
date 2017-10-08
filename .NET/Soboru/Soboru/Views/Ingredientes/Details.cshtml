@@ -32,6 +32,24 @@
                         </dd>
                     </dl>
 
+                <dl class="basic">
+                    <dt>
+                        Criado em:
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CreatedAt)
+                    </dd>
+                </dl>
+
+                <dl class="basic">
+                    <dt>
+                        Modificado em:
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.UpdatedAt)
+                    </dd>
+                </dl>
+
                     <div class="bwrap">
                         @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "button" })
                     </div>

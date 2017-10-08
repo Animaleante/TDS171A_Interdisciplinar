@@ -14,19 +14,21 @@ namespace Soboru.Controllers
     public class CategoriasController : Controller
     {
         private EFContext context = new EFContext();
+
         private string controllerName = "Categorias";
+        private string categoria = "Cadastro";
 
         // GET: CategoriaReceitas
         public ActionResult Index()
         {
             ViewBag.ControllerName = controllerName;
-
+            ViewBag.Categoria = categoria;
             return View(context.Categorias.OrderBy(i => i.Nome));
         }
 
         // GET: CategoriaReceitas/Details/5
         public ActionResult Details(int? id)
-        {
+        {   
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -37,6 +39,7 @@ namespace Soboru.Controllers
                 return HttpNotFound();
             }
 
+            ViewBag.Categoria = categoria;
             ViewBag.ControllerName = controllerName;
 
             return View(categoriaReceita);
@@ -45,7 +48,7 @@ namespace Soboru.Controllers
         // GET: CategoriaReceitas/Create
         public ActionResult Create()
         {
-
+            ViewBag.Categoria = categoria;
             ViewBag.ControllerName = controllerName;
 
             return View();
@@ -64,6 +67,7 @@ namespace Soboru.Controllers
 
                 context.Categorias.Add(categoriaReceita);
                 context.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
@@ -73,6 +77,7 @@ namespace Soboru.Controllers
         // GET: CategoriaReceitas/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.Categoria = categoria;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -111,7 +116,7 @@ namespace Soboru.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete()
         {
-            int id = int.Parse(Request["CategoriaReceitaId"]);
+            int id = int.Parse(Request["Id"]);
 
             Categoria categoriaReceita = context.Categorias.Find(id);
             if (categoriaReceita != null) {
