@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Soboru.Contexts;
+using Soboru.Models;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Soboru.Contexts;
-using Soboru.Models;
 
 namespace Soboru.Controllers
 {
@@ -28,7 +26,7 @@ namespace Soboru.Controllers
 
         // GET: CategoriaReceitas/Details/5
         public ActionResult Details(int? id)
-        {   
+        {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

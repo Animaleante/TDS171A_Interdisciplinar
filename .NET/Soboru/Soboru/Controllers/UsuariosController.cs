@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Soboru.Contexts;
+using Soboru.Models;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Soboru.Contexts;
-using Soboru.Models;
 
 namespace Soboru.Controllers
 {
@@ -16,7 +13,7 @@ namespace Soboru.Controllers
         private EFContext context = new EFContext();
 
         private string controllerName = "Usuarios";
-        private string categoria = "Cadastro";        
+        private string categoria = "Cadastro";
                
 
         // GET: Usuarios
@@ -24,6 +21,7 @@ namespace Soboru.Controllers
         {
             ViewBag.ControllerName = controllerName;
             ViewBag.Categoria = categoria;
+
             return View(context.Usuarios.ToList());
         }
 
@@ -46,7 +44,10 @@ namespace Soboru.Controllers
         // GET: Usuarios/Create
         public ActionResult Create()
         {
-            ViewBag.Categoria = categoria;             
+            ViewBag.Categoria = categoria;
+
+            ViewBag.SexoId = new SelectList(context.Sexos.OrderBy(s => s.Nome), "Id", "Nome");
+
             return View();
         }
 
@@ -55,9 +56,7 @@ namespace Soboru.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //REtirado [Bind(Include = "UsuarioId,NomeUsuario,Email,Senha,Role,Nasc,Sexo,NotificacaoEmail,CreatedAt,UpdatedAt,DeletedAt")]
-        //pois estava gravando dados como null.
-        public ActionResult Create( Usuario usuario)
+        public ActionResult Create(Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -90,9 +89,7 @@ namespace Soboru.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //Retirado [Bind(Include = "UsuarioId,NomeUsuario,Email,Senha,Role,Nasc,Sexo,NotificacaoEmail,CreatedAt,UpdatedAt,DeletedAt")]
-        //pois estava gravando como null
-        public ActionResult Edit( Usuario usuario)
+        public ActionResult Edit(Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -102,33 +99,6 @@ namespace Soboru.Controllers
             }
             return View(usuario);
         }
-
-        /*
-        // GET: Usuarios/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = context.Usuarios.Find(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuario);
-        }
-
-        // POST: Usuarios/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Usuario usuario = context.Usuarios.Find(id);
-            context.Usuarios.Remove(usuario);
-            context.SaveChanges();
-            return RedirectToAction("Index");
-        }*/
 
         public ActionResult Delete()
         {

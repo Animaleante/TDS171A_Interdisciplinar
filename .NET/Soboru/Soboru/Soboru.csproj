@@ -95,10 +95,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Asp_Net_MVC_DB.mdf" />
-    <Content Include="App_Data\Asp_Net_MVC_DB_log.ldf">
-      <DependentUpon>Asp_Net_MVC_DB.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -398,7 +394,7 @@
     <Compile Include="Contexts\EFContext.cs" />
     <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\ComentariosController.cs" />
-    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\ContatoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngredienteController.cs" />
     <Compile Include="Controllers\MedidasController.cs" />
@@ -451,7 +447,7 @@
     <Content Include="Views\Utensilios\Edit.cshtml" />
     <Content Include="Views\Tags\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Contato\Index.cshtml" />
     <Content Include="Views\Categorias\Index.cshtml" />
     <Content Include="Views\Categorias\Details.cshtml" />
     <Content Include="Views\Categorias\Create.cshtml" />
@@ -479,6 +475,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Views\Comentarios\" />
     <Folder Include="Views\PontuacaoReceitas\" />
     <Folder Include="Views\ReceitaIngredientes\" />

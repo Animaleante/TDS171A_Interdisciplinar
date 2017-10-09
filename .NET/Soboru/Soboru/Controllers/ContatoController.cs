@@ -6,10 +6,10 @@ using System.Web.Mvc;
 
 namespace Soboru.Controllers
 {
-    public class ContactController : Controller
+    public class ContatoController : Controller
     {
-        private string controllerName = "Contact";
-        private string categoria = "Contact";
+        private string controllerName = "Contato";
+        private string categoria = "Contato";
         // GET: Home
         public ActionResult Index()
         {

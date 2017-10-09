@@ -56,14 +56,9 @@ namespace Soboru.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //retirado [Bind(Include = "NomeUtensilio")] pois não estava gravando
-        //o nome.
-        public ActionResult Create( Utensilio utensilio)
+        public ActionResult Create(Utensilio utensilio)
         {
             if (ModelState.IsValid) {
-                utensilio.CreatedAt = DateTime.Now;
-                utensilio.UpdatedAt = DateTime.Now;
-
                 context.Utensilios.Add(utensilio);
                 context.SaveChanges();
                 return RedirectToAction("Index");
@@ -93,8 +88,6 @@ namespace Soboru.Controllers
         public ActionResult Edit(Utensilio utensilio)
         {
             if (ModelState.IsValid) {
-                utensilio.UpdatedAt = DateTime.Now;
-
                 context.Entry(utensilio).State = EntityState.Modified;
                 context.SaveChanges();
                 return RedirectToAction("Index");

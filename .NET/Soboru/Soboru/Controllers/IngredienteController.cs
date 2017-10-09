@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Soboru.Contexts;
+using Soboru.Models;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using Soboru.Contexts;
-using Soboru.Models;
 
 namespace Soboru.Controllers
 {
@@ -53,9 +52,6 @@ namespace Soboru.Controllers
         public ActionResult Create(Ingrediente ingrediente)
         {
             if (ModelState.IsValid) {
-                ingrediente.CreatedAt = DateTime.Now;
-                ingrediente.UpdatedAt = DateTime.Now;
-
                 context.Ingredientes.Add(ingrediente);
                 context.SaveChanges();
 
@@ -87,8 +83,6 @@ namespace Soboru.Controllers
         public ActionResult Edit(Ingrediente ingrediente)
         {
             if(ModelState.IsValid) {
-                ingrediente.UpdatedAt = DateTime.Now;
-
                 context.Entry(ingrediente).State = EntityState.Modified;
                 context.SaveChanges();
                 return RedirectToAction("Index");
