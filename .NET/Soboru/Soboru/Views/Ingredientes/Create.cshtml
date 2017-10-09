@@ -2,7 +2,8 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = ViewBag.ControllerName + " - Criar";
+    var controllerName = ViewBag.ControllerName;
+    ViewBag.Title = controllerName + " - Criar";
 }
 
 <main class="main" role="main">
@@ -41,8 +42,6 @@
                             @Html.ActionLink("Cancelar", "Index")
                         </div>
                     }
-
-                   
                 </div>
             </section>
         </div>
