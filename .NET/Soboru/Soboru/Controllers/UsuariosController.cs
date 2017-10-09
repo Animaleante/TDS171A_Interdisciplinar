@@ -60,6 +60,8 @@ namespace Soboru.Controllers
         {
             if (ModelState.IsValid)
             {
+                usuario.RoleId = context.Roles.First().Id;
+
                 context.Usuarios.Add(usuario);
                 context.SaveChanges();
                 return RedirectToAction("Index");

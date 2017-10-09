@@ -21,7 +21,7 @@ namespace Soboru.Models
         public DateTime? DeletedAt { get; set; }
 
         public virtual ICollection<Receita> Receitas { get; set; }
-        public Sexo Sexo { get; set; }
-        public Role Role { get; set; }
+        public virtual Sexo Sexo { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

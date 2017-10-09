@@ -12,8 +12,7 @@ namespace Soboru.Contexts
     {
         public EFContext() : base("Asp_Net_MVC_CS")
         {
-            Database.SetInitializer<EFContext>(
-            new DropCreateDatabaseIfModelChanges<EFContext>());
+            //Database.SetInitializer<EFContext>(new DropCreateDatabaseIfModelChanges<EFContext>());
         }
 
         public DbSet<Ingrediente> Ingredientes { get; set; }
