@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Site;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Receita;
 use App\Models\Categoria;
@@ -12,7 +13,8 @@ class ReceitasController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show']);
+        // $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('auth_site')->except(['index', 'show']);
     }
 
     public function index() {

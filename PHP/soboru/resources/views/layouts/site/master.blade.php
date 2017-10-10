@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,7 +9,7 @@
         
         <title>{{ config('app.name', 'Laravel') }}</title>
         
-        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/site.css') }}" rel="stylesheet">
         <link href="{{ asset('css/icons.css') }}" rel="stylesheet">
         <link href="http://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700,800" rel="stylesheet">
         <script src="https://use.fontawesome.com/e808bf9397.js"></script>
@@ -35,7 +34,6 @@
         <!--//preloader-->
         
         @include('layouts.site.nav')
-        
         
         @yield('content')
 

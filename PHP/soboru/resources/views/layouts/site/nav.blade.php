@@ -60,12 +60,12 @@
             <ul>
                 {{-- <li class="light current-menu-item"> --}}
                 <li class="light">
-                    <a href="find_recipe.html" title="Search for recipes">
+                    <a href="#" title="Search for recipes">
                         <i class="icon icon-themeenergy_search"></i> <span>Procurar receitas</span>
                     </a>
                 </li>
                 <li class="medium">
-                    <a href="my_profile.html" title="My account">
+                    <a href="#" title="My account">
                         <i class="icon icon-themeenergy_chef-hat"></i> <span>Minha conta</span>
                     </a>
                 </li>

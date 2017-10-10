@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'teste@teste.com',
             'password' => bcrypt('123456'),
             'role_id' => \App\Models\Role::first()->id,
-            'nasc' => \Carbon\Carbon::parse('01/01/1900'),
+            'nasc' => \Carbon\Carbon::parse('01/01/2001'),
             'sexo_id' => 2,
             'notificacao_email' => 1,
         ]);
