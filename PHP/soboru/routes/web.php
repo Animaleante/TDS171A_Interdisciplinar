@@ -22,6 +22,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     // Auth::routes();
 
     Route::get('', ['uses' => 'Admin\HomeController@index', 'as' => 'index']);
+
+    Route::group(['middleware' => 'guest'], function () {
+        // Route::get('register', ['uses' => 'Admin\RegisterController@index', 'as' => 'register.index']);
+        // Route::post('register', ['uses' => 'Admin\RegisterController@register', 'as' => 'register.store']);
+        Route::get('login', ['uses' => 'Admin\LoginController@index', 'as' => 'login.index']);
+        // Route::post('login', ['uses' => 'Admin\LoginController@login', 'as' => 'login.store']);
+    });
 });
 
 Route::group(['middleware' => 'guest'], function () {
