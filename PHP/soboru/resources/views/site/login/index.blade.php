@@ -31,7 +31,7 @@
                         </div>
                     </form>
 
-                    <p><a href="{{ route('site.password.request') }}">Esqueceu sua senha?</a></p>
+                    <p><a href="{{ route('password.request') }}">Esqueceu sua senha?</a></p>
                     <p>Ainda não tem uma conta? <a href="{{ route('site.register.index') }}">Se registre!</a></p>
                 </div>
             </section>

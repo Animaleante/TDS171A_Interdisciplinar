@@ -24,6 +24,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('', ['uses' => 'Admin\HomeController@index', 'as' => 'index']);
 });
 
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('forgot-password', ['uses' => 'Site\ForgotPasswordController@index', 'as' => 'password.request']);
+    Route::post('forgot-password', ['uses' => 'Site\ResetPasswordController@reset', 'as' => 'password.request']);
+    Route::get('forgot-password/{token}', ['uses' => 'Site\ResetPasswordController@index', 'as' => 'password.reset']);
+    Route::post('forgot-password/send-link', ['uses' => 'Site\ForgotPasswordController@sendResetLinkEmail', 'as' => 'password.reset.email']);
+});
+
 Route::group(['as' => 'site.'], function () {
     Route::get('', ['uses' => 'Site\HomeController@index', 'as' => 'index']);
 

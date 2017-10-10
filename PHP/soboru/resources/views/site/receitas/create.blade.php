@@ -6,13 +6,13 @@
 		<nav class="breadcrumbs">
 			<ul>
 				<li><a href="index.html" title="Home">Home</a></li>
-				<li>Submit a recipe</li>
+				<li>Enviar Receita</li>
 			</ul>
 		</nav>
 		
 		<div class="row">
 			<header class="s-title">
-				<h1>Add a new recipe</h1>
+				<h1>Envie uma nova receita</h1>
 			</header>
 			
             @if($errors->any())
