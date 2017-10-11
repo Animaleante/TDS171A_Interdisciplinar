@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Utils\Constants;
 
 class LoginController extends Controller
 {
@@ -26,7 +28,8 @@ class LoginController extends Controller
      * @var string
      */
     // protected $redirectTo = '/home';
-    protected $redirectTo = '/';
+    // protected $redirectTo = '/';
+    protected $redirectTo = '/admin';
 
     /**
      * Create a new controller instance.
@@ -36,6 +39,14 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function attemptLogin(Request $request)
+    {
+        $attemptData = $request->only('nome_usuario', 'password') + ['role_id' => Constants::ADMIN];
+        return $this->guard()->attempt(
+            $attemptData, $request->has('remember')
+        );
     }
 
     /**

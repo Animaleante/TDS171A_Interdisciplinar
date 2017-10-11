@@ -11,23 +11,11 @@
 |
 */
 
-/*Route::get('/', function () {
-    // return view('welcome');
-    return view('index');
-});*/
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_role:2']], function () {
+    Auth::routes();
 
-// Auth::routes();
-
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
-    // Auth::routes();
-
-    Route::get('', ['uses' => 'Admin\HomeController@index', 'as' => 'index']);
-
-    Route::group(['middleware' => 'guest'], function () {
-        // Route::get('register', ['uses' => 'Admin\RegisterController@index', 'as' => 'register.index']);
-        // Route::post('register', ['uses' => 'Admin\RegisterController@register', 'as' => 'register.store']);
-        Route::get('login', ['uses' => 'Admin\LoginController@index', 'as' => 'login.index']);
-        // Route::post('login', ['uses' => 'Admin\LoginController@login', 'as' => 'login.store']);
+    Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function () {
+        Route::get('', ['uses' => 'HomeController@index', 'as' => 'index']);
     });
 });
 
@@ -52,20 +40,18 @@ Route::group(['as' => 'site.'], function () {
         Route::get('logout', ['uses' => 'Site\LoginController@logout', 'as' => 'logout.index']);
     });
 
-    // Auth::routes();
-
-    Route::group(['prefix' => 'receitas', 'as' => 'receitas.'], function () {
+    Route::group(['prefix' => 'receitas', 'as' => 'receitas.', 'namespace' => 'Site'], function () {
         Route::get('', ['uses' => 'ReceitasController@index', 'as' => 'index']);
-        Route::get('create', ['uses' => 'Site\ReceitasController@create', 'as' => 'create']);
-        Route::post('create', ['uses' => 'Site\ReceitasController@store', 'as' => 'store']);
-        Route::get('search', ['uses' => 'Site\ReceitasController@search', 'as' => 'search']);
-        Route::get('{receita}', ['uses' => 'Site\ReceitasController@show', 'as' => 'show']);
-        Route::get('{receita}/edit', ['uses' => 'Site\ReceitasController@edit', 'as' => 'edit']);
-        Route::post('{receita}/edit', ['uses' => 'Site\ReceitasController@update', 'as' => 'update']);
-        Route::get('{receita}/delete', ['uses' => 'Site\ReceitasController@delete', 'as' => 'delete']);
-        Route::post('{receita}/delete', ['uses' => 'Site\ReceitasController@destroy', 'as' => 'destroy']);
+        Route::get('create', ['uses' => 'ReceitasController@create', 'as' => 'create']);
+        Route::post('create', ['uses' => 'ReceitasController@store', 'as' => 'store']);
+        Route::get('search', ['uses' => 'ReceitasController@search', 'as' => 'search']);
+        Route::get('{receita}', ['uses' => 'ReceitasController@show', 'as' => 'show']);
+        Route::get('{receita}/edit', ['uses' => 'ReceitasController@edit', 'as' => 'edit']);
+        Route::post('{receita}/edit', ['uses' => 'ReceitasController@update', 'as' => 'update']);
+        Route::get('{receita}/delete', ['uses' => 'ReceitasController@delete', 'as' => 'delete']);
+        Route::post('{receita}/delete', ['uses' => 'ReceitasController@destroy', 'as' => 'destroy']);
 
-        Route::post('{receita}/comments', ['uses' => 'Site\ComentariosController@store', 'as' => 'store']);
+        Route::post('{receita}/comments', ['uses' => 'ComentariosController@store', 'as' => 'store']);
     });
 
     Route::get('suporte', ['uses' => 'Site\SuporteController@index', 'as' => 'index']);
