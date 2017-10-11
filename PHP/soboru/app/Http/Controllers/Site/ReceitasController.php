@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Receita;
 use App\Models\Categoria;
 use App\Models\Ingrediente;
-use App\Models\MedidasIngrediente;
+use App\Models\Medida;
 
 class ReceitasController extends Controller
 {
@@ -26,15 +26,15 @@ class ReceitasController extends Controller
     	$categorias = Categoria::where('id_super_categoria', '=', null)->get();
 
         // $ingredientes = Ingrediente::all();
-        $ingredientes = Ingrediente::pluck('nome_ingrediente', 'id');
-        // $medidas = MedidasIngrediente::all();
-        $medidas = MedidasIngrediente::pluck('nome_medida', 'id');
+        $ingredientes = Ingrediente::pluck('nome', 'id');
+        // $medidas = Medida::all();
+        $medidas = Medida::pluck('nome', 'id');
     	return view('site.receitas.create', compact('categorias', 'ingredientes', 'medidas'));
     }
 
     public function store() {
     	$this->validate(request(), [
-            'nome_receita' => 'required|string|max:255',
+            'nome' => 'required|string|max:255',
             'categoria_id' => 'required|not_in:0',
             'porcao' => 'required',
             'tempo_preparo' => 'required',
@@ -49,12 +49,12 @@ class ReceitasController extends Controller
             $ingrediente_id = $ingrediente;
 
             if(!is_numeric($ingrediente)) {
-                $ingrediente = Ingrediente::where('nome_ingrediente', $ingrediente)->first();
+                $ingrediente = Ingrediente::where('nome', $ingrediente)->first();
                 if($ingrediente != null) {
                     $ingrediente_id = $ingrediente->id;
                 } else {
                     $ingrediente_id = Ingrediente::create([
-                        'nome_ingrediente' => $ingrediente_id
+                        'nome' => $ingrediente_id
                     ])->id;
                 }
             } else {
@@ -69,14 +69,14 @@ class ReceitasController extends Controller
         }
 
         $receita = Receita::create([
-            'nome_receita' => request('nome_receita'),
+            'nome' => request('nome'),
             'categoria_id' => request('categoria_id'),
             'user_id' => auth()->id(),
             'porcao' => request('porcao'),
             'tempo_preparo' => request('tempo_preparo'),
             'modo_preparo' => request('modo_preparo'),
             // 'img_path' => request('img_path'),
-            'slug' => str_slug(request('nome_receita'), '-')
+            'slug' => str_slug(request('nome'), '-')
         ]);
 
         $receita->ingredientes()->attach($ingredientes);
@@ -122,9 +122,9 @@ class ReceitasController extends Controller
     }
 
     public function search(Request $request) {
-    	$nome_receita = $request->get('nome');
+    	$nome = $request->get('nome');
 
-    	$query = Receita::whereRaw("lower(nome_receita) like lower('%".$nome_receita."%')");
+    	$query = Receita::whereRaw("lower(nome) like lower('%".$nome."%')");
 
     	$receitas = $query->orderBy('pontuacao_media', 'DESC')->paginate(1);
     	// $receitas = $query->orderBy('pontuacao_media', 'DESC')->get();

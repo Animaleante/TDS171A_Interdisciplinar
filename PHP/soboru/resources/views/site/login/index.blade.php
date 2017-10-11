@@ -15,7 +15,7 @@
                                 <input type="email" name="email" placeholder="Your e-mail" />
                             </div> --}}
                             <div class="f-row">
-                                <input type="text" name="nome_usuario" placeholder="Login" />
+                                <input type="text" name="login" placeholder="Login" />
                             </div>
                             <div class="f-row">
                                 <input type="password" name="password" placeholder="Senha" />

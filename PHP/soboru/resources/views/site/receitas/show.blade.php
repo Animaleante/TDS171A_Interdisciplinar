@@ -7,14 +7,14 @@
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="/receitas">Receitas</a></li>
-                    <li><a href="/categorias/{{ $receita->categoria->slug }}">{{ $receita->categoria->nome_categoria }}</a></li>
-                    <li>{{ $receita->nome_receita }}</li>
+                    <li><a href="/categorias/{{ $receita->categoria->slug }}">{{ $receita->categoria->nome }}</a></li>
+                    <li>{{ $receita->nome }}</li>
                 </ul>
             </nav>
             
             <div class="row">
                 <header class="s-title">
-                    <h1>{{ $receita->nome_receita }}</h1>
+                    <h1>{{ $receita->nome }}</h1>
                 </header>
                 <section class="content three-fourth">
                         <div class="recipe">
@@ -53,15 +53,15 @@
                                     
                                     <dl class="user">
                                         <dt>Categoria</dt>
-                                        <dd>{{ $receita->categoria->nome_categoria }}</dd>
+                                        <dd>{{ $receita->categoria->nome }}</dd>
                                         <dt>Postada por</dt>
-                                        <dd>{{ $receita->user->nome_usuario }}</dd>
+                                        <dd>{{ $receita->user->nome }}</dd>
                                     </dl>
                                     
                                     <dl class="ingredients">
                                         @foreach ($receita->receitasIngredientes as $receitaIngrediente)
                                             <dt>{{$receitaIngrediente->qty}}{{$receitaIngrediente->medida->abreviacao}}</dt>
-                                            <dd>{{$receitaIngrediente->ingrediente->nome_ingrediente}}</dd>
+                                            <dd>{{$receitaIngrediente->ingrediente->nome}}</dd>
                                         @endforeach
 
                                         {{-- <dt>300g</dt>
@@ -97,7 +97,7 @@
                                         </div>
                                         <div class="comment-box">
                                             <div class="comment-author meta"> 
-                                                <strong>{{ $comentario->user->nome_usuario }}</strong> said {{ $comentario->created_at->diffForHumans() }}</a>
+                                                <strong>{{ $comentario->user->nome }}</strong> said {{ $comentario->created_at->diffForHumans() }}</a>
                                             </div>
                                             <div class="comment-text">
                                                 <p>{{ $comentario->body }}</p>

@@ -13,16 +13,16 @@ class IngredientesTableSeeder extends Seeder
     public function run()
     {
         Ingrediente::create([
-            'nome_ingrediente'=> 'Alho'
+            'nome'=> 'Alho'
         ]);
         Ingrediente::create([
-            'nome_ingrediente'=> 'Cebola'
+            'nome'=> 'Cebola'
         ]);
         Ingrediente::create([
-            'nome_ingrediente'=> 'Bacon'
+            'nome'=> 'Bacon'
         ]);
         Ingrediente::create([
-            'nome_ingrediente'=> 'Alcatra'
+            'nome'=> 'Alcatra'
         ]);
     }
 }

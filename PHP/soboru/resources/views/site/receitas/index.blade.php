@@ -58,7 +58,7 @@
                                     </figcaption>
                                 </figure>
                                 <div class="container">
-                                    <h2><a href="receitas/{{ $receita->id }}">{{ $receita->nome_receita }}</a></h2> 
+                                    <h2><a href="receitas/{{ $receita->id }}">{{ $receita->nome }}</a></h2> 
                                     <div class="actions">
                                         <div>
                                             {{-- <div class="difficulty"><i class="ico i-medium"></i><a href="#">medium</a></div> --}}

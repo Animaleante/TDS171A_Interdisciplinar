@@ -4,7 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Database\Eloquent\Model;
 
-class PontuacaoReceita extends Model
+class Pontuacao extends Model
 {
     public function user() {
     	return $this->belongsTo(User::class);

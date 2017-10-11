@@ -11,7 +11,7 @@
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
                         <div class="f-row">
-                            <input type="text" name="nome_usuario" placeholder="Your username" />
+                            <input type="text" name="login" placeholder="Your username" />
                         </div>
                         <div class="f-row">
                             <input type="password" name="password" placeholder="Your password" />
@@ -79,7 +79,7 @@
                     {{ csrf_field() }}
 
                     <div class="form-group has-feedback">
-                        <input type="text" class="form-control" placeholder="Nome de Usuário" name="nome_usuario">
+                        <input type="text" class="form-control" placeholder="Nome de Usuário" name="login">
                         <span class="fa fa-user form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">

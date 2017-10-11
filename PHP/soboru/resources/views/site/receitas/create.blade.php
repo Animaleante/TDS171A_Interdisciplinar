@@ -33,7 +33,7 @@
 							<p>Todos os campos são obrigatórios.</p>
 							<div class="f-row">
 								<div class="full">
-									<input type="text" placeholder="Nome da Receita" name="nome_receita" value="{{ old('nome_receita') }}" />
+									<input type="text" placeholder="Nome da Receita" name="nome" value="{{ old('nome') }}" />
 								</div>
 							</div>
 							<div class="f-row">
@@ -50,11 +50,11 @@
 										@endif
 										@foreach($categorias as $categoria)
 											@if($categoria->children()->count())
-												<optgroup label="{{ $categoria->nome_categoria }}">
+												<optgroup label="{{ $categoria->nome }}">
 													@include('site.receitas._categoria_children', ['children' => $categoria->children])
 												</optgroup>
 											@else
-												<option value="{{ $categoria->id }}" {{ (old('categoria_id') == $categoria->id) ? 'selected="selected"' : '' }}>{{ $categoria->nome_categoria }}</option>
+												<option value="{{ $categoria->id }}" {{ (old('categoria_id') == $categoria->id) ? 'selected="selected"' : '' }}>{{ $categoria->nome }}</option>
 											@endif
 										@endforeach
 									</select>

@@ -43,7 +43,7 @@ class LoginController extends Controller
 
     protected function attemptLogin(Request $request)
     {
-        $attemptData = $request->only('nome_usuario', 'password') + ['role_id' => Constants::ADMIN];
+        $attemptData = $request->only('login', 'password') + ['role_id' => Constants::ADMIN];
         return $this->guard()->attempt(
             $attemptData, $request->has('remember')
         );
@@ -56,6 +56,6 @@ class LoginController extends Controller
      */
     public function username()
     {
-        return 'nome_usuario';
+        return 'login';
     }
 }

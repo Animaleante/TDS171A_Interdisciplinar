@@ -20,7 +20,7 @@
                             {{ csrf_field() }}
 							
 							<div class="f-row">
-								<input type="text" placeholder="Your name" name="nome_usuario" />
+								<input type="text" placeholder="Your name" name="login" />
 							</div>
 							<div class="f-row">
 								<input type="email" placeholder="Your email" name="email" />
@@ -52,12 +52,6 @@
 									<input type="radio" name="sexo_id" value="3" />
 									Indefinido
 								</label>
-                                {{-- @foreach ($sexos as $sexo)
-                                    <label>
-                                        <input type="radio" name="sexo_id" value="{{ $sexo->id }}" />
-                                        {{ $sexo->nome_sexo }}
-                                    </label>
-                                @endforeach --}}
 							</div>
 							<div class="f-row">
 								<label>

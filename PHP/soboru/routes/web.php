@@ -16,6 +16,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
 
     Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function () {
         Route::get('', ['uses' => 'HomeController@index', 'as' => 'index']);
+
+        Route::group(['prefix' => 'user', 'as' => 'user.'], function() {
+            Route::get('', ['uses' => 'UserController@index', 'as' => 'index']);
+            Route::get('create', ['uses' => 'UserController@create', 'as' => 'create']);
+
+            Route::get('{user}', ['uses' => 'UserController@show', 'as' => 'show']);
+
+            Route::get('{user}/delete', ['uses' => 'UserController@destroy', 'as' => 'destroy']);
+        });
     });
 });
 

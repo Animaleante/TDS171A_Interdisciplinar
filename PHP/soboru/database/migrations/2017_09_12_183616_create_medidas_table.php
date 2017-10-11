@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMedidasIngredientesTable extends Migration
+class CreateMedidasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateMedidasIngredientesTable extends Migration
      */
     public function up()
     {
-        Schema::create('medidas_ingredientes', function (Blueprint $table) {
+        Schema::create('medidas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nome_medida')->unique();
+            $table->string('nome')->unique();
             $table->string('abreviacao');
             $table->timestamps();
             $table->softDeletes();
@@ -29,6 +29,6 @@ class CreateMedidasIngredientesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medidas_ingredientes');
+        Schema::dropIfExists('medidas');
     }
 }
