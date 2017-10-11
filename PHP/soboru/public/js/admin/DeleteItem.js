@@ -11,11 +11,11 @@ DeleteItem.prototype.bindEvents = function () {
 
     $(document).on('click', '.delete-item', function () {
         var itemId = $(this).attr('data-item-id');
-        $('.btn-confirm-deleting').attr('data-item-id', itemId);
-        $('#confirm-deleting-modal').modal('show');
+        $('.btn-confirm-delete').attr('data-item-id', itemId);
+        $('#confirm-delete-modal').modal('show');
     });
 
-    $(document).on('click', '.btn-confirm-deleting', function () {
+    $(document).on('click', '.btn-confirm-delete', function () {
         var itemId = $(this).attr('data-item-id');
         window.location.href = self.route + '/' + itemId;
     });
