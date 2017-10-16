@@ -19,7 +19,7 @@
 
         <section class="content">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 center-block" style="float: none;">
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <form method="POST" action="{{ route('admin.user.create')}}">
