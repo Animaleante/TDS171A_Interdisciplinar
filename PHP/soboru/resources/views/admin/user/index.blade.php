@@ -11,9 +11,8 @@
                 Usuários
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Usuários</a></li>
-                <li class="active">Listar</li>
+                <li><a href="{{ route('admin.index') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Usuários</li>
             </ol>
         </section>
 
