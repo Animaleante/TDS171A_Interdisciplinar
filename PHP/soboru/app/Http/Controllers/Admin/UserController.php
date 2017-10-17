@@ -49,7 +49,7 @@ class UserController extends Controller
             'sexo_id' => 'required'
         ]);
 
-        $user = User::create([
+        User::create([
             'nome' => $request['nome'],
             'login' => $request['login'],
             'email' => $request['email'],
@@ -64,17 +64,6 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -82,7 +71,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -106,7 +97,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        
+
         if($user) {
             $user->delete();
         }
