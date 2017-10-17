@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="{{ asset('css/admin/ionicons.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/admin/AdminLTE.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/admin/skin-red.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/admin/style.css') }}">
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 

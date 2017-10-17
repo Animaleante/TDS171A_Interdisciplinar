@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -65,8 +66,7 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'nasc' => 'required',
-            'sexo_id' => 'required',
-            // 'notificacao_email' => 'required',
+            'sexo_id' => 'required'
         ]);
     }
 
@@ -82,10 +82,8 @@ class RegisterController extends Controller
             'login' => $data['login'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'role_id' => \App\Models\Role::first()->id,
-            // 'nasc' => $data['nasc'],
-            // 'nasc' => \Carbon\Carbon::parse($data['nasc']),
-            'nasc' => $data['nasc'],
+            'role_id' => Role::first()->id,
+            'nasc' => implode('-', array_reverse(explode('/', $data['nasc']))),
             'sexo_id' => $data['sexo_id'],
             'notificacao_email' => isset($data['notificacao_email']) ? 1 : 0,
         ]);

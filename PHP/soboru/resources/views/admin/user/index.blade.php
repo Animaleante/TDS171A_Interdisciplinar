@@ -20,10 +20,12 @@
         <section class="content">
             <div class="row">
                 <div class="col-xs-12">
+
+                    @if(session()->has('success'))
+                        @include('admin.parts._success_message')
+                    @endif
+                    
                     <div class="box">
-                        {{-- <div class="box-header">
-                            <h3 class="box-title">Data Table With Full Features</h3>
-                        </div> --}}
                         <div class="box-body">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
@@ -49,7 +51,7 @@
                                                 <td>{{ $result->role->nome }}</td>
 
                                                 <td>
-                                                    <a href="{{route('admin.user.show', $result->id)}}"
+                                                    <a href="{{route('admin.user.edit', $result->id)}}"
                                                        class="btn btn-default btn-sm">
                                                         <i class="fa fa-edit"></i>
                                                     </a>

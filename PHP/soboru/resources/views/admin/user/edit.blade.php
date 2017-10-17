@@ -13,7 +13,7 @@
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li><a href="#">Usuários</a></li>
-                <li class="active">Criar</li>
+                <li class="active">Editar</li>
             </ol>
         </section>
 
@@ -31,7 +31,7 @@
                                 </ul>
                             @endif
 
-                            <form method="POST" action="{{ route('admin.user.create')}}">
+                            <form method="POST" action="{{ route('admin.user.edit')}}">
                                 {{ csrf_field() }}
 
                                 <div class="box-body">
@@ -39,7 +39,7 @@
                                 </div>
 
                                 <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary">Criar</button>
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
                                 </div>
                             </form>
                         </div>

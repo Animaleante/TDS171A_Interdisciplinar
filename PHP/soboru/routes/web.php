@@ -21,9 +21,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['check_rol
             Route::get('', ['uses' => 'UserController@index', 'as' => 'index']);
             Route::get('create', ['uses' => 'UserController@create', 'as' => 'create']);
             Route::post('create', ['uses' => 'UserController@store', 'as' => 'store']);
-            Route::get('{user}', ['uses' => 'UserController@show', 'as' => 'show']);
+            // Route::get('{user}', ['uses' => 'UserController@show', 'as' => 'show']);
+            Route::get('edit/{user}', ['uses' => 'UserController@edit', 'as' => 'edit']);
+            Route::post('edit/{user}', ['uses' => 'UserController@update', 'as' => 'update']);
 
-            Route::get('{user}/delete', ['uses' => 'UserController@destroy', 'as' => 'destroy']);
+            Route::get('delete/{user}', ['uses' => 'UserController@destroy', 'as' => 'destroy']);
         });
     });
 });

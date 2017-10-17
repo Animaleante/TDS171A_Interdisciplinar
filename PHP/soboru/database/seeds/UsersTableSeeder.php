@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'teste@teste.com',
             'password' => bcrypt('123456'),
             'role_id' => 1,
-            'nasc' => Carbon::parse('01/01/2001'),
+            'nasc' => '2001-01-02',
             'sexo_id' => 2,
             'notificacao_email' => 1,
         ]);
@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@teste.com',
             'password' => bcrypt('123456'),
             'role_id' => 2,
-            'nasc' => Carbon::parse('06/06/2006'),
+            'nasc' => '2006-10-05',
             'sexo_id' => 2,
             'notificacao_email' => 0,
         ]);
