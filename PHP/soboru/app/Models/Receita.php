@@ -27,4 +27,13 @@ class Receita extends Model
         // ->withTimestamps()
         ->withPivot(['medida_id', 'subsessao', 'qty']);
     }
+
+    public function comentarios() {
+        return $this->hasMany(Comentario::class);
+        // return $this->belongsToMany(Comentario::class, 'comentarios');
+    }
+
+    public function categoria() {
+        return $this->belongsTo(Categoria::class);
+    }
 }
