@@ -16,6 +16,14 @@ public class Utils {
 	 * @return a conexão com o banco
 	 */
 	public static Connection createConnection() throws SQLException {
-		return DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1521/xe", "aluno", "aluno");
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			
+			return null;
+		}
+		
+		return DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1521/xe", "soboru", "opet");
 	}
 }

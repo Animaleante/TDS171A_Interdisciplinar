@@ -1,8 +1,7 @@
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+      xmlns:h="http://java.sun.com/jsf/html"> 
 
 	<h:head>
 		<title>Soboru</title>
@@ -10,5 +9,9 @@
 	<h:body>
 		<h1>Soboru</h1>
 		<h3>Subtitle</h3>
+		
+		<h:form>
+			<h:commandButton action="#{ingredienteBean.listar()}" value="Ingredientes" />
+		</h:form>
 	</h:body> 
 </html>
