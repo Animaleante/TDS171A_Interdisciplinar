@@ -13,19 +13,19 @@ class UtensiliosTableSeeder extends Seeder
     public function run()
     {
         Utensilio::create([
-            'nome_utensilio'=>'Fogão'
+            'nome'=>'Fogão'
         ]);
         Utensilio::create([
-            'nome_utensilio'=>'Forno'
+            'nome'=>'Forno'
         ]);
         Utensilio::create([
-            'nome_utensilio'=>'Microondas'
+            'nome'=>'Microondas'
         ]);
         Utensilio::create([
-            'nome_utensilio'=>'Geladeira'
+            'nome'=>'Geladeira'
         ]);
         Utensilio::create([
-            'nome_utensilio'=>'Batedeira'
+            'nome'=>'Batedeira'
         ]);
     }
 }

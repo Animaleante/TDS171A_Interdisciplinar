@@ -7,7 +7,7 @@ namespace App\Models;
 class ReceitasIngrediente extends Model
 {
     public function medida() {
-        return $this->belongsTo(MedidasIngrediente::class);
+        return $this->belongsTo(Medida::class);
     }
     public function ingrediente() {
         return $this->belongsTo(Ingrediente::class);

@@ -15,7 +15,7 @@ class CreateReceitasTable extends Migration
     {
         Schema::create('receitas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nome_receita')->unique();
+            $table->string('nome')->unique();
             $table->integer('categoria_id');
             $table->integer('user_id');
             $table->string('porcao');
