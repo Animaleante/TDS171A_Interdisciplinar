@@ -51,18 +51,68 @@ public class IngredienteBean implements Serializable {
 	    FacesContext context = FacesContext.getCurrentInstance();
 
 	    if(getIngrediente().getNome().isEmpty()) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome não pode vazio!", null));
-	        return routeBase + "create";
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
+	        return routeBase + "criar";
 	    }
 
 	    if(controller.incluir(getIngrediente())) {
 	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Ingrediente cadastrado com sucesso!", null));
 	    } else {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingrediente não foi cadastrado!", null));
-            return routeBase + "create";
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingrediente nao foi cadastrado!", null));
+            return routeBase + "criar";
 	    }
 
 	    setIngrediente(new Ingrediente());
+
+	    return listar();
+	}
+	
+	public String editar(Ingrediente ingrediente) {
+		setIngrediente(ingrediente);
+		return routeBase + "editar";
+	}
+	
+	public String editar() {
+	    FacesContext context = FacesContext.getCurrentInstance();
+
+	    if(getIngrediente().getNome().isEmpty()) {
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
+	        return routeBase + "criar";
+	    }
+	    
+		if(controller.atualizar(getIngrediente())) {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Ingrediente atualizado com sucesso!", null));
+	    } else {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingrediente nao foi atualizado.", null));
+            return routeBase + "editar";
+		}
+		
+		setIngrediente(null);
+
+	    return listar();
+	}
+	
+	public String deletar(Ingrediente ingrediente) {
+		setIngrediente(ingrediente);
+		return routeBase + "deletar";
+	}
+	
+	public String deletar() {
+	    FacesContext context = FacesContext.getCurrentInstance();
+
+	    if(getIngrediente() == null) {
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingrediente nao pode ser vvazio!", null));
+	        return routeBase + "criar";
+	    }
+	    
+		if(controller.remover(getIngrediente().getId())) {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Ingrediente deletado com sucesso!", null));
+	    } else {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingrediente nao foi deletado.", null));
+            return routeBase + "deletar";
+		}
+		
+		setIngrediente(null);
 
 	    return listar();
 	}

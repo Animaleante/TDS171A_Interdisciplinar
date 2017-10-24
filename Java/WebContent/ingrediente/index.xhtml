@@ -1,12 +1,16 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"> 
 	<h:head>
-		<title></title>
+		<title>Ingredientes</title>
 	</h:head> 
 	<body> 
+		<h:form>
+			<h:messages globalOnly="true" errorClass="error"/>
+		</h:form>
+		
 		<h:dataTable value="#{ingredienteBean.ingredienteLista}" var="ingrediente">
 			<h:column>
 				<f:facet name="header">ID</f:facet>
@@ -16,9 +20,16 @@
 				<f:facet name="header">Nome</f:facet>
 				<h:outputText value="#{ingrediente.nome}" />
 			</h:column>
+			<h:column>
+				<f:facet name="header">Ações</f:facet>
+				<h:form>
+					<h:commandButton action="#{ingredienteBean.editar(ingrediente)}" value="Editar"></h:commandButton>
+					<h:commandButton action="#{ingredienteBean.deletar(ingrediente)}" value="Deletar"></h:commandButton>
+				</h:form>
+			</h:column>
 		</h:dataTable>		
 		<h:form>
-			<h:commandButton action="/ingrediente/create" immediate="true" value="Criar novo ingrediente." />
+			<h:commandButton action="/ingrediente/criar" immediate="true" value="Criar novo ingrediente" />
 		</h:form>		
 	</body> 
 </html>
