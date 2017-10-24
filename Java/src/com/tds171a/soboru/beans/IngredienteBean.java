@@ -39,13 +39,10 @@ public class IngredienteBean implements Serializable {
 	public IngredienteBean() {
 		controller = new IngredienteController();
 		setIngrediente(new Ingrediente());
-		//setIngredienteLista(controller.listar());
 	}
 
 	public String listar() {
 		setIngredienteLista(controller.listar());
-
-		System.out.println("Lista size: " + getIngredienteLista().size());
 
 		return routeBase + "index";
 	}
