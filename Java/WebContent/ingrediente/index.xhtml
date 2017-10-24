@@ -16,6 +16,9 @@
 				<f:facet name="header">Nome</f:facet>
 				<h:outputText value="#{ingrediente.nome}" />
 			</h:column>
-		</h:dataTable>
+		</h:dataTable>		
+		<h:form>
+			<h:commandButton action="/ingrediente/create" immediate="true" value="Criar novo ingrediente." />
+		</h:form>		
 	</body> 
 </html>

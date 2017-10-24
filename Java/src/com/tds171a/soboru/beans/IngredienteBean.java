@@ -67,7 +67,7 @@ public class IngredienteBean implements Serializable {
 
 	    setIngrediente(new Ingrediente());
 
-	    return routeBase + "index";
+	    return listar();
 	}
 
 	/**
