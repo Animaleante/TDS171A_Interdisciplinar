@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -27,7 +28,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -60,12 +62,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'nome_usuario' => 'required|string|max:255',
+            'login' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'nasc' => 'required',
-            'sexo_id' => 'required',
-            // 'notificacao_email' => 'required',
+            'sexo_id' => 'required'
         ]);
     }
 
@@ -78,13 +79,11 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'nome_usuario' => $data['nome_usuario'],
+            'login' => $data['login'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'role_id' => \App\Models\Role::first()->id,
-            // 'nasc' => $data['nasc'],
-            // 'nasc' => \Carbon\Carbon::parse($data['nasc']),
-            'nasc' => $data['nasc'],
+            'role_id' => Role::first()->id,
+            'nasc' => implode('-', array_reverse(explode('/', $data['nasc']))),
             'sexo_id' => $data['sexo_id'],
             'notificacao_email' => isset($data['notificacao_email']) ? 1 : 0,
         ]);

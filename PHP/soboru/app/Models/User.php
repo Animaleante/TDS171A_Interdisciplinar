@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nome_usuario', 'email', 'password', 'role_id', 'nasc', 'sexo_id', 'notificacao_email',
+        'nome', 'login', 'email', 'password', 'role_id', 'nasc', 'sexo_id', 'notificacao_email',
     ];
 
     /**
@@ -57,8 +57,8 @@ class User extends Authenticatable
     }
 
     public function pontuacao() {
-        // return $this->hasMany(PontuacaoReceita::class);
-        // return $this->belongsToMany(PontuacaoReceita::class);
+        // return $this->hasMany(Pontuacao::class);
+        // return $this->belongsToMany(Pontuacao::class);
         return $this->belongsToMany(Receita::class, 'pontuacao_receitas')->withPivot('qty');
     }
 

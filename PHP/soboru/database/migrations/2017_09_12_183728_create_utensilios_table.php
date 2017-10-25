@@ -15,7 +15,7 @@ class CreateUtensiliosTable extends Migration
     {
         Schema::create('utensilios', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nome_utensilio')->unique();
+            $table->string('nome')->unique();
             $table->timestamps();
             $table->softDeletes();
         });
