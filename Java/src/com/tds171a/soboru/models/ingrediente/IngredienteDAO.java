@@ -17,14 +17,14 @@ import com.tds171a.soboru.vos.Ingrediente;
  *
  */
 public class IngredienteDAO implements IDAO<Ingrediente> {
-	
+
 	/**
-	 * Parâmetro com nome da tabela referente a esse DAO
+	 * Parï¿½metro com nome da tabela referente a esse DAO
 	 */
 	private String tableName = "ingredientes";
 
 	/**
-	 * Método para incluir um novo Ingrediente
+	 * Mï¿½todo para incluir um novo Ingrediente
 	 * @param ingrediente
 	 * @return
 	 */
@@ -38,7 +38,7 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 			sttm.setString(1, ingrediente.getNome());
 
 			int rowsAffected = sttm.executeUpdate();
-			
+
 			if (sttm != null)
 				sttm.close();
 
@@ -60,7 +60,7 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 	}
 
 	/**
-	 * Método para trazer uma lista de todos os Ingredientes
+	 * Mï¿½todo para trazer uma lista de todos os Ingredientes
 	 * @return
 	 */
 	@Override
@@ -77,12 +77,12 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				String nome = rs.getString("nome");
-				
+
 				Ingrediente i = new Ingrediente(id, nome);
-				
+
 				list.add(i);
 			}
-			
+
 			if (sttm != null)
 				sttm.close();
 
@@ -102,9 +102,9 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 
 		return null;
 	}
-	
+
 	/**
-	 * Método para atualizar um Ingrediente já registrado
+	 * Mï¿½todo para atualizar um Ingrediente jï¿½ registrado
 	 * @param ingrediente
 	 * @return
 	 */
@@ -119,7 +119,7 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 			sttm.setInt(2, ingrediente.getId());
 
 			int rowsAffected = sttm.executeUpdate();
-			
+
 			if (sttm != null)
 				sttm.close();
 
@@ -141,7 +141,7 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 	}
 
 	/**
-	 * Método para remover um Ingrediente
+	 * Mï¿½todo para remover um Ingrediente
 	 * @param ingredienteId
 	 * @return
 	 */
@@ -155,7 +155,7 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 			sttm.setInt(1, ingredienteId);
 
 			int rowsAffected = sttm.executeUpdate();
-			
+
 			if (sttm != null)
 				sttm.close();
 

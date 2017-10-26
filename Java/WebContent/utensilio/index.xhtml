@@ -1,0 +1,35 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+	<h:head>
+		<title>Utensilios</title>
+	</h:head> 
+	<body> 
+		<h:form>
+			<h:messages globalOnly="true" errorClass="error"/>
+		</h:form>
+		
+		<h:dataTable value="#{utensilioBean.utensilioLista}" var="utensilio">
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+				<h:outputText value="#{utensilio.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				<h:outputText value="#{utensilio.nome}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Ações</f:facet>
+				<h:form>
+					<h:commandButton action="#{utensilioBean.editar(utensilio)}" value="Editar"></h:commandButton>
+					<h:commandButton action="#{utensilioBean.deletar(utensilio)}" value="Deletar"></h:commandButton>
+				</h:form>
+			</h:column>
+		</h:dataTable>		
+		<h:form>
+			<h:commandButton action="/utensilio/criar" immediate="true" value="Criar novo ingrediente" />
+		</h:form>		
+	</body> 
+</html>
