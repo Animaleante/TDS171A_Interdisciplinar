@@ -38,5 +38,33 @@
 	<h:outputScript name="js/jquery.uniform.min.js" />
 	<h:outputScript name="js/jquery.slicknav.min.js" />
 	<h:outputScript name="js/scripts.js" />
+	
+	<h:outputScript>
+		var controllerName = "home";
+	
+		function setActivePage(pageId, categoryName) {
+            //criado variável que recebe a categoria e concatena
+            //com os parâmetros esperados para setactivepage
+            var bag = 'nav ul li#nav_' + categoryName.toLowerCase();
+
+            $('nav ul li').removeClass('current-menu-item');
+            if (pageId === "nav_home")
+                $('nav ul li#nav_home').addClass("current-menu-item");
+            else
+                //alterado else pois tudo que não fosse home ia para cadastro,
+                //e contatos é outra categoria.
+                $(bag).addClass("current-menu-item");
+        }
+
+        function registerDeleteModalInfo() {
+            $(".modelItemRemove").click(function (event) {
+                var $el = $(event.target);
+                $('.modal').find('.modelItemName').text($el.data('modelitemname'));
+                $('.modal').find('form input.modelItemId').val($el.data('modelitemid'));
+            });
+        }
+
+        setActivePage('nav_' + controllerName.toLowerCase(), "");
+	</h:outputScript>
 </body> 
 </html>
