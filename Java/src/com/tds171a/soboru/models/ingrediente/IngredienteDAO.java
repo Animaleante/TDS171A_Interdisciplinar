@@ -34,7 +34,7 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" (id, nome) values(ingrediente_seq.NEXTVAL, ?)");
+			PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" (id, nome) values(ingredientes_seq.NEXTVAL, ?)");
 			sttm.setString(1, ingrediente.getNome());
 
 			int rowsAffected = sttm.executeUpdate();
