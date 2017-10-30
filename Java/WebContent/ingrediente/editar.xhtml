@@ -2,29 +2,55 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
-
-	<h:head>
-		<title>Editar</title>
-	</h:head> 
-	<body> 
-		<h:form>
-			<h:messages globalOnly="true" errorClass="error"/>
-		
-			<h:outputText value="Nome:" />
-			<h:inputText id="nome"  value="#{ingredienteBean.ingrediente.nome}" size="80"
-			             required="true" 
-			             validatorMessage="Nome deve ter no máximo 80 caracteres"
-			             requiredMessage="Nome é obrigatório">
-			    <f:validateLength minimum="1" maximum="80" />
-			</h:inputText>
-			
-			<h:message for="nome" errorClass="error"/>
-			
-			<hr/>
-			
-			<h:commandButton immediate="true" action="#{ingredienteBean.listar()}" value="Voltar" />
-			<h:commandButton action="#{ingredienteBean.editar()}" value="Salvar" />
-		</h:form>
+      xmlns:h="http://java.sun.com/jsf/html" >
+	<body>
+		<ui:composition template="../templates/_layout.xhtml">
+			<ui:define name="content">
+				<main class="main" role="main">
+				    <div class="wrap clearfix">
+				        <nav class="breadcrumbs">
+				            <ul>
+				                <li><a href="/" title="Home">Home</a></li>
+				                <li><a href="#">Cadastro</a></li>
+				                <li>Ingrediente</li>
+				            </ul>
+				        </nav>
+				
+				        <div class="row">
+				            <header class="s-title">
+				                <h1>Editar</h1>
+				            </header>
+				
+				            <section class="content full-width">
+				                <div class="container">
+				                	<h:form>
+						                <section>
+											<h:messages globalOnly="true" errorClass="error"/>
+											<div class="f-row">
+												<h:outputText value="Nome" styleClass="control-label col-md-2" />
+							                    <div class="full">
+							                        <h:inputText id="nome"  value="#{ingredienteBean.ingrediente.nome}" size="80"
+													             required="true" 
+													             validatorMessage="Nome deve ter no máximo 80 caracteres"
+													             requiredMessage="Nome é obrigatório">
+													    <f:validateLength minimum="1" maximum="80" />
+													</h:inputText>
+													
+													<h:message for="nome" errorClass="text-danger" />
+							                    </div>
+						                    </div>
+						                </section>
+		                        		<div class="f-row full">
+											<h:commandButton action="#{ingredienteBean.editar()}" value="Salvar" styleClass="btn btn-default"/>
+											<h:commandButton immediate="true" action="#{ingredienteBean.listar()}" value="Cancelar" />
+					                    </div>
+							        </h:form>
+				                </div>
+				            </section>
+				        </div>
+				    </div>
+				</main>
+			</ui:define>
+		</ui:composition>
 	</body> 
 </html>
