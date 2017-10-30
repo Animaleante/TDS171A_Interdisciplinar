@@ -11,12 +11,12 @@ import com.tds171a.soboru.vos.Medida;
  *
  */
 public class MedidaController {
-	
+
 	/**
-	 * Parâmetro de model da Medida
+	 * Parï¿½metro de model da Medida
 	 */
 	private MedidaModel model;
-	
+
 	/**
 	 * Construtor da classe de controller da Medida
 	 */
@@ -25,8 +25,8 @@ public class MedidaController {
 	}
 
 	/**
-	 * Método para incluir uma nova Medida
-	 * @param ingrediente
+	 * Mï¿½todo para incluir uma nova Medida
+	 * @param medida
 	 * @return
 	 */
 	public boolean incluir(Medida medida) {
@@ -34,16 +34,16 @@ public class MedidaController {
 	}
 
 	/**
-	 * Método para trazer uma lista de todas as Medidas
+	 * Mï¿½todo para trazer uma lista de todas as Medidas
 	 * @return
 	 */
 	public List<Medida> listar() {
 		return model.listar();
 	}
-	
+
 	/**
-	 * Método para atualizar uma Medida já registrada
-	 * @param ingrediente
+	 * Mï¿½todo para atualizar uma Medida jï¿½ registrada
+	 * @param medida
 	 * @return
 	 */
 	public boolean atualizar(Medida medida) {
@@ -51,8 +51,8 @@ public class MedidaController {
 	}
 
 	/**
-	 * Método para remover uma Medida
-	 * @param ingredienteId
+	 * Mï¿½todo para remover uma Medida
+	 * @param medidaId
 	 * @return
 	 */
 	public boolean remover(int medidaId) {

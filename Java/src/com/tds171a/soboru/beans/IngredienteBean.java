@@ -51,7 +51,7 @@ public class IngredienteBean implements Serializable {
 
 	public String incluir() {
 	    FacesContext context = FacesContext.getCurrentInstance();
-
+	    System.out.println("passou incluir ingrediente.");
 	    if(getIngrediente().getNome().isEmpty()) {
 	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
 	        return routeBase + "criar";
@@ -89,7 +89,7 @@ public class IngredienteBean implements Serializable {
             return routeBase + "editar";
 		}
 
-		setIngrediente(null);
+		setIngrediente(new Ingrediente());
 
 	    return listar();
 	}
@@ -102,8 +102,8 @@ public class IngredienteBean implements Serializable {
 	public String deletar() {
 	    FacesContext context = FacesContext.getCurrentInstance();
 
-	    if(getIngrediente() == null) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingrediente nao pode ser vvazio!", null));
+	    if(getIngrediente().getId() == -1) {
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingrediente nao pode ser vazio!", null));
 	        return routeBase + "criar";
 	    }
 
@@ -114,7 +114,7 @@ public class IngredienteBean implements Serializable {
             return routeBase + "deletar";
 		}
 
-		setIngrediente(null);
+		setIngrediente(new Ingrediente());
 
 	    return listar();
 	}

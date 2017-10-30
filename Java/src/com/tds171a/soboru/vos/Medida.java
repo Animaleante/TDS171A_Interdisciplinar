@@ -6,27 +6,31 @@ package com.tds171a.soboru.vos;
  *
  */
 public class Medida {
-	
+
 	/**
-	 * Parâmetro id da Medida
+	 * Parï¿½metro id da Medida
 	 */
 	private int id;
-	
+
 	/**
-	 * Parâmetro nome da Medida
+	 * Parï¿½metro nome da Medida
 	 */
 	private String nome;
-	
+
 	/**
-	 * Parâmetro abreviacao da Medida
+	 * Parï¿½metro abreviacao da Medida
 	 */
 	private String abreviacao;
-	
+
 	/**
 	 * Construtor da classe de Medida
 	 */
-	public Medida() {}
-	
+	public Medida() {
+	    id = -1;
+	    nome = "";
+	    abreviacao = "";
+	}
+
 	/**
 	 * Construtor da classe de Medida que recebe o nome e a abreviacao
 	 * @param nome
@@ -36,7 +40,7 @@ public class Medida {
 		this.nome = nome;
 		this.abreviacao = abreviacao;
 	}
-	
+
 	/**
 	 * Construtor da classe de Medida que recebe o id, nome e abreviacao
 	 * @param id
@@ -48,7 +52,7 @@ public class Medida {
 		this.nome = nome;
 		this.abreviacao = abreviacao;
 	}
-	
+
 	/**
 	 * @return o id
 	 */
