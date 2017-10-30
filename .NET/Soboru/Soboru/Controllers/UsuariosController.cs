@@ -1,34 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Soboru.Contexts;
+using Soboru.Models;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Soboru.Contexts;
-using Soboru.Models;
 
 namespace Soboru.Controllers
 {
     public class UsuariosController : Controller
     {
-        private EFContext db = new EFContext();
+        private EFContext context = new EFContext();
+
+        private string controllerName = "Usuarios";
+        private string categoria = "Cadastro";
+               
 
         // GET: Usuarios
         public ActionResult Index()
         {
-            return View(db.Usuarios.ToList());
+            ViewBag.ControllerName = controllerName;
+            ViewBag.Categoria = categoria;
+
+            return View(context.Usuarios.ToList());
         }
 
         // GET: Usuarios/Details/5
         public ActionResult Details(int? id)
         {
+            ViewBag.Categoria = categoria;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuarios.Find(id);
+            Usuario usuario = context.Usuarios.Find(id);
             if (usuario == null)
             {
                 return HttpNotFound();
@@ -39,6 +44,10 @@ namespace Soboru.Controllers
         // GET: Usuarios/Create
         public ActionResult Create()
         {
+            ViewBag.Categoria = categoria;
+
+            ViewBag.SexoId = new SelectList(context.Sexos.OrderBy(s => s.Nome), "Id", "Nome");
+
             return View();
         }
 
@@ -47,12 +56,14 @@ namespace Soboru.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UsuarioId,NomeUsuario,Email,Senha,Role,Nasc,Sexo,NotificacaoEmail,CreatedAt,UpdatedAt,DeletedAt")] Usuario usuario)
+        public ActionResult Create(Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                db.Usuarios.Add(usuario);
-                db.SaveChanges();
+                usuario.RoleId = context.Roles.First().Id;
+
+                context.Usuarios.Add(usuario);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -62,11 +73,12 @@ namespace Soboru.Controllers
         // GET: Usuarios/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.Categoria = categoria;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuarios.Find(id);
+            Usuario usuario = context.Usuarios.Find(id);
             if (usuario == null)
             {
                 return HttpNotFound();
@@ -79,40 +91,34 @@ namespace Soboru.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UsuarioId,NomeUsuario,Email,Senha,Role,Nasc,Sexo,NotificacaoEmail,CreatedAt,UpdatedAt,DeletedAt")] Usuario usuario)
+        public ActionResult Edit(Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(usuario).State = EntityState.Modified;
-                db.SaveChanges();
+                context.Entry(usuario).State = EntityState.Modified;
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(usuario);
         }
 
-        // GET: Usuarios/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = db.Usuarios.Find(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuario);
-        }
+            int id = int.Parse(Request["Id"]);
 
-        // POST: Usuarios/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Usuario usuario = db.Usuarios.Find(id);
-            db.Usuarios.Remove(usuario);
-            db.SaveChanges();
+            Usuario usuario = context.Usuarios.Find(id);
+            if (usuario != null)
+            {
+                context.Usuarios.Remove(usuario);
+                context.SaveChanges();
+
+                TempData["Message"] = "Usuário " + usuario.Nome + " foi removido!";
+            }
+            else
+            {
+                TempData["Message"] = "Não foi encontrado um Usuário com esse id.";
+            }
+
             return RedirectToAction("Index");
         }
 
@@ -120,7 +126,7 @@ namespace Soboru.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                context.Dispose();
             }
             base.Dispose(disposing);
         }

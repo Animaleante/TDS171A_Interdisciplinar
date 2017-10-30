@@ -20,7 +20,7 @@ namespace Soboru.Controllers
         {
             ViewBag.ControllerName = "Sexos";
             ViewBag.ItemIdName = "SexoId";
-            return View(context.Sexos.OrderBy(i => i.NomeSexo));
+            return View(context.Sexos.OrderBy(i => i.Nome));
         }
 
         // GET: Sexoes/Details/5
@@ -96,13 +96,13 @@ namespace Soboru.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete()
         {
-            int id = int.Parse(Request["SexoId"]);
+            int id = int.Parse(Request["Id"]);
             Sexo sexo = context.Sexos.Find(id);
             if (sexo != null) {
                 context.Sexos.Remove(sexo);
                 context.SaveChanges();
 
-                TempData["Message"] = "Sexo " + sexo.NomeSexo + " foi removido!";
+                TempData["Message"] = "Sexo " + sexo.Nome + " foi removido!";
             } else {
                 TempData["Message"] = "Não foi encontrado um Sexo com esse id.";
             }

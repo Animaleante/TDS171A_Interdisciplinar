@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Soboru.Models
 {
     public class Receita
     {
         [Key]
-        public int ReceitaId { get; set; }
-        [Display(Name = "Nome")]
-        public string NomeReceita { get; set; }
+        public int Id { get; set; }
+        public string Nome { get; set; }
         public int? UsuarioId { get; set; }
-        public int CategoriaReceitaId { get; set; }
+        public int CategoriaId { get; set; }
         public int Porcao { get; set; }
         public float TempoPreparo { get; set; }
         public string ModoPreparo { get; set; }
@@ -27,6 +23,6 @@ namespace Soboru.Models
         public DateTime? DeletedAt { get; set; }
 
         public Usuario Usuario { get; set; }
-        public CategoriaReceita CategoriaReceita { get; set; }
+        public Categoria CategoriaReceita { get; set; }
     }
 }

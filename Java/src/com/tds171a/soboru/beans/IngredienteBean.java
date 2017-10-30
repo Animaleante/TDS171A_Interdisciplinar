@@ -44,6 +44,8 @@ public class IngredienteBean implements Serializable {
 	public String listar() {
 		setIngredienteLista(controller.listar());
 
+		System.out.println("Tamanho lista: " + getIngredienteLista().size());
+
 		return routeBase + "index";
 	}
 

@@ -1,0 +1,42 @@
+﻿@model Soboru.Models.Sexo
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = ViewBag.ControllerName + " - Detalhes";
+}
+
+<main class="main" role="main">
+    <div class="wrap clearfix">
+        <nav class="breadcrumbs">
+            <ul>
+                <li><a href="/" title="Home">Home</a></li>
+                <li><a href="#">Cadastro</a></li>
+                <li>Sexo</li>
+            </ul>
+        </nav>
+
+        <div class="row">
+            <header class="s-title">
+                <h1>Detalhes</h1>
+            </header>
+
+            <section class="content full-width">
+                @*<div class="container">*@
+                <dl class="basic">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Nome)
+                    </dd>
+                </dl>
+                <div class="bwrap">
+                    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "button" })
+                    @Html.ActionLink("Voltar", "Index")
+                </div>
+                @*</div>*@
+            </section>
+        </div>
+    </div>
+</main>

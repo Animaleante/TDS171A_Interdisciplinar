@@ -16,18 +16,23 @@ namespace Soboru.Controllers
     {
         private EFContext context = new EFContext();
 
+        private string controllerName = "Utensilios";
+        private string categoria = "Cadastro";
         // GET: Utensilios
         public ActionResult Index()
         {
-            ViewBag.ControllerName = "Utensilios";
+            ViewBag.ControllerName = controllerName;
+            ViewBag.Categoria = categoria;
             ViewBag.ItemIdName = "UtensilioId";
 
-            return View(context.Utensilios.OrderBy(i => i.NomeUtensilio));
+
+            return View(context.Utensilios.OrderBy(i => i.Nome));
         }
 
         // GET: Utensilios/Details/5
         public ActionResult Details(int? id)
         {
+            ViewBag.Categoria = categoria;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -43,6 +48,7 @@ namespace Soboru.Controllers
         // GET: Utensilios/Create
         public ActionResult Create()
         {
+            ViewBag.Categoria = categoria;
             return View();
         }
 
@@ -50,12 +56,9 @@ namespace Soboru.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "NomeUtensilio")] Utensilio utensilio)
+        public ActionResult Create(Utensilio utensilio)
         {
             if (ModelState.IsValid) {
-                utensilio.CreatedAt = DateTime.Now;
-                utensilio.UpdatedAt = DateTime.Now;
-
                 context.Utensilios.Add(utensilio);
                 context.SaveChanges();
                 return RedirectToAction("Index");
@@ -85,8 +88,6 @@ namespace Soboru.Controllers
         public ActionResult Edit(Utensilio utensilio)
         {
             if (ModelState.IsValid) {
-                utensilio.UpdatedAt = DateTime.Now;
-
                 context.Entry(utensilio).State = EntityState.Modified;
                 context.SaveChanges();
                 return RedirectToAction("Index");
@@ -99,7 +100,7 @@ namespace Soboru.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete()
         {
-            int id = int.Parse(Request["UtensilioId"]);
+            int id = int.Parse(Request["Id"]);
 
             Utensilio utensilio = context.Utensilios.Find(id);
             if (utensilio != null)
@@ -109,7 +110,7 @@ namespace Soboru.Controllers
                 context.Utensilios.Remove(utensilio);
                 context.SaveChanges();
 
-                TempData["Message"] = "Utensilio " + utensilio.NomeUtensilio + " foi removido!";
+                TempData["Message"] = "Utensilio " + utensilio.Nome + " foi removido!";
             }
             else
             {

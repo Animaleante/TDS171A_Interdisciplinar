@@ -2,62 +2,60 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Ingredientes - Detalhes";
+    ViewBag.Title = ViewBag.ControllerName + " - Detalhes";
 }
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <h3>Ingredientes</h3>
+<main class="main" role="main">
+    <div class="wrap clearfix">
+        <nav class="breadcrumbs">
+            <ul>
+                <li><a href="/" title="Home">Home</a></li>
+                <li><a href="#">Cadastro</a></li>
+                <li>Ingrediente</li>
+            </ul>
+        </nav>
+
+        <div class="row">
+            <header class="s-title">
+                <h1>Detalhes</h1>
+            </header>
+
+            <section class="content full-width">
+                @*<div class="container">*@
+                    <dl class="basic">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Nome)
+                        </dd>
+                    </dl>
+
+                <dl class="basic">
+                    <dt>
+                        Criado em:
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CreatedAt)
+                    </dd>
+                </dl>
+
+                <dl class="basic">
+                    <dt>
+                        Modificado em:
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.UpdatedAt)
+                    </dd>
+                </dl>
+
+                    <div class="bwrap">
+                        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "button" })
+                        @Html.ActionLink("Voltar", "Index")
+                    </div>
+                @*</div>*@
+            </section>
+        </div>
     </div>
-    <hr />
-    <div class="panel-body">
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.NomeIngrediente)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.NomeIngrediente)
-            </dd>
-
-            @*<dt>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.CreatedAt)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.UpdatedAt)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.UpdatedAt)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.DeletedAt)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.DeletedAt)
-            </dd>*@
-
-        </dl>
-    </div>
-    <div class="panel-footer panel-info">
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.IngredienteId }) |
-            @Html.ActionLink("Back to List", "Index")
-        </p>
-    </div>
-</div>
-
-@section Scripts {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            setActivePage("nav_ingredientes");
-        });
-    </script>
-}
+</main>

@@ -20,7 +20,7 @@ namespace Soboru.Controllers
         {
             ViewBag.ControllerName = "Roles";
             ViewBag.ItemIdName = "RoleId";
-            return View(context.Roles.OrderBy(i => i.NomeRole));
+            return View(context.Roles.OrderBy(i => i.Nome));
         }
 
         // GET: Roles/Details/5
@@ -107,7 +107,7 @@ namespace Soboru.Controllers
                 context.Roles.Remove(role);
                 context.SaveChanges();
 
-                TempData["Message"] = "Role " + role.NomeRole + " foi removido!";
+                TempData["Message"] = "Role " + role.Nome + " foi removido!";
             } else {
                 TempData["Message"] = "Não foi encontrado um Role com esse id.";
             }
