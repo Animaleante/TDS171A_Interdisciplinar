@@ -44,6 +44,8 @@ public class IngredienteBean implements Serializable {
 	public String listar() {
 		setIngredienteLista(controller.listar());
 
+		System.out.println("Tamanho lista: " + getIngredienteLista().size());
+
 		return routeBase + "index";
 	}
 
@@ -66,12 +68,12 @@ public class IngredienteBean implements Serializable {
 
 	    return listar();
 	}
-	
+
 	public String editar(Ingrediente ingrediente) {
 		setIngrediente(ingrediente);
 		return routeBase + "editar";
 	}
-	
+
 	public String editar() {
 	    FacesContext context = FacesContext.getCurrentInstance();
 
@@ -79,24 +81,24 @@ public class IngredienteBean implements Serializable {
 	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
 	        return routeBase + "criar";
 	    }
-	    
+
 		if(controller.atualizar(getIngrediente())) {
 	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Ingrediente atualizado com sucesso!", null));
 	    } else {
 	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingrediente nao foi atualizado.", null));
             return routeBase + "editar";
 		}
-		
+
 		setIngrediente(null);
 
 	    return listar();
 	}
-	
+
 	public String deletar(Ingrediente ingrediente) {
 		setIngrediente(ingrediente);
 		return routeBase + "deletar";
 	}
-	
+
 	public String deletar() {
 	    FacesContext context = FacesContext.getCurrentInstance();
 
@@ -104,14 +106,14 @@ public class IngredienteBean implements Serializable {
 	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingrediente nao pode ser vvazio!", null));
 	        return routeBase + "criar";
 	    }
-	    
+
 		if(controller.remover(getIngrediente().getId())) {
 	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Ingrediente deletado com sucesso!", null));
 	    } else {
 	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingrediente nao foi deletado.", null));
             return routeBase + "deletar";
 		}
-		
+
 		setIngrediente(null);
 
 	    return listar();
