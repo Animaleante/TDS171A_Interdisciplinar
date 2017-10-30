@@ -45,8 +45,9 @@
 							                        </td>
 							                        <td>
 														<h:form>
-															<h:commandButton action="#{ingredienteBean.editar(ingrediente)}" value="Editar"></h:commandButton>
-															<h:commandButton action="#{ingredienteBean.deletar(ingrediente)}" value="Deletar"></h:commandButton>
+															<h:commandLink action="#{ingredienteBean.exibir(ingrediente)}" value="Detalhes"></h:commandLink> |
+															<h:commandLink action="#{ingredienteBean.editar(ingrediente)}" value="Editar"></h:commandLink> |
+															<h:commandLink action="#{ingredienteBean.deletar(ingrediente)}" value="Deletar"></h:commandLink>
 														</h:form>
 							                        </td>
 							                    </tr>

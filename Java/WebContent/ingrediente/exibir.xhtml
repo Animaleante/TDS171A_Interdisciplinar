@@ -18,44 +18,32 @@
 				
 				        <div class="row">
 				            <header class="s-title">
-				                <h1>Editar</h1>
+				                <h1>Detalhes</h1>
 				            </header>
 				
 				            <section class="content full-width">
 				                <dl class="basic">
 			                        <dt>
-			                            @Html.DisplayNameFor(model => model.Nome)
+			                            ID
 			                        </dt>
 			
 			                        <dd>
-			                            @Html.DisplayFor(model => model.Nome)
+			                            #{ingredienteBean.ingrediente.id}
+			                        </dd>
+			                    </dl>
+				                <dl class="basic">
+			                        <dt>
+			                            Nome
+			                        </dt>
+			
+			                        <dd>
+			                            #{ingredienteBean.ingrediente.nome}
 			                        </dd>
 			                    </dl>
 			
-				                <dl class="basic">
-				                    <dt>
-				                        Criado em:
-				                    </dt>
-				                    <dd>
-				                        @Html.DisplayFor(model => model.CreatedAt)
-				                    </dd>
-				                </dl>
-				
-				                <dl class="basic">
-				                    <dt>
-				                        Modificado em:
-				                    </dt>
-				                    <dd>
-				                        @Html.DisplayFor(model => model.UpdatedAt)
-				                    </dd>
-				                </dl>
-			
 			                    <div class="bwrap">
-			                        @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "button" })
-			                        @Html.ActionLink("Voltar", "Index")
-										
 									<h:form>
-										<h:commandButton action="#{ingredienteBean.editar(ingrediente)}" value="Editar"></h:commandButton>
+										<h:commandButton action="#{ingredienteBean.editar(ingredienteBean.ingrediente)}" value="Editar"></h:commandButton>
 											<h:commandButton immediate="true" action="#{ingredienteBean.listar()}" value="Voltar" />
 									</h:form>
 			                    </div>
