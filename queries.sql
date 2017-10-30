@@ -266,5 +266,5 @@ CREATE SEQUENCE utensilio_seq
 	START WITH 1
 	NOCACHE;		
 	
-insert into ingredientes values (1,"nome1");
-insert into medidas values (2,"nome2","abreviacao");
+insert into ingredientes values (1,'nome1');
+insert into medidas values (2,'nome2','abreviacao');
