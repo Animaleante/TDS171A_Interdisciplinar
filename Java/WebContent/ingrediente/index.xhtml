@@ -38,7 +38,7 @@
 							                </tr>
 							            </thead>
 							            <tbody>
-							            	<c:forEach items="#{ingredienteBean.ingredienteLista}" var="ingrediente"></c:forEach>
+							            	<c:forEach items="#{ingredienteBean.ingredienteLista}" var="ingrediente">
 							                    <tr>
 							                        <td>
 							                            #{ingrediente.nome}
@@ -50,6 +50,7 @@
 														</h:form>
 							                        </td>
 							                    </tr>
+							                </c:forEach>
 							            </tbody>
 							        </table>
 										
