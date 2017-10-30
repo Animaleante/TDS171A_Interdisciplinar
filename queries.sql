@@ -226,3 +226,45 @@ CREATE SEQUENCE seq_pont_receitas
 	INCREMENT BY 1
 	START WITH 1
 	NOCACHE;
+	
+----------------------
+
+create user soboru identified by opet;
+grant connect, resource to soboru;
+
+CREATE TABLE ingredientes (
+	id NUMBER(11) NOT NULL,
+	nome VARCHAR2(80) NOT NULL,
+	CONSTRAINT ingrediente_pk PRIMARY KEY (id)
+);
+
+CREATE SEQUENCE ingrediente_seq
+	INCREMENT BY 1
+	START WITH 1
+	NOCACHE;
+	
+CREATE TABLE medidas (
+	id NUMBER(11) NOT NULL,
+	nome VARCHAR2(80) NOT NULL,
+	abreviacao VARCHAR2(80) NOT NULL,
+	CONSTRAINT medida_pk PRIMARY KEY (id)
+);
+
+CREATE SEQUENCE medida_seq
+	INCREMENT BY 1
+	START WITH 1
+	NOCACHE;	
+	
+CREATE TABLE utensilios (
+	id NUMBER(11) NOT NULL,
+	nome VARCHAR2(80) NOT NULL,
+	CONSTRAINT utensilio_pk PRIMARY KEY (id)
+);
+
+CREATE SEQUENCE utensilio_seq
+	INCREMENT BY 1
+	START WITH 1
+	NOCACHE;		
+	
+insert into ingredientes values (1,"nome1");
+insert into medidas values (2,"nome2","abreviacao");
