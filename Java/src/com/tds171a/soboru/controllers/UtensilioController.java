@@ -11,12 +11,12 @@ import com.tds171a.soboru.vos.Utensilio;
  *
  */
 public class UtensilioController {
-	
+
 	/**
-	 * Parâmetro de model do Utensilio
+	 * Parï¿½metro de model do Utensilio
 	 */
 	private UtensilioModel model;
-	
+
 	/**
 	 * Construtor da classe de controller do Utensilio
 	 */
@@ -25,8 +25,8 @@ public class UtensilioController {
 	}
 
 	/**
-	 * Método para incluir um novo Utensilio
-	 * @param ingrediente
+	 * Mï¿½todo para incluir um novo Utensilio
+	 * @param utensilio
 	 * @return
 	 */
 	public boolean incluir(Utensilio utensilio) {
@@ -34,16 +34,16 @@ public class UtensilioController {
 	}
 
 	/**
-	 * Método para trazer uma lista de todos os Utensilios
+	 * Mï¿½todo para trazer uma lista de todos os Utensilios
 	 * @return
 	 */
 	public List<Utensilio> listar() {
 		return model.listar();
 	}
-	
+
 	/**
-	 * Método para atualizar um Utensilio já registrado
-	 * @param ingrediente
+	 * Mï¿½todo para atualizar um Utensilio jï¿½ registrado
+	 * @param utensilio
 	 * @return
 	 */
 	public boolean atualizar(Utensilio utensilio) {
@@ -51,8 +51,8 @@ public class UtensilioController {
 	}
 
 	/**
-	 * Método para remover um Utensilio
-	 * @param ingredienteId
+	 * Mï¿½todo para remover um Utensilio
+	 * @param utensilioId
 	 * @return
 	 */
 	public boolean remover(int utensilioId) {

@@ -11,9 +11,9 @@ import com.tds171a.soboru.vos.Utensilio;
  *
  */
 public class UtensilioModel implements IDAO<Utensilio> {
-	
+
 	/**
-	 * Parâmetro de model do Utensilio
+	 * Parametro de model do Utensilio
 	 */
 	private UtensilioDAO dao;
 
@@ -25,7 +25,7 @@ public class UtensilioModel implements IDAO<Utensilio> {
 	}
 
 	/**
-	 * Método para incluir um novo Utensilio
+	 * Mï¿½todo para incluir um novo Utensilio
 	 * @param ingrediente
 	 * @return
 	 */
@@ -35,16 +35,16 @@ public class UtensilioModel implements IDAO<Utensilio> {
 	}
 
 	/**
-	 * Método para trazer uma lista de todos os Utensilios
+	 * Mï¿½todo para trazer uma lista de todos os Utensilios
 	 * @return
 	 */
 	@Override
 	public List<Utensilio> listar() {
 		return dao.listar();
 	}
-	
+
 	/**
-	 * Método para atualizar um Utensilio já registrado
+	 * Mï¿½todo para atualizar um Utensilio jï¿½ registrado
 	 * @param ingrediente
 	 * @return
 	 */
@@ -54,7 +54,7 @@ public class UtensilioModel implements IDAO<Utensilio> {
 	}
 
 	/**
-	 * Método para remover um Utensilio
+	 * Mï¿½todo para remover um Utensilio
 	 * @param ingredienteId
 	 * @return
 	 */

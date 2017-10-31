@@ -6,22 +6,26 @@ package com.tds171a.soboru.vos;
  *
  */
 public class Utensilio {
-	
+
 	/**
-	 * Parâmetro de id do Utensilio
+	 * Parï¿½metro de id do Utensilio
 	 */
 	private int id;
-	
+
 	/**
-	 * Parâmetro de nome do Utensilio
+	 * Parï¿½metro de nome do Utensilio
 	 */
 	private String nome;
-	
+
 	/**
-	 * Construtor da classe de Utensilio 
+	 * Construtor da classe de Utensilio
 	 */
-	public Utensilio() {}
-	
+	public Utensilio() {
+
+	    id = -1;
+        nome = "";
+	}
+
 	/**
 	 * Construtor da classe de Utensilio que recebe o nome
 	 * @param nome
@@ -29,7 +33,7 @@ public class Utensilio {
 	public Utensilio(String nome) {
 		this.nome = nome;
 	}
-	
+
 	/**
 	 * Construtor da classe de Utensilio que recebe a id e o nome
 	 * @param id
@@ -39,7 +43,7 @@ public class Utensilio {
 		this.id = id;
 		this.nome = nome;
 	}
-	
+
 	/**
 	 * @return o id
 	 */

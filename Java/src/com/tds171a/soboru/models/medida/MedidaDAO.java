@@ -17,15 +17,15 @@ import com.tds171a.soboru.vos.Medida;
  *
  */
 public class MedidaDAO implements IDAO<Medida> {
-	
+
 	/**
-	 * Parâmetro com nome da tabela referente a esse DAO
+	 * Parï¿½metro com nome da tabela referente a esse DAO
 	 */
 	private String tableName = "medidas";
 
 	/**
-	 * Método para incluir uma nova Medida
-	 * @param ingrediente
+	 * Mï¿½todo para incluir uma nova Medida
+	 * @param medida
 	 * @return
 	 */
 	@Override
@@ -39,7 +39,7 @@ public class MedidaDAO implements IDAO<Medida> {
 			sttm.setString(2, medida.getAbreviacao());
 
 			int rowsAffected = sttm.executeUpdate();
-			
+
 			if (sttm != null)
 				sttm.close();
 
@@ -61,7 +61,7 @@ public class MedidaDAO implements IDAO<Medida> {
 	}
 
 	/**
-	 * Método para trazer uma lista de todos as Medidaa
+	 * Mï¿½todo para trazer uma lista de todos as Medidaa
 	 * @return
 	 */
 	@Override
@@ -78,13 +78,13 @@ public class MedidaDAO implements IDAO<Medida> {
 			while(rs.next()) {
 				int id = rs.getInt("id");
 				String nome = rs.getString("nome");
-				String abreveacao = rs.getString("abreveacao");
-				
+				String abreveacao = rs.getString("abreviacao");
+
 				Medida m = new Medida(id, nome, abreveacao);
-				
+
 				list.add(m);
 			}
-			
+
 			if (sttm != null)
 				sttm.close();
 
@@ -106,7 +106,7 @@ public class MedidaDAO implements IDAO<Medida> {
 	}
 
 	/**
-	 * Método para atualizar uma Medida já registrado
+	 * Mï¿½todo para atualizar uma Medida jï¿½ registrado
 	 * @param ingrediente
 	 * @return
 	 */
@@ -115,14 +115,14 @@ public class MedidaDAO implements IDAO<Medida> {
 		Connection connection = null;
 		try {
 			connection = Utils.createConnection();
-			
+
 			PreparedStatement sttm = connection.prepareStatement("update "+tableName+" set nome = ?, abreveacao = ? where id = ?");
 			sttm.setString(1, medida.getNome());
 			sttm.setString(2, medida.getAbreviacao());
 			sttm.setInt(3, medida.getId());
 
 			int rowsAffected = sttm.executeUpdate();
-			
+
 			if (sttm != null)
 				sttm.close();
 
@@ -144,8 +144,8 @@ public class MedidaDAO implements IDAO<Medida> {
 	}
 
 	/**
-	 * Método para remover uma Medida
-	 * @param ingredienteId
+	 * Mï¿½todo para remover uma Medida
+	 * @param medidaId
 	 * @return
 	 */
 	@Override
@@ -158,7 +158,7 @@ public class MedidaDAO implements IDAO<Medida> {
 			sttm.setInt(1, medidaId);
 
 			int rowsAffected = sttm.executeUpdate();
-			
+
 			if (sttm != null)
 				sttm.close();
 

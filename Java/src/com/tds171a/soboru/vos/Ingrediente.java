@@ -6,30 +6,36 @@ package com.tds171a.soboru.vos;
  *
  */
 public class Ingrediente {
-	
+
 	/**
-	 * Parâmetro id do Ingrediente
+	 * Parï¿½metro id do Ingrediente
 	 */
 	private int id;
-	
+
 	/**
-	 * Parâmetro nome do Ingrediente
+	 * Parï¿½metro nome do Ingrediente
 	 */
 	private String nome;
-	
+
 	/**
 	 * Construtor da classe de Ingrediente
 	 */
-	public Ingrediente() {}
-	
+	public Ingrediente() {
+
+	    id = -1;
+	    nome = "";
+	}
+
 	/**
 	 * Construtor da classe de Ingrediente que recebe o nome
 	 * @param nome
 	 */
+
+
 	public Ingrediente(String nome) {
 		this.nome = nome;
 	}
-	
+
 	/**
 	 * Construtor da classe de Ingrediente que recebe o id e o nome
 	 * @param id
@@ -39,7 +45,7 @@ public class Ingrediente {
 		this.id = id;
 		this.nome = nome;
 	}
-	
+
 	/**
 	 * @return o id
 	 */
