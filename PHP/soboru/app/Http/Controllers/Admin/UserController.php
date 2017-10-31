@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Models\User;
+use App\Models\Role;
 
 class UserController extends Controller
 {
@@ -29,7 +30,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+        $roles = Role::all();
+        return view('admin.user.create', compact('roles'));
     }
 
     /**
@@ -46,6 +48,7 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users,deleted_at,NULL',
             'password' => 'required|string|min:6|confirmed',
             'nasc' => 'required',
+            'role_id' => 'required',
             'sexo_id' => 'required'
         ]);
 
@@ -66,14 +69,15 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::find($id);
+        // $user = User::find($id);
+        $roles = Role::all();
 
-        return view('admin.user.edit', compact('user'));
+        return view('admin.user.edit', compact('user', 'roles'));
     }
 
     /**

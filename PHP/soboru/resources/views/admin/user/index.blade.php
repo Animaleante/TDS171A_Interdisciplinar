@@ -50,11 +50,11 @@
                                                 <td>{{ $result->role->nome }}</td>
 
                                                 <td>
-                                                    <a href="{{route('admin.user.edit', $result->id)}}"
+                                                    <a href="{{ route('admin.user.edit', $result->id) }}"
                                                        class="btn btn-default btn-sm">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
-                                                    <a class="btn btn-default delete-item btn-sm" data-item-id="{{$result->id}}">
+                                                    <a class="btn btn-default delete-item btn-sm" data-item-id="{{ $result->id }}">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
                                                 </td>
