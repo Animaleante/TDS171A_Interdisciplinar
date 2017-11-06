@@ -13,13 +13,13 @@
 				            <ul>
 				                <li><a href="/" title="Home">Home</a></li>
 				                <li><a href="#">Cadastro</a></li>
-				                <li>Ingrediente</li>
+				                <li>Medidas</li>
 				            </ul>
 				        </nav>
 				
 				        <div class="row">
 				            <header class="s-title">
-				                <h1>Ingredientes</h1>
+				                <h1>Medidas</h1>
 				            </header>
 				
 				            <section class="content full-width">
@@ -28,31 +28,38 @@
 										<h:messages globalOnly="true" errorClass="error"/>
 									</h:form>
 									
-									<table class="table table-stiped table-hover">
-							            <thead>
-							                <tr>
-							                    <th>
-							                        Nome
-							                    </th>
-							                    <th>Ações</th>
-							                </tr>
-							            </thead>
-							            <tbody>
-							            	<c:forEach items="#{medidaBean.medidaLista}" var="medida">
-							                    <tr>
-							                        <td>
-							                            #{medida.nome}
-							                        </td>
-							                        <td>
-														<h:form>
-															<h:commandButton action="#{medidaBean.editar(medida)}" value="Editar"></h:commandButton>
-															<h:commandButton action="#{medidaBean.deletar(medida)}" value="Deletar"></h:commandButton>
-														</h:form>
-							                        </td>
-							                    </tr>
-							                </c:forEach>
-							            </tbody>
-							        </table>
+									<c:choose>
+										<c:when test="${not empty medidaBean.lista}">
+											<table class="table table-stiped table-hover">
+									            <thead>
+									                <tr>
+									                    <th>
+									                        Nome
+									                    </th>
+									                    <th>Ações</th>
+									                </tr>
+									            </thead>
+									            <tbody>
+									            	<c:forEach items="#{medidaBean.lista}" var="medida">
+									                    <tr>
+									                        <td>
+									                            #{medida.nome}
+									                        </td>
+									                        <td>
+																<h:form>
+																	<h:commandButton action="#{medidaBean.editar(medida)}" value="Editar"></h:commandButton>
+																	<h:commandButton action="#{medidaBean.deletar(medida)}" value="Deletar"></h:commandButton>
+																</h:form>
+									                        </td>
+									                    </tr>
+									                </c:forEach>
+									            </tbody>
+									        </table>
+								        </c:when>
+								        <c:otherwise>
+								        	<p>A lista está vazia.</p>
+								        </c:otherwise>
+							        </c:choose>
 										
 									<h:form>
 										<h:commandButton action="/medida/criar" immediate="true" value="Criar novo medida" />

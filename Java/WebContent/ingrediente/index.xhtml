@@ -13,7 +13,7 @@
 				            <ul>
 				                <li><a href="/" title="Home">Home</a></li>
 				                <li><a href="#">Cadastro</a></li>
-				                <li>Ingrediente</li>
+				                <li>Ingredientes</li>
 				            </ul>
 				        </nav>
 				
@@ -28,32 +28,39 @@
 										<h:messages globalOnly="true" errorClass="error"/>
 									</h:form>
 									
-									<table class="table table-stiped table-hover">
-							            <thead>
-							                <tr>
-							                    <th>
-							                        Nome
-							                    </th>
-							                    <th>Ações</th>
-							                </tr>
-							            </thead>
-							            <tbody>
-							            	<c:forEach items="#{ingredienteBean.ingredienteLista}" var="ingrediente">
-							                    <tr>
-							                        <td>
-							                            #{ingrediente.nome}
-							                        </td>
-							                        <td>
-														<h:form>
-															<h:commandLink action="#{ingredienteBean.exibir(ingrediente)}" value="Detalhes"></h:commandLink> |
-															<h:commandLink action="#{ingredienteBean.editar(ingrediente)}" value="Editar"></h:commandLink> |
-															<h:commandLink action="#{ingredienteBean.deletar(ingrediente)}" value="Deletar"></h:commandLink>
-														</h:form>
-							                        </td>
-							                    </tr>
-							                </c:forEach>
-							            </tbody>
-							        </table>
+									<c:choose>
+										<c:when test="${not empty ingredienteBean.lista}">
+											<table class="table table-stiped table-hover">
+									            <thead>
+									                <tr>
+									                    <th>
+									                        Nome
+									                    </th>
+									                    <th>Ações</th>
+									                </tr>
+									            </thead>
+									            <tbody>
+									            	<c:forEach items="#{ingredienteBean.lista}" var="ingrediente">
+									                    <tr>
+									                        <td>
+									                            #{ingrediente.nome}
+									                        </td>
+									                        <td>
+																<h:form>
+<!-- 																	<h:commandLink action="#{ingredienteBean.exibir(ingrediente)}" value="Detalhes"></h:commandLink> | -->
+																	<h:commandLink action="#{ingredienteBean.editar(ingrediente)}" value="Editar"></h:commandLink> |
+																	<h:commandLink action="#{ingredienteBean.deletar(ingrediente)}" value="Deletar"></h:commandLink>
+																</h:form>
+									                        </td>
+									                    </tr>
+									                </c:forEach>
+									            </tbody>
+									        </table>
+								        </c:when>
+								        <c:otherwise>
+								        	<p>A lista está vazia.</p>
+								        </c:otherwise>
+							        </c:choose>
 										
 									<h:form>
 										<h:commandButton action="/ingrediente/criar" immediate="true" value="Criar novo ingrediente" />

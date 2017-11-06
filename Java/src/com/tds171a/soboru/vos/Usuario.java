@@ -12,7 +12,7 @@ public class Usuario {
 	private String nome;
 	private String email;
 	private String senha;
-	private int tipo;
+	private String tipo;
 	private Date nasc;
 	private int sexo;
 	private int roleId;
@@ -81,14 +81,14 @@ public class Usuario {
 	/**
 	 * @return the tipo
 	 */
-	public int getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
 
 	/**
 	 * @param tipo the tipo to set
 	 */
-	public void setTipo(int tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 

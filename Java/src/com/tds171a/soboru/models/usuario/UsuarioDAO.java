@@ -37,15 +37,14 @@ public class UsuarioDAO implements IDAO<Usuario> {
 			connection = Utils.createConnection();
 
 			PreparedStatement sttm = connection.prepareStatement(
-					"insert into "+tableName+" (id, nome, email, senha, tipo, nasc, sexo, id_role, notificacao_email) values(usuario_seq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?)");
+					"insert into "+tableName+" (id, nome, email, senha, nasc, sexo, id_role, notificacao_email) values(usuario_seq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)");
 			sttm.setString(1, usuario.getNome());
 			sttm.setString(2, usuario.getEmail());
 			sttm.setString(3, usuario.getSenha());
-			sttm.setInt(4, usuario.getTipo());
-			sttm.setDate(5, Date.valueOf(Utils.dateToOracleDate(usuario.getNasc())));
-			sttm.setInt(6, usuario.getSexo());
-			sttm.setInt(7, usuario.getRoleId());
-			sttm.setBoolean(8, usuario.isNotificacaoEmail());
+			sttm.setDate(4, Date.valueOf(Utils.dateToOracleDate(usuario.getNasc())));
+			sttm.setInt(5, usuario.getSexo());
+			sttm.setInt(6, usuario.getRoleId());
+			sttm.setBoolean(7, usuario.isNotificacaoEmail());
 
 			int rowsAffected = sttm.executeUpdate();
 
@@ -81,7 +80,9 @@ public class UsuarioDAO implements IDAO<Usuario> {
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName);
+//			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName);
+			PreparedStatement sttm = connection.prepareStatement(
+					"select u.id, u.nome, u.email, u.senha, u.nasc, u.sexo, u.id_role, u.notificacao_email, r.nome tipo from "+tableName+" u inner join roles r on u.id_role = r.id");
 
 			ResultSet rs = sttm.executeQuery();
 
@@ -93,11 +94,11 @@ public class UsuarioDAO implements IDAO<Usuario> {
 				usuario.setNome(rs.getString("nome"));
 				usuario.setEmail(rs.getString("email"));
 				usuario.setSenha(rs.getString("senha"));
-				usuario.setTipo(rs.getInt("tipo"));
 				usuario.setNasc(rs.getDate("nasc"));
 				usuario.setSexo(rs.getInt("sexo"));
 				usuario.setRoleId(rs.getInt("id_role"));
 				usuario.setNotificacaoEmail(rs.getBoolean("notificacao_email"));
+				usuario.setTipo(rs.getString("tipo"));
 
 				list.add(usuario);
 			}
@@ -136,16 +137,15 @@ public class UsuarioDAO implements IDAO<Usuario> {
 			connection = Utils.createConnection();
 
 			PreparedStatement sttm = connection.prepareStatement(
-					"update "+tableName+" set nome = ?, set email = ?, set senha = ?, set tipo = ?, set nasc = ?, set sexo = ?, set id_role = ?, set notificacao_email = ? where id = ?");
+					"update "+tableName+" set nome = ?, set email = ?, set senha = ?, set nasc = ?, set sexo = ?, set id_role = ?, set notificacao_email = ? where id = ?");
 			sttm.setString(1, usuario.getNome());
 			sttm.setString(2, usuario.getEmail());
 			sttm.setString(3, usuario.getSenha());
-			sttm.setInt(4, usuario.getTipo());
-			sttm.setDate(5, Date.valueOf(Utils.dateToOracleDate(usuario.getNasc())));
-			sttm.setInt(6, usuario.getSexo());
-			sttm.setInt(7, usuario.getRoleId());
-			sttm.setBoolean(8, usuario.isNotificacaoEmail());
-			sttm.setInt(9, usuario.getId());
+			sttm.setDate(4, Date.valueOf(Utils.dateToOracleDate(usuario.getNasc())));
+			sttm.setInt(5, usuario.getSexo());
+			sttm.setInt(6, usuario.getRoleId());
+			sttm.setBoolean(7, usuario.isNotificacaoEmail());
+			sttm.setInt(8, usuario.getId());
 
 			int rowsAffected = sttm.executeUpdate();
 
