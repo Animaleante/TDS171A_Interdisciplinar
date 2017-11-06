@@ -214,7 +214,6 @@ public class UsuarioDAO implements IDAO<Usuario> {
 		try {
 			connection = Utils.createConnection();
 
-//			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName);
 			PreparedStatement sttm = connection.prepareStatement(
 					"select u.id, u.nome, u.email, u.senha, u.nasc, u.sexo, u.id_role, u.notificacao_email, r.nome tipo from "+tableName+" u inner join roles r on u.id_role = r.id where u.email = ? and u.senha = ?");
 			sttm.setString(1, email);

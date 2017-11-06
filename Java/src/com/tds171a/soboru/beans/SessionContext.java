@@ -26,7 +26,7 @@ public class SessionContext {
 		}
 	}
 	
-	public encerrarSessao() {
+	public void encerrarSessao() {
 		currentExternalContext().invalidateSession();
 	}
 	
