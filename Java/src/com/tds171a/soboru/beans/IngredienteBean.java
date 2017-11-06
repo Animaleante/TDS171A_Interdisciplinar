@@ -27,7 +27,7 @@ public class IngredienteBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 8410408634179869866L;
 
-	private String routeBase = "/ingrediente/";
+	private static final String ROUTE_BASE = "/ingrediente/";
 
 	private IngredienteController controller;
 	private Ingrediente ingrediente;
@@ -44,7 +44,7 @@ public class IngredienteBean implements Serializable {
 	public String listar() {
 		setIngredienteLista(controller.listar());
 
-		return routeBase + "index";
+		return ROUTE_BASE + "index";
 	}
 
 	public String incluir() {
@@ -52,14 +52,14 @@ public class IngredienteBean implements Serializable {
 	    System.out.println("passou incluir ingrediente.");
 	    if(getIngrediente().getNome().isEmpty()) {
 	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
-	        return routeBase + "criar";
+	        return ROUTE_BASE + "criar";
 	    }
 
 	    if(controller.incluir(getIngrediente())) {
 	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Ingrediente cadastrado com sucesso!", null));
 	    } else {
 	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingrediente nao foi cadastrado!", null));
-            return routeBase + "criar";
+            return ROUTE_BASE + "criar";
 	    }
 
 	    setIngrediente(new Ingrediente());
@@ -69,12 +69,12 @@ public class IngredienteBean implements Serializable {
 
 	public String exibir(Ingrediente ingrediente) {
 	    setIngrediente(ingrediente);
-	    return routeBase + "exibir";
+	    return ROUTE_BASE + "exibir";
 	}
 
 	public String editar(Ingrediente ingrediente) {
 		setIngrediente(ingrediente);
-		return routeBase + "editar";
+		return ROUTE_BASE + "editar";
 	}
 
 	public String editar() {
@@ -82,14 +82,14 @@ public class IngredienteBean implements Serializable {
 
 	    if(getIngrediente().getNome().isEmpty()) {
 	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
-	        return routeBase + "criar";
+	        return ROUTE_BASE + "criar";
 	    }
 
 		if(controller.atualizar(getIngrediente())) {
 	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Ingrediente atualizado com sucesso!", null));
 	    } else {
 	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingrediente nao foi atualizado.", null));
-            return routeBase + "editar";
+            return ROUTE_BASE + "editar";
 		}
 
 		setIngrediente(new Ingrediente());
@@ -99,7 +99,7 @@ public class IngredienteBean implements Serializable {
 
 	public String deletar(Ingrediente ingrediente) {
 		setIngrediente(ingrediente);
-		return routeBase + "deletar";
+		return ROUTE_BASE + "deletar";
 	}
 
 	public String deletar() {
@@ -107,14 +107,14 @@ public class IngredienteBean implements Serializable {
 
 	    if(getIngrediente().getId() == -1) {
 	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingrediente nao pode ser vazio!", null));
-	        return routeBase + "criar";
+	        return ROUTE_BASE + "criar";
 	    }
 
 		if(controller.remover(getIngrediente().getId())) {
 	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Ingrediente deletado com sucesso!", null));
 	    } else {
 	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingrediente nao foi deletado.", null));
-            return routeBase + "deletar";
+            return ROUTE_BASE + "deletar";
 		}
 
 		setIngrediente(new Ingrediente());

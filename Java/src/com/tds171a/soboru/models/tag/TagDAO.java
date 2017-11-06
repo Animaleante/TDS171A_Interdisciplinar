@@ -34,7 +34,7 @@ public class TagDAO implements IDAO<Tag> {
         try {
             connection = Utils.createConnection();
 
-            PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" (id, nome) values(tags_seq.NEXTVAL, ?)");
+            PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" (id, nome) values(tag_seq.NEXTVAL, ?)");
             sttm.setString(1, tag.getNome());
 
             int rowsAffected = sttm.executeUpdate();

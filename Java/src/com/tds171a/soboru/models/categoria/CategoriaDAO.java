@@ -34,7 +34,7 @@ public class CategoriaDAO implements IDAO<Categoria> {
         try {
             connection = Utils.createConnection();
 
-            PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" (id, nome) values(categorias_seq.NEXTVAL, ?)");
+            PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" (id, nome) values(categoria_seq.NEXTVAL, ?)");
             sttm.setString(1, categoria.getNome());
 
             int rowsAffected = sttm.executeUpdate();

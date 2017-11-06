@@ -34,7 +34,7 @@ public class UtensilioDAO implements IDAO<Utensilio> {
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" values(utensilios_seq.NEXTVAL, ?)");
+			PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" values(utensilio_seq.NEXTVAL, ?)");
 			sttm.setString(1, utensilio.getNome());
 
 			int rowsAffected = sttm.executeUpdate();

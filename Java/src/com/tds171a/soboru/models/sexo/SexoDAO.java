@@ -34,7 +34,7 @@ public class SexoDAO implements IDAO<Sexo> {
         try {
             connection = Utils.createConnection();
 
-            PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" (id, nome) values(sexos_seq.NEXTVAL, ?)");
+            PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" (id, nome) values(sexo_seq.NEXTVAL, ?)");
             sttm.setString(1, sexo.getNome());
 
             int rowsAffected = sttm.executeUpdate();

@@ -34,7 +34,7 @@ public class MedidaDAO implements IDAO<Medida> {
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" values(medidas_seq.NEXTVAL, ?,?)");
+			PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" values(medida_seq.NEXTVAL, ?,?)");
 			sttm.setString(1, medida.getNome());
 			sttm.setString(2, medida.getAbreviacao());
 
@@ -61,7 +61,7 @@ public class MedidaDAO implements IDAO<Medida> {
 	}
 
 	/**
-	 * M�todo para trazer uma lista de todos as Medidaa
+	 * M�todo para trazer uma lista de todos as Medida
 	 * @return
 	 */
 	@Override
