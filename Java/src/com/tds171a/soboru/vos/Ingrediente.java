@@ -8,12 +8,12 @@ package com.tds171a.soboru.vos;
 public class Ingrediente {
 
 	/**
-	 * Par�metro id do Ingrediente
+	 * Parametro id do Ingrediente
 	 */
 	private int id;
 
 	/**
-	 * Par�metro nome do Ingrediente
+	 * Parametro nome do Ingrediente
 	 */
 	private String nome;
 
@@ -21,7 +21,6 @@ public class Ingrediente {
 	 * Construtor da classe de Ingrediente
 	 */
 	public Ingrediente() {
-
 	    id = -1;
 	    nome = "";
 	}

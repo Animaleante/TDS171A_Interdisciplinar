@@ -26,6 +26,7 @@ CREATE TABLE usuarios (
 	tipo NUMBER(1) NOT NULL,
 	nasc DATE NOT NULL,
 	sexo NUMBER(1) NOT NULL,
+	id_role NUMBER(11) NOT NULL,
 	notificacao_email NUMBER(1) NOT NULL,
 	-- created_at DATE NOT NULL,
 	-- updated_at DATE NOT NULL,

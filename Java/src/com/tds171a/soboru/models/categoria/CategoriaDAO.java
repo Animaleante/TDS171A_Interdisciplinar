@@ -24,7 +24,7 @@ public class CategoriaDAO implements IDAO<Categoria> {
     private String tableName = "categorias";
 
     /**
-     * M�todo para incluir um novo Categoria
+     * Metodo para incluir um novo Categoria
      * @param categoria
      * @return
      */
@@ -47,7 +47,9 @@ public class CategoriaDAO implements IDAO<Categoria> {
             return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
+        } catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
             if (connection != null)
                 try {
                     connection.close();
@@ -60,7 +62,7 @@ public class CategoriaDAO implements IDAO<Categoria> {
     }
 
     /**
-     * M�todo para trazer uma lista de todos os Categorias
+     * Metodo para trazer uma lista de todos os Categorias
      * @return
      */
     @Override
@@ -89,9 +91,11 @@ public class CategoriaDAO implements IDAO<Categoria> {
             sttm = null;
 
             return list;
-        } catch (SQLException Except) {
-            Except.printStackTrace();
-        } finally {
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
             if (connection != null)
                 try {
                     connection.close();
@@ -104,7 +108,7 @@ public class CategoriaDAO implements IDAO<Categoria> {
     }
 
     /**
-     * M�todo para atualizar um Categoria j� registrado
+     * Metodo para atualizar um Categoria j� registrado
      * @param categoria
      * @return
      */
@@ -128,7 +132,9 @@ public class CategoriaDAO implements IDAO<Categoria> {
             return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
+        } catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
             if (connection != null)
                 try {
                     connection.close();
@@ -141,7 +147,7 @@ public class CategoriaDAO implements IDAO<Categoria> {
     }
 
     /**
-     * M�todo para remover um Categoria
+     * Metodo para remover um Categoria
      * @param categoriaId
      * @return
      */
@@ -164,7 +170,9 @@ public class CategoriaDAO implements IDAO<Categoria> {
             return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
+        } catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
             if (connection != null)
                 try {
                     connection.close();

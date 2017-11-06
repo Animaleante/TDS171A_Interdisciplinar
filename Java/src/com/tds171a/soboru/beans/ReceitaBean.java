@@ -3,9 +3,6 @@
  */
 package com.tds171a.soboru.beans;
 
-import java.io.Serializable;
-import java.util.List;
-
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -20,134 +17,85 @@ import com.tds171a.soboru.vos.Receita;
  * @author Sony
  *
  */
-public class ReceitaBean implements Serializable {
+public class ReceitaBean  extends BeanBase<Receita> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1877717137441387967L;
 
-	private static final String ROUTE_BASE = "/receitas/";
-
-	private ReceitaController controller;
-	private Receita receita;
-	private List<Receita> lista;
-
 	/**
 	 *
 	 */
 	public ReceitaBean() {
+		route_base = "/receitas/";
 		controller = new ReceitaController();
-		setReceita(new Receita());
+		setVo(new Receita());
 	}
 
-	public String listar() {
-		setLista(controller.listar());
-
-		return ROUTE_BASE + "index";
-	}
+	@Override
 
 	public String incluir() {
 	    FacesContext context = FacesContext.getCurrentInstance();
 
-	    if(getReceita().getNome().isEmpty()) {
+	    if(getVo().getNome().isEmpty()) {
 	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
-	        return ROUTE_BASE + "criar";
+	        return route_base + CRIAR_PAGE;
 	    }
 
-	    if(controller.incluir(getReceita())) {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Receita cadastrada com sucesso!", null));
+	    if(controller.incluir(getVo())) {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso!", null));
 	    } else {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Receita nao foi cadastrada!", null));
-            return ROUTE_BASE + "criar";
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel fazer o cadastro!", null));
+            return route_base + CRIAR_PAGE;
 	    }
 
-	    setReceita(new Receita());
+	    setVo(new Receita());
 
 	    return listar();
 	}
 
-	public String exibir(Receita receita) {
-		setReceita(receita);
-	    return ROUTE_BASE + "exibir";
-	}
-
-	public String editar(Receita receita) {
-		setReceita(receita);
-		return ROUTE_BASE + "editar";
-	}
+	@Override
 
 	public String editar() {
 	    FacesContext context = FacesContext.getCurrentInstance();
 
-	    if(getReceita().getNome().isEmpty()) {
+	    if(getVo().getNome().isEmpty()) {
 	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
-	        return ROUTE_BASE + "criar";
+	        return route_base + CRIAR_PAGE;
 	    }
 
-		if(controller.atualizar(getReceita())) {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Receita atualizada com sucesso!", null));
+		if(controller.atualizar(getVo())) {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualizada com sucesso!", null));
 	    } else {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Receita nao foi atualizada.", null));
-            return ROUTE_BASE + "editar";
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel fazer a atualizacao.", null));
+            return route_base + EDITAR_PAGE;
 		}
 
-		setReceita(new Receita());
+		setVo(new Receita());
 
 	    return listar();
 	}
 
-	public String deletar(Receita receita) {
-		setReceita(receita);
-		return ROUTE_BASE + "deletar";
-	}
-
+	@Override
 	public String deletar() {
 	    FacesContext context = FacesContext.getCurrentInstance();
 
-	    if(getReceita().getId() == -1) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Receita nao pode ser vazio!", null));
-	        return ROUTE_BASE + "criar";
+	    if(getVo().getId() == -1) {
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Item nao pode ser vazio!", null));
+	        return route_base + CRIAR_PAGE;
 	    }
 
-		if(controller.remover(getReceita().getId())) {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Receita deletada com sucesso!", null));
+		if(controller.remover(getVo().getId())) {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Deletado com sucesso!", null));
 	    } else {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Receita nao foi deletada.", null));
-            return ROUTE_BASE + "deletar";
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel deletar.", null));
+            return route_base + DELETAR_PAGE;
 		}
 
-		setReceita(new Receita());
+		setVo(new Receita());
 
 	    return listar();
-	}
-
-	/**
-	 * @return the receita
-	 */
-	public Receita getReceita() {
-		return receita;
-	}
-
-	/**
-	 * @param receita the receita to set
-	 */
-	public void setReceita(Receita receita) {
-		this.receita = receita;
-	}
-
-	/**
-	 * @return the lista
-	 */
-	public List<Receita> getLista() {
-		return lista;
-	}
-
-	/**
-	 * @param lista the lista to set
-	 */
-	public void setLista(List<Receita> lista) {
-		this.lista = lista;
 	}
 
 }

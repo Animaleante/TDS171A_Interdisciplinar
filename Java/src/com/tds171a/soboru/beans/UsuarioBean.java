@@ -1,5 +1,5 @@
 /**
- *
+ * 
  */
 package com.tds171a.soboru.beans;
 
@@ -8,30 +8,30 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
-import com.tds171a.soboru.controllers.CategoriaController;
-import com.tds171a.soboru.vos.Categoria;
+import com.tds171a.soboru.controllers.UsuarioController;
+import com.tds171a.soboru.vos.Usuario;
 
-@Named("categoriaBean")
+@Named("usuarioBean")
 @SessionScoped
 /**
- * @author Sony
+ * @author Diogo
  *
  */
-public class CategoriaBean extends BeanBase<Categoria> {
+public class UsuarioBean extends BeanBase<Usuario> {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 8410408634179869866L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4490606218207822710L;
 
-    /**
-     *
-     */
-    public CategoriaBean() {
-    	route_base = "/categoria/";
-        controller = new CategoriaController();
-        setVo(new Categoria());
-    }
+	/**
+	 * 
+	 */
+	public UsuarioBean() {
+		route_base = "/usuarios/";
+		controller = new UsuarioController();
+		setVo(new Usuario());
+	}
 
 	@Override
 
@@ -50,7 +50,7 @@ public class CategoriaBean extends BeanBase<Categoria> {
             return route_base + CRIAR_PAGE;
 	    }
 
-	    setVo(new Categoria());
+	    setVo(new Usuario());
 
 	    return listar();
 	}
@@ -72,7 +72,7 @@ public class CategoriaBean extends BeanBase<Categoria> {
             return route_base + EDITAR_PAGE;
 		}
 
-		setVo(new Categoria());
+		setVo(new Usuario());
 
 	    return listar();
 	}
@@ -93,7 +93,7 @@ public class CategoriaBean extends BeanBase<Categoria> {
             return route_base + DELETAR_PAGE;
 		}
 
-		setVo(new Categoria());
+		setVo(new Usuario());
 
 	    return listar();
 	}

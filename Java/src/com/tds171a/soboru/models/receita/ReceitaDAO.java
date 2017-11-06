@@ -61,6 +61,8 @@ public class ReceitaDAO implements IDAO<Receita> {
 			return rowsAffected > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} finally {
 			if (connection != null)
 				try {
@@ -111,8 +113,10 @@ public class ReceitaDAO implements IDAO<Receita> {
 			sttm = null;
 
 			return list;
-		} catch (SQLException Except) {
-			Except.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} finally {
 			if (connection != null)
 				try {
@@ -161,6 +165,8 @@ public class ReceitaDAO implements IDAO<Receita> {
 			return rowsAffected > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} finally {
 			if (connection != null)
 				try {
@@ -196,6 +202,8 @@ public class ReceitaDAO implements IDAO<Receita> {
 
 			return rowsAffected > 0;
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
 			if (connection != null)

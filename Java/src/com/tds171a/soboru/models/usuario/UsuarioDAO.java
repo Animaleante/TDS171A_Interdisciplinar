@@ -1,6 +1,10 @@
-package com.tds171a.soboru.models.ingrediente;
+/**
+ * 
+ */
+package com.tds171a.soboru.models.usuario;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,33 +13,39 @@ import java.util.List;
 
 import com.tds171a.soboru.models.IDAO;
 import com.tds171a.soboru.utils.Utils;
-import com.tds171a.soboru.vos.Ingrediente;
+import com.tds171a.soboru.vos.Usuario;
 
 /**
- * Classe de DAO do Ingrediente
  * @author Diogo
  *
  */
-public class IngredienteDAO implements IDAO<Ingrediente> {
-
+public class UsuarioDAO implements IDAO<Usuario> {
 	/**
 	 * Parametro com nome da tabela referente a esse DAO
 	 */
-	private String tableName = "ingredientes";
+	private String tableName = "usuarios";
 
 	/**
 	 * Metodo para incluir um novo Ingrediente
-	 * @param ingrediente
+	 * @param usuario
 	 * @return
 	 */
 	@Override
-	public boolean incluir(Ingrediente ingrediente) {
+	public boolean incluir(Usuario usuario) {
 		Connection connection = null;
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" (id, nome) values(ingrediente_seq.NEXTVAL, ?)");
-			sttm.setString(1, ingrediente.getNome());
+			PreparedStatement sttm = connection.prepareStatement(
+					"insert into "+tableName+" (id, nome, email, senha, tipo, nasc, sexo, id_role, notificacao_email) values(usuario_seq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?)");
+			sttm.setString(1, usuario.getNome());
+			sttm.setString(2, usuario.getEmail());
+			sttm.setString(3, usuario.getSenha());
+			sttm.setInt(4, usuario.getTipo());
+			sttm.setDate(5, Date.valueOf(Utils.dateToOracleDate(usuario.getNasc())));
+			sttm.setInt(6, usuario.getSexo());
+			sttm.setInt(7, usuario.getRoleId());
+			sttm.setBoolean(8, usuario.isNotificacaoEmail());
 
 			int rowsAffected = sttm.executeUpdate();
 
@@ -62,11 +72,11 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 	}
 
 	/**
-	 * Metodo para trazer uma lista de todos os Ingredientes
+	 * Metodo para trazer uma lista de todos os Usuarios
 	 * @return
 	 */
 	@Override
-	public List<Ingrediente> listar() {
+	public List<Usuario> listar() {
 		Connection connection = null;
 		try {
 			connection = Utils.createConnection();
@@ -75,14 +85,21 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 
 			ResultSet rs = sttm.executeQuery();
 
-			List<Ingrediente> list = new ArrayList<Ingrediente>();
+			List<Usuario> list = new ArrayList<Usuario>();
+			Usuario usuario = null;
 			while(rs.next()) {
-				int id = rs.getInt("id");
-				String nome = rs.getString("nome");
+				usuario = new Usuario();
+				usuario.setId(rs.getInt("id"));
+				usuario.setNome(rs.getString("nome"));
+				usuario.setEmail(rs.getString("email"));
+				usuario.setSenha(rs.getString("senha"));
+				usuario.setTipo(rs.getInt("tipo"));
+				usuario.setNasc(rs.getDate("nasc"));
+				usuario.setSexo(rs.getInt("sexo"));
+				usuario.setRoleId(rs.getInt("id_role"));
+				usuario.setNotificacaoEmail(rs.getBoolean("notificacao_email"));
 
-				Ingrediente i = new Ingrediente(id, nome);
-
-				list.add(i);
+				list.add(usuario);
 			}
 
 			if (sttm != null)
@@ -108,19 +125,27 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 	}
 
 	/**
-	 * Metodo para atualizar um Ingrediente ja registrado
-	 * @param ingrediente
+	 * Metodo para atualizar um Usuario ja registrado
+	 * @param usuario
 	 * @return
 	 */
 	@Override
-	public boolean atualizar(Ingrediente ingrediente) {
+	public boolean atualizar(Usuario usuario) {
 		Connection connection = null;
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("update "+tableName+" set nome = ? where id = ?");
-			sttm.setString(1, ingrediente.getNome());
-			sttm.setInt(2, ingrediente.getId());
+			PreparedStatement sttm = connection.prepareStatement(
+					"update "+tableName+" set nome = ?, set email = ?, set senha = ?, set tipo = ?, set nasc = ?, set sexo = ?, set id_role = ?, set notificacao_email = ? where id = ?");
+			sttm.setString(1, usuario.getNome());
+			sttm.setString(2, usuario.getEmail());
+			sttm.setString(3, usuario.getSenha());
+			sttm.setInt(4, usuario.getTipo());
+			sttm.setDate(5, Date.valueOf(Utils.dateToOracleDate(usuario.getNasc())));
+			sttm.setInt(6, usuario.getSexo());
+			sttm.setInt(7, usuario.getRoleId());
+			sttm.setBoolean(8, usuario.isNotificacaoEmail());
+			sttm.setInt(9, usuario.getId());
 
 			int rowsAffected = sttm.executeUpdate();
 
@@ -147,18 +172,18 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 	}
 
 	/**
-	 * Metodo para remover um Ingrediente
-	 * @param ingredienteId
+	 * Metodo para remover um Usuario
+	 * @param usuarioId
 	 * @return
 	 */
 	@Override
-	public boolean remover(int ingredienteId) {
+	public boolean remover(int usuarioId) {
 		Connection connection = null;
 		try {
 			connection = Utils.createConnection();
 
 			PreparedStatement sttm = connection.prepareStatement("delete from "+tableName+" where id = ?");
-			sttm.setInt(1, ingredienteId);
+			sttm.setInt(1, usuarioId);
 
 			int rowsAffected = sttm.executeUpdate();
 

@@ -47,7 +47,9 @@ public class TagDAO implements IDAO<Tag> {
             return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
+        } catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
             if (connection != null)
                 try {
                     connection.close();
@@ -89,9 +91,11 @@ public class TagDAO implements IDAO<Tag> {
             sttm = null;
 
             return list;
-        } catch (SQLException Except) {
-            Except.printStackTrace();
-        } finally {
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
             if (connection != null)
                 try {
                     connection.close();
@@ -128,7 +132,9 @@ public class TagDAO implements IDAO<Tag> {
             return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
+        } catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
             if (connection != null)
                 try {
                     connection.close();
@@ -164,7 +170,9 @@ public class TagDAO implements IDAO<Tag> {
             return rowsAffected > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
+        } catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
             if (connection != null)
                 try {
                     connection.close();

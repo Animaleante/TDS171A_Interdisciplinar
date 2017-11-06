@@ -1,4 +1,7 @@
-package com.tds171a.soboru.models.ingrediente;
+/**
+ * 
+ */
+package com.tds171a.soboru.models.roles;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,32 +13,32 @@ import java.util.List;
 import com.tds171a.soboru.models.IDAO;
 import com.tds171a.soboru.utils.Utils;
 import com.tds171a.soboru.vos.Ingrediente;
+import com.tds171a.soboru.vos.Role;
 
 /**
- * Classe de DAO do Ingrediente
  * @author Diogo
  *
  */
-public class IngredienteDAO implements IDAO<Ingrediente> {
+public class RoleDAO implements IDAO<Role> {
 
 	/**
 	 * Parametro com nome da tabela referente a esse DAO
 	 */
-	private String tableName = "ingredientes";
+	private String tableName = "roles";
 
 	/**
-	 * Metodo para incluir um novo Ingrediente
-	 * @param ingrediente
+	 * Metodo para incluir um novo Role
+	 * @param role
 	 * @return
 	 */
 	@Override
-	public boolean incluir(Ingrediente ingrediente) {
+	public boolean incluir(Role role) {
 		Connection connection = null;
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" (id, nome) values(ingrediente_seq.NEXTVAL, ?)");
-			sttm.setString(1, ingrediente.getNome());
+			PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" (id, nome) values(role_seq.NEXTVAL, ?)");
+			sttm.setString(1, role.getNome());
 
 			int rowsAffected = sttm.executeUpdate();
 
@@ -62,11 +65,11 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 	}
 
 	/**
-	 * Metodo para trazer uma lista de todos os Ingredientes
+	 * Metodo para trazer uma lista de todos os Roles
 	 * @return
 	 */
 	@Override
-	public List<Ingrediente> listar() {
+	public List<Role> listar() {
 		Connection connection = null;
 		try {
 			connection = Utils.createConnection();
@@ -75,14 +78,14 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 
 			ResultSet rs = sttm.executeQuery();
 
-			List<Ingrediente> list = new ArrayList<Ingrediente>();
+			List<Role> list = new ArrayList<Role>();
+			Role role = null;
 			while(rs.next()) {
-				int id = rs.getInt("id");
-				String nome = rs.getString("nome");
+				role = new Role();
+				role.setId(rs.getInt("id"));
+				role.setNome(rs.getString("nome"));
 
-				Ingrediente i = new Ingrediente(id, nome);
-
-				list.add(i);
+				list.add(role);
 			}
 
 			if (sttm != null)
@@ -108,19 +111,19 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 	}
 
 	/**
-	 * Metodo para atualizar um Ingrediente ja registrado
-	 * @param ingrediente
+	 * Metodo para atualizar um Role ja registrado
+	 * @param role
 	 * @return
 	 */
 	@Override
-	public boolean atualizar(Ingrediente ingrediente) {
+	public boolean atualizar(Role role) {
 		Connection connection = null;
 		try {
 			connection = Utils.createConnection();
 
 			PreparedStatement sttm = connection.prepareStatement("update "+tableName+" set nome = ? where id = ?");
-			sttm.setString(1, ingrediente.getNome());
-			sttm.setInt(2, ingrediente.getId());
+			sttm.setString(1, role.getNome());
+			sttm.setInt(2, role.getId());
 
 			int rowsAffected = sttm.executeUpdate();
 
@@ -147,18 +150,18 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 	}
 
 	/**
-	 * Metodo para remover um Ingrediente
-	 * @param ingredienteId
+	 * Metodo para remover um Role
+	 * @param roleId
 	 * @return
 	 */
 	@Override
-	public boolean remover(int ingredienteId) {
+	public boolean remover(int roleId) {
 		Connection connection = null;
 		try {
 			connection = Utils.createConnection();
 
 			PreparedStatement sttm = connection.prepareStatement("delete from "+tableName+" where id = ?");
-			sttm.setInt(1, ingredienteId);
+			sttm.setInt(1, roleId);
 
 			int rowsAffected = sttm.executeUpdate();
 

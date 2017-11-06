@@ -3,9 +3,6 @@
  */
 package com.tds171a.soboru.beans;
 
-import java.io.Serializable;
-import java.util.List;
-
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -20,131 +17,84 @@ import com.tds171a.soboru.vos.Tag;
  * @author Sony
  *
  */
-public class TagBean implements Serializable {
+public class TagBean extends BeanBase<Tag> {
 
     /**
      *
      */
     private static final long serialVersionUID = 8410408634179869866L;
 
-    private String routeBase = "/tag/";
-
-    private TagController controller;
-    private Tag tag;
-    private List<Tag> tagLista;
-
     /**
      *
      */
     public TagBean() {
+    	route_base = "/tags/";
         controller = new TagController();
-        setTag(new Tag());
+        setVo(new Tag());
     }
 
-    public String listar() {
-        setTagLista(controller.listar());
+	@Override
 
-        System.out.println("Tamanho lista: " + getTagLista().size());
+	public String incluir() {
+	    FacesContext context = FacesContext.getCurrentInstance();
 
-        return routeBase + "index";
-    }
+	    if(getVo().getNome().isEmpty()) {
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
+	        return route_base + CRIAR_PAGE;
+	    }
 
-    public String incluir() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        System.out.println("passou incluir tag.");
-        if(getTag().getNome().isEmpty()) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
-            return routeBase + "criar";
-        }
+	    if(controller.incluir(getVo())) {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso!", null));
+	    } else {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel fazer o cadastro!", null));
+            return route_base + CRIAR_PAGE;
+	    }
 
-        if(controller.incluir(getTag())) {
-            context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Tag cadastrado com sucesso!", null));
-        } else {
-            context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Tag nao foi cadastrado!", null));
-            return routeBase + "criar";
-        }
+	    setVo(new Tag());
 
-        setTag(new Tag());
+	    return listar();
+	}
 
-        return listar();
-    }
+	@Override
 
-    public String editar(Tag tag) {
-        setTag(tag);
-        return routeBase + "editar";
-    }
+	public String editar() {
+	    FacesContext context = FacesContext.getCurrentInstance();
 
-    public String editar() {
-        FacesContext context = FacesContext.getCurrentInstance();
+	    if(getVo().getNome().isEmpty()) {
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
+	        return route_base + CRIAR_PAGE;
+	    }
 
-        if(getTag().getNome().isEmpty()) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
-            return routeBase + "criar";
-        }
+		if(controller.atualizar(getVo())) {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualizada com sucesso!", null));
+	    } else {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel fazer a atualizacao.", null));
+            return route_base + EDITAR_PAGE;
+		}
 
-        if(controller.atualizar(getTag())) {
-            context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Tag atualizado com sucesso!", null));
-        } else {
-            context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Tag nao foi atualizado.", null));
-            return routeBase + "editar";
-        }
+		setVo(new Tag());
 
-        setTag(new Tag());
+	    return listar();
+	}
 
-        return listar();
-    }
+	@Override
+	public String deletar() {
+	    FacesContext context = FacesContext.getCurrentInstance();
 
-    public String deletar(Tag tag) {
-        setTag(tag);
-        return routeBase + "deletar";
-    }
+	    if(getVo().getId() == -1) {
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Item nao pode ser vazio!", null));
+	        return route_base + CRIAR_PAGE;
+	    }
 
-    public String deletar() {
-        FacesContext context = FacesContext.getCurrentInstance();
+		if(controller.remover(getVo().getId())) {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Deletado com sucesso!", null));
+	    } else {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel deletar.", null));
+            return route_base + DELETAR_PAGE;
+		}
 
-        if(getTag().getId() == -1) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Tag nao pode ser vazio!", null));
-            return routeBase + "criar";
-        }
+		setVo(new Tag());
 
-        if(controller.remover(getTag().getId())) {
-            context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Tag deletado com sucesso!", null));
-        } else {
-            context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Tag nao foi deletado.", null));
-            return routeBase + "deletar";
-        }
-
-        setTag(new Tag());
-
-        return listar();
-    }
-
-    /**
-     * @return the tag
-     */
-    public Tag getTag() {
-        return tag;
-    }
-
-    /**
-     * @param tag the tag to set
-     */
-    public void setTag(Tag tag) {
-        this.tag = tag;
-    }
-
-    /**
-     * @return the tagLista
-     */
-    public List<Tag> getTagLista() {
-        return tagLista;
-    }
-
-    /**
-     * @param tagLista the tagLista to set
-     */
-    public void setTagLista(List<Tag> tagLista) {
-        this.tagLista = tagLista;
-    }
-
+	    return listar();
+	}
 }

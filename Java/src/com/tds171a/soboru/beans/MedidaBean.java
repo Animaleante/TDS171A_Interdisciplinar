@@ -3,9 +3,6 @@
  */
 package com.tds171a.soboru.beans;
 
-import java.io.Serializable;
-import java.util.List;
-
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -20,129 +17,84 @@ import com.tds171a.soboru.vos.Medida;
  * @author Sony
  *
  */
-public class MedidaBean implements Serializable {
+public class MedidaBean extends BeanBase<Medida> {
 
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = 8410408634179869866L;
 
-	private String routeBase = "/medida/";
-
-	private MedidaController controller;
-	private Medida medida;
-	private List<Medida> medidaLista;
-
 	/**
 	 *
 	 */
 	public MedidaBean() {
+		route_base = "/medida/";
 		controller = new MedidaController();
-		setMedida(new Medida());
+		setVo(new Medida());
 	}
 
-	public String listar() {
-		setMedidaLista(controller.listar());
-
-		return routeBase + "index";
-	}
+	@Override
 
 	public String incluir() {
 	    FacesContext context = FacesContext.getCurrentInstance();
-	    System.out.println("passou incluir medida.");
-	    if(getMedida().getNome().isEmpty()) {
+
+	    if(getVo().getNome().isEmpty()) {
 	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
-	        return routeBase + "criar";
+	        return route_base + CRIAR_PAGE;
 	    }
 
-	    if(controller.incluir(getMedida())) {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Medida cadastrado com sucesso!", null));
+	    if(controller.incluir(getVo())) {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso!", null));
 	    } else {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Medida nao foi cadastrado!", null));
-            return routeBase + "criar";
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel fazer o cadastro!", null));
+            return route_base + CRIAR_PAGE;
 	    }
 
-	    setMedida(new Medida());
+	    setVo(new Medida());
 
 	    return listar();
 	}
 
-	public String editar(Medida medida) {
-		setMedida(medida);
-		return routeBase + "editar";
-	}
+	@Override
 
 	public String editar() {
 	    FacesContext context = FacesContext.getCurrentInstance();
 
-	    if(getMedida().getNome().isEmpty()) {
+	    if(getVo().getNome().isEmpty()) {
 	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
-	        return routeBase + "criar";
+	        return route_base + CRIAR_PAGE;
 	    }
 
-		if(controller.atualizar(getMedida())) {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Medida atualizado com sucesso!", null));
+		if(controller.atualizar(getVo())) {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualizada com sucesso!", null));
 	    } else {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Medida nao foi atualizado.", null));
-            return routeBase + "editar";
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel fazer a atualizacao.", null));
+            return route_base + EDITAR_PAGE;
 		}
 
-		setMedida(new Medida());
+		setVo(new Medida());
 
 	    return listar();
 	}
 
-	public String deletar(Medida medida) {
-		setMedida(medida);
-		return routeBase + "deletar";
-	}
-
+	@Override
 	public String deletar() {
 	    FacesContext context = FacesContext.getCurrentInstance();
 
-	    if(getMedida().getId() == -1) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Medida nao pode ser vazio!", null));
-	        return routeBase + "criar";
+	    if(getVo().getId() == -1) {
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Item nao pode ser vazio!", null));
+	        return route_base + CRIAR_PAGE;
 	    }
 
-		if(controller.remover(getMedida().getId())) {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Medida deletado com sucesso!", null));
+		if(controller.remover(getVo().getId())) {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Deletado com sucesso!", null));
 	    } else {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Medida nao foi deletado.", null));
-            return routeBase + "deletar";
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel deletar.", null));
+            return route_base + DELETAR_PAGE;
 		}
 
-		setMedida(new Medida());
+		setVo(new Medida());
 
 	    return listar();
 	}
-
-	/**
-	 * @return the medida
-	 */
-	public Medida getMedida() {
-		return medida;
-	}
-
-	/**
-	 * @param medida the medida to set
-	 */
-	public void setMedida(Medida medida) {
-		this.medida = medida;
-	}
-
-	/**
-	 * @return the medidaLista
-	 */
-	public List<Medida> getMedidaLista() {
-		return medidaLista;
-	}
-
-	/**
-	 * @param medidaLista the medidaLista to set
-	 */
-	public void setMedidaLista(List<Medida> medidaLista) {
-		this.medidaLista = medidaLista;
-	}
-
 }

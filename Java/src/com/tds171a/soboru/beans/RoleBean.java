@@ -1,5 +1,5 @@
 /**
- *
+ * 
  */
 package com.tds171a.soboru.beans;
 
@@ -8,30 +8,26 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
-import com.tds171a.soboru.controllers.CategoriaController;
-import com.tds171a.soboru.vos.Categoria;
+import com.tds171a.soboru.controllers.RoleController;
+import com.tds171a.soboru.vos.Role;
 
-@Named("categoriaBean")
+@Named("roleBean")
 @SessionScoped
 /**
- * @author Sony
+ * @author Diogo
  *
  */
-public class CategoriaBean extends BeanBase<Categoria> {
+public class RoleBean extends BeanBase<Role> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8346498977844526384L;
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 8410408634179869866L;
-
-    /**
-     *
-     */
-    public CategoriaBean() {
-    	route_base = "/categoria/";
-        controller = new CategoriaController();
-        setVo(new Categoria());
-    }
+	public RoleBean() {
+		route_base = "/roles/";
+		controller = new RoleController();
+		setVo(new Role());
+	}
 
 	@Override
 
@@ -50,7 +46,7 @@ public class CategoriaBean extends BeanBase<Categoria> {
             return route_base + CRIAR_PAGE;
 	    }
 
-	    setVo(new Categoria());
+	    setVo(new Role());
 
 	    return listar();
 	}
@@ -72,7 +68,7 @@ public class CategoriaBean extends BeanBase<Categoria> {
             return route_base + EDITAR_PAGE;
 		}
 
-		setVo(new Categoria());
+		setVo(new Role());
 
 	    return listar();
 	}
@@ -93,7 +89,7 @@ public class CategoriaBean extends BeanBase<Categoria> {
             return route_base + DELETAR_PAGE;
 		}
 
-		setVo(new Categoria());
+		setVo(new Role());
 
 	    return listar();
 	}

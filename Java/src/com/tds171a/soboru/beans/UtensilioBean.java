@@ -3,9 +3,6 @@
  */
 package com.tds171a.soboru.beans;
 
-import java.io.Serializable;
-import java.util.List;
-
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -20,130 +17,84 @@ import com.tds171a.soboru.vos.Utensilio;
  * @author Sony
  *
  */
-public class UtensilioBean implements Serializable {
+public class UtensilioBean extends BeanBase<Utensilio> {
 
     /**
      *
      */
     private static final long serialVersionUID = 1526925242084747984L;
 
-
-    private String routeBase = "/utensilio/";
-
-    private UtensilioController controller;
-    private Utensilio utensilio;
-    private List<Utensilio> utensilioLista;
-
     /**
      *
      */
     public UtensilioBean() {
+        route_base = "/utensilio/";
         controller = new UtensilioController();
-        setUtensilio(new Utensilio());
+        setVo(new Utensilio());
     }
 
-    public String listar() {
-        setUtensilioLista(controller.listar());
+	@Override
 
-        return routeBase + "index";
-    }
+	public String incluir() {
+	    FacesContext context = FacesContext.getCurrentInstance();
 
-    public String incluir() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        System.out.println("Passou incluir utensilio");
-        if(getUtensilio().getNome().isEmpty()) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
-            return routeBase + "criar";
-        }
+	    if(getVo().getNome().isEmpty()) {
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
+	        return route_base + CRIAR_PAGE;
+	    }
 
-        if(controller.incluir(getUtensilio())) {
-            context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Utensilio cadastrado com sucesso!", null));
-        } else {
-            context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Utensilio nao foi cadastrado!", null));
-            return routeBase + "criar";
-        }
+	    if(controller.incluir(getVo())) {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso!", null));
+	    } else {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel fazer o cadastro!", null));
+            return route_base + CRIAR_PAGE;
+	    }
 
-        setUtensilio(new Utensilio());
+	    setVo(new Utensilio());
 
-        return listar();
-    }
+	    return listar();
+	}
 
-    public String editar(Utensilio utensilio) {
-        setUtensilio(utensilio);
-        return routeBase + "editar";
-    }
+	@Override
 
-    public String editar() {
-        FacesContext context = FacesContext.getCurrentInstance();
+	public String editar() {
+	    FacesContext context = FacesContext.getCurrentInstance();
 
-        if(getUtensilio().getNome().isEmpty()) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
-            return routeBase + "editar";
-        }
+	    if(getVo().getNome().isEmpty()) {
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
+	        return route_base + CRIAR_PAGE;
+	    }
 
-        if(controller.atualizar(getUtensilio())) {
-            context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Utensilio atualizado com sucesso!", null));
-        } else {
-            context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Utensilio nao foi atualizado.", null));
-            return routeBase + "editar";
-        }
+		if(controller.atualizar(getVo())) {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualizada com sucesso!", null));
+	    } else {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel fazer a atualizacao.", null));
+            return route_base + EDITAR_PAGE;
+		}
 
-        setUtensilio(new Utensilio());
+		setVo(new Utensilio());
 
-        return listar();
-    }
+	    return listar();
+	}
 
-    public String deletar(Utensilio utensilio) {
-        setUtensilio(utensilio);
-        return routeBase + "deletar";
-    }
+	@Override
+	public String deletar() {
+	    FacesContext context = FacesContext.getCurrentInstance();
 
-    public String deletar() {
-        FacesContext context = FacesContext.getCurrentInstance();
+	    if(getVo().getId() == -1) {
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Item nao pode ser vazio!", null));
+	        return route_base + CRIAR_PAGE;
+	    }
 
-        if(getUtensilio().getId() == -1) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Utensilio nao pode ser vazio!", null));
-            return routeBase + "criar";
-        }
+		if(controller.remover(getVo().getId())) {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Deletado com sucesso!", null));
+	    } else {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel deletar.", null));
+            return route_base + DELETAR_PAGE;
+		}
 
-        if(controller.remover(getUtensilio().getId())) {
-            context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Utensilio deletado com sucesso!", null));
-        } else {
-            context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Utensilio nao foi deletado.", null));
-            return routeBase + "deletar";
-        }
+		setVo(new Utensilio());
 
-        setUtensilio(new Utensilio());
-
-        return listar();
-    }
-
-    /**
-     * @return the utensilio
-     */
-    public Utensilio getUtensilio() {
-        return utensilio;
-    }
-
-    /**
-     * @param utensilio the utensilio to set
-     */
-    public void setUtensilio(Utensilio utensilio) {
-        this.utensilio = utensilio;
-    }
-
-    /**
-     * @return the UtensilioLista
-     */
-    public List<Utensilio> getUtensilioLista() {
-        return utensilioLista;
-    }
-
-    /**
-     * @param utensilioLista the utensilioLista to set
-     */
-    public void setUtensilioLista(List<Utensilio> utensilioLista) {
-        this.utensilioLista = utensilioLista;
-    }
-
+	    return listar();
+	}
 }
