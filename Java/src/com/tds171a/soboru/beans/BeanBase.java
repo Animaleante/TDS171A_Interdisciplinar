@@ -6,7 +6,11 @@ package com.tds171a.soboru.beans;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import com.tds171a.soboru.controllers.ControllerBase;
+import com.tds171a.soboru.vos.Receita;
 
 /**
  * @author Diogo
@@ -35,7 +39,24 @@ public abstract class BeanBase<T> implements Serializable {
 		return route_base + INDEX_PAGE;
 	}
 
-	public abstract String incluir();
+//	public abstract String incluir();
+	public String incluir() {
+		FacesContext context = FacesContext.getCurrentInstance();
+
+	    if(!validarDados())
+	    	return route_base + CRIAR_PAGE;
+
+	    if(controller.incluir(getVo())) {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso!", null));
+	    } else {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel fazer o cadastro!", null));
+            return route_base + CRIAR_PAGE;
+	    }
+
+	    limparVo();
+
+	    return listar();
+	}
 
 	public String exibir(T vo) {
 		setVo(vo);
@@ -47,7 +68,24 @@ public abstract class BeanBase<T> implements Serializable {
 		return route_base + EDITAR_PAGE;
 	}
 
-	public abstract String editar();
+//	public abstract String editar();
+	public String editar() {
+		FacesContext context = FacesContext.getCurrentInstance();
+
+	    if(!validarDados())
+	    	return route_base + EDITAR_PAGE;
+
+	    if(controller.atualizar(getVo())) {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualizada com sucesso!", null));
+	    } else {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel fazer a atualizacao.", null));
+            return route_base + EDITAR_PAGE;
+		}
+
+	    limparVo();
+
+	    return listar();
+	}
 
 	public String deletar(T vo) {
 		setVo(vo);
@@ -55,6 +93,12 @@ public abstract class BeanBase<T> implements Serializable {
 	}
 
 	public abstract String deletar();
+	
+	public boolean validarDados() {
+		return true;
+	}
+	
+	public abstract void limparVo();
 
 	/**
 	 * @return the vo

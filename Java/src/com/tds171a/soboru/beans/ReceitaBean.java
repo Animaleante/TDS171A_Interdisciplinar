@@ -36,49 +36,8 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	@Override
 	public String listar() {
 		System.out.println("Esta logado: " + (SessionContext.getInstance().getUsuarioLogado() != null));
+		// TODO - Se usuario nao esta logado, redirecionar para pagina de login
 		return super.listar();
-	}
-
-	@Override
-	public String incluir() {
-	    FacesContext context = FacesContext.getCurrentInstance();
-
-	    if(getVo().getNome().isEmpty()) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
-	        return route_base + CRIAR_PAGE;
-	    }
-
-	    if(controller.incluir(getVo())) {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso!", null));
-	    } else {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel fazer o cadastro!", null));
-            return route_base + CRIAR_PAGE;
-	    }
-
-	    setVo(new Receita());
-
-	    return listar();
-	}
-
-	@Override
-	public String editar() {
-	    FacesContext context = FacesContext.getCurrentInstance();
-
-	    if(getVo().getNome().isEmpty()) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
-	        return route_base + CRIAR_PAGE;
-	    }
-
-		if(controller.atualizar(getVo())) {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualizada com sucesso!", null));
-	    } else {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel fazer a atualizacao.", null));
-            return route_base + EDITAR_PAGE;
-		}
-
-		setVo(new Receita());
-
-	    return listar();
 	}
 
 	@Override
@@ -101,5 +60,21 @@ public class ReceitaBean  extends BeanBase<Receita> {
 
 	    return listar();
 	}
-
+	
+	@Override
+	public boolean validarDados() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		
+		if(getVo().getNome().isEmpty()) {
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
+	        return false;
+	    }
+		
+		return true;
+	}
+	
+	@Override
+	public void limparVo() {
+		setVo(new Receita());
+	}
 }
