@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/templates/_layout.xhtml">
+	<ui:define name="content">
+		<main class="main" role="main">
+		    <div class="wrap clearfix">
+		        <div class="row">
+	                <section class="content center full-width">
+	                    <div class="modal container">
+	                        <h3>Registrar</h3>
+	
+	                        <h2>Registro completado com sucesso</h2>
+
+	                        <h:form>
+	                        	<h:commandLink action="/login/index" value="Faça o login!" />
+	                        </h:form>
+	                    </div>
+	                </section>
+	            </div>
+		    </div>
+		</main>
+	</ui:define>
+</ui:composition>

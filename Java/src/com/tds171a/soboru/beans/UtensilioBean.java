@@ -28,7 +28,7 @@ public class UtensilioBean extends BeanBase<Utensilio> {
      *
      */
     public UtensilioBean() {
-        route_base = "/utensilio/";
+        route_base = "/cadastro/utensilio/";
         controller = new UtensilioController();
         setVo(new Utensilio());
     }

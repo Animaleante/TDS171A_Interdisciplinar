@@ -28,7 +28,7 @@ public class CategoriaBean extends BeanBase<Categoria> {
      *
      */
     public CategoriaBean() {
-    	route_base = "/categoria/";
+    	route_base = "/cadastro/categoria/";
         controller = new CategoriaController();
         setVo(new Categoria());
     }

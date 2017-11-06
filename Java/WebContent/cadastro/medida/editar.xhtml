@@ -1,0 +1,36 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+	<h:head>
+		<title>Editar</title>
+	</h:head> 
+	<body> 
+		<h:form>
+			<h:messages globalOnly="true" errorClass="error"/>
+		
+			<h:outputText value="Nome:" />
+			<h:inputText id="nome"  value="#{medidaBean.vo.nome}" size="80"
+			             required="true" 
+			             validatorMessage="Nome deve ter no máximo 80 caracteres"
+			             requiredMessage="Nome é obrigatório">
+			    <f:validateLength minimum="1" maximum="80" />
+			</h:inputText>
+			<h:inputText id="Abreviacao"  value="#{medidaBean.vo.abreviacao}" size="80"
+			             required="true" 
+			             validatorMessage="Abreviação deve ter no máximo 80 caracteres"
+			             requiredMessage="Abreviação é obrigatório">
+			    <f:validateLength minimum="1" maximum="80" />
+			</h:inputText>
+			
+			<h:message for="nome" errorClass="error"/>
+			
+			<hr/>
+			
+			<h:commandButton immediate="true" action="#{medidaBean.listar()}" value="Voltar" />
+			<h:commandButton action="#{medidaBean.editar()}" value="Salvar" />
+		</h:form>
+	</body> 
+</html>

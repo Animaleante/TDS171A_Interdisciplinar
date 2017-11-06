@@ -28,7 +28,7 @@ public class MedidaBean extends BeanBase<Medida> {
 	 *
 	 */
 	public MedidaBean() {
-		route_base = "/medida/";
+		route_base = "/cadastro/medida/";
 		controller = new MedidaController();
 		setVo(new Medida());
 	}

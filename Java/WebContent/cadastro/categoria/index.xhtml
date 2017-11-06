@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	template="/templates/_layout.xhtml">
+	<ui:define name="content">
+		<main class="main" role="main">
+		    <div class="wrap clearfix">
+		        <nav class="breadcrumbs">
+		            <ul>
+		                <li><a href="/" title="Home">Home</a></li>
+		                <li><a href="#">Cadastro</a></li>
+		                <li>Categorias</li>
+		            </ul>
+		        </nav>
+		
+		        <div class="row">
+		            <header class="s-title">
+		                <h1>Categorias</h1>
+		            </header>
+		
+		            <section class="content full-width">
+		                <div class="container">
+							<h:form>
+								<h:messages globalOnly="true" errorClass="error"/>
+							</h:form>
+							
+							<c:choose>
+								<c:when test="${not empty categoriaBean.lista}">
+									<table class="table table-stiped table-hover">
+							            <thead>
+							                <tr>
+							                    <th>Nome</th>
+							                    <th>Ações</th>
+							                </tr>
+							            </thead>
+							            <tbody>
+							            	<c:forEach items="#{categoriaBean.lista}" var="categoria">
+							                    <tr>
+							                        <td>
+							                            #{categoria.nome}
+							                        </td>
+							                        <td>
+														<h:form>
+<!-- 															<h:commandLink action="#{categoriaBean.exibir(categoria)}" value="Detalhes"></h:commandLink> | -->
+															<h:commandLink action="#{categoriaBean.editar(categoria)}" value="Editar"></h:commandLink> |
+															<h:commandLink action="#{categoriaBean.deletar(categoria)}" value="Deletar"></h:commandLink>
+														</h:form>
+							                        </td>
+							                    </tr>
+							                </c:forEach>
+							            </tbody>
+							        </table>
+						        </c:when>
+						        <c:otherwise>
+						        	<p>A lista está vazia.</p>
+						        </c:otherwise>
+					        </c:choose>
+								
+							<h:form>
+								<h:commandButton action="/cadastro/categoria/criar" immediate="true" value="Criar novo" />
+							</h:form>
+		                </div>
+		            </section>
+		        </div>
+		    </div>
+		</main>
+	</ui:define>
+</ui:composition>

@@ -28,7 +28,7 @@ public class IngredienteBean extends BeanBase<Ingrediente> {
 	 *
 	 */
 	public IngredienteBean() {
-		route_base = "/ingrediente/";
+		route_base = "/cadastro/ingrediente/";
 		controller = new IngredienteController();
 		setVo(new Ingrediente());
 	}

@@ -28,13 +28,18 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	 *
 	 */
 	public ReceitaBean() {
-		route_base = "/receitas/";
+		route_base = "/cadastro/receita/";
 		controller = new ReceitaController();
 		setVo(new Receita());
 	}
+	
+	@Override
+	public String listar() {
+		System.out.println("Esta logado: " + (SessionContext.getInstance().getUsuarioLogado() != null));
+		return super.listar();
+	}
 
 	@Override
-
 	public String incluir() {
 	    FacesContext context = FacesContext.getCurrentInstance();
 
@@ -56,7 +61,6 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	}
 
 	@Override
-
 	public String editar() {
 	    FacesContext context = FacesContext.getCurrentInstance();
 

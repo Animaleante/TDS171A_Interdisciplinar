@@ -28,7 +28,7 @@ public class UsuarioBean extends BeanBase<Usuario> {
 	 * 
 	 */
 	public UsuarioBean() {
-		route_base = "/usuarios/";
+		route_base = "/cadastro/usuario/";
 		controller = new UsuarioController();
 		setVo(new Usuario());
 	}

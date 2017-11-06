@@ -18,13 +18,17 @@ import com.tds171a.soboru.vos.Role;
  *
  */
 public class RoleBean extends BeanBase<Role> {
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8346498977844526384L;
 
+	/**
+	 * 
+	 */
 	public RoleBean() {
-		route_base = "/roles/";
+		route_base = "/cadastro/role/";
 		controller = new RoleController();
 		setVo(new Role());
 	}

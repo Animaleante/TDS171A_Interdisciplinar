@@ -28,7 +28,7 @@ public class TagBean extends BeanBase<Tag> {
      *
      */
     public TagBean() {
-    	route_base = "/tags/";
+    	route_base = "/cadastro/tag/";
         controller = new TagController();
         setVo(new Tag());
     }

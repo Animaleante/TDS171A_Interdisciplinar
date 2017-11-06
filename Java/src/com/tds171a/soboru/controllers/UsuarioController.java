@@ -13,4 +13,8 @@ public class UsuarioController extends ControllerBase<Usuario> {
 	public UsuarioController() {
 		model = new UsuarioModel();
 	}
+
+	public Usuario loginUsuario(String email, String senha) {
+		return ((UsuarioModel)model).loginUsuario(email, senha);
+	}
 }

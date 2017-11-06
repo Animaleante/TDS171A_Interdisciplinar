@@ -18,4 +18,8 @@ public class UsuarioModel extends ModelBase<Usuario> {
     public UsuarioModel() {
         dao = new UsuarioDAO();
     }
+
+	public Usuario loginUsuario(String email, String senha) {
+		return ((UsuarioDAO)dao).loginUsuario(email, senha);
+	}
 }

@@ -20,30 +20,29 @@
 				                <li id="nav_cadastro">
 				                    <a href="#" title="Cadastro"><span>Cadastro</span></a>
 				                    <ul>
+				                        <li role="presentation" id="nav_categorias">
+				                    		<h:commandLink action="#{categoriaBean.listar()}" value="Categorias" />
+				                        </li>
 				                        <li role="presentation" id="nav_ingredientes">
-<!-- 				                    		<a href="#" title="Ingredientes"><span>Ingredientes</span></a> -->
 				                    		<h:commandLink action="#{ingredienteBean.listar()}" value="Ingredientes" />
 				                        </li>
-				                        <li role="presentation" id="nav_utensilios">
-				                    		<a href="#" title="Utensilios"><span>Utensilios</span></a>
-				                        </li>
-				                        <li role="presentation" id="nav_tags">
-				                    		<a href="#" title="Categorias"><span>Categorias</span></a>
-				                        </li>
-				                        <li role="presentation" id="nav_tags">
-				                    		<a href="#" title="Medidas"><span>Medidas</span></a>
-				                        </li>
-				                        <li role="presentation" id="nav_tags">
-				                    		<a href="#" title="Tags"><span>Tags</span></a>
+				                        <li role="presentation" id="nav_medidas">
+				                    		<h:commandLink action="#{medidaBean.listar()}" value="Medidas" />
 				                        </li>
 				                        <li role="presentation" id="nav_receitas">
 				                    		<h:commandLink action="#{receitaBean.listar()}" value="Receitas" />
 				                        </li>
-				                        <li role="presentation" id="nav_tags">
-				                    		<a href="#" title="Sexos"><span>Sexos</span></a>
+				                        <li role="presentation" id="nav_utensilios">
+				                    		<h:commandLink action="#{utensilioBean.listar()}" value="Utensilios" />
 				                        </li>
 				                        <li role="presentation" id="nav_tags">
-				                    		<a href="#" title="Usuarios"><span>Usuarios</span></a>
+				                    		<h:commandLink action="#{tagBean.listar()}" value="Tag" />
+				                        </li>
+				                        <li role="presentation" id="nav_roles">
+				                    		<h:commandLink action="#{roleBean.listar()}" value="Roles" />
+				                        </li>
+				                        <li role="presentation" id="nav_usuarios">
+				                    		<h:commandLink action="#{usuarioBean.listar()}" value="Usuarios" />
 				                        </li>
 				
 				                    </ul>
@@ -59,17 +58,17 @@
 				            <ul>
 				                <li class="light">
 				                    <a href="#" title="Search for recipes">
-				                        <i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span>
+				                        <i class="icon icon-themeenergy_search"></i> <span>Procurar receitas</span>
 				                    </a>
 				                </li>
 				                <li class="medium">
 				                    <a href="#" title="My account">
-				                        <i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span>
+				                        <i class="icon icon-themeenergy_chef-hat"></i> <span>Minha conta</span>
 				                    </a>
 				                </li>
 				                <li class="dark">
 				                    <a href="#" title="Submit a recipe">
-				                        <i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span>
+				                        <i class="icon icon-themeenergy_fork-spoon"></i> <span>Postar receita</span>
 				                    </a>
 				                </li>
 				            </ul>

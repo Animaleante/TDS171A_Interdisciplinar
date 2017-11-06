@@ -1,0 +1,30 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+	<h:head>
+		<title>Criar</title>
+	</h:head> 
+	<body> 
+		<h:form>
+			<h:messages globalOnly="true" errorClass="error"/>
+		
+			<h:outputText value="Nome:" />
+			<h:inputText id="nome"  value="#{utensilioBean.vo.nome}" size="80"
+			             required="true" 
+			             validatorMessage="Nome deve ter no máximo 80 caracteres"
+			             requiredMessage="Nome é obrigatório">
+			    <f:validateLength minimum="1" maximum="80" />
+			</h:inputText>
+			
+			<h:message for="nome" errorClass="error"/>
+			
+			<hr/>
+			
+			<h:commandButton immediate="true" action="#{utensilioBean.listar()}" value="Voltar" />
+			<h:commandButton action="#{utensilioBean.incluir()}" value="Cadastrar" />
+		</h:form>
+	</body> 
+</html>
