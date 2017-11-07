@@ -4146,9 +4146,3 @@ div.uploader.disabled.active span.action {
         margin: 0 0 15px;
     }
 }
-
-/* ------------------------------------------------------------- */
-
-.submit_recipe .f-row.ingredient:first-of-type .remove {
-    display: none;
-}

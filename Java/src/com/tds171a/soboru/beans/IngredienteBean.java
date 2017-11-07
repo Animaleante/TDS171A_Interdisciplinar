@@ -28,7 +28,6 @@ public class IngredienteBean extends BeanBase<Ingrediente> {
 	 *
 	 */
 	public IngredienteBean() {
-		System.out.println("construtor");
 		route_base = "/cadastro/ingrediente/";
 		controller = new IngredienteController();
 		setVo(new Ingrediente());
@@ -69,9 +68,6 @@ public class IngredienteBean extends BeanBase<Ingrediente> {
 
 	@Override
 	public void limparVo() {
-		System.out.println("limpar vo");
-		System.out.println(getVo().getNome());
 		setVo(new Ingrediente());
-		System.out.println(getVo().getNome());
 	}
 }

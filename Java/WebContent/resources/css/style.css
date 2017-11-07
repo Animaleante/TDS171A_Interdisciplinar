@@ -1,0 +1,12 @@
+.submit_recipe .f-row.ingredient:first-of-type .remove {
+    display: none;
+}
+
+.f-row.submit input[type="submit"] {
+	float: right;
+}
+
+.f-row.submit a {
+	padding: 10px 20px 0 20px !important; 
+	float: right;
+}
