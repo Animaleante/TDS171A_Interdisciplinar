@@ -210,6 +210,7 @@ public class UsuarioDAO implements IDAO<Usuario> {
 	}
 
 	public Usuario loginUsuario(String email, String senha) {
+		System.out.println(email + ":" + senha);
 		Connection connection = null;
 		try {
 			connection = Utils.createConnection();
@@ -222,6 +223,7 @@ public class UsuarioDAO implements IDAO<Usuario> {
 			ResultSet rs = sttm.executeQuery();
 			Usuario usuario = null;
 			while(rs.next()) {
+				System.out.println("Found user");
 				usuario = new Usuario();
 				usuario.setId(rs.getInt("id"));
 				usuario.setNome(rs.getString("nome"));

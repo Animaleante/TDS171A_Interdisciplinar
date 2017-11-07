@@ -3,6 +3,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough" 
 	template="/templates/_layout.xhtml">
 	<ui:define name="content">
 		<main class="main" role="main">
@@ -13,22 +14,24 @@
 	                        <h3>Login</h3>
 	                        
 	                        <h:form styleClass="form-horizontal">
+								<h:messages globalOnly="true" errorClass="error"/>
+									
 	                        	<div class="f-row">
-	                        		<h:inputText id="email"  value="#{sessaoBean.usario.email}" size="80"
-									             required="true" 
+	                        		<h:inputText id="email"  value="#{loginBean.email}" size="80"
+									             required="true" a:placeholder="E-mail"
 									             requiredMessage="E-mail é obrigatório">
 									</h:inputText>
 	                        	</div>
 	                        	
 	                        	<div class="f-row">
-	                        		<h:inputText id="senha"  value="#{sessaoBean.usario.senha}" size="80"
-									             required="true" 
+	                        		<h:inputText id="senha"  value="#{loginBean.senha}" size="80"
+									             required="true" a:placeholder="Senha" 
 									             requiredMessage="Senha é obrigatório">
 									</h:inputText>
 	                        	</div>
 	                        	
 	                            <div class="f-row bwrap">
-									<h:commandButton action="#{sessaoBean.login()}" value="Log In" />
+									<h:commandButton action="#{loginBean.login()}" value="Log In" />
 	                            </div>
 	                        </h:form>
 	

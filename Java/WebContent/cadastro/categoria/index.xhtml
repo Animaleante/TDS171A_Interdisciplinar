@@ -1,4 +1,5 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -43,7 +44,6 @@
 							                        </td>
 							                        <td>
 														<h:form>
-<!-- 															<h:commandLink action="#{categoriaBean.exibir(categoria)}" value="Detalhes"></h:commandLink> | -->
 															<h:commandLink action="#{categoriaBean.editar(categoria)}" value="Editar"></h:commandLink> |
 															<h:commandLink action="#{categoriaBean.deletar(categoria)}" value="Deletar"></h:commandLink>
 														</h:form>
@@ -58,9 +58,11 @@
 						        </c:otherwise>
 					        </c:choose>
 								
-							<h:form>
-								<h:commandButton action="/cadastro/categoria/criar" immediate="true" value="Criar novo" />
-							</h:form>
+							<div class="f-row">
+								<h:form>
+									<h:commandButton action="#{categoriaBean.criar()}" immediate="true" value="Criar novo" />
+								</h:form>
+							</div>
 		                </div>
 		            </section>
 		        </div>
