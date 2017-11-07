@@ -56,7 +56,7 @@ public class ReceitaBean  extends BeanBase<Receita> {
             return route_base + DELETAR_PAGE;
 		}
 
-		setVo(new Receita());
+		limparVo();
 
 	    return listar();
 	}

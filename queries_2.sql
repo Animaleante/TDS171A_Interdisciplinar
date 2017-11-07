@@ -106,12 +106,13 @@ CREATE TABLE receitas (
 	id_usuario NUMBER(11) NOT NULL,
 	porcao NUMBER(11) NOT NULL,
 	tempo_preparo DECIMAL(5,2) NOT NULL,
-	modo_preparo TEXT NOT NULL,
+	modo_preparo CLOB NOT NULL,
 	img_path VARCHAR2(80) NOT NULL,
 	pontuacao_media DECIMAL(5,2) NOT NULL,
 	views NUMBER(11) NOT NULL,
 	favs NUMBER(11) NOT NULL,
 	slug VARCHAR2(80) NOT NULL,
+	aprovado NUMBER(1) NOT NULL,
 	-- created_at DATE NOT NULL,
 	-- updated_at DATE NOT NULL,
 	-- deleted_at DATE NULL,
@@ -245,7 +246,7 @@ CREATE TABLE comentarios (
 	id NUMBER(11) NOT NULL,
 	id_receita NUMBER(11) NOT NULL,
 	id_usuario NUMBER(11) NOT NULL,
-	body TEXT NOT NULL,
+	body CLOB NOT NULL,
 	-- created_at DATE NOT NULL,
 	-- updated_at DATE NOT NULL,
 	-- deleted_at DATE NULL,
@@ -298,7 +299,7 @@ CREATE TABLE receitas_tags (
 	-- deleted_at DATE NULL,
 	CONSTRAINT rec_tag_pk PRIMARY KEY (id_receita, id_tag),
 	CONSTRAINT rec_tags_rec_fk FOREIGN KEY (id_receita) REFERENCES receitas(id),
-	CONSTRAINT rec_tags_tag_fk FOREIGN KEY (id_utensilio) REFERENCES tags(id)
+	CONSTRAINT rec_tags_tag_fk FOREIGN KEY (id_tag) REFERENCES tags(id)
 );
 
 CREATE SEQUENCE receita_tag_seq

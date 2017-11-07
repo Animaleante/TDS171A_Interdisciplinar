@@ -28,53 +28,10 @@ public class IngredienteBean extends BeanBase<Ingrediente> {
 	 *
 	 */
 	public IngredienteBean() {
+		System.out.println("construtor");
 		route_base = "/cadastro/ingrediente/";
 		controller = new IngredienteController();
 		setVo(new Ingrediente());
-	}
-
-	@Override
-
-	public String incluir() {
-	    FacesContext context = FacesContext.getCurrentInstance();
-
-	    if(getVo().getNome().isEmpty()) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
-	        return route_base + CRIAR_PAGE;
-	    }
-
-	    if(controller.incluir(getVo())) {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso!", null));
-	    } else {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel fazer o cadastro!", null));
-            return route_base + CRIAR_PAGE;
-	    }
-
-	    setVo(new Ingrediente());
-
-	    return listar();
-	}
-
-	@Override
-
-	public String editar() {
-	    FacesContext context = FacesContext.getCurrentInstance();
-
-	    if(getVo().getNome().isEmpty()) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
-	        return route_base + CRIAR_PAGE;
-	    }
-
-		if(controller.atualizar(getVo())) {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualizada com sucesso!", null));
-	    } else {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel fazer a atualizacao.", null));
-            return route_base + EDITAR_PAGE;
-		}
-
-		setVo(new Ingrediente());
-
-	    return listar();
 	}
 
 	@Override
@@ -93,8 +50,28 @@ public class IngredienteBean extends BeanBase<Ingrediente> {
             return route_base + DELETAR_PAGE;
 		}
 
-		setVo(new Ingrediente());
+		limparVo();
 
 	    return listar();
+	}
+	
+	@Override
+	public boolean validarDados() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		
+		if(getVo().getNome().isEmpty()) {
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
+	        return false;
+	    }
+		
+		return true;
+	}
+
+	@Override
+	public void limparVo() {
+		System.out.println("limpar vo");
+		System.out.println(getVo().getNome());
+		setVo(new Ingrediente());
+		System.out.println(getVo().getNome());
 	}
 }

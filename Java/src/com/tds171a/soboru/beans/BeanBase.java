@@ -10,7 +10,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import com.tds171a.soboru.controllers.ControllerBase;
-import com.tds171a.soboru.vos.Receita;
 
 /**
  * @author Diogo
@@ -34,9 +33,16 @@ public abstract class BeanBase<T> implements Serializable {
 	private List<T> lista;
 	
 	public String listar() {
+	    limparVo();
+	    
 		setLista(controller.listar());
 
 		return route_base + INDEX_PAGE;
+	}
+
+	public String criar() {
+		limparVo();
+	    return route_base + CRIAR_PAGE;
 	}
 
 //	public abstract String incluir();

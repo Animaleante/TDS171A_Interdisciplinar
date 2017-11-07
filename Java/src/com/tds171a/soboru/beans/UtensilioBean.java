@@ -34,50 +34,6 @@ public class UtensilioBean extends BeanBase<Utensilio> {
     }
 
 	@Override
-
-	public String incluir() {
-	    FacesContext context = FacesContext.getCurrentInstance();
-
-	    if(getVo().getNome().isEmpty()) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
-	        return route_base + CRIAR_PAGE;
-	    }
-
-	    if(controller.incluir(getVo())) {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso!", null));
-	    } else {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel fazer o cadastro!", null));
-            return route_base + CRIAR_PAGE;
-	    }
-
-	    setVo(new Utensilio());
-
-	    return listar();
-	}
-
-	@Override
-
-	public String editar() {
-	    FacesContext context = FacesContext.getCurrentInstance();
-
-	    if(getVo().getNome().isEmpty()) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
-	        return route_base + CRIAR_PAGE;
-	    }
-
-		if(controller.atualizar(getVo())) {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualizada com sucesso!", null));
-	    } else {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel fazer a atualizacao.", null));
-            return route_base + EDITAR_PAGE;
-		}
-
-		setVo(new Utensilio());
-
-	    return listar();
-	}
-
-	@Override
 	public String deletar() {
 	    FacesContext context = FacesContext.getCurrentInstance();
 
@@ -93,8 +49,25 @@ public class UtensilioBean extends BeanBase<Utensilio> {
             return route_base + DELETAR_PAGE;
 		}
 
-		setVo(new Utensilio());
+		limparVo();
 
 	    return listar();
+	}
+	
+	@Override
+	public boolean validarDados() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		
+		if(getVo().getNome().isEmpty()) {
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
+	        return false;
+	    }
+		
+		return true;
+	}
+
+	@Override
+	public void limparVo() {
+		setVo(new Utensilio());
 	}
 }
