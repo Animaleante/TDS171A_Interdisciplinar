@@ -33,14 +33,14 @@ public class ReceitaBean  extends BeanBase<Receita> {
 		setVo(new Receita());
 	}
 	
-	@Override
+	/*@Override
 	public String listar() {
 		if(!SessionContext.getInstance().isLogado()) {
 			return "/login/index";
 		}
 		
 		return super.listar();
-	}
+	}*/
 
 	@Override
 	public String deletar() {
