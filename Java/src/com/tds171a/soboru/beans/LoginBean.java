@@ -51,6 +51,14 @@ public class LoginBean implements Serializable {
 	 * 
 	 * @return
 	 */
+	public String index() {
+		return route_base + "index";
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public String login() {
 		Usuario usuario = controller.loginUsuario(getEmail(), getSenha());
 		

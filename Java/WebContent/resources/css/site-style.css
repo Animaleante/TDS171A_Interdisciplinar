@@ -3037,7 +3037,7 @@ div.uploader.disabled.active span.action {
 }
 
 /*CONTACT PAGE*/
-/*.modal {
+.modal-soboru {
     display: inline-block;
     width: 48%;
     margin: 25px auto;
@@ -3046,31 +3046,31 @@ div.uploader.disabled.active span.action {
     float: none;
 }
 
-.modal h3 {
+.modal-soboru h3 {
     color: #666;
     padding: 5px 0 20px;
     font-size: 16px;
     font-weight: 600;
 }
 
-.modal textarea {
+.modal-soboru textarea {
     height: 94px;
 }
 
-.modal .captcha {
+.modal-soboru .captcha {
     float: left;
     width: 48%;
 }
 
-.modal .bwrap {
+.modal-soboru .bwrap {
     float: right;
     width: 48%;
 }
 
-.modal p {
+.modal-soboru p {
     font-size: 13px;
     padding: 0 0 5px;
-}*/
+}
 
 .center {
     text-align: center;

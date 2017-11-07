@@ -10,7 +10,7 @@
 		    <div class="wrap clearfix">
 		        <div class="row">
 	                <section class="content center full-width">
-	                    <div class="modal container">
+	                    <div class="modal-soboru container">
 	                        <h3>Login</h3>
 	                        
 	                        <h:form styleClass="form-horizontal">
@@ -35,8 +35,10 @@
 	                            </div>
 	                        </h:form>
 	
-	                        <p><a href="#">Esqueceu sua senha?</a></p>
-	                        <p>Ainda não tem uma conta? <a href="#">Se registre!</a></p>
+<!-- 	                        <p><a href="#">Esqueceu sua senha?</a></p> -->
+							<h:form>
+	                        	<p>Ainda não tem uma conta? <h:commandLink action="#{registroBean.index()}" value="">Se registre!</h:commandLink></p>
+	                        </h:form>
 	                    </div>
 	                </section>
 	            </div>

@@ -53,6 +53,10 @@ public class RegistroBean implements Serializable {
 		controller = new UsuarioController();
 	}
 	
+	public String index() {
+		return route_base + "index";
+	}
+	
 	public String incluir() {
 	    FacesContext context = FacesContext.getCurrentInstance();
 	    
