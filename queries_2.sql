@@ -309,6 +309,11 @@ CREATE SEQUENCE receita_tag_seq
 
 ----------------------------------
 
+insert into roles values(role_seq.NEXTVAL, 'Usuario');
+insert into roles values(role_seq.NEXTVAL, 'Admin');
+
+insert into usuarios values(usuario_seq.NEXTVAL, 'Usuario Teste', 'teste@teste.com', '123456', '10-20-2001', 3, 2, 1);
+
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'nome1');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'nome2');
 insert into medidas values (medida_seq.NEXTVAL,'nome1','abreviacao1');

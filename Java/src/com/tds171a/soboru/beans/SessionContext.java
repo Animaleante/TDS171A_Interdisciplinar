@@ -34,6 +34,10 @@ public class SessionContext {
 		return (Usuario) getAttribute("usuarioLogado");
 	}
 	
+	public boolean isLogado() {
+		return getUsuarioLogado() != null;
+	}
+	
 	public void setUsuarioLogado(Usuario usuario) {
 		setAttribute("usuarioLogado", usuario);
 	}

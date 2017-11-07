@@ -35,8 +35,10 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	
 	@Override
 	public String listar() {
-		System.out.println("Esta logado: " + (SessionContext.getInstance().getUsuarioLogado() != null));
-		// TODO - Se usuario nao esta logado, redirecionar para pagina de login
+		if(!SessionContext.getInstance().isLogado()) {
+			return "/login/index";
+		}
+		
 		return super.listar();
 	}
 
