@@ -26,6 +26,7 @@ public abstract class BeanBase<T> implements Serializable {
 	protected static final String EXIBIR_PAGE = "exibir";
 	protected static final String EDITAR_PAGE = "editar";
 	protected static final String DELETAR_PAGE = "deletar";
+	protected static final String FACES_REDIRECT = "?faces-redirect=true";
 	
 	protected String route_base;
 	protected ControllerBase<T> controller;
@@ -37,12 +38,12 @@ public abstract class BeanBase<T> implements Serializable {
 	    
 		setLista(controller.listar());
 
-		return route_base + INDEX_PAGE;
+		return route_base + INDEX_PAGE + FACES_REDIRECT;
 	}
 
 	public String criar() {
 		limparVo();
-	    return route_base + CRIAR_PAGE;
+	    return route_base + CRIAR_PAGE + FACES_REDIRECT;
 	}
 
 //	public abstract String incluir();
@@ -66,12 +67,12 @@ public abstract class BeanBase<T> implements Serializable {
 
 	public String exibir(T vo) {
 		setVo(vo);
-	    return route_base + EXIBIR_PAGE;
+	    return route_base + EXIBIR_PAGE + FACES_REDIRECT;
 	}
 
 	public String editar(T vo) {
 		setVo(vo);
-		return route_base + EDITAR_PAGE;
+		return route_base + EDITAR_PAGE + FACES_REDIRECT;
 	}
 
 //	public abstract String editar();
@@ -95,7 +96,7 @@ public abstract class BeanBase<T> implements Serializable {
 
 	public String deletar(T vo) {
 		setVo(vo);
-		return route_base + DELETAR_PAGE;
+		return route_base + DELETAR_PAGE + FACES_REDIRECT;
 	}
 
 	public abstract String deletar();

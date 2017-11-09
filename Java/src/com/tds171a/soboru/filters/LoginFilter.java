@@ -13,8 +13,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.tds171a.soboru.beans.SessionContext;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Diogo
@@ -40,9 +39,11 @@ public class LoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		if(!SessionContext.getInstance().isLogado()) {
+		HttpSession sessao = ((HttpServletRequest) request).getSession();
+		// if(!SessionContext.getInstance().isLogado()) {
+		if(sessao.getAttribute("usuarioLogado") == null) {
 			String contextPath = ((HttpServletRequest) request).getContextPath();
-			((HttpServletResponse) response).sendRedirect(contextPath + "login/index");
+			((HttpServletResponse) response).sendRedirect(contextPath + "/login/");
 		} else {
 			chain.doFilter(request, response);
 		}

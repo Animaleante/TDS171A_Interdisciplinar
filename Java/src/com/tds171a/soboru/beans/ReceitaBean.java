@@ -5,13 +5,13 @@ package com.tds171a.soboru.beans;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.inject.Named;
 
 import com.tds171a.soboru.controllers.ReceitaController;
 import com.tds171a.soboru.vos.Receita;
 
-@Named("receitaBean")
+@ManagedBean(name="receitaBean")
 @SessionScoped
 /**
  * @author Sony
