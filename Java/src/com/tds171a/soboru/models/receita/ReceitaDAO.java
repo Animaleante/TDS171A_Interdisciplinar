@@ -37,7 +37,7 @@ public class ReceitaDAO implements IDAO<Receita> {
 			connection = Utils.createConnection();
 
 			PreparedStatement sttm = connection.prepareStatement(
-				"insert into "+tableName+"(ID, NOME, CATEGORIA_ID, USER_ID, PORCAO, TEMPO_PREPARO, MODO_PREPARO, IMG_PATH, PONTUACAO_MEDIA, VIEWS, FAVS, SLUG, APROVADO) values(receita_seq.NEXTVAL, ?,?,?,?,?,?,?,?,?,?,?,?)");
+				"insert into "+tableName+"(ID, NOME, ID_CATEGORIA, ID_USUARIO, PORCAO, TEMPO_PREPARO, MODO_PREPARO, IMG_PATH, PONTUACAO_MEDIA, VIEWS, FAVS, SLUG, APROVADO) values(receita_seq.NEXTVAL, ?,?,?,?,?,?,?,?,?,?,?,?)");
 			sttm.setString(1, vo.getNome());
 			sttm.setInt(2, vo.getCategoriaId());
 			sttm.setInt(3, vo.getUsuarioId());
@@ -90,21 +90,84 @@ public class ReceitaDAO implements IDAO<Receita> {
 			ResultSet rs = sttm.executeQuery();
 
 			List<Receita> list = new ArrayList<Receita>();
+			Receita receita = null;
 			while(rs.next()) {
-				list.add(new Receita(
-						rs.getInt("id"), 
-						rs.getString("nome"), 
-						rs.getInt("categoria_id"),
-						rs.getInt("user_id"),
-						rs.getInt("porcao"),
-						rs.getDouble("tempo_preparo"),
-						rs.getString("modo_preparo"),
-						rs.getString("img_path"),
-						rs.getDouble("pontuacao_media"),
-						rs.getInt("views"),
-						rs.getInt("favs"),
-						rs.getString("slug"),
-						rs.getBoolean("aprovado")));
+				receita = new Receita();
+
+				receita.setId(rs.getInt("id"));
+				receita.setNome(rs.getString("nome"));
+				receita.setCategoriaId(rs.getInt("id_categoria"));
+				receita.setUsuarioId(rs.getInt("id_usuario"));
+				receita.setPorcao(rs.getInt("porcao"));
+				receita.setTempoPreparo(rs.getDouble("tempo_preparo"));
+				receita.setModoPreparo(rs.getString("modo_preparo"));
+				receita.setImgPath(rs.getString("img_path"));
+				receita.setPontuacaoMedia(rs.getDouble("pontuacao_media"));
+				receita.setViews(rs.getInt("views"));
+				receita.setFavs(rs.getInt("favs"));
+				receita.setSlug(rs.getString("slug"));
+				receita.setAprovado(rs.getBoolean("aprovado"));
+				
+				list.add(receita);
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Metodo para trazer uma Receita
+	 * @return
+	 */
+	public List<Receita> selecionar(int receitaId) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+
+			PreparedStatement sttm = connection.prepareStatement(
+					"select r.ID, r.NOME, r.ID_CATEGORIA, r.ID_USUARIO, r.PORCAO, r.TEMPO_PREPARO, r.MODO_PREPARO, r.IMG_PATH, r.PONTUACAO_MEDIA, r.VIEWS, FAVS, r.SLUG, r.APROVADO, c.NOME, u.NOME from "+tableName+" r "+
+					"inner join categorias c on r.ID_CATEGORIA = c.ID inner join usuarios u on r.ID_USUARIO = u.ID");
+
+			ResultSet rs = sttm.executeQuery();
+
+			List<Receita> list = new ArrayList<Receita>();
+			Receita receita = null;
+			while(rs.next()) {
+				receita = new Receita();
+
+				receita.setId(rs.getInt("id"));
+				receita.setNome(rs.getString("nome"));
+				receita.setCategoriaId(rs.getInt("id_categoria"));
+				receita.setUsuarioId(rs.getInt("id_usuario"));
+				receita.setPorcao(rs.getInt("porcao"));
+				receita.setTempoPreparo(rs.getDouble("tempo_preparo"));
+				receita.setModoPreparo(rs.getString("modo_preparo"));
+				receita.setImgPath(rs.getString("img_path"));
+				receita.setPontuacaoMedia(rs.getDouble("pontuacao_media"));
+				receita.setViews(rs.getInt("views"));
+				receita.setFavs(rs.getInt("favs"));
+				receita.setSlug(rs.getString("slug"));
+				receita.setAprovado(rs.getBoolean("aprovado"));
+				
+				list.add(receita);
 			}
 
 			if (sttm != null)

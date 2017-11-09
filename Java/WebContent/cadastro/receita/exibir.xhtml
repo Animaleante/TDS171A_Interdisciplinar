@@ -11,30 +11,32 @@
 		            <ul>
 		                <li><a href="/" title="Home">Home</a></li>
 		                <li><a href="#">Cadastro</a></li>
-		                <li>Usuario</li>
+		                <li>Receita</li>
 		            </ul>
 		        </nav>
 		
 		        <div class="row">
 		            <header class="s-title">
-		                <h1>Deletar</h1>
+		                <h1>Detalhes</h1>
 		            </header>
 		
 		            <section class="content full-width">
-		                <div class="container">
-		                    <h:form>
-								<h:messages globalOnly="true" errorClass="error"/>
-							</h:form>
-							
-							<h:outputText value="Tem certeza que deseja deletar o usuario '#{usuarioBean.vo.nome}'?" />
+		                <dl class="basic">
+	                        <dt>ID</dt>
+	                        <dd>#{receitaBean.vo.id}</dd>
+	                    </dl>
+	                    
+		                <dl class="basic">
+	                        <dt>Nome</dt>
+	                        <dd>#{receitaBean.vo.nome}</dd>
+	                    </dl>
 	
-		                    <div class="bwrap">
-								<h:form>
-									<h:commandButton action="#{usuarioBean.deletar()}" value="Confirmar exclusão" />
-									<h:commandButton immediate="true" action="#{usuarioBean.listar()}" value="Voltar" />
-								</h:form>
-		                    </div>
-						</div>
+	                    <div class="bwrap">
+							<h:form>
+								<h:commandButton action="#{receitaBean.editar(receitaBean.vo)}" value="Editar"></h:commandButton>
+								<h:commandButton immediate="true" action="#{receitaBean.listar()}" value="Voltar" />
+							</h:form>
+	                    </div>
 		            </section>
 		        </div>
 		    </div>

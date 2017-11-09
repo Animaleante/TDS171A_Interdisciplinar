@@ -16,11 +16,15 @@ public class Receita {
 	 * Parametro nome da receita
 	 */
 	private int categoriaId;
+	
+	private String categoriaNome;
 
 	/**
 	 * Parametro nome da receita
 	 */
 	private int usuarioId;
+	
+	private String usuarioNome;
 
 	/**
 	 * Parametro nome da receita
@@ -67,22 +71,22 @@ public class Receita {
 	 */
 	private boolean aprovado;
 	
-	public Receita() {}
-	
-	public Receita(int id, String nome, int categoriaId, int usuarioId, int porcao, double tempoPreparo, String modoPreparo, String imgPath, double pontuacaoMedia, int views, int favs, String slug, boolean aprovado) {
-		this.id = id;
-		this.nome = nome;
-		this.categoriaId = categoriaId;
-		this.usuarioId = usuarioId;
-		this.porcao = porcao;
-		this.tempoPreparo = tempoPreparo;
-		this.modoPreparo = modoPreparo;
-		this.imgPath = imgPath;
-		this.pontuacaoMedia = pontuacaoMedia;
-		this.views = views;
-		this.favs = favs;
-		this.slug = slug;
-		this.setAprovado(aprovado);
+	public Receita() {
+		this.id = -1;
+		this.nome = "";
+		this.categoriaId = -1;
+		this.categoriaNome="";
+		this.usuarioId = -1;
+		this.usuarioNome = "";
+		this.porcao = -1;
+		this.tempoPreparo = 0;
+		this.modoPreparo = "";
+		this.imgPath = "";
+		this.pontuacaoMedia = 0;
+		this.views = 0;
+		this.favs = 0;
+		this.slug = "";
+		this.aprovado = false;
 	}
 
 	/**
@@ -265,5 +269,33 @@ public class Receita {
 	 */
 	public void setAprovado(boolean aprovado) {
 		this.aprovado = aprovado;
+	}
+
+	/**
+	 * @return the categoriaNome
+	 */
+	public String getCategoriaNome() {
+		return categoriaNome;
+	}
+
+	/**
+	 * @param categoriaNome the categoriaNome to set
+	 */
+	public void setCategoriaNome(String categoriaNome) {
+		this.categoriaNome = categoriaNome;
+	}
+
+	/**
+	 * @return the usuarioNome
+	 */
+	public String getUsuarioNome() {
+		return usuarioNome;
+	}
+
+	/**
+	 * @param usuarioNome the usuarioNome to set
+	 */
+	public void setUsuarioNome(String usuarioNome) {
+		this.usuarioNome = usuarioNome;
 	}
 }
