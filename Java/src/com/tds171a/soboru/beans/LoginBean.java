@@ -80,6 +80,10 @@ public class LoginBean implements Serializable {
 		SessionContext.getInstance().encerrarSessao();
 		return route_base + "index?faces-redirect=true";
 	}
+	
+	public boolean isLogado() {
+		return SessionContext.getInstance().isLogado();
+	}
 
 	/**
 	 * @return the email
