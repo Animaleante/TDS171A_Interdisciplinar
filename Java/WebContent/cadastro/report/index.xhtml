@@ -40,11 +40,10 @@
 							            <tbody>
 							            	<c:forEach items="#{reportBean.lista}" var="report">
 							                    <tr>
-							                        <td>#{report.usuarioNome}</td>
 							                        <td>#{report.receitaNome}</td>
+							                        <td>#{report.usuarioNome}</td>
 							                        <td>
 														<h:form>
-															<h:commandLink action="#{reportBean.editar(report)}" value="Editar"></h:commandLink> |
 															<h:commandLink action="#{reportBean.deletar(report)}" value="Deletar"></h:commandLink>
 														</h:form>
 							                        </td>

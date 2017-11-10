@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.tds171a.soboru.beans;
 
@@ -32,10 +32,10 @@ import com.tds171a.soboru.vos.Utensilio;
 public class ReceitaBean  extends BeanBase<Receita> {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1877717137441387967L;
-	
+
 	private List<Categoria> categorias;
 	private List<Ingrediente> ingredientes;
 	private List<Medida> medidas;
@@ -53,21 +53,21 @@ public class ReceitaBean  extends BeanBase<Receita> {
 		setUtensilios(new ArrayList<Utensilio>());
 		setVo(new Receita());
 	}
-	
+
 	@Override
 	public String criar() {
 		CategoriaController categoriaController = new CategoriaController();
 		setCategorias(categoriaController.listar());
-		
+
 		IngredienteController ingredienteController = new IngredienteController();
 		setIngredientes(ingredienteController.listar());
-		
+
 		MedidaController medidaController = new MedidaController();
 		setMedidas(medidaController.listar());
-		
+
 		UtensilioController utensilioController = new UtensilioController();
 		setUtensilios(utensilioController.listar());
-		
+
 		return super.criar();
 	}
 
@@ -77,7 +77,7 @@ public class ReceitaBean  extends BeanBase<Receita> {
 
 	    if(getVo().getId() == -1) {
 	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Item nao pode ser vazio!", null));
-	        return route_base + CRIAR_PAGE;
+	        return route_base + DELETAR_PAGE;
 	    }
 
 		if(controller.remover(getVo().getId())) {
@@ -91,19 +91,19 @@ public class ReceitaBean  extends BeanBase<Receita> {
 
 	    return listar();
 	}
-	
+
 	@Override
 	public boolean validarDados() {
 		FacesContext context = FacesContext.getCurrentInstance();
-		
+
 		if(getVo().getNome().isEmpty()) {
 	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
 	        return false;
 	    }
-		
+
 		return true;
 	}
-	
+
 	@Override
 	public void limparVo() {
 		setVo(new Receita());
@@ -113,10 +113,10 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	 * @return the categorias
 	 */
 	public List<SelectItem> getCategorias() {
-		List<SelectItem> items = new ArrayList<SelectItem>();  
-	    for (Categoria c : this.categorias) {  
-	        items.add(new SelectItem(c.getId(), c.getNome()));  
-	    }  
+		List<SelectItem> items = new ArrayList<SelectItem>();
+	    for (Categoria c : this.categorias) {
+	        items.add(new SelectItem(c.getId(), c.getNome()));
+	    }
 	    return items;
 	}
 
@@ -131,10 +131,10 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	 * @return the ingredientes
 	 */
 	public List<SelectItem> getIngredientes() {
-		List<SelectItem> items = new ArrayList<SelectItem>();  
-	    for (Ingrediente c : this.ingredientes) {  
-	        items.add(new SelectItem(c.getId(), c.getNome()));  
-	    }  
+		List<SelectItem> items = new ArrayList<SelectItem>();
+	    for (Ingrediente c : this.ingredientes) {
+	        items.add(new SelectItem(c.getId(), c.getNome()));
+	    }
 	    return items;
 	}
 
@@ -149,10 +149,10 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	 * @return the medidas
 	 */
 	public List<SelectItem> getMedidas() {
-		List<SelectItem> items = new ArrayList<SelectItem>();  
-	    for (Medida c : this.medidas) {  
-	        items.add(new SelectItem(c.getId(), c.getNome()));  
-	    }  
+		List<SelectItem> items = new ArrayList<SelectItem>();
+	    for (Medida c : this.medidas) {
+	        items.add(new SelectItem(c.getId(), c.getNome()));
+	    }
 	    return items;
 	}
 
@@ -167,10 +167,10 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	 * @return the utensilios
 	 */
 	public List<SelectItem> getUtensilios() {
-		List<SelectItem> items = new ArrayList<SelectItem>();  
-	    for (Utensilio c : this.utensilios) {  
-	        items.add(new SelectItem(c.getId(), c.getNome()));  
-	    }  
+		List<SelectItem> items = new ArrayList<SelectItem>();
+	    for (Utensilio c : this.utensilios) {
+	        items.add(new SelectItem(c.getId(), c.getNome()));
+	    }
 	    return items;
 	}
 
