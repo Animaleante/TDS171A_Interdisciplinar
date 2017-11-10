@@ -141,10 +141,10 @@ CREATE TABLE receitas_ingredientes (
 	CONSTRAINT rec_ing_med_fk FOREIGN KEY (id_medida) REFERENCES medidas(id)
 );
 
-CREATE SEQUENCE receita_ingrediente_seq
-	INCREMENT BY 1
-	START WITH 1
-	NOCACHE;
+--CREATE SEQUENCE receita_ingrediente_seq
+--	INCREMENT BY 1
+--	START WITH 1
+--	NOCACHE;
 
 CREATE TABLE receitas_utensilios (
 	id_receita NUMBER(11) NOT NULL,
@@ -157,10 +157,10 @@ CREATE TABLE receitas_utensilios (
 	CONSTRAINT rec_utens_uten_fk FOREIGN KEY (id_utensilio) REFERENCES utensilios(id)
 );
 
-CREATE SEQUENCE receita_utensilio_seq
-	INCREMENT BY 1
-	START WITH 1
-	NOCACHE;
+--CREATE SEQUENCE receita_utensilio_seq
+--	INCREMENT BY 1
+--	START WITH 1
+--	NOCACHE;
 
 CREATE TABLE reports (
 	id_usuario NUMBER(11) NOT NULL,
@@ -173,10 +173,10 @@ CREATE TABLE reports (
 	CONSTRAINT reports_rec_fk FOREIGN KEY (id_receita) REFERENCES receitas(id)
 );
 
-CREATE SEQUENCE report_seq
-	INCREMENT BY 1
-	START WITH 1
-	NOCACHE;
+--CREATE SEQUENCE report_seq
+--	INCREMENT BY 1
+--	START WITH 1
+--	NOCACHE;
 
 CREATE TABLE ingredientes_fav (
 	id_ingrediente NUMBER(11) NOT NULL,
@@ -189,10 +189,10 @@ CREATE TABLE ingredientes_fav (
 	CONSTRAINT ing_fav_usr_fk FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
 );
 
-CREATE SEQUENCE ingredientes_fav_seq
-	INCREMENT BY 1
-	START WITH 1
-	NOCACHE;
+--CREATE SEQUENCE ingredientes_fav_seq
+--	INCREMENT BY 1
+--	START WITH 1
+--	NOCACHE;
 
 CREATE TABLE ingredientes_exc (
 	id_ingrediente NUMBER(11) NOT NULL,
@@ -205,10 +205,10 @@ CREATE TABLE ingredientes_exc (
 	CONSTRAINT ing_exc_usr_fk FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
 );
 
-CREATE SEQUENCE ingredientes_exc_seq
-	INCREMENT BY 1
-	START WITH 1
-	NOCACHE;
+--CREATE SEQUENCE ingredientes_exc_seq
+--	INCREMENT BY 1
+--	START WITH 1
+--	NOCACHE;
 
 CREATE TABLE receitas_fav (
 	id_receita NUMBER(11) NOT NULL,
@@ -221,10 +221,10 @@ CREATE TABLE receitas_fav (
 	CONSTRAINT rec_fav_rec_fk FOREIGN KEY (id_receita) REFERENCES receitas(id)
 );
 
-CREATE SEQUENCE receita_fav_seq
-	INCREMENT BY 1
-	START WITH 1
-	NOCACHE;
+--CREATE SEQUENCE receita_fav_seq
+--	INCREMENT BY 1
+--	START WITH 1
+--	NOCACHE;
 
 CREATE TABLE receitas_exc (
 	id_receita NUMBER(11) NOT NULL,
@@ -237,10 +237,10 @@ CREATE TABLE receitas_exc (
 	CONSTRAINT rec_exc_rec_fk FOREIGN KEY (id_receita) REFERENCES receitas(id)
 );
 
-CREATE SEQUENCE receita_exc_seq
-	INCREMENT BY 1
-	START WITH 1
-	NOCACHE;
+--CREATE SEQUENCE receita_exc_seq
+--	INCREMENT BY 1
+--	START WITH 1
+--	NOCACHE;
 
 CREATE TABLE comentarios (
 	id NUMBER(11) NOT NULL,
@@ -272,10 +272,10 @@ CREATE TABLE pontuacoes (
 	CONSTRAINT pont_rec_usr_fk FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
 );
 
-CREATE SEQUENCE pontuacao_seq
-	INCREMENT BY 1
-	START WITH 1
-	NOCACHE;
+--CREATE SEQUENCE pontuacao_seq
+--	INCREMENT BY 1
+--	START WITH 1
+--	NOCACHE;
 
 CREATE TABLE tags (
 	id NUMBER(11) NOT NULL,
@@ -302,10 +302,10 @@ CREATE TABLE receitas_tags (
 	CONSTRAINT rec_tags_tag_fk FOREIGN KEY (id_tag) REFERENCES tags(id)
 );
 
-CREATE SEQUENCE receita_tag_seq
-	INCREMENT BY 1
-	START WITH 1
-	NOCACHE;
+--CREATE SEQUENCE receita_tag_seq
+--	INCREMENT BY 1
+--	START WITH 1
+--	NOCACHE;
 
 ----------------------------------
 
@@ -314,8 +314,38 @@ insert into roles values(role_seq.NEXTVAL, 'Admin');
 
 insert into usuarios values(usuario_seq.NEXTVAL, 'Usuario Teste', 'teste@teste.com', '123456', '20-10-2001', 3, 2, 1);
 
-insert into ingredientes values (ingrediente_seq.NEXTVAL,'nome1');
-insert into ingredientes values (ingrediente_seq.NEXTVAL,'nome2');
-insert into medidas values (medida_seq.NEXTVAL,'nome1','abreviacao1');
+insert into ingredientes values (ingrediente_seq.NEXTVAL,'ingrediente1');
+insert into ingredientes values (ingrediente_seq.NEXTVAL,'ingrediente2');
+
+insert into medidas values (medida_seq.NEXTVAL,'medida1','abreviacao1');
+
+insert into utensilios values (utensilio_seq.NEXTVAL, 'utensilio1');
+
+insert into categorias values(categoria_seq.NEXTVAL, 'categoria1');
+
+insert into receitas values(receita_seq.NEXTVAL, 'receita1', 1, 1, 2, 2.5, 'Modo de Preparo da Receita', '', 0, 0, 0, 'receita1', 1);
+
+insert into receitas_ingredientes values(1, 1, 1, '', 50);
+insert into receitas_ingredientes values(1, 2, 1, 'Cobertura', 150);
+
+insert into receitas_utensilios values(1, 1);
+
+insert into reports values(1, 1);
+
+insert into ingredientes_fav values(1, 1);
+
+insert into ingredientes_exc values(2, 1);
+
+insert into receitas_fav values(1, 1);
+
+--insert into receitas_exc values(1, 1);
+
+insert into comentarios values(comentario_seq.NEXTVAL, 1, 1, 'Melhor receita.');
+
+insert into pontuacoes values(1, 1, 4.5);
+
+insert into tags values(tag_seq.NEXTVAL, 'tag1');
+
+insert into receitas_tags values(1, 1);
 
 commit;
