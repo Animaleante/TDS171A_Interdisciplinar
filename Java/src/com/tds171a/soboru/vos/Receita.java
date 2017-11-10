@@ -29,12 +29,12 @@ public class Receita {
 	/**
 	 * Parametro nome da receita
 	 */
-	private int porcao;
+	private Integer porcao;
 
 	/**
 	 * Parametro nome da receita
 	 */
-	private double tempoPreparo;
+	private Double tempoPreparo;
 
 	/**
 	 * Parametro nome da receita
@@ -74,12 +74,12 @@ public class Receita {
 	public Receita() {
 		this.id = -1;
 		this.nome = "";
-		this.categoriaId = -1;
+		//this.categoriaId = -1;
 		this.categoriaNome="";
-		this.usuarioId = -1;
+		//this.usuarioId = -1;
 		this.usuarioNome = "";
-		this.porcao = -1;
-		this.tempoPreparo = 0;
+		this.porcao = null;
+		this.tempoPreparo = null;
 		this.modoPreparo = "";
 		this.imgPath = "";
 		this.pontuacaoMedia = 0;
@@ -148,28 +148,28 @@ public class Receita {
 	/**
 	 * @return the porcao
 	 */
-	public int getPorcao() {
+	public Integer getPorcao() {
 		return porcao;
 	}
 
 	/**
 	 * @param porcao the porcao to set
 	 */
-	public void setPorcao(int porcao) {
+	public void setPorcao(Integer porcao) {
 		this.porcao = porcao;
 	}
 
 	/**
 	 * @return the tempo_preparo
 	 */
-	public double getTempoPreparo() {
+	public Double getTempoPreparo() {
 		return tempoPreparo;
 	}
 
 	/**
 	 * @param tempoPreparo the tempo_preparo to set
 	 */
-	public void setTempoPreparo(double tempoPreparo) {
+	public void setTempoPreparo(Double tempoPreparo) {
 		this.tempoPreparo = tempoPreparo;
 	}
 
