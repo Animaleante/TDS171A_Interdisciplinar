@@ -33,15 +33,15 @@
 							            <thead>
 							                <tr>
 							                    <th>Nome</th>
+							                    <th>Abreviacao</th>
 							                    <th>Ações</th>
 							                </tr>
 							            </thead>
 							            <tbody>
 							            	<c:forEach items="#{medidaBean.lista}" var="medida">
 							                    <tr>
-							                        <td>
-							                            #{medida.nome}
-							                        </td>
+							                        <td>#{medida.nome}</td>
+							                        <td>#{medida.abreviacao}</td>
 							                        <td>
 														<h:form>
 															<h:commandLink action="#{medidaBean.editar(medida)}" value="Editar"></h:commandLink> |
