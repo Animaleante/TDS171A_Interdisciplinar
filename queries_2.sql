@@ -317,3 +317,5 @@ insert into usuarios values(usuario_seq.NEXTVAL, 'Usuario Teste', 'teste@teste.c
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'nome1');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'nome2');
 insert into medidas values (medida_seq.NEXTVAL,'nome1','abreviacao1');
+
+commit;
