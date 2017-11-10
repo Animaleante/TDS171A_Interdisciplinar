@@ -54,7 +54,9 @@
 		                    </ul>
 		                </li>
 		                <li id="nav_contact">
-		                    <a href="contato/" title="Contato"><span>Contato</span></a>
+		                    <h:commandLink action="#{contatoBean.index()}" value="">
+		                    	<span>Contato</span>
+		                    </h:commandLink>
 		                </li>
 						<c:if test="#{loginBean.logado}">
 			                <li>
@@ -69,9 +71,9 @@
 		        <nav class="user-nav" role="navigation">
 		            <ul>
 		                <li class="light">
-		                    <a href="#" title="Search for recipes">
+		                    <h:commandLink action="#{pesquisaBean.pesquisar()}" value="">
 		                        <i class="icon icon-themeenergy_search"></i> <span>Procurar receitas</span>
-		                    </a>
+		                    </h:commandLink>
 		                </li>
 		                <li class="medium">
 		                    <h:commandLink action="#{loginBean.index()}" value="">
@@ -79,9 +81,9 @@
 		                    </h:commandLink>
 		                </li>
 		                <li class="dark">
-		                    <a href="#" title="Submit a recipe">
+		                    <h:commandLink action="#{receitaBean.criar()}" value="">
 		                        <i class="icon icon-themeenergy_fork-spoon"></i> <span>Postar receita</span>
-		                    </a>
+		                    </h:commandLink>
 		                </li>
 		            </ul>
 		        </nav>

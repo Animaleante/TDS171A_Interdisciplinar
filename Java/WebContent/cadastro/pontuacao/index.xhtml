@@ -1,4 +1,5 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -11,13 +12,13 @@
 		            <ul>
 		                <li><a href="/" title="Home">Home</a></li>
 		                <li><a href="#">Cadastro</a></li>
-		                <li>Usuario</li>
+		                <li>Pontuacao</li>
 		            </ul>
 		        </nav>
 		
 		        <div class="row">
 		            <header class="s-title">
-		                <h1>Usuarios</h1>
+		                <h1>Pontuacoes</h1>
 		            </header>
 		
 		            <section class="content full-width">
@@ -27,29 +28,26 @@
 							</h:form>
 							
 							<c:choose>
-								<c:when test="${not empty usuarioBean.lista}">
+								<c:when test="${not empty pontuacaoBean.lista}">
 									<table class="table table-stiped table-hover">
 							            <thead>
 							                <tr>
-							                    <th>Nome</th>
-							                    <th>Tipo</th>
+							                    <th>Receita</th>
+							                    <th>Usuario</th>
+							                    <th>Valor</th>
 							                    <th>Ações</th>
 							                </tr>
 							            </thead>
 							            <tbody>
-							            	<c:forEach items="#{usuarioBean.lista}" var="usuario">
+							            	<c:forEach items="#{pontuacaoBean.lista}" var="pontuacao">
 							                    <tr>
-							                        <td>
-							                            #{usuario.nome}
-							                        </td>
-							                        <td>
-							                            #{usuario.tipo}
-							                        </td>
+							                        <td>#{pontuacao.receitaNome}</td>
+							                        <td>#{pontuacao.usuarioNome}</td>
+							                        <td>#{pontuacao.valor}</td>
 							                        <td>
 														<h:form>
-															<h:commandLink action="#{usuarioBean.exibir(usuario)}" value="Detalhes"></h:commandLink> |
-															<h:commandLink action="#{usuarioBean.editar(usuario)}" value="Editar"></h:commandLink> |
-															<h:commandLink action="#{usuarioBean.deletar(usuario)}" value="Deletar"></h:commandLink>
+															<h:commandLink action="#{pontuacaoBean.editar(pontuacao)}" value="Editar"></h:commandLink> |
+															<h:commandLink action="#{pontuacaoBean.deletar(pontuacao)}" value="Deletar"></h:commandLink>
 														</h:form>
 							                        </td>
 							                    </tr>
@@ -62,9 +60,11 @@
 						        </c:otherwise>
 					        </c:choose>
 								
-							<h:form>
-								<h:commandButton action="#{usuarioBean.criar()}" immediate="true" value="Criar novo" />
-							</h:form>
+							<div class="f-row">
+								<h:form>
+									<h:commandButton action="#{pontuacaoBean.criar()}" immediate="true" value="Criar novo" />
+								</h:form>
+							</div>
 		                </div>
 		            </section>
 		        </div>
@@ -75,7 +75,7 @@
 	<ui:define name="script">
 		<h:outputScript>
 			navName = "cadastro";
-			subNavName = "usuarios";
+			subNavName = "pontuacoes";
 		</h:outputScript>
 	</ui:define>
 </ui:composition>
