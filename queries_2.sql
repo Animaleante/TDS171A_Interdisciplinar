@@ -321,9 +321,9 @@ insert into medidas values (medida_seq.NEXTVAL,'medida1','abreviacao1');
 
 insert into utensilios values (utensilio_seq.NEXTVAL, 'utensilio1');
 
-insert into categorias values(categoria_seq.NEXTVAL, 'categoria1');
+insert into categorias values(categoria_seq.NEXTVAL, 'categoria1', null, 1, 'categoria1');
 
-insert into receitas values(receita_seq.NEXTVAL, 'receita1', 1, 1, 2, 2.5, 'Modo de Preparo da Receita', '', 0, 0, 0, 'receita1', 1);
+insert into receitas values(receita_seq.NEXTVAL, 'receita1', 1, 1, 2, 2.5, 'Modo de Preparo da Receita', 'teste.jpg', 0, 0, 0, 'receita1', 1);
 
 insert into receitas_ingredientes values(1, 1, 1, '', 50);
 insert into receitas_ingredientes values(1, 2, 1, 'Cobertura', 150);
