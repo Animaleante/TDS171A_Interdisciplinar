@@ -1,6 +1,7 @@
 package com.tds171a.soboru.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -13,16 +14,16 @@ import com.tds171a.soboru.vos.Tag;
 public class ReceitaTagBean implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -1219962404859468474L;
-	
+
 	private List<Tag> lista;
 
 	public ReceitaTagBean() {
 		lista = new ArrayList<Tag>();
 	}
-	
+
 	public void add() {
 		System.out.println("add");
 		lista.add(null);
