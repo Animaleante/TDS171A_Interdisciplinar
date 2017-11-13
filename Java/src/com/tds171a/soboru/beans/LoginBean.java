@@ -15,31 +15,38 @@ import com.tds171a.soboru.vos.Usuario;
 @ManagedBean(eager = true)
 @SessionScoped
 /**
- * @author Diogo
- *
+ * Bean de login
  */
 public class LoginBean implements Serializable {
 	
 	/**
-	 * 
-	 */
+     *criando o serial do bean
+     */
 	private static final long serialVersionUID = 5084200841784300266L;
 	
+	/**
+	 * variavel recebe a rota da aplicação.
+	 */
 	private String route_base = "/login/";
+	/**
+	 * objeto do tipo controller 
+	 */
 	private UsuarioController controller;
 	
 	/**
-	 * 
+	 * variável responsável para manipular o
+	 * email do cliente. 
 	 */
 	private String email;
 	
 	/**
-	 * 
+	 * variável que irá receber a senha do cliente
 	 */
 	private String senha;
 
 	/**
-	 * 
+	 * contrutor que cria um novo usuário controller
+	 * para manipulação dos dados.
 	 */
 	public LoginBean() {
 		setEmail("");
@@ -48,7 +55,7 @@ public class LoginBean implements Serializable {
 	}
 	
 	/**
-	 * 
+	 * método que informa a rota da índex
 	 * @return
 	 */
 	public String index() {
@@ -56,7 +63,7 @@ public class LoginBean implements Serializable {
 	}
 	
 	/**
-	 * 
+	 * método que efetua o login do cliente e cria uma sessao
 	 * @return
 	 */
 	public String login() {
@@ -73,7 +80,7 @@ public class LoginBean implements Serializable {
 	}
 	
 	/**
-	 * 
+	 * método para dar logoff na sessão
 	 * @return
 	 */
 	public String logout() {
@@ -81,11 +88,13 @@ public class LoginBean implements Serializable {
 		return route_base + "index?faces-redirect=true";
 	}
 	
+	método que verifica se a sessão está válida 
 	public boolean isLogado() {
 		return SessionContext.getInstance().isLogado();
 	}
 
 	/**
+	 * adiquirir o email
 	 * @return the email
 	 */
 	public String getEmail() {
@@ -93,6 +102,7 @@ public class LoginBean implements Serializable {
 	}
 
 	/**
+	 * seta o email
 	 * @param email the email to set
 	 */
 	public void setEmail(String email) {
@@ -100,6 +110,7 @@ public class LoginBean implements Serializable {
 	}
 
 	/**
+	 * adiquirir a senha
 	 * @return the senha
 	 */
 	public String getSenha() {
@@ -107,6 +118,7 @@ public class LoginBean implements Serializable {
 	}
 
 	/**
+	 * setar a senha.
 	 * @param senha the senha to set
 	 */
 	public void setSenha(String senha) {

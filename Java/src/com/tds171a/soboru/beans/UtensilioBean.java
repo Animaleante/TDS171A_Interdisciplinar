@@ -14,18 +14,19 @@ import com.tds171a.soboru.vos.Utensilio;
 @Named("utensilioBean")
 @SessionScoped
 /**
- * @author Sony
- *
+ * Criação do bean herando de beanbase passando
+ * o vo utilizada.
  */
 public class UtensilioBean extends BeanBase<Utensilio> {
 
-    /**
-     *
+	/**
+     *criando o serial do bean
      */
     private static final long serialVersionUID = 1526925242084747984L;
 
     /**
-     *
+     *Construtor setando a rota e qual
+     *será passado para o navegador.
      */
     public UtensilioBean() {
         route_base = "/cadastro/utensilio/";
@@ -33,6 +34,11 @@ public class UtensilioBean extends BeanBase<Utensilio> {
         setVo(new Utensilio());
     }
 
+    /**
+     * Override do deletar, onde verifica a sessao, 
+     * se existe um ítem válido e se não houver, retorna a 
+     * pagina de criação.
+     */
 	@Override
 	public String deletar() {
 	    FacesContext context = FacesContext.getCurrentInstance();
@@ -54,6 +60,10 @@ public class UtensilioBean extends BeanBase<Utensilio> {
 	    return listar();
 	}
 	
+	/**
+	 * Verifica os dados da pagina de interação e se faltar algum dado 
+	 * informa ao cliente.
+	 */
 	@Override
 	public boolean validarDados() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -66,6 +76,10 @@ public class UtensilioBean extends BeanBase<Utensilio> {
 		return true;
 	}
 
+	/**
+	 * Cria uma nova vo para limpar os campos para um novo registro
+	 * sem interferencia de dados cadastrados anteriormente.
+	 */
 	@Override
 	public void limparVo() {
 		setVo(new Utensilio());

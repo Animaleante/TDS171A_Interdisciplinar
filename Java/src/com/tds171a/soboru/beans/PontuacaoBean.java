@@ -12,16 +12,20 @@ import com.tds171a.soboru.vos.Pontuacao;
 @Named("pontuacaoBean")
 @SessionScoped
 /**
- * @author Diogo
+ * bean de pontuacao
  *
  */
 public class PontuacaoBean extends BeanBase<Pontuacao> {
 
 	/**
-	 * 
+	 * criando o serial do bean
 	 */
 	private static final long serialVersionUID = -8215281509767049355L;
 	
+	/**
+     *Construtor setando a rota e qual
+     *será passado para o navegador.
+     */
 	public PontuacaoBean() {
 		route_base = "/cadastro/pontuacao/";
 		controller = new PontuacaoController();

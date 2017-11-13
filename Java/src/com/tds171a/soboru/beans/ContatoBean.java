@@ -11,8 +11,8 @@ import javax.inject.Named;
 @Named("contatoBean")
 @SessionScoped
 /**
- * @author Diogo
- *
+ * Criação do bean herando de beanbase passando
+ * o vo utilizada.
  */
 public class ContatoBean implements Serializable {
 
@@ -22,8 +22,9 @@ public class ContatoBean implements Serializable {
 	private static final long serialVersionUID = -4706081572950852709L;
 
 	/**
-	 * 
-	 */
+     *Construtor setando a rota e qual
+     *será passado para o navegador.
+     */
 	public ContatoBean() {
 		// TODO Auto-generated constructor stub
 	}

@@ -5,6 +5,11 @@ import javax.faces.context.FacesContext;
 
 import com.tds171a.soboru.vos.Usuario;
 
+/**
+ * Cria uma sessão
+ * @author Palte
+ *
+ */
 public class SessionContext {
 	private static SessionContext instance;
 	
@@ -18,6 +23,9 @@ public class SessionContext {
 	
 	private SessionContext() {}
 	
+	/**
+	 * Verifica se foi feito login de forma correta
+	 */
 	private ExternalContext currentExternalContext() {
 		if(FacesContext.getCurrentInstance() == null) {
 			throw new RuntimeException("O FacesContext nao pode ser chamado fora de uma requisicao HTTP");
@@ -26,21 +34,34 @@ public class SessionContext {
 		}
 	}
 	
+	/**
+	 * faz logoff invalidando a sessão
+	 */
 	public void encerrarSessao() {
 		currentExternalContext().invalidateSession();
 	}
 	
+	/**
+	 * recebe o usuário logado
+	 */
 	public Usuario getUsuarioLogado() {
 		return (Usuario) getAttribute("usuarioLogado");
 	}
 	
+	/**
+	 * retorna se o cliente está logado.
+	 */
 	public boolean isLogado() {
 		return getUsuarioLogado() != null;
 	}
 	
+	/**
+	 * seta o usuáro
+	 */
 	public void setUsuarioLogado(Usuario usuario) {
 		setAttribute("usuarioLogado", usuario);
 	}
+	
 	
 	public Object getAttribute(String nome) {
 		return currentExternalContext().getSessionMap().get(nome);
