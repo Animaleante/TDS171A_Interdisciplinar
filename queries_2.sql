@@ -31,7 +31,8 @@ CREATE TABLE usuarios (
 	-- created_at DATE NOT NULL,
 	-- updated_at DATE NOT NULL,
 	-- deleted_at DATE NULL,
-	CONSTRAINT usuario_pk PRIMARY KEY (id)
+	CONSTRAINT usuario_pk PRIMARY KEY (id),
+	CONSTRAINT usuario_email_unique UNIQUE (email)
 );
 
 CREATE SEQUENCE usuario_seq
