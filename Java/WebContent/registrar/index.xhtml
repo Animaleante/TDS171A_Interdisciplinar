@@ -13,11 +13,9 @@
 	                    <div class="modal-soboru container">
 	                        <h3>Registrar</h3>
 	                        
-							<h:form>
-								<h:messages globalOnly="true" errorClass="error"/>
-							</h:form>
-	
 	                        <h:form styleClass="form-horizontal">
+								<h:messages globalOnly="true" errorClass="error"/>
+								
 	                            <div class="f-row">
 	                                <h:inputText id="nome"  value="#{registroBean.nome}" size="80"
 									             required="true" a:placeholder="Nome"
@@ -58,7 +56,6 @@
 	                                <h:inputText id="nasc"  value="#{registroBean.nasc}" a:type="date"
 									             required="true" a:placeholder="Data de Nascimento"
 									             requiredMessage="Data de Nascimento é obrigatória">
-									             <f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
 									</h:inputText>
 	                            </div>
 	                            

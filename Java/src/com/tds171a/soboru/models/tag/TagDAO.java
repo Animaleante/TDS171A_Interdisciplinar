@@ -233,7 +233,44 @@ public class TagDAO implements IDAO<Tag> {
 	 * @return
 	 */
 	public List<Tag> selecionarPorReceita(int receitaId) {
-		// TODO Auto-generated method stub
-		return null;
+        Connection connection = null;
+        try {
+            connection = Utils.createConnection();
+
+            PreparedStatement sttm = connection.prepareStatement("select t.id, t.nome from "+tableName+" t inner join receitas_tags rt on rt.id_receita = ?");
+            sttm.setInt(1, receitaId);
+
+            ResultSet rs = sttm.executeQuery();
+
+            List<Tag> list = new ArrayList<Tag>();
+            Tag tag;
+            while(rs.next()) {
+            	tag = new Tag();
+            	tag.setId(rs.getInt("id"));
+            	tag.setNome(rs.getString("nome"));
+
+                list.add(tag);
+            }
+
+            if (sttm != null)
+                sttm.close();
+
+            sttm = null;
+
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+            if (connection != null)
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
+
+        return null;
 	}
 }

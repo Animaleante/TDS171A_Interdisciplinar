@@ -4,8 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+import java.util.regex.Pattern;
 
 /**
  * Classe Utils
@@ -13,6 +18,9 @@ import java.util.Date;
  *
  */
 public class Utils {
+	private static final Pattern NONLATIN = Pattern.compile("[^\\w-]");
+	private static final Pattern WHITESPACE = Pattern.compile("[\\s]");
+	private static final String PADRAO_DATA = "dd/MM/yyyy";
 	
 	/**
 	 * Metodo estatico que cria uma conexão com o banco
@@ -45,5 +53,23 @@ public class Utils {
 	 */
 	public static String dateToOracleDate(Date date) {
 		return new SimpleDateFormat("yyyy-MM-dd").format(date);
+	}
+
+    public static Date formataData(String dataFormatoString) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat(PADRAO_DATA);
+        sdf.setLenient(false);
+        return sdf.parse(dataFormatoString);
+    }
+
+    public static String formataData(Date dataFormatoDate) {
+//        return new SimpleDateFormat(PADRAO_DATA).format(dataFormatoDate);
+        return new SimpleDateFormat("dd/MM/yyyy EEE").format(dataFormatoDate);
+    }
+
+	public static String toSlug(String input) {
+		String nowhitespace = WHITESPACE.matcher(input).replaceAll("-");
+		String normalized = Normalizer.normalize(nowhitespace, Form.NFD);
+		String slug = NONLATIN.matcher(normalized).replaceAll("");
+		return slug.toLowerCase(Locale.ENGLISH);
 	}
 }

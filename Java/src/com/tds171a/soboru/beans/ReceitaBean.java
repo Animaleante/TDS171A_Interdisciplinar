@@ -3,14 +3,21 @@
  */
 package com.tds171a.soboru.beans;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
+import javax.servlet.http.Part;
 
 import com.tds171a.soboru.controllers.CategoriaController;
 import com.tds171a.soboru.controllers.ComentarioController;
@@ -23,6 +30,7 @@ import com.tds171a.soboru.controllers.ReportController;
 import com.tds171a.soboru.controllers.TagController;
 import com.tds171a.soboru.controllers.UsuarioController;
 import com.tds171a.soboru.controllers.UtensilioController;
+import com.tds171a.soboru.utils.Utils;
 import com.tds171a.soboru.vos.Categoria;
 import com.tds171a.soboru.vos.Ingrediente;
 import com.tds171a.soboru.vos.Medida;
@@ -59,6 +67,8 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	private List<Medida> medidas;
 	private List<Utensilio> utensilios;
 	private List<Tag> tags;
+	
+	private Part imgFile;
 
 	/**
 	 *
@@ -94,7 +104,21 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	
 	@Override
 	public String incluir() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		
 		getVo().setUsuarioId(SessionContext.getInstance().getUsuarioLogado().getId());
+		getVo().setSlug(Utils.toSlug(getVo().getNome()));
+		getVo().setAprovado(false);
+		
+		try (InputStream input = imgFile.getInputStream()) {
+			File file = File.createTempFile("receita_",  ".jpg", new File(System.getProperty("jboss.server.data.dir"), "images"));
+			Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			getVo().setImgPath(file.getName());
+		} catch (IOException e) {
+			e.printStackTrace();
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro ao tentar fazer upload da imagem: " + e.getMessage(), null));
+            return route_base + CRIAR_PAGE;
+		}
 		
 		return super.incluir();
 	}
@@ -241,5 +265,19 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	 */
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
+	}
+
+	/**
+	 * @return the imgFile
+	 */
+	public Part getImgFile() {
+		return imgFile;
+	}
+
+	/**
+	 * @param imgFile the imgFile to set
+	 */
+	public void setImgFile(Part imgFile) {
+		this.imgFile = imgFile;
 	}
 }

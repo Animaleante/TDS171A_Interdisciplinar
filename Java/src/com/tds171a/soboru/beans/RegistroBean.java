@@ -4,6 +4,7 @@
 package com.tds171a.soboru.beans;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.Date;
 
 import javax.enterprise.context.SessionScoped;
@@ -12,6 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import com.tds171a.soboru.controllers.UsuarioController;
+import com.tds171a.soboru.utils.Utils;
 import com.tds171a.soboru.vos.Usuario;
 
 @Named("registroBean")
@@ -34,7 +36,7 @@ public class RegistroBean implements Serializable {
 	private String email;
 	private String senha;
 	private String senhaConfirmacao;
-	private Date nasc;
+	private String nasc;
 	private int sexo;
 	private boolean notificacaoEmail;
 
@@ -63,11 +65,22 @@ public class RegistroBean implements Serializable {
 		if(!getSenha().equals(getSenhaConfirmacao())) {
 	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Senhas nao sao identicas!", null));
 		} else {
+			Date formattedDate;
+			try {
+				formattedDate = Utils.formataData(getNasc());
+			} catch (ParseException e) {
+				e.printStackTrace();
+				setSenha("");
+				setSenhaConfirmacao("");
+		        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel registrar um usuario!", null));
+				return route_base + "index";
+			}
+			
 			Usuario usuario = new Usuario();
 			usuario.setNome(nome);
 			usuario.setEmail(email);
 			usuario.setSenha(senha);
-			usuario.setNasc(nasc);
+			usuario.setNasc(formattedDate);
 			usuario.setSexo(sexo);
 			usuario.setRoleId(1);
 			usuario.setNotificacaoEmail(notificacaoEmail);
@@ -81,7 +94,7 @@ public class RegistroBean implements Serializable {
 				setSexo(1);
 				setNotificacaoEmail(true);
 				
-				return route_base + "successo";	
+				return "/login/index";
 			} else {
 				setSenha("");
 				setSenhaConfirmacao("");
@@ -151,14 +164,14 @@ public class RegistroBean implements Serializable {
 	/**
 	 * @return the nasc
 	 */
-	public Date getNasc() {
+	public String getNasc() {
 		return nasc;
 	}
 
 	/**
 	 * @param nasc the nasc to set
 	 */
-	public void setNasc(Date nasc) {
+	public void setNasc(String nasc) {
 		this.nasc = nasc;
 	}
 

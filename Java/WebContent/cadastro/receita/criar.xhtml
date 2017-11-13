@@ -23,7 +23,7 @@
 		
 		            <section class="content full-width">
 		                <div class="submit_recipe container">
-		                	<h:form>
+		                	<h:form enctype="multipart/form-data">
 				                <section>
 									<h:messages globalOnly="true" errorClass="error"/>
 									
@@ -62,7 +62,7 @@
 									</div>
 				                </section>
 		            
-					            <section id="ingredientes">
+					            <!-- <section id="ingredientes">
 										<h2>Ingredientes</h2>
 										<div class="f-row ingredient">
 			                                   <div class="large">
@@ -85,13 +85,14 @@
 									<div class="f-row full add-ingredient">
 										<button class="add">Adicionar um ingrediente</button>
 									</div>
-								</section>
+								</section> -->
 								
 								<section>
 									<h2>Modo de Preparo</h2>
 									<div class="full">
 										<div class="f-row instruction">
-											<textarea type="text" name="modo_preparo" value=""></textarea>
+<!-- 											<textarea type="text" name="modo_preparo" value=""></textarea> -->
+											<h:inputTextarea value="#{receitaBean.vo.modoPreparo}"></h:inputTextarea>
 										</div>
 									</div>
 								</section>
@@ -100,7 +101,8 @@
 									<h2>Foto</h2>
 									<div class="f-row full">
 										<label for="receita-foto" class="btn">Selecionar uma foto</label>
-										<input id="receita-foto" type="file" name="img_path" style="display: none;" value="" />
+<!-- 										<input id="receita-foto" type="file" name="img_path" style="display: none;" value="" /> -->
+										<h:inputFile id="receita-foto" value="#{receitaBean.imgFile}"/>
 									</div>
 								</section>
 								

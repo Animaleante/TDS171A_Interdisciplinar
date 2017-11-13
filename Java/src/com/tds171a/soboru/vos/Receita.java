@@ -1,5 +1,6 @@
 package com.tds171a.soboru.vos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Receita {
@@ -126,12 +127,13 @@ public class Receita {
 		
 		this.categoria = null;
 		this.usuario = null;
-		this.utensilios = null;
-		this.tags = null;
-		this.receitaIngredientes = null;
-		this.comentarios = null;
-		this.reports = null;
-		this.pontuacoes = null;
+		
+		this.utensilios = new ArrayList<Utensilio>();
+		this.tags = new ArrayList<Tag>();
+		this.receitaIngredientes = new ArrayList<ReceitaIngrediente>();
+		this.comentarios = new ArrayList<Comentario>();
+		this.reports = new ArrayList<Report>();
+		this.pontuacoes = new ArrayList<Pontuacao>();
 	}
 
 	/**
