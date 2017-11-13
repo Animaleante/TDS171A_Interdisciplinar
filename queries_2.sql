@@ -127,6 +127,7 @@ CREATE SEQUENCE receita_seq
 	NOCACHE;
 
 CREATE TABLE receitas_ingredientes (
+	id NUMBER(11) NOT NULL,
 	id_receita NUMBER(11) NOT NULL,
 	id_ingrediente NUMBER(11) NOT NULL,
 	id_medida NUMBER(11) NOT NULL,
@@ -135,16 +136,17 @@ CREATE TABLE receitas_ingredientes (
 	-- created_at DATE NOT NULL,
 	-- updated_ate DATE NOT NULL,
 	-- deleted_at DATE NULL,
-	CONSTRAINT rec_ing_pk PRIMARY KEY(id_receita, id_ingrediente, id_medida),
+	-- CONSTRAINT rec_ing_pk PRIMARY KEY(id_receita, id_ingrediente, id_medida),
+	CONSTRAINT rec_ing_pk PRIMARY KEY(id),
 	CONSTRAINT rec_ing_rec_fk FOREIGN KEY (id_receita) REFERENCES receitas(id),
 	CONSTRAINT rec_ing_ing_fk FOREIGN KEY (id_ingrediente) REFERENCES ingredientes(id),
 	CONSTRAINT rec_ing_med_fk FOREIGN KEY (id_medida) REFERENCES medidas(id)
 );
 
---CREATE SEQUENCE receita_ingrediente_seq
---	INCREMENT BY 1
---	START WITH 1
---	NOCACHE;
+CREATE SEQUENCE receita_ingrediente_seq
+	INCREMENT BY 1
+	START WITH 1
+	NOCACHE;
 
 CREATE TABLE receitas_utensilios (
 	id_receita NUMBER(11) NOT NULL,
@@ -325,8 +327,8 @@ insert into categorias values(categoria_seq.NEXTVAL, 'categoria1', null, 1, 'cat
 
 insert into receitas values(receita_seq.NEXTVAL, 'receita1', 1, 1, 2, 2.5, 'Modo de Preparo da Receita', 'teste.jpg', 0, 0, 0, 'receita1', 1);
 
-insert into receitas_ingredientes values(1, 1, 1, '', 50);
-insert into receitas_ingredientes values(1, 2, 1, 'Cobertura', 150);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 1, 1, 1, '', 50);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 1, 2, 1, 'Cobertura', 150);
 
 insert into receitas_utensilios values(1, 1);
 
