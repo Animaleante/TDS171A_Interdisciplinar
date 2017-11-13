@@ -7,7 +7,8 @@ import com.tds171a.soboru.models.roles.RoleModel;
 import com.tds171a.soboru.vos.Role;
 
 /**
- * @author Diogo
+ * Classe de controller do Role
+ * @author Palte
  *
  */
 public class RoleController extends ControllerBase<Role> {

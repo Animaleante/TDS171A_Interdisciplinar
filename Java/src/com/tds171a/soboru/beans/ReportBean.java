@@ -16,21 +16,36 @@ import com.tds171a.soboru.vos.Report;
 
 @Named("reportBean")
 @SessionScoped
+/**
+ * Criação do bean herando de beanbase passando
+ * o vo utilizada.
+ */
 public class ReportBean extends BeanBase<Report> {
 
 	/**
-	 *
-	 */
+     *criando o serial do bean
+     */
 	private static final long serialVersionUID = 4730432362349049623L;
 
+	/**
+	 *Lista do tipo receita
+	 */
 	private List<Receita> receitas;
 
+	/**
+     *Construtor setando a rota e qual
+     *será passado para o navegador.
+     */
 	public ReportBean() {
 		route_base = "/cadastro/report/";
 		controller = new ReportController();
 		setVo(new Report());
 	}
 
+	/**
+	 * Override do criar, onde é criado um controller do tipo receita
+	 * e incluido no receitas uma lista da receitacontroller.
+	 */
 	@Override
 	public String criar()
 	{
@@ -39,14 +54,23 @@ public class ReportBean extends BeanBase<Report> {
 	    return super.criar();
 	}
 
+	/**
+	 * override de incluir onde é pego o
+	 * id do usuário logado. 
+	 */
 	@Override
 	public String incluir()
-	{
+	{		
 	    getVo().setUsuarioId(SessionContext.getInstance().getUsuarioLogado().getId());
 
 	    return super.incluir();
 	}
 
+	/**
+     * Override do deletar, onde verifica a sessao, 
+     * se existe um ítem válido e se não houver, retorna a 
+     * pagina de criação.
+     */
 	@Override
 	public String deletar() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -63,16 +87,27 @@ public class ReportBean extends BeanBase<Report> {
         return listar();
 	}
 
-	@Override
-	public void limparVo() {
-		setVo(new Report());
-	}
-
+	/**
+	 * Verifica os dados da pagina de interação e se faltar algum dado 
+	 * informa ao cliente.
+	 */
 	@Override
 	public boolean validarDados() {
 		// TODO Auto-generated method stub
 		return super.validarDados();
 	}
+	
+	
+	/**
+	 * Cria uma nova vo para limpar os campos para um novo registro
+	 * sem interferencia de dados cadastrados anteriormente.
+	 */
+	@Override
+	public void limparVo() {
+		setVo(new Report());
+	}
+
+	
 
     /**
      * @return the receitas

@@ -41,14 +41,14 @@ import com.tds171a.soboru.vos.Utensilio;
 @Named("receitaBean")
 @SessionScoped
 /**
- * @author Sony
- *
+ * Criação do bean herando de beanbase passando
+ * o vo utilizada.
  */
 public class ReceitaBean  extends BeanBase<Receita> {
 
 	/**
-	 *
-	 */
+     *criando o serial do bean
+     */
 	private static final long serialVersionUID = 1877717137441387967L;
 
 	private CategoriaController categoriaController;
@@ -71,8 +71,9 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	private Part imgFile;
 
 	/**
-	 *
-	 */
+     *Construtor setando a rota e qual
+     *será passado para o navegador.
+     */
 	public ReceitaBean() {
 		route_base = "/cadastro/receita/";
 		controller = new ReceitaController();
@@ -91,6 +92,11 @@ public class ReceitaBean  extends BeanBase<Receita> {
 		setVo(new Receita());
 	}
 
+	/**
+	 * recebe listas de controllers especificas
+	 * para passar ao cliente e ele selecionar 
+	 * quais anexar na receita.
+	 */
 	@Override
 	public String criar() {
 		setCategorias(categoriaController.listar());
@@ -102,6 +108,10 @@ public class ReceitaBean  extends BeanBase<Receita> {
 		return super.criar();
 	}
 	
+	/**
+	 * POST do criar, onde é verificado a sessão
+	 * e se válida gera a inclusão da receita.
+	 */
 	@Override
 	public String incluir() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -123,6 +133,10 @@ public class ReceitaBean  extends BeanBase<Receita> {
 		return super.incluir();
 	}
 	
+	/**
+	 * Override do exibir, onde recebe o id de todas as controllers
+	 * e exibe a receita ao cliente.
+	 */
 	@Override
 	public String exibir(Receita vo) {
 		if(vo.getCategoria() == null)
@@ -143,6 +157,11 @@ public class ReceitaBean  extends BeanBase<Receita> {
 		return super.exibir(vo);
 	}
 
+	/**
+     * Override do deletar, onde verifica a sessao, 
+     * se existe um ítem válido e se não houver, retorna a 
+     * pagina de criação.
+     */
 	@Override
 	public String deletar() {
 	    FacesContext context = FacesContext.getCurrentInstance();
@@ -164,6 +183,10 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	    return listar();
 	}
 
+	/**
+	 * Verifica os dados da pagina de interação e se faltar algum dado 
+	 * informa ao cliente.
+	 */
 	@Override
 	public boolean validarDados() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -176,6 +199,10 @@ public class ReceitaBean  extends BeanBase<Receita> {
 		return true;
 	}
 
+	/**
+	 * Cria uma nova vo para limpar os campos para um novo registro
+	 * sem interferencia de dados cadastrados anteriormente.
+	 */
 	@Override
 	public void limparVo() {
 		setVo(new Receita());

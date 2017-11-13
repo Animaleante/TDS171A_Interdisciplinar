@@ -14,25 +14,31 @@ import com.tds171a.soboru.vos.Medida;
 @Named("medidaBean")
 @SessionScoped
 /**
- * @author Sony
- *
+ * Criação do bean herando de beanbase passando
+ * o vo utilizada.
  */
 public class MedidaBean extends BeanBase<Medida> {
 
 	/**
-	 *
-	 */
+     *criando o serial do bean
+     */
 	private static final long serialVersionUID = 8410408634179869866L;
 
 	/**
-	 *
-	 */
+     *Construtor setando a rota e qual
+     *será passado para o navegador.
+     */
 	public MedidaBean() {
 		route_base = "/cadastro/medida/";
 		controller = new MedidaController();
 		setVo(new Medida());
 	}
 
+	/**
+     * Override do deletar, onde verifica a sessao, 
+     * se existe um ítem válido e se não houver, retorna a 
+     * pagina de criação.
+     */
 	@Override
 	public String deletar() {
 	    FacesContext context = FacesContext.getCurrentInstance();
@@ -54,6 +60,10 @@ public class MedidaBean extends BeanBase<Medida> {
 	    return listar();
 	}
 	
+	/**
+	 * Verifica os dados da pagina de interação e se faltar algum dado 
+	 * informa ao cliente.
+	 */
 	@Override
 	public boolean validarDados() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -66,6 +76,10 @@ public class MedidaBean extends BeanBase<Medida> {
 		return true;
 	}
 
+	/**
+	 * Cria uma nova vo para limpar os campos para um novo registro
+	 * sem interferencia de dados cadastrados anteriormente.
+	 */
 	@Override
 	public void limparVo() {
 		setVo(new Medida());

@@ -14,28 +14,41 @@ import com.tds171a.soboru.vos.Ingrediente;
 @Named("pesquisaBean")
 @SessionScoped
 /**
- * @author Sony
- *
+ * Bean de pesquisa
  */
 public class PesquisaBean implements Serializable {
 	
-	/**
-	 * 
-	 */
+	 /**
+     *criando o serial do bean
+     */
 	private static final long serialVersionUID = -4789696156861417503L;
 
+	/**
+	 * Recebe a rota
+	 */
 	private static final String ROUTE_BASE = "/pesquisa/";
 	
+	/**
+	 * recebe os termos usados para pesquisar
+	 */
 	private String termoBusca;
+	/**
+	 * Recebe uma lista com os ingredientes
+	 */
 	private List<Ingrediente> listaIngredientes;
 
 	/**
-	 * 
+	 * Construtor da pesquisa que seta o 
+	 * termo como nulo para não ter exception de 
+	 * null
 	 */
 	public PesquisaBean() {
 		setTermoBusca("");
 	}
 	
+	/**
+	 * recebe a rota para a pesquisa.
+	 */
 	public String pesquisar() {
 		return ROUTE_BASE + "index";
 	}

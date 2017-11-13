@@ -19,17 +19,21 @@ import com.tds171a.soboru.vos.Usuario;
 @Named("registroBean")
 @SessionScoped
 /**
- * @author Diogo
- *
+ * Criação do bean herando de beanbase passando
+ * o vo utilizada.
  */
 public class RegistroBean implements Serializable {
 	
 	/**
-	 * 
-	 */
+     *criando o serial do bean
+     */
 	private static final long serialVersionUID = -3690960600864076027L;
 	
+	/**
+	 * Recebe a rota. 
+	 */
 	private String route_base = "/registrar/";
+	
 	private UsuarioController controller;
 	
 	private String nome;
@@ -41,8 +45,9 @@ public class RegistroBean implements Serializable {
 	private boolean notificacaoEmail;
 
 	/**
-	 * 
-	 */
+     *Construtor setando a todas as variáveis
+     *como vazio para não ter exception de null.
+     */
 	public RegistroBean() {
 		setNome("");
 		setEmail("");
@@ -55,10 +60,17 @@ public class RegistroBean implements Serializable {
 		controller = new UsuarioController();
 	}
 	
+	/**
+	 * método para exibir o índex
+	 */
 	public String index() {
 		return route_base + "index";
 	}
 	
+	/**
+	 * Método para verificar os dados no cadastro do usuário. Verifica os dados, se tiver erro
+	 * ele apresenta para o cliente,
+	 */
 	public String incluir() {
 	    FacesContext context = FacesContext.getCurrentInstance();
 	    
