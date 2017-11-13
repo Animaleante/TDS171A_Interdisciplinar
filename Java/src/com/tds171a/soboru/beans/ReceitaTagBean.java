@@ -3,12 +3,12 @@ package com.tds171a.soboru.beans;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.inject.Named;
 
 import com.tds171a.soboru.vos.Tag;
 
-@Named("receitaTagBean")
+@ManagedBean(name="receitaTagBean")
 @ViewScoped
 public class ReceitaTagBean implements Serializable {
 
@@ -20,10 +20,11 @@ public class ReceitaTagBean implements Serializable {
 	private List<Tag> lista;
 
 	public ReceitaTagBean() {
-		// TODO Auto-generated constructor stub
+		lista = new ArrayList<Tag>();
 	}
 	
 	public void add() {
+		System.out.println("add");
 		lista.add(null);
 	}
 
