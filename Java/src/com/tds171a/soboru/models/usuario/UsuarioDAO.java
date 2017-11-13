@@ -257,7 +257,49 @@ public class UsuarioDAO implements IDAO<Usuario> {
 
 	@Override
 	public Usuario selecionar(int voId) {
-		// TODO Auto-generated method stub
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+
+			PreparedStatement sttm = connection.prepareStatement(
+					"select u.id, u.nome, u.email, u.senha, u.nasc, u.sexo, u.id_role, u.notificacao_email, r.nome tipo from "+tableName+" u inner join roles r on u.id_role = r.id where u.id = ?");
+			sttm.setInt(1, voId);
+
+			ResultSet rs = sttm.executeQuery();
+
+			Usuario usuario = null;
+			while(rs.next()) {
+				usuario = new Usuario();
+				usuario.setId(rs.getInt("id"));
+				usuario.setNome(rs.getString("nome"));
+				usuario.setEmail(rs.getString("email"));
+				usuario.setSenha(rs.getString("senha"));
+				usuario.setNasc(rs.getDate("nasc"));
+				usuario.setSexo(rs.getInt("sexo"));
+				usuario.setRoleId(rs.getInt("id_role"));
+				usuario.setNotificacaoEmail(rs.getBoolean("notificacao_email"));
+				usuario.setTipo(rs.getString("tipo"));
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return usuario;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
 		return null;
 	}
 }
