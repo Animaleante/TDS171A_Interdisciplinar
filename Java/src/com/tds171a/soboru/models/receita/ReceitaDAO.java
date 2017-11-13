@@ -137,18 +137,19 @@ public class ReceitaDAO implements IDAO<Receita> {
 	 * Metodo para trazer uma Receita
 	 * @return
 	 */
-	public List<Receita> selecionar(int receitaId) {
+	public Receita selecionar(int receitaId) {
 		Connection connection = null;
 		try {
 			connection = Utils.createConnection();
-
-			PreparedStatement sttm = connection.prepareStatement(
+			
+			/*PreparedStatement sttm = connection.prepareStatement(
 					"select r.ID, r.NOME, r.ID_CATEGORIA, r.ID_USUARIO, r.PORCAO, r.TEMPO_PREPARO, r.MODO_PREPARO, r.IMG_PATH, r.PONTUACAO_MEDIA, r.VIEWS, FAVS, r.SLUG, r.APROVADO, c.NOME, u.NOME from "+tableName+" r "+
-					"inner join categorias c on r.ID_CATEGORIA = c.ID inner join usuarios u on r.ID_USUARIO = u.ID");
+					"inner join categorias c on r.ID_CATEGORIA = c.ID inner join usuarios u on r.ID_USUARIO = u.ID");*/
+			PreparedStatement sttm = connection.prepareStatement("select from "+tableName+" where id = ?");
+			sttm.setInt(1, receitaId);
 
 			ResultSet rs = sttm.executeQuery();
 
-			List<Receita> list = new ArrayList<Receita>();
 			Receita receita = null;
 			while(rs.next()) {
 				receita = new Receita();
@@ -166,8 +167,6 @@ public class ReceitaDAO implements IDAO<Receita> {
 				receita.setFavs(rs.getInt("favs"));
 				receita.setSlug(rs.getString("slug"));
 				receita.setAprovado(rs.getBoolean("aprovado"));
-				
-				list.add(receita);
 			}
 
 			if (sttm != null)
@@ -175,7 +174,7 @@ public class ReceitaDAO implements IDAO<Receita> {
 
 			sttm = null;
 
-			return list;
+			return receita;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

@@ -111,8 +111,7 @@ public class ReportDAO implements IDAO<Report> {
 	}
 
 	@Override
-	public boolean remover(int voId)
-	{
+	public boolean remover(int voId) {
 	    return false;
 	}
 
@@ -147,6 +146,12 @@ public class ReportDAO implements IDAO<Report> {
         }
 
         return false;
+	}
+
+	@Override
+	public Report selecionar(int voId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

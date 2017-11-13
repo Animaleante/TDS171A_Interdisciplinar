@@ -186,4 +186,45 @@ public class MedidaDAO implements IDAO<Medida> {
 
 		return false;
 	}
+
+	@Override
+	public Medida selecionar(int voId) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+
+			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" where id = ?");
+			sttm.setInt(1, voId);
+
+			ResultSet rs = sttm.executeQuery();
+
+			Medida medida = null;
+			while(rs.next()) {
+				medida = new Medida();
+				medida.setId(rs.getInt("id"));
+				medida.setNome(rs.getString("nome"));
+				medida.setAbreviacao(rs.getString("abreviacao"));
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return medida;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return null;
+	}
 }

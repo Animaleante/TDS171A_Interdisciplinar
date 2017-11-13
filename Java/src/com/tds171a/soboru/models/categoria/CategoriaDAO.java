@@ -183,4 +183,44 @@ public class CategoriaDAO implements IDAO<Categoria> {
 
         return false;
     }
+
+	@Override
+	public Categoria selecionar(int voId) {
+        Connection connection = null;
+        try {
+            connection = Utils.createConnection();
+
+            PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" where id = ?");
+            sttm.setInt(1, voId);
+
+            ResultSet rs = sttm.executeQuery();
+
+            Categoria categoria = null;
+            while(rs.next()) {
+                categoria = new Categoria();
+                categoria.setId(rs.getInt("id"));
+                categoria.setNome(rs.getString("nome"));
+            }
+
+            if (sttm != null)
+                sttm.close();
+
+            sttm = null;
+
+            return categoria;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+            if (connection != null)
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
+
+        return null;
+	}
 }

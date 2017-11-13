@@ -13,14 +13,21 @@ import javax.faces.model.SelectItem;
 import javax.inject.Named;
 
 import com.tds171a.soboru.controllers.CategoriaController;
+import com.tds171a.soboru.controllers.ComentarioController;
 import com.tds171a.soboru.controllers.IngredienteController;
 import com.tds171a.soboru.controllers.MedidaController;
+import com.tds171a.soboru.controllers.PontuacaoController;
 import com.tds171a.soboru.controllers.ReceitaController;
+import com.tds171a.soboru.controllers.ReceitaIngredienteController;
+import com.tds171a.soboru.controllers.ReportController;
+import com.tds171a.soboru.controllers.TagController;
+import com.tds171a.soboru.controllers.UsuarioController;
 import com.tds171a.soboru.controllers.UtensilioController;
 import com.tds171a.soboru.vos.Categoria;
 import com.tds171a.soboru.vos.Ingrediente;
 import com.tds171a.soboru.vos.Medida;
 import com.tds171a.soboru.vos.Receita;
+import com.tds171a.soboru.vos.Tag;
 import com.tds171a.soboru.vos.Utensilio;
 
 @Named("receitaBean")
@@ -36,10 +43,22 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	 */
 	private static final long serialVersionUID = 1877717137441387967L;
 
+	private CategoriaController categoriaController;
+	private UsuarioController usuarioController;
+	private UtensilioController utensilioController;
+	private TagController tagController;
+	private ComentarioController comentarioController;
+	private ReceitaIngredienteController receitaIngredienteController;
+	private IngredienteController ingredienteController;
+	private MedidaController medidaController;
+	private ReportController reportController;
+	private PontuacaoController pontuacaoController;
+
 	private List<Categoria> categorias;
 	private List<Ingrediente> ingredientes;
 	private List<Medida> medidas;
 	private List<Utensilio> utensilios;
+	private List<Tag> tags;
 
 	/**
 	 *
@@ -47,28 +66,57 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	public ReceitaBean() {
 		route_base = "/cadastro/receita/";
 		controller = new ReceitaController();
-		setCategorias(new ArrayList<Categoria>());
-		setIngredientes(new ArrayList<Ingrediente>());
-		setMedidas(new ArrayList<Medida>());
-		setUtensilios(new ArrayList<Utensilio>());
+
+		categoriaController = new CategoriaController();
+		usuarioController = new UsuarioController();
+		utensilioController = new UtensilioController();
+		tagController = new TagController();
+		comentarioController = new ComentarioController();
+		receitaIngredienteController = new ReceitaIngredienteController();
+		ingredienteController = new IngredienteController();
+		medidaController = new MedidaController();
+		reportController = new ReportController();
+		pontuacaoController = new PontuacaoController();
+		
 		setVo(new Receita());
 	}
 
 	@Override
 	public String criar() {
-		CategoriaController categoriaController = new CategoriaController();
 		setCategorias(categoriaController.listar());
-
-		IngredienteController ingredienteController = new IngredienteController();
 		setIngredientes(ingredienteController.listar());
-
-		MedidaController medidaController = new MedidaController();
 		setMedidas(medidaController.listar());
-
-		UtensilioController utensilioController = new UtensilioController();
 		setUtensilios(utensilioController.listar());
+		setTags(tagController.listar());
 
 		return super.criar();
+	}
+	
+	@Override
+	public String incluir() {
+		getVo().setUsuarioId(SessionContext.getInstance().getUsuarioLogado().getId());
+		
+		return super.incluir();
+	}
+	
+	@Override
+	public String exibir(Receita vo) {
+		if(vo.getCategoria() == null)
+			vo.setCategoria(categoriaController.selecionar(vo.getCategoriaId()));
+		
+		if(vo.getUsuario() == null)
+			vo.setUsuario(usuarioController.selecionar(vo.getUsuarioId()));
+		
+		if(vo.getUtensilios() == null)
+			vo.setUtensilios(((UtensilioController)utensilioController).selecionarPorReceita(vo.getId()));
+		
+		if(vo.getTags() == null)
+			vo.setTags(((TagController) tagController).selecionarPorReceita(vo.getId()));
+		
+		if(vo.getReceitaIngredientes() == null)
+			vo.setReceitaIngredientes(((ReceitaIngredienteController) receitaIngredienteController).selecionarPorReceita(vo.getId()));
+		
+		return super.exibir(vo);
 	}
 
 	@Override
@@ -179,5 +227,19 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	 */
 	public void setUtensilios(List<Utensilio> utensilios) {
 		this.utensilios = utensilios;
+	}
+
+	/**
+	 * @return the tags
+	 */
+	public List<Tag> getTags() {
+		return tags;
+	}
+
+	/**
+	 * @param tags the tags to set
+	 */
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
 	}
 }

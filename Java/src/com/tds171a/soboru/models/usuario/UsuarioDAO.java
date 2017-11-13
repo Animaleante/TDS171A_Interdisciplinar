@@ -254,4 +254,10 @@ public class UsuarioDAO implements IDAO<Usuario> {
 		}
 		return null;
 	}
+
+	@Override
+	public Usuario selecionar(int voId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

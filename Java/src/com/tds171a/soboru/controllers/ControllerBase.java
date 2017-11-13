@@ -51,4 +51,13 @@ public abstract class ControllerBase<T> {
 	public boolean remover(int voId) {
 		return model.remover(voId);
 	}
+	
+	/**
+	 * Metodo para selecionar um Item
+	 * @param voId
+	 * @return
+	 */
+	public T selecionar(int voId) {
+		return model.selecionar(voId);
+	}
 }

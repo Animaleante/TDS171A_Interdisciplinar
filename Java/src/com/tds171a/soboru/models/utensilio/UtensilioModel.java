@@ -1,5 +1,7 @@
 package com.tds171a.soboru.models.utensilio;
 
+import java.util.List;
+
 import com.tds171a.soboru.models.ModelBase;
 import com.tds171a.soboru.vos.Utensilio;
 
@@ -15,5 +17,9 @@ public class UtensilioModel extends ModelBase<Utensilio> {
 	 */
 	public UtensilioModel() {
 		dao = new UtensilioDAO();
+	}
+
+	public List<Utensilio> selecionarPorReceita(int receitaId) {
+		return ((UtensilioDAO) dao).selecionarPorReceita(receitaId);
 	}
 }

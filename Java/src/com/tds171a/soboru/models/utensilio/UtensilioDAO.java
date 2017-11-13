@@ -183,4 +183,59 @@ public class UtensilioDAO implements IDAO<Utensilio> {
 
 		return false;
 	}
+	
+	/**
+	 * 
+	 * @param voId
+	 * @return
+	 */
+	@Override
+	public Utensilio selecionar(int voId) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+
+			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" where id = ?");
+			sttm.setInt(1, voId);
+
+			ResultSet rs = sttm.executeQuery();
+
+			Utensilio utensilio = null;
+			while(rs.next()) {
+				utensilio = new Utensilio();
+				utensilio.setId(rs.getInt("id"));
+				utensilio.setNome(rs.getString("nome"));
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return utensilio;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param receitaId
+	 * @return
+	 */
+	public List<Utensilio> selecionarPorReceita(int receitaId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

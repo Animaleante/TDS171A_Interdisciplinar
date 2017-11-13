@@ -7,4 +7,5 @@ public interface IDAO<T> {
 	public List<T> listar();
 	public boolean atualizar(T vo);
 	public boolean remover(int voId);
+	public T selecionar(int voId);
 }

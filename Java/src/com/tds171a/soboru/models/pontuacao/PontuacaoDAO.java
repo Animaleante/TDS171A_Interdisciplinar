@@ -38,4 +38,9 @@ public class PontuacaoDAO implements IDAO<Pontuacao> {
 		return false;
 	}
 
+	@Override
+	public Pontuacao selecionar(int voId) {
+		return null;
+	}
+
 }

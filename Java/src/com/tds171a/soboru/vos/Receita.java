@@ -1,5 +1,7 @@
 package com.tds171a.soboru.vos;
 
+import java.util.List;
+
 public class Receita {
 
 	/**
@@ -16,15 +18,11 @@ public class Receita {
 	 * Parametro nome da receita
 	 */
 	private int categoriaId;
-	
-	private String categoriaNome;
 
 	/**
 	 * Parametro nome da receita
 	 */
 	private int usuarioId;
-	
-	private String usuarioNome;
 
 	/**
 	 * Parametro nome da receita
@@ -71,13 +69,51 @@ public class Receita {
 	 */
 	private boolean aprovado;
 	
+	/**
+	 * 
+	 */
+	private Categoria categoria;
+	
+	/**
+	 * 
+	 */
+	private Usuario usuario;
+	
+	/**
+	 * 
+	 */
+	private List<Utensilio> utensilios;
+	
+	/**
+	 * 
+	 */
+	private List<Tag> tags;
+	
+	/**
+	 * 
+	 */
+	private List<ReceitaIngrediente> receitaIngredientes;
+	
+	/**
+	 * 
+	 */
+	private List<Comentario> comentarios;
+	
+	/**
+	 * 
+	 */
+	private List<Report> reports;
+	
+	/**
+	 * 
+	 */
+	private List<Pontuacao> pontuacoes;
+	
 	public Receita() {
 		this.id = -1;
 		this.nome = "";
-		//this.categoriaId = -1;
-		this.categoriaNome="";
-		//this.usuarioId = -1;
-		this.usuarioNome = "";
+		this.categoriaId = -1;
+		this.usuarioId = -1;
 		this.porcao = null;
 		this.tempoPreparo = null;
 		this.modoPreparo = "";
@@ -87,6 +123,15 @@ public class Receita {
 		this.favs = 0;
 		this.slug = "";
 		this.aprovado = false;
+		
+		this.categoria = null;
+		this.usuario = null;
+		this.utensilios = null;
+		this.tags = null;
+		this.receitaIngredientes = null;
+		this.comentarios = null;
+		this.reports = null;
+		this.pontuacoes = null;
 	}
 
 	/**
@@ -272,30 +317,114 @@ public class Receita {
 	}
 
 	/**
-	 * @return the categoriaNome
+	 * @return the categoria
 	 */
-	public String getCategoriaNome() {
-		return categoriaNome;
+	public Categoria getCategoria() {
+		return categoria;
 	}
 
 	/**
-	 * @param categoriaNome the categoriaNome to set
+	 * @param categoria the categoria to set
 	 */
-	public void setCategoriaNome(String categoriaNome) {
-		this.categoriaNome = categoriaNome;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	/**
-	 * @return the usuarioNome
+	 * @return the usuario
 	 */
-	public String getUsuarioNome() {
-		return usuarioNome;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
 	/**
-	 * @param usuarioNome the usuarioNome to set
+	 * @param usuario the usuario to set
 	 */
-	public void setUsuarioNome(String usuarioNome) {
-		this.usuarioNome = usuarioNome;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	/**
+	 * @return the utensilios
+	 */
+	public List<Utensilio> getUtensilios() {
+		return utensilios;
+	}
+
+	/**
+	 * @param utensilios the utensilios to set
+	 */
+	public void setUtensilios(List<Utensilio> utensilios) {
+		this.utensilios = utensilios;
+	}
+
+	/**
+	 * @return the tags
+	 */
+	public List<Tag> getTags() {
+		return tags;
+	}
+
+	/**
+	 * @param comentarios the comentarios to set
+	 */
+	public void setComentarios(List<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}
+
+	/**
+	 * @return the receitaIngredientes
+	 */
+	public List<ReceitaIngrediente> getReceitaIngredientes() {
+		return receitaIngredientes;
+	}
+
+	/**
+	 * @param receitaIngredientes the receitaIngredientes to set
+	 */
+	public void setReceitaIngredientes(List<ReceitaIngrediente> receitaIngredientes) {
+		this.receitaIngredientes = receitaIngredientes;
+	}
+
+	/**
+	 * @param tags the tags to set
+	 */
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
+	}
+
+	/**
+	 * @return the comentarios
+	 */
+	public List<Comentario> getComentarios() {
+		return comentarios;
+	}
+
+	/**
+	 * @return the reports
+	 */
+	public List<Report> getReports() {
+		return reports;
+	}
+
+	/**
+	 * @param reports the reports to set
+	 */
+	public void setReports(List<Report> reports) {
+		this.reports = reports;
+	}
+
+	/**
+	 * @return the pontuacoes
+	 */
+	public List<Pontuacao> getPontuacoes() {
+		return pontuacoes;
+	}
+
+	/**
+	 * @param pontuacoes the pontuacoes to set
+	 */
+	public void setPontuacoes(List<Pontuacao> pontuacoes) {
+		this.pontuacoes = pontuacoes;
 	}
 }

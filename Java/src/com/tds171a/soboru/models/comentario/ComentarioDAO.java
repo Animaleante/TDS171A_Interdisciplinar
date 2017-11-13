@@ -38,4 +38,10 @@ public class ComentarioDAO implements IDAO<Comentario> {
 		return false;
 	}
 
+	@Override
+	public Comentario selecionar(int voId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

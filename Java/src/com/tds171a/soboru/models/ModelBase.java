@@ -59,4 +59,14 @@ public abstract class ModelBase<T> implements IDAO<T> {
     public boolean remover(int voId) {
         return dao.remover(voId);
     }
+
+    /**
+     * Metodo para remover um Item
+     * @param voId
+     * @return
+     */
+    @Override
+    public T selecionar(int voId) {
+        return dao.selecionar(voId);
+    }
 }

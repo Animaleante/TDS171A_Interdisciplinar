@@ -183,4 +183,44 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 
 		return false;
 	}
+
+	@Override
+	public Ingrediente selecionar(int voId) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+
+			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" where id = ?");
+			sttm.setInt(1, voId);
+
+			ResultSet rs = sttm.executeQuery();
+
+			Ingrediente ingrediente = null;
+			while(rs.next()) {
+				ingrediente = new Ingrediente();
+				ingrediente.setId(rs.getInt("id"));
+				ingrediente.setNome(rs.getString("nome"));
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return ingrediente;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return null;
+	}
 }

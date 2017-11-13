@@ -7,20 +7,57 @@ package com.tds171a.soboru.vos;
  * @author Sony
  *
  */
-public class ReceitasIngredientes {
+public class ReceitaIngrediente {
+	
+	/**
+	 * 
+	 */
 	private int id;
 	
+	/**
+	 * 
+	 */
 	private int id_receita;
 	
+	/**
+	 * 
+	 */
 	private int id_ingrediente;
 	
+	/**
+	 * 
+	 */
 	private int id_medida;
 	
+	/**
+	 * 
+	 */
 	private String sub_sessao;
 	
+	/**
+	 * 
+	 */
 	private double qty;
 	
-	public ReceitasIngredientes() {
+	/**
+	 * 
+	 */
+	private Medida medida;
+	
+	/**
+	 * 
+	 */
+	private Ingrediente ingrediente;
+	
+	/**
+	 * 
+	 */
+	private Receita receita;
+	
+	/**
+	 * 
+	 */
+	public ReceitaIngrediente() {
 		
 	}
 
@@ -106,5 +143,47 @@ public class ReceitasIngredientes {
 	 */
 	public void setQty(double qty) {
 		this.qty = qty;
+	}
+
+	/**
+	 * @return the medida
+	 */
+	public Medida getMedida() {
+		return medida;
+	}
+
+	/**
+	 * @param medida the medida to set
+	 */
+	public void setMedida(Medida medida) {
+		this.medida = medida;
+	}
+
+	/**
+	 * @return the ingrediente
+	 */
+	public Ingrediente getIngrediente() {
+		return ingrediente;
+	}
+
+	/**
+	 * @param ingrediente the ingrediente to set
+	 */
+	public void setIngrediente(Ingrediente ingrediente) {
+		this.ingrediente = ingrediente;
+	}
+
+	/**
+	 * @return the receita
+	 */
+	public Receita getReceita() {
+		return receita;
+	}
+
+	/**
+	 * @param receita the receita to set
+	 */
+	public void setReceita(Receita receita) {
+		this.receita = receita;
 	}
 }

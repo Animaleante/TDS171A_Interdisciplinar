@@ -183,4 +183,57 @@ public class TagDAO implements IDAO<Tag> {
 
         return false;
     }
+
+    /**
+     * 
+     */
+	@Override
+	public Tag selecionar(int voId) {
+        Connection connection = null;
+        try {
+            connection = Utils.createConnection();
+
+            PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" where id = ?");
+            sttm.setInt(1, voId);
+
+            ResultSet rs = sttm.executeQuery();
+
+            Tag tag = null;
+            while(rs.next()) {
+                tag = new Tag();
+                tag.setId(rs.getInt("id"));
+                tag.setNome(rs.getString("nome"));
+            }
+
+            if (sttm != null)
+                sttm.close();
+
+            sttm = null;
+
+            return tag;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+            if (connection != null)
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
+
+        return null;
+	}
+
+	/**
+	 * 
+	 * @param receitaId
+	 * @return
+	 */
+	public List<Tag> selecionarPorReceita(int receitaId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

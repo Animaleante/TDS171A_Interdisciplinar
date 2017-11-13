@@ -27,16 +27,6 @@ public class Categoria {
     }
 
     /**
-     * Construtor da classe de Categoria que recebe o nome
-     * @param nome
-     */
-
-
-    public Categoria(String nome) {
-        this.nome = nome;
-    }
-
-    /**
      * Construtor da classe de Categoria que recebe o id e o nome
      * @param id
      * @param nome

@@ -185,4 +185,10 @@ public class RoleDAO implements IDAO<Role> {
 
 		return false;
 	}
+
+	@Override
+	public Role selecionar(int voId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
