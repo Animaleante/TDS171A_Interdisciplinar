@@ -88,7 +88,9 @@ public class LoginBean implements Serializable {
 		return route_base + "index?faces-redirect=true";
 	}
 	
-	método que verifica se a sessão está válida 
+	/**
+	 * método que verifica se a sessão está válida
+	 */ 
 	public boolean isLogado() {
 		return SessionContext.getInstance().isLogado();
 	}
