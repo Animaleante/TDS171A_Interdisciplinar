@@ -314,7 +314,7 @@ CREATE TABLE receitas_tags (
 insert into roles values(role_seq.NEXTVAL, 'Usuario');
 insert into roles values(role_seq.NEXTVAL, 'Admin');
 
-insert into usuarios values(usuario_seq.NEXTVAL, 'Usuario Teste', 'teste@teste.com', '123456', '20-10-2001', 3, 2, 1);
+insert into usuarios values(usuario_seq.NEXTVAL, 'Usuario Teste', 'teste@teste.com', '123456', TO_DATE('22-10-2001', 'DD_MM_YYYY'), 3, 2, 1);
 
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'ingrediente1');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'ingrediente2');
