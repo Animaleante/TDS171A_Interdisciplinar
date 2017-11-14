@@ -7,13 +7,15 @@ connect soboru/opet
 CREATE TABLE roles (
 	id NUMBER(11) NOT NULL,
 	nome VARCHAR2(80) NOT NULL,
+	is_admin NUMBER(1) NOT NULL,
 	-- created_at DATE NOT NULL,
 	-- updated_at DATE NOT NULL,
 	-- deleted_at DATE NULL,
-	CONSTRAINT role_pk PRIMARY KEY (id)
+	CONSTRAINT role_pk PRIMARY KEY (id),
+	CONSTRAINT role_nome_unique UNIQUE (nome)
 );
 
-CREATE SEQUENCE role_seq
+CREATE SEQUENCE role_seqhahahah
 	INCREMENT BY 1
 	START WITH 1
 	NOCACHE;
@@ -47,7 +49,8 @@ CREATE TABLE medidas (
 	-- created_at DATE NOT NULL,
 	-- updated_at DATE NOT NULL,
 	-- deleted_at DATE NULL,
-	CONSTRAINT medida_pk PRIMARY KEY (id)
+	CONSTRAINT medida_pk PRIMARY KEY (id),
+	CONSTRAINT medida_nome_unique UNIQUE (nome)
 );
 
 CREATE SEQUENCE medida_seq
@@ -120,9 +123,10 @@ CREATE TABLE receitas (
 	-- created_at DATE NOT NULL,
 	-- updated_at DATE NOT NULL,
 	-- deleted_at DATE NULL,
-	CONSTRAINT receitas_pk PRIMARY KEY (id),
-	CONSTRAINT receitas_cat_fk FOREIGN KEY (id_categoria) REFERENCES categorias(id),
-	CONSTRAINT receitas_usr_fk FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+	CONSTRAINT receita_pk PRIMARY KEY (id),
+	CONSTRAINT receita_nome_unique UNIQUE (nome),
+	CONSTRAINT receita_cat_fk FOREIGN KEY (id_categoria) REFERENCES categorias(id),
+	CONSTRAINT receita_usr_fk FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
 );
 
 CREATE SEQUENCE receita_seq
@@ -316,43 +320,78 @@ CREATE TABLE receitas_tags (
 
 ----------------------------------
 
-insert into roles values(role_seq.NEXTVAL, 'Usuario');
-insert into roles values(role_seq.NEXTVAL, 'Admin');
+insert into roles values(role_seq.NEXTVAL, 'Admin', 1);
+insert into roles values(role_seq.NEXTVAL, 'Usuario', 0);
 
-insert into usuarios values(usuario_seq.NEXTVAL, 'Usuario Teste', 'teste@teste.com', '123456', TO_DATE('22-10-2001', 'DD_MM_YYYY'), 3, 2, 1);
+insert into usuarios values(usuario_seq.NEXTVAL, 'Admin Teste', 'admin@teste.com', '123456', TO_DATE('28-02-1990', 'DD_MM_YYYY'), 3, 1, 1);
+insert into usuarios values(usuario_seq.NEXTVAL, 'Usuario Teste', 'teste@teste.com', '123456', TO_DATE('07-11-1988', 'DD_MM_YYYY'), 3, 2, 1);
 
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'ingrediente1');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'ingrediente2');
+insert into ingredientes values (ingrediente_seq.NEXTVAL,'ingrediente3');
+insert into ingredientes values (ingrediente_seq.NEXTVAL,'ingrediente4');
 
 insert into medidas values (medida_seq.NEXTVAL,'medida1','abreviacao1');
+insert into medidas values (medida_seq.NEXTVAL,'medida2','abreviacao2');
+insert into medidas values (medida_seq.NEXTVAL,'medida3','abreviacao3');
 
 insert into utensilios values (utensilio_seq.NEXTVAL, 'utensilio1');
+insert into utensilios values (utensilio_seq.NEXTVAL, 'utensilio2');
+insert into utensilios values (utensilio_seq.NEXTVAL, 'utensilio3');
 
-insert into categorias values(categoria_seq.NEXTVAL, 'categoria1', null, 1, 'categoria1');
-
-insert into receitas values(receita_seq.NEXTVAL, 'receita1', 1, 1, 2, 2.5, 'Modo de Preparo da Receita', 'teste.jpg', 0, 0, 0, 'receita1', 1);
-
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 1, 1, 1, '', 50);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 1, 2, 1, 'Cobertura', 150);
-
-insert into receitas_utensilios values(1, 1);
-
-insert into reports values(1, 1);
-
-insert into ingredientes_fav values(1, 1);
-
-insert into ingredientes_exc values(2, 1);
-
-insert into receitas_fav values(1, 1);
-
---insert into receitas_exc values(1, 1);
-
-insert into comentarios values(comentario_seq.NEXTVAL, 1, 1, 'Melhor receita.');
-
-insert into pontuacoes values(1, 1, 4.5);
+insert into categorias values(categoria_seq.NEXTVAL, 'categoria1', null, 0, 'categoria1');
+insert into categorias values(categoria_seq.NEXTVAL, 'categoria2', 1, 1, 'categoria2');
+insert into categorias values(categoria_seq.NEXTVAL, 'categoria3', 1, 1, 'categoria3');
+insert into categorias values(categoria_seq.NEXTVAL, 'categoria4', null, 0, 'categoria4');
 
 insert into tags values(tag_seq.NEXTVAL, 'tag1');
+insert into tags values(tag_seq.NEXTVAL, 'tag2');
+insert into tags values(tag_seq.NEXTVAL, 'tag3');
+
+insert into receitas values(receita_seq.NEXTVAL, 'receita1', 2, 1, 2, 2, 'Modo de Preparo da Receita 1', 'teste.jpg', 0, 0, 0, 'receita1', 1);
+insert into receitas values(receita_seq.NEXTVAL, 'receita2', 3, 1, 4, 1.5, 'Modo de Preparo da Receita 2', 'teste.jpg', 0, 0, 0, 'receita2', 1);
+insert into receitas values(receita_seq.NEXTVAL, 'receita3', 3, 2, 5, 6.4, 'Modo de Preparo da Receita 3', 'teste.jpg', 0, 0, 0, 'receita3', 0);
+
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 1, 1, 2, null, 50);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 1, 2, 1, null, 200);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 1, 2, 1, 'Cobertura', 150);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 1, 3, 3, 'Cobertura', 10);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 2, 1, 1, null, 10);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 2, 2, 2, null, 300);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 2, 3, 2, null, 800);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 1, 1, null, 10);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 3, 1, null, 15);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 4, 2, null, 100);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 4, 3, 'Recheio', 4);
+
+insert into receitas_utensilios values(1, 1);
+insert into receitas_utensilios values(1, 3);
+insert into receitas_utensilios values(2, 1);
+insert into receitas_utensilios values(3, 2);
+insert into receitas_utensilios values(3, 1);
+
+insert into reports values(1, 2);
+
+insert into ingredientes_fav values(1, 2);
+
+insert into ingredientes_exc values(2, 2);
+
+insert into receitas_fav values(1, 2);
+
+insert into receitas_exc values(2, 2);
+
+insert into comentarios values(comentario_seq.NEXTVAL, 1, 2, 'Melhor receita 1.');
+insert into comentarios values(comentario_seq.NEXTVAL, 2, 2, 'Melhor receita 2.');
+insert into comentarios values(comentario_seq.NEXTVAL, 3, 1, 'Melhor receita 3.');
+
+insert into pontuacoes values(1, 2, 4.5);
+insert into pontuacoes values(2, 2, 2);
+insert into pontuacoes values(3, 2, 5);
 
 insert into receitas_tags values(1, 1);
+insert into receitas_tags values(1, 2);
+insert into receitas_tags values(2, 3);
+insert into receitas_tags values(3, 1);
+insert into receitas_tags values(3, 3);
 
 commit;
