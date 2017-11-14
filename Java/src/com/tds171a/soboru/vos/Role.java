@@ -18,9 +18,12 @@ public class Role {
 	 */
 	private String nome;
 	
+	private boolean isAdmin;
+	
 	public Role() {
 	    id = -1;
 	    nome = "";
+	    isAdmin = false;
 	}
 	
 	/**
@@ -46,5 +49,19 @@ public class Role {
 	 */
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	/**
+	 * @return the isAdmin
+	 */
+	public boolean getIsAdmin() {
+		return isAdmin;
+	}
+
+	/**
+	 * @param isAdmin the isAdmin to set
+	 */
+	public void setIsAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 }

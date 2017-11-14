@@ -36,8 +36,9 @@ public class RoleDAO implements IDAO<Role> {
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" (id, nome) values(role_seq.NEXTVAL, ?)");
+			PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" (id, nome, is_admin) values(role_seq.NEXTVAL, ?, ?)");
 			sttm.setString(1, role.getNome());
+			sttm.setBoolean(2, role.getIsAdmin());
 
 			int rowsAffected = sttm.executeUpdate();
 
@@ -83,6 +84,7 @@ public class RoleDAO implements IDAO<Role> {
 				role = new Role();
 				role.setId(rs.getInt("id"));
 				role.setNome(rs.getString("nome"));
+				role.setIsAdmin(rs.getBoolean("is_admin"));
 
 				list.add(role);
 			}
@@ -120,8 +122,9 @@ public class RoleDAO implements IDAO<Role> {
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("update "+tableName+" set nome = ? where id = ?");
+			PreparedStatement sttm = connection.prepareStatement("update "+tableName+" set nome = ?, is_admin = ? where id = ?");
 			sttm.setString(1, role.getNome());
+			sttm.setBoolean(2, role.getIsAdmin());
 			sttm.setInt(2, role.getId());
 
 			int rowsAffected = sttm.executeUpdate();
@@ -188,7 +191,42 @@ public class RoleDAO implements IDAO<Role> {
 
 	@Override
 	public Role selecionar(int voId) {
-		// TODO Auto-generated method stub
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+
+			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" where id = ?");
+			sttm.setInt(1, voId);
+
+			ResultSet rs = sttm.executeQuery();
+
+			Role role = null;
+			while(rs.next()) {
+				role = new Role();
+				role.setId(rs.getInt("id"));
+				role.setNome(rs.getString("nome"));
+				role.setIsAdmin(rs.getBoolean("is_admin"));
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return role;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
 		return null;
 	}
 }
