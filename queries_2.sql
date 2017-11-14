@@ -61,7 +61,8 @@ CREATE TABLE ingredientes (
 	-- created_at DATE NOT NULL,
 	-- updated_at DATE NOT NULL,
 	-- deleted_at DATE NULL,
-	CONSTRAINT ingrediente_pk PRIMARY KEY (id)
+	CONSTRAINT ingrediente_pk PRIMARY KEY (id),
+	CONSTRAINT ingrediente_nome_unique UNIQUE (nome)
 );
 
 CREATE SEQUENCE ingrediente_seq
