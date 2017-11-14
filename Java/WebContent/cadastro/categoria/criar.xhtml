@@ -28,6 +28,8 @@
 									<h:messages globalOnly="true" errorClass="error"/>
 									
 									<div class="f-row">
+											<h:message for="nome" errorClass="error"/>
+											
 					                        <h:inputText id="nome"  value="#{categoriaBean.vo.nome}" size="80"
 											             required="true" a:placeholder="Nome"
 											             validatorMessage="Nome deve ter no máximo 80 caracteres"
@@ -38,14 +40,14 @@
 				                    
 									<div class="f-row">
 		                                <label>
-		                                	É um grupo:
+		                                	É uma subcategoria:
 											<h:selectBooleanCheckbox value="#{categoriaBean.vo.selecionavel}" />
 		                                </label>
 				                    </div>
 				                    
 				                    <div class="f-row">
 										<h:selectOneMenu value="#{categoriaBean.vo.idSuperCategoria}">
-  											<f:selectItem itemValue="0" itemLabel="Selecione uma categoria" a:disabled="disabled" a:selected="selected"/>
+  											<f:selectItem itemValue="-1" itemLabel="Selecione uma categoria" a:disabled="disabled" a:selected="selected"/>
 											<f:selectItems value="#{categoriaBean.categorias}" />
 										</h:selectOneMenu>
 				                    </div>

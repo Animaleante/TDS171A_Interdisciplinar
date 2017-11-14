@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +46,10 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 			sttm = null;
 
 			return rowsAffected > 0;
-		} catch (SQLException e) {
+		} /*catch(SQLIntegrityConstraintViolationException e) {
+			e.printStackTrace();
+			// TODO - Warn user that name already exists
+		}*/ catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

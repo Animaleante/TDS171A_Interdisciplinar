@@ -166,6 +166,24 @@ public class CategoriaDAO implements IDAO<Categoria> {
         try {
             connection = Utils.createConnection();
 
+            PreparedStatement sttmCheck = connection.prepareStatement("select * from "+tableName+" where id_super_categoria = ?");
+            sttmCheck.setInt(1, categoriaId);
+
+            ResultSet rs = sttmCheck.executeQuery();
+            if(rs.next()) {
+                if (sttmCheck != null)
+                	sttmCheck.close();
+
+                sttmCheck = null;
+                
+            	return false;
+            }
+            
+            if (sttmCheck != null)
+            	sttmCheck.close();
+
+            sttmCheck = null;
+
             PreparedStatement sttm = connection.prepareStatement("delete from "+tableName+" where id = ?");
             sttm.setInt(1, categoriaId);
 

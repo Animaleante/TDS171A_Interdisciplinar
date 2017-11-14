@@ -44,7 +44,6 @@ public class CategoriaBean extends BeanBase<Categoria> {
     @Override
     public String criar() {
     	setCategorias(((CategoriaController)controller).listarGrupos());
-    	getVo().setSelecionavel(!getVo().getSelecionavel());
 
 	    return route_base + CRIAR_PAGE + FACES_REDIRECT;
     }
@@ -52,7 +51,6 @@ public class CategoriaBean extends BeanBase<Categoria> {
     @Override
     public String incluir() {
     	getVo().setSlug(Utils.toSlug(getVo().getNome()));
-    	getVo().setSelecionavel(!getVo().getSelecionavel());
     	if(!getVo().getSelecionavel())
     		getVo().setIdSuperCategoria(-1);
     	
@@ -62,7 +60,6 @@ public class CategoriaBean extends BeanBase<Categoria> {
     @Override
     public String editar(Categoria vo) {
     	setCategorias(((CategoriaController)controller).listarGrupos());
-    	vo.setSelecionavel(!vo.getSelecionavel());
     	
     	return super.editar(vo);
     }
@@ -70,7 +67,6 @@ public class CategoriaBean extends BeanBase<Categoria> {
     @Override
     public String editar() {
     	getVo().setSlug(Utils.toSlug(getVo().getNome()));
-    	getVo().setSelecionavel(!getVo().getSelecionavel());
     	if(!getVo().getSelecionavel())
     		getVo().setIdSuperCategoria(-1);
     	
@@ -115,6 +111,11 @@ public class CategoriaBean extends BeanBase<Categoria> {
 	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
 	        return false;
 	    }
+		
+		if(getVo().getSelecionavel() && getVo().getIdSuperCategoria() <= 0) {
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Subcategoria tem de ter uma super categoria!", null));
+	        return false;
+		}
 		
 		return true;
 	}
