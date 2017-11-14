@@ -79,7 +79,8 @@ CREATE TABLE categorias (
 	-- created_at DATE NOT NULL,
 	-- updated_at DATE NOT NULL,
 	-- deleted_at DATE NULL,
-	CONSTRAINT categoria_pk PRIMARY KEY (id)
+	CONSTRAINT categoria_pk PRIMARY KEY (id),
+	CONSTRAINT categoria_nome_unique UNIQUE (nome)
 );
 
 CREATE SEQUENCE categoria_seq
@@ -93,7 +94,8 @@ CREATE TABLE utensilios (
 	-- created_at DATE NOT NULL,
 	-- updated_at DATE NOT NULL,
 	-- deleted_at DATE NULL,
-	CONSTRAINT utensilio_pk PRIMARY KEY (id)
+	CONSTRAINT utensilio_pk PRIMARY KEY (id),
+	CONSTRAINT utensilio_nome_unique UNIQUE (nome)
 );
 
 CREATE SEQUENCE utensilio_seq
@@ -287,7 +289,8 @@ CREATE TABLE tags (
 	-- created_at DATE NOT NULL,
 	-- updated_at DATE NOT NULL,
 	-- deleted_at DATE NULL,
-	CONSTRAINT tag_pk PRIMARY KEY (id)
+	CONSTRAINT tag_pk PRIMARY KEY (id),
+	CONSTRAINT tag_nome_unique UNIQUE (nome)
 );
 
 CREATE SEQUENCE tag_seq
