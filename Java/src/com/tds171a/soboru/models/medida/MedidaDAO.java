@@ -120,7 +120,7 @@ public class MedidaDAO implements IDAO<Medida> {
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("update "+tableName+" set nome = ?, abreveacao = ? where id = ?");
+			PreparedStatement sttm = connection.prepareStatement("update "+tableName+" set nome = ?, abreviacao = ? where id = ?");
 			sttm.setString(1, medida.getNome());
 			sttm.setString(2, medida.getAbreviacao());
 			sttm.setInt(3, medida.getId());

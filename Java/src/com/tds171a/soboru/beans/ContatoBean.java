@@ -20,6 +20,16 @@ public class ContatoBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -4706081572950852709L;
+	
+	private String nome;
+	
+	private String email;
+	
+	private Long telefone;
+	
+	private String mensagem;
+	
+	private String route_base = "/contato/";
 
 	/**
      *Construtor setando a rota e qual
@@ -30,8 +40,74 @@ public class ContatoBean implements Serializable {
 	}
 	
 	public String index() {
-		// TODO
-		return "";
+		return route_base + "index";
+	}
+	
+	public String enviar() {
+		// TODO - enviar mensagem
+		
+		setNome("");
+		setEmail("");
+		setTelefone(null);
+		setMensagem("");
+		
+		return index();
+	}
+
+	/**
+	 * @return the nome
+	 */
+	public String getNome() {
+		return nome;
+	}
+
+	/**
+	 * @param nome the nome to set
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
+	 * @return the telefone
+	 */
+	public Long getTelefone() {
+		return telefone;
+	}
+
+	/**
+	 * @param telefone the telefone to set
+	 */
+	public void setTelefone(Long telefone) {
+		this.telefone = telefone;
+	}
+
+	/**
+	 * @return the mensagem
+	 */
+	public String getMensagem() {
+		return mensagem;
+	}
+
+	/**
+	 * @param mensagem the mensagem to set
+	 */
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
 	}
 
 }

@@ -6,6 +6,7 @@ package com.tds171a.soboru.beans;
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
@@ -59,6 +60,8 @@ public class LoginBean implements Serializable {
 	 * @return
 	 */
 	public String index() {
+		if(SessionContext.getInstance().isLogado())
+			return "/index";
 		return route_base + "index";
 	}
 	
@@ -70,7 +73,9 @@ public class LoginBean implements Serializable {
 		Usuario usuario = controller.loginUsuario(getEmail(), getSenha());
 		
 		if(usuario == null) {
-			FacesContext.getCurrentInstance().validationFailed();
+		    FacesContext context = FacesContext.getCurrentInstance();
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Verifique o e-mail/senha enviados", null));
+//			FacesContext.getCurrentInstance().validationFailed();
 			return "";
 		}
 		

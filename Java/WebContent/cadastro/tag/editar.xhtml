@@ -12,7 +12,7 @@
 		            <ul>
 		                <li><a href="/" title="Home">Home</a></li>
 		                <li><a href="#">Cadastro</a></li>
-		                <li>Ingrediente</li>
+		                <li>Tag</li>
 		            </ul>
 		        </nav>
 		
@@ -30,7 +30,7 @@
 									<div class="f-row">
 										<h:message for="nome" errorClass="error"/>
 										
-				                        <h:inputText id="nome"  value="#{ingredienteBean.vo.nome}" size="80"
+				                        <h:inputText id="nome"  value="#{tagBean.vo.nome}" size="80"
 										             required="true" a:placeholder="Nome"
 										             validatorMessage="Nome deve ter no máximo 80 caracteres"
 										             requiredMessage="Nome é obrigatório">
@@ -39,8 +39,8 @@
 				                    </div>
 				                </section>
                         		<div class="f-row submit">
-									<h:commandButton action="#{ingredienteBean.editar()}" value="Salvar"/>
-									<h:commandLink immediate="true" action="#{ingredienteBean.listar()}" value="Cancelar" />
+									<h:commandButton action="#{tagBean.editar()}" value="Salvar"/>
+									<h:commandLink immediate="true" action="#{tagBean.listar()}" value="Cancelar" />
 			                    </div>
 					        </h:form>
 		                </div>
