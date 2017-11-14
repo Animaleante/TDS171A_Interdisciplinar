@@ -1,5 +1,7 @@
 package com.tds171a.soboru.models.categoria;
 
+import java.util.List;
+
 import com.tds171a.soboru.models.ModelBase;
 import com.tds171a.soboru.vos.Categoria;
 
@@ -16,4 +18,8 @@ public class CategoriaModel extends ModelBase<Categoria> {
     public CategoriaModel() {
         dao = new CategoriaDAO();
     }
+    
+	public List<Categoria> listarGrupos() {
+		return ((CategoriaDAO)dao).listarGrupos();
+	}
 }

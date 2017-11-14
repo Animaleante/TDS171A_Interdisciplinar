@@ -1,5 +1,7 @@
 package com.tds171a.soboru.controllers;
 
+import java.util.List;
+
 import com.tds171a.soboru.models.categoria.CategoriaModel;
 import com.tds171a.soboru.vos.Categoria;
 
@@ -16,4 +18,8 @@ public class CategoriaController extends ControllerBase<Categoria> {
     public CategoriaController() {
         model = new CategoriaModel();
     }
+
+	public List<Categoria> listarGrupos() {
+		return ((CategoriaModel)model).listarGrupos();
+	}
 }

@@ -3,6 +3,7 @@ package com.tds171a.soboru.controllers;
 import java.util.List;
 
 import com.tds171a.soboru.models.IDAO;
+import com.tds171a.soboru.vos.Categoria;
 
 public abstract class ControllerBase<T> {
 	/**

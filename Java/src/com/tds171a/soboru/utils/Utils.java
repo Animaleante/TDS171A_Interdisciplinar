@@ -20,7 +20,6 @@ import java.util.regex.Pattern;
 public class Utils {
 	private static final Pattern NONLATIN = Pattern.compile("[^\\w-]");
 	private static final Pattern WHITESPACE = Pattern.compile("[\\s]");
-	private static final String PADRAO_DATA = "dd/MM/yyyy";
 	
 	/**
 	 * Metodo estatico que cria uma conexão com o banco
@@ -56,13 +55,12 @@ public class Utils {
 	}
 
     public static Date formataData(String dataFormatoString) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat(PADRAO_DATA);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sdf.setLenient(false);
         return sdf.parse(dataFormatoString);
     }
 
     public static String formataData(Date dataFormatoDate) {
-//        return new SimpleDateFormat(PADRAO_DATA).format(dataFormatoDate);
         return new SimpleDateFormat("dd/MM/yyyy EEE").format(dataFormatoDate);
     }
 

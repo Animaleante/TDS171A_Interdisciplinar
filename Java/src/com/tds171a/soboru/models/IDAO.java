@@ -2,6 +2,8 @@ package com.tds171a.soboru.models;
 
 import java.util.List;
 
+import com.tds171a.soboru.vos.Categoria;
+
 public interface IDAO<T> {
 	public boolean incluir(T vo);
 	public List<T> listar();

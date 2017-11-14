@@ -16,14 +16,22 @@ public class Categoria {
      * Par�metro nome do Categoria
      */
     private String nome;
+    
+    private boolean selecionavel;
+    
+    private int idSuperCategoria;
+    
+    private String slug;
 
     /**
      * Construtor da classe de Categoria
      */
     public Categoria() {
-
         id = -1;
         nome = "";
+        selecionavel = true;
+        idSuperCategoria = -1;
+        slug = "";
     }
 
     /**
@@ -60,4 +68,46 @@ public class Categoria {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+	/**
+	 * @return the selecionavel
+	 */
+	public boolean getSelecionavel() {
+		return selecionavel;
+	}
+
+	/**
+	 * @param selecionavel the selecionavel to set
+	 */
+	public void setSelecionavel(boolean selecionavel) {
+		this.selecionavel = selecionavel;
+	}
+
+	/**
+	 * @return the idSuperCategoria
+	 */
+	public int getIdSuperCategoria() {
+		return idSuperCategoria;
+	}
+
+	/**
+	 * @param idSuperCategoria the idSuperCategoria to set
+	 */
+	public void setIdSuperCategoria(int idSuperCategoria) {
+		this.idSuperCategoria = idSuperCategoria;
+	}
+
+	/**
+	 * @return the slug
+	 */
+	public String getSlug() {
+		return slug;
+	}
+
+	/**
+	 * @param slug the slug to set
+	 */
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
 }

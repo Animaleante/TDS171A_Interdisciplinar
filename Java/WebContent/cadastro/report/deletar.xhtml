@@ -11,7 +11,7 @@
 		            <ul>
 		                <li><a href="/" title="Home">Home</a></li>
 		                <li><a href="#">Cadastro</a></li>
-		                <li>Categoria</li>
+		                <li>Report</li>
 		            </ul>
 		        </nav>
 		
@@ -26,12 +26,12 @@
 								<h:messages globalOnly="true" errorClass="error"/>
 							</h:form>
 							
-							<h:outputText value="Tem certeza que deseja deletar a categoria '#{categoriaBean.vo.nome}'?" />
+							<h:outputText value="Tem certeza que deseja deletar o report para receita '#{reportBean.vo.receitaNome}'?" />
 	
 		                    <div class="f-row submit">
 								<h:form>
-									<h:commandButton action="#{categoriaBean.deletar()}" value="Confirmar exclusão" />
-									<h:commandLink immediate="true" action="#{categoriaBean.listar()}" value="Voltar" />
+									<h:commandButton action="#{reportBean.deletar()}" value="Confirmar exclusão" />
+									<h:commandLink immediate="true" action="#{reportBean.listar()}" value="Voltar" />
 								</h:form>
 		                    </div>
 						</div>
@@ -44,7 +44,7 @@
 	<ui:define name="script">
 		<h:outputScript>
 			navName = "cadastro";
-			subNavName = "categorias";
+			subNavName = "reports";
 		</h:outputScript>
 	</ui:define>
 </ui:composition>

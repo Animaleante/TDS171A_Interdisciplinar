@@ -34,8 +34,11 @@ public class CategoriaDAO implements IDAO<Categoria> {
         try {
             connection = Utils.createConnection();
 
-            PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" (id, nome) values(categoria_seq.NEXTVAL, ?)");
+            PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" values(categoria_seq.NEXTVAL, ?, ?, ?, ?)");
             sttm.setString(1, categoria.getNome());
+            sttm.setInt(2,  categoria.getIdSuperCategoria());
+            sttm.setBoolean(3, categoria.getSelecionavel());
+            sttm.setString(4, categoria.getSlug());
 
             int rowsAffected = sttm.executeUpdate();
 
@@ -76,13 +79,16 @@ public class CategoriaDAO implements IDAO<Categoria> {
             ResultSet rs = sttm.executeQuery();
 
             List<Categoria> list = new ArrayList<Categoria>();
+            Categoria categoria;
             while(rs.next()) {
-                int id = rs.getInt("id");
-                String nome = rs.getString("nome");
+                categoria = new Categoria();
+                categoria.setId(rs.getInt("id"));
+                categoria.setNome(rs.getString("nome"));
+                categoria.setIdSuperCategoria(rs.getInt("id_super_categoria"));
+                categoria.setSelecionavel(rs.getBoolean("selecionavel"));
+                categoria.setSlug(rs.getString("slug"));
 
-                Categoria i = new Categoria(id, nome);
-
-                list.add(i);
+                list.add(categoria);
             }
 
             if (sttm != null)
@@ -118,9 +124,12 @@ public class CategoriaDAO implements IDAO<Categoria> {
         try {
             connection = Utils.createConnection();
 
-            PreparedStatement sttm = connection.prepareStatement("update "+tableName+" set nome = ? where id = ?");
+            PreparedStatement sttm = connection.prepareStatement("update "+tableName+" set nome = ?, id_super_categoria = ?, selecionavel = ?, slug = ? where id = ?");
             sttm.setString(1, categoria.getNome());
-            sttm.setInt(2, categoria.getId());
+            sttm.setInt(2,  categoria.getIdSuperCategoria());
+            sttm.setBoolean(3, categoria.getSelecionavel());
+            sttm.setString(4, categoria.getSlug());
+            sttm.setInt(5, categoria.getId());
 
             int rowsAffected = sttm.executeUpdate();
 
@@ -200,6 +209,9 @@ public class CategoriaDAO implements IDAO<Categoria> {
                 categoria = new Categoria();
                 categoria.setId(rs.getInt("id"));
                 categoria.setNome(rs.getString("nome"));
+                categoria.setIdSuperCategoria(rs.getInt("id_super_categoria"));
+                categoria.setSelecionavel(rs.getBoolean("selecionavel"));
+                categoria.setSlug(rs.getString("slug"));
             }
 
             if (sttm != null)
@@ -208,6 +220,50 @@ public class CategoriaDAO implements IDAO<Categoria> {
             sttm = null;
 
             return categoria;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+            if (connection != null)
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
+
+        return null;
+	}
+
+	public List<Categoria> listarGrupos() {
+        Connection connection = null;
+        try {
+            connection = Utils.createConnection();
+
+            PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" where selecionavel = 0");
+
+            ResultSet rs = sttm.executeQuery();
+
+            List<Categoria> list = new ArrayList<Categoria>();
+            Categoria categoria;
+            while(rs.next()) {
+                categoria = new Categoria();
+                categoria.setId(rs.getInt("id"));
+                categoria.setNome(rs.getString("nome"));
+                categoria.setIdSuperCategoria(rs.getInt("id_super_categoria"));
+                categoria.setSelecionavel(rs.getBoolean("selecionavel"));
+                categoria.setSlug(rs.getString("slug"));
+
+                list.add(categoria);
+            }
+
+            if (sttm != null)
+                sttm.close();
+
+            sttm = null;
+
+            return list;
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

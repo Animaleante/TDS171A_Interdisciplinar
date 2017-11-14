@@ -3,12 +3,17 @@
  */
 package com.tds171a.soboru.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.inject.Named;
 
 import com.tds171a.soboru.controllers.CategoriaController;
+import com.tds171a.soboru.utils.Utils;
 import com.tds171a.soboru.vos.Categoria;
 
 @Named("categoriaBean")
@@ -24,6 +29,8 @@ public class CategoriaBean extends BeanBase<Categoria> {
      */
     private static final long serialVersionUID = 8410408634179869866L;
 
+	private List<Categoria> categorias;
+	
     /**
      *Construtor setando a rota e qual
      *será passado para o navegador.
@@ -32,6 +39,42 @@ public class CategoriaBean extends BeanBase<Categoria> {
     	route_base = "/cadastro/categoria/";
         controller = new CategoriaController();
         setVo(new Categoria());
+    }
+    
+    @Override
+    public String criar() {
+    	setCategorias(((CategoriaController)controller).listarGrupos());
+    	getVo().setSelecionavel(!getVo().getSelecionavel());
+
+	    return route_base + CRIAR_PAGE + FACES_REDIRECT;
+    }
+    
+    @Override
+    public String incluir() {
+    	getVo().setSlug(Utils.toSlug(getVo().getNome()));
+    	getVo().setSelecionavel(!getVo().getSelecionavel());
+    	if(!getVo().getSelecionavel())
+    		getVo().setIdSuperCategoria(-1);
+    	
+    	return super.incluir();
+    }
+    
+    @Override
+    public String editar(Categoria vo) {
+    	setCategorias(((CategoriaController)controller).listarGrupos());
+    	vo.setSelecionavel(!vo.getSelecionavel());
+    	
+    	return super.editar(vo);
+    }
+    
+    @Override
+    public String editar() {
+    	getVo().setSlug(Utils.toSlug(getVo().getNome()));
+    	getVo().setSelecionavel(!getVo().getSelecionavel());
+    	if(!getVo().getSelecionavel())
+    		getVo().setIdSuperCategoria(-1);
+    	
+    	return super.editar();
     }
 
     /**
@@ -83,5 +126,23 @@ public class CategoriaBean extends BeanBase<Categoria> {
 	@Override
 	public void limparVo() {
 		setVo(new Categoria());
+	}
+
+	/**
+	 * @return the categorias
+	 */
+	public List<SelectItem> getCategorias() {
+		List<SelectItem> items = new ArrayList<SelectItem>();
+	    for (Categoria c : this.categorias) {
+	        items.add(new SelectItem(c.getId(), c.getNome()));
+	    }
+	    return items;
+	}
+
+	/**
+	 * @param categorias the categorias to set
+	 */
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
 	}
 }

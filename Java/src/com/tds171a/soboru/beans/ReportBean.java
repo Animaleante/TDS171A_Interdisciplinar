@@ -65,6 +65,11 @@ public class ReportBean extends BeanBase<Report> {
 
 	    return super.incluir();
 	}
+	
+	@Override
+	public String deletar(Report vo) {
+		return super.deletar(vo);
+	}
 
 	/**
      * Override do deletar, onde verifica a sessao, 
