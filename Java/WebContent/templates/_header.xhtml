@@ -15,44 +15,46 @@
 		                <li id="nav_home">
 		                    <a href="#{request.contextPath}/" title="Home"><span>Home</span></a>
 		                </li>
-		                <li id="nav_cadastro">
-		                    <a href="#" title="Cadastro"><span>Cadastro</span></a>
-		                    <ul>
-		                        <li role="presentation" id="nav_categorias">
-		                    		<h:commandLink action="#{categoriaBean.listar()}" value="Categorias" />
-		                        </li>
-		                        <li role="presentation" id="nav_ingredientes">
-		                    		<h:commandLink action="#{ingredienteBean.listar()}" value="Ingredientes" />
-		                        </li>
-		                        <li role="presentation" id="nav_medidas">
-		                    		<h:commandLink action="#{medidaBean.listar()}" value="Medidas" />
-		                        </li>
-		                        <li role="presentation" id="nav_utensilios">
-		                    		<h:commandLink action="#{utensilioBean.listar()}" value="Utensilios" />
-		                        </li>
-		                        <li role="presentation" id="nav_tags">
-		                    		<h:commandLink action="#{tagBean.listar()}" value="Tag" />
-		                        </li>
-		                        <li role="presentation" id="nav_receitas">
-		                    		<h:commandLink action="#{receitaBean.listar()}" value="Receitas" />
-		                        </li>
-		                        <li role="presentation" id="nav_roles">
-		                    		<h:commandLink action="#{roleBean.listar()}" value="Roles" />
-		                        </li>
-		                        <li role="presentation" id="nav_usuarios">
-		                    		<h:commandLink action="#{usuarioBean.listar()}" value="Usuarios" />
-		                        </li>
-		                        <li role="presentation" id="nav_reports">
-		                    		<h:commandLink action="#{reportBean.listar()}" value="Reports" />
-		                        </li>
-		                        <li role="presentation" id="nav_comentarios">
-		                    		<h:commandLink action="#{comentarioBean.listar()}" value="Comentarios" />
-		                        </li>
-		                        <li role="presentation" id="nav_pontuacoes">
-		                    		<h:commandLink action="#{pontuacaoBean.listar()}" value="Pontuacoes" />
-		                        </li>
-		                    </ul>
-		                </li>
+						<c:if test="#{loginBean.logado}">
+			                <li id="nav_cadastro">
+			                    <a href="#" title="Cadastro"><span>Cadastro</span></a>
+			                    <ul>
+			                        <li role="presentation" id="nav_categorias">
+			                    		<h:commandLink action="#{categoriaBean.listar()}" value="Categorias" />
+			                        </li>
+			                        <li role="presentation" id="nav_ingredientes">
+			                    		<h:commandLink action="#{ingredienteBean.listar()}" value="Ingredientes" />
+			                        </li>
+			                        <li role="presentation" id="nav_medidas">
+			                    		<h:commandLink action="#{medidaBean.listar()}" value="Medidas" />
+			                        </li>
+			                        <li role="presentation" id="nav_utensilios">
+			                    		<h:commandLink action="#{utensilioBean.listar()}" value="Utensilios" />
+			                        </li>
+			                        <li role="presentation" id="nav_tags">
+			                    		<h:commandLink action="#{tagBean.listar()}" value="Tag" />
+			                        </li>
+			                        <li role="presentation" id="nav_receitas">
+			                    		<h:commandLink action="#{receitaBean.listar()}" value="Receitas" />
+			                        </li>
+			                        <li role="presentation" id="nav_roles">
+			                    		<h:commandLink action="#{roleBean.listar()}" value="Roles" />
+			                        </li>
+			                        <li role="presentation" id="nav_usuarios">
+			                    		<h:commandLink action="#{usuarioBean.listar()}" value="Usuarios" />
+			                        </li>
+			                        <li role="presentation" id="nav_reports">
+			                    		<h:commandLink action="#{reportBean.listar()}" value="Reports" />
+			                        </li>
+			                        <li role="presentation" id="nav_comentarios">
+			                    		<h:commandLink action="#{comentarioBean.listar()}" value="Comentarios" />
+			                        </li>
+			                        <li role="presentation" id="nav_pontuacoes">
+			                    		<h:commandLink action="#{pontuacaoBean.listar()}" value="Pontuacoes" />
+			                        </li>
+			                    </ul>
+			                </li>
+						</c:if>
 		                <li id="nav_contato">
 		                    <h:commandLink action="#{contatoBean.index()}" value="">
 		                    	<span>Contato</span>
@@ -71,7 +73,7 @@
 		        <nav class="user-nav" role="navigation">
 		            <ul>
 		                <li class="light">
-		                    <h:commandLink action="#{pesquisaBean.pesquisar()}" value="">
+		                    <h:commandLink action="#{pesquisaBean.index()}" value="">
 		                        <i class="icon icon-themeenergy_search"></i> <span>Procurar receitas</span>
 		                    </h:commandLink>
 		                </li>

@@ -64,7 +64,7 @@ public class RegistroBean implements Serializable {
 	 * método para exibir o índex
 	 */
 	public String index() {
-		return route_base + "index";
+		return route_base + "index?faces-redirect=true";
 	}
 	
 	/**

@@ -15,7 +15,7 @@ CREATE TABLE roles (
 	CONSTRAINT role_nome_unique UNIQUE (nome)
 );
 
-CREATE SEQUENCE role_seqhahahah
+CREATE SEQUENCE role_seq
 	INCREMENT BY 1
 	START WITH 1
 	NOCACHE;

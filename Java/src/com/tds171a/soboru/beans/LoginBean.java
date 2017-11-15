@@ -62,7 +62,7 @@ public class LoginBean implements Serializable {
 	public String index() {
 		if(SessionContext.getInstance().isLogado())
 			return "/index";
-		return route_base + "index";
+		return route_base + "index?faces-redirect=true";
 	}
 	
 	/**

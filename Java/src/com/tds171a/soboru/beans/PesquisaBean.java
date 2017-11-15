@@ -46,6 +46,10 @@ public class PesquisaBean implements Serializable {
 		setTermoBusca("");
 	}
 	
+	public String index() {
+		return ROUTE_BASE + "index?faces-redirect=true";
+	}
+	
 	/**
 	 * recebe a rota para a pesquisa.
 	 */

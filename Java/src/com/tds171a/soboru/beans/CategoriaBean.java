@@ -128,6 +128,12 @@ public class CategoriaBean extends BeanBase<Categoria> {
 	public void limparVo() {
 		setVo(new Categoria());
 	}
+	
+	public String isGrupo(Categoria categoria) {
+		if(categoria.getSelecionavel())
+			return "Não";
+		return "Sim";
+	}
 
 	/**
 	 * @return the categorias

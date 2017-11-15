@@ -33,15 +33,15 @@
 							            <thead>
 							                <tr>
 							                    <th>Nome</th>
+							                    <th>Grupo</th>
 							                    <th>Ações</th>
 							                </tr>
 							            </thead>
 							            <tbody>
 							            	<c:forEach items="#{categoriaBean.lista}" var="categoria">
 							                    <tr>
-							                        <td>
-							                            #{categoria.nome}
-							                        </td>
+							                        <td>#{categoria.nome}</td>
+							                        <td>#{categoriaBean.isGrupo(categoria)}</td>
 							                        <td>
 														<h:form>
 															<h:commandLink action="#{categoriaBean.editar(categoria)}" value="Editar"></h:commandLink> |
