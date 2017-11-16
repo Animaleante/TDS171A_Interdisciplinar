@@ -357,9 +357,11 @@ insert into receitas_ingredientes values(receita_seq.NEXTVAL, 1, 1, 2, null, 50)
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 1, 2, 1, null, 200);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 1, 2, 1, 'Cobertura', 150);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 1, 3, 3, 'Cobertura', 10);
+
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 2, 1, 1, null, 10);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 2, 2, 2, null, 300);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 2, 3, 2, null, 800);
+    
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 1, 1, null, 10);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 3, 1, null, 15);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 4, 2, null, 100);
