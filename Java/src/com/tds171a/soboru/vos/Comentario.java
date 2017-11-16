@@ -13,11 +13,15 @@ public class Comentario {
 	private int usuarioId;
 	private String body;
 	
-	private String receitaNome;
-	private String usuarioNome;
+	private Receita receita;
+	private Usuario usuario;
 	
 	public Comentario() {
-		// TODO Auto-generated constructor stub
+		id = -1;
+		receitaId = -1;
+		usuarioId = -1;
+		receita = null;
+		usuario = null;
 	}
 	
 	/**
@@ -70,30 +74,30 @@ public class Comentario {
 	}
 
 	/**
-	 * @return the receitaNome
+	 * @return the receita
 	 */
-	public String getReceitaNome() {
-		return receitaNome;
+	public Receita getReceita() {
+		return receita;
 	}
 
 	/**
-	 * @param receitaNome the receitaNome to set
+	 * @param receita the receita to set
 	 */
-	public void setReceitaNome(String receitaNome) {
-		this.receitaNome = receitaNome;
+	public void setReceita(Receita receita) {
+		this.receita = receita;
 	}
 
 	/**
-	 * @return the usuarioNome
+	 * @return the usuario
 	 */
-	public String getUsuarioNome() {
-		return usuarioNome;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
 	/**
-	 * @param usuarioNome the usuarioNome to set
+	 * @param usuario the usuario to set
 	 */
-	public void setUsuarioNome(String usuarioNome) {
-		this.usuarioNome = usuarioNome;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 }

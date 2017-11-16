@@ -1,5 +1,7 @@
 package com.tds171a.soboru.controllers;
 
+import java.util.List;
+
 import com.tds171a.soboru.models.usuario.UsuarioModel;
 import com.tds171a.soboru.vos.Usuario;
 
@@ -23,5 +25,9 @@ public class UsuarioController extends ControllerBase<Usuario> {
 	 */
 	public Usuario loginUsuario(String email, String senha) {
 		return ((UsuarioModel)model).loginUsuario(email, senha);
+	}
+
+	public List<Usuario> selecionarUsuariosQueFavoritaram(int receitaId) {
+		return ((UsuarioModel) model).selecionarUsuariosQueFavoritaram(receitaId);
 	}
 }

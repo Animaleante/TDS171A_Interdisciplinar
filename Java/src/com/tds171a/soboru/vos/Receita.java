@@ -1,6 +1,5 @@
 package com.tds171a.soboru.vos;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Receita {
@@ -110,6 +109,11 @@ public class Receita {
 	 */
 	private List<Pontuacao> pontuacoes;
 	
+	/**
+	 * 
+	 */
+	private List<Usuario> usuariosFavoritaram;
+	
 	public Receita() {
 		this.id = -1;
 		this.nome = "";
@@ -128,12 +132,13 @@ public class Receita {
 		this.categoria = null;
 		this.usuario = null;
 		
-		this.utensilios = new ArrayList<Utensilio>();
-		this.tags = new ArrayList<Tag>();
-		this.receitaIngredientes = new ArrayList<ReceitaIngrediente>();
-		this.comentarios = new ArrayList<Comentario>();
-		this.reports = new ArrayList<Report>();
-		this.pontuacoes = new ArrayList<Pontuacao>();
+		this.utensilios = null;
+		this.tags = null;
+		this.receitaIngredientes = null;
+		this.comentarios = null;
+		this.reports = null;
+		this.pontuacoes = null;
+		this.usuariosFavoritaram = null;
 	}
 
 	/**
@@ -428,5 +433,19 @@ public class Receita {
 	 */
 	public void setPontuacoes(List<Pontuacao> pontuacoes) {
 		this.pontuacoes = pontuacoes;
+	}
+
+	/**
+	 * @return the usuariosFavoritaram
+	 */
+	public List<Usuario> getUsuariosFavoritaram() {
+		return usuariosFavoritaram;
+	}
+
+	/**
+	 * @param usuariosFavoritaram the usuariosFavoritaram to set
+	 */
+	public void setUsuariosFavoritaram(List<Usuario> usuariosFavoritaram) {
+		this.usuariosFavoritaram = usuariosFavoritaram;
 	}
 }
