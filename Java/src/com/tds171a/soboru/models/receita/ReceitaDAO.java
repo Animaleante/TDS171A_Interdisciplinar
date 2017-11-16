@@ -13,6 +13,7 @@ import java.util.List;
 import com.tds171a.soboru.models.IDAO;
 import com.tds171a.soboru.utils.Utils;
 import com.tds171a.soboru.vos.Receita;
+import com.tds171a.soboru.vos.Tag;
 
 /**
  * @author Sony
@@ -145,9 +146,9 @@ public class ReceitaDAO implements IDAO<Receita> {
 			/*PreparedStatement sttm = connection.prepareStatement(
 					"select r.ID, r.NOME, r.ID_CATEGORIA, r.ID_USUARIO, r.PORCAO, r.TEMPO_PREPARO, r.MODO_PREPARO, r.IMG_PATH, r.PONTUACAO_MEDIA, r.VIEWS, FAVS, r.SLUG, r.APROVADO, c.NOME, u.NOME from "+tableName+" r "+
 					"inner join categorias c on r.ID_CATEGORIA = c.ID inner join usuarios u on r.ID_USUARIO = u.ID");*/
-			PreparedStatement sttm = connection.prepareStatement("select from "+tableName+" where id = ?");
+			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" where id = ?");
 			sttm.setInt(1, receitaId);
-
+			
 			ResultSet rs = sttm.executeQuery();
 
 			Receita receita = null;
@@ -277,5 +278,82 @@ public class ReceitaDAO implements IDAO<Receita> {
 		}
 
 		return false;
+	}
+
+	public boolean incluirTag(Receita receita, Tag tag) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+
+			PreparedStatement sttm = connection.prepareStatement(
+				"insert into receitas_tags values(?,?)");
+			sttm.setInt(1, receita.getId());
+			sttm.setInt(2, tag.getId());
+
+			int rowsAffected = sttm.executeUpdate();
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return rowsAffected > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return false;
+	}
+
+	public List<Tag> listarTags(Receita receita) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+
+			PreparedStatement sttm = connection.prepareStatement("select t.id,t.nome from tags t inner join receitas_tags rt on rt.id_receita = ? and rt.id_tag = t.id");
+			sttm.setInt(1, receita.getId());
+
+			ResultSet rs = sttm.executeQuery();
+
+			List<Tag> list = new ArrayList<Tag>();
+			Tag tag = null;
+			while(rs.next()) {
+				tag = new Tag();
+
+				tag.setId(rs.getInt("id"));
+				tag.setNome(rs.getString("nome"));
+				
+				list.add(tag);
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return null;
 	}
 }
