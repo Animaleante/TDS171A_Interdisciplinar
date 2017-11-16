@@ -31,7 +31,6 @@ import com.tds171a.soboru.controllers.UsuarioController;
 import com.tds171a.soboru.controllers.UtensilioController;
 import com.tds171a.soboru.utils.Utils;
 import com.tds171a.soboru.vos.Categoria;
-import com.tds171a.soboru.vos.Comentario;
 import com.tds171a.soboru.vos.Ingrediente;
 import com.tds171a.soboru.vos.Medida;
 import com.tds171a.soboru.vos.Receita;
@@ -212,6 +211,49 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	@Override
 	public void limparVo() {
 		setVo(new Receita());
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String favoritar() {
+		if(SessionContext.getInstance().isLogado()) {
+			// TODO - adicionar as receitas favoritas desse usuario
+			getVo().getUsuariosFavoritaram().add(SessionContext.getInstance().getUsuarioLogado());
+			// TODO - pegar receita novamente com novos dados
+			return exibir(getVo());
+		}
+		
+		return "/login/"+INDEX_PAGE+FACES_REDIRECT;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String reportar() {
+		if(SessionContext.getInstance().isLogado()) {
+			// TODO - criar report desse usuario para essa receita
+			return exibir(getVo());
+		}
+		
+		return "/login/"+INDEX_PAGE+FACES_REDIRECT;
+	}
+	
+	/**
+	 * 
+	 * @param pontos
+	 * @return
+	 */
+	public String pontuar(double pontos) {
+		if(SessionContext.getInstance().isLogado()) {
+			// TODO - adicionar pontuacao a essa receita atrelada a esse usuario, e recalcular pontuacao_media da receita
+			// TODO - pegar receita novamente com novos dados
+			return exibir(getVo());
+		}
+		
+		return "/login/"+INDEX_PAGE+FACES_REDIRECT;
 	}
 
 	/**

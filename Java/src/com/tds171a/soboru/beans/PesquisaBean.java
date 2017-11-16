@@ -35,20 +35,49 @@ public class PesquisaBean implements Serializable {
 	 */
 	private static final String ROUTE_BASE = "/pesquisa/";
 	
+	/**
+	 * Controlador de Receita
+	 */
 	private ReceitaController receitaController;
+	
+	/**
+	 * Controlador de Ingrediente
+	 */
 	private IngredienteController ingredienteController;
+	
+	/**
+	 * Controlador de categoria
+	 */
 	private CategoriaController categoriaController;
 	
 	/**
-	 * recebe os termos usados para pesquisar
+	 * Recebe os ingredientes a serem usados na pesquisa
+	 */
+	private List<Integer> lista;
+	
+	/**
+	 * Recebe os termos usados para pesquisar
 	 */
 	private String termoBusca;
+	
+	/**
+	 * Recebe o id da categoria para pesquisar
+	 */
 	private int categoriaId;
+	
 	/**
 	 * Recebe uma lista com os ingredientes
 	 */
 	private List<Ingrediente> listaIngredientes;
+	
+	/**
+	 * Recebe uma lista com as categorias existentes
+	 */
 	private List<Categoria> listaCategorias;
+	
+	/**
+	 * Recebe uma lista de receitas que vieram como resultados da pesquisa
+	 */
 	private List<Receita> resultados;
 
 	/**
@@ -61,6 +90,7 @@ public class PesquisaBean implements Serializable {
 		ingredienteController = new IngredienteController();
 		categoriaController = new CategoriaController();
 		
+		setLista(new ArrayList<Integer>());
 		setTermoBusca("");
 		setCategoriaId(0);
 		setResultados(new ArrayList<Receita>());
@@ -69,31 +99,39 @@ public class PesquisaBean implements Serializable {
 	}
 	
 	public String index() {
+		setLista(new ArrayList<Integer>());
 		setTermoBusca("");
 		setCategoriaId(0);
 		setResultados(new ArrayList<Receita>());
 		setListaIngredientes(ingredienteController.listar());
 		setListaCategorias(categoriaController.listar());
 		
-		return ROUTE_BASE + "index?faces-redirect=true";
+		return ROUTE_BASE+BeanBase.INDEX_PAGE+BeanBase.FACES_REDIRECT;
 	}
 	
 	/**
 	 * recebe a rota para a pesquisa.
 	 */
 	public String pesquisar() {
-		if(!getTermoBusca().isEmpty()) {
-			setResultados(receitaController.selecionarPorNome(getTermoBusca()));
-		}
+		lista.add(1);
+		lista.add(3);
 		
-		return ROUTE_BASE + "index?faces-redirect=true";
+		if(!getTermoBusca().isEmpty() && getLista().size() > 0) {
+			setResultados(receitaController.selecionarPorNomeEIngredientes(getTermoBusca(), getLista()));
+		} else if(!getTermoBusca().isEmpty()) {
+			setResultados(receitaController.selecionarPorNome(getTermoBusca()));
+		} else if(getLista().size() > 0) {
+			receitaController.selecionarPorIngredientes(getLista());
+		}
+
+		return ROUTE_BASE+BeanBase.INDEX_PAGE+BeanBase.FACES_REDIRECT;
 	}
 
 	/**
 	 * @return the termoBusca
 	 */
 	public String getTermoBusca() {
-		return termoBusca;
+		return termoBusca.trim();
 	}
 
 	/**
@@ -161,6 +199,20 @@ public class PesquisaBean implements Serializable {
 	 */
 	public void setResultados(List<Receita> resultados) {
 		this.resultados = resultados;
+	}
+
+	/**
+	 * @return the lista
+	 */
+	public List<Integer> getLista() {
+		return lista;
+	}
+
+	/**
+	 * @param lista the lista to set
+	 */
+	public void setLista(List<Integer> lista) {
+		this.lista = lista;
 	}
 
 }

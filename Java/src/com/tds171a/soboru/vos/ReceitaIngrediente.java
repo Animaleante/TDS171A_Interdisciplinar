@@ -58,7 +58,15 @@ public class ReceitaIngrediente {
 	 * 
 	 */
 	public ReceitaIngrediente() {
-		
+		id = -1;
+		id_receita = -1;
+		id_ingrediente = -1;
+		id_medida = -1;
+		sub_sessao = null;
+		qty = 0;
+		medida = null;
+		ingrediente = null;
+		receita = null;
 	}
 
 	/**
