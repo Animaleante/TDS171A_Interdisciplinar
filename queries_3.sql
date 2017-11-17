@@ -274,7 +274,7 @@ CREATE SEQUENCE comentario_seq
 CREATE TABLE pontuacoes (
     id_receita NUMBER(11) NOT NULL,
     id_usuario NUMBER(11) NOT NULL,
-    qty NUMBER(11) NOT NULL,
+    qty NUMBER(1) NOT NULL,
     -- created_at DATE NOT NULL,
     -- updated_at DATE NOT NULL,
     -- deleted_at DATE NULL,
@@ -379,7 +379,9 @@ insert into ingredientes_fav values(1, 2);
 
 insert into ingredientes_exc values(2, 2);
 
+insert into receitas_fav values(1, 1);
 insert into receitas_fav values(1, 2);
+update receitas set favs = (select count(id_receita) from receitas_fav where id_receita = 1) where id = 1;
 
 insert into receitas_exc values(2, 2);
 
@@ -387,14 +389,20 @@ insert into comentarios values(comentario_seq.NEXTVAL, 1, 2, 'Melhor receita 1.'
 insert into comentarios values(comentario_seq.NEXTVAL, 2, 2, 'Melhor receita 2.');
 insert into comentarios values(comentario_seq.NEXTVAL, 3, 1, 'Melhor receita 3.');
 
-insert into pontuacoes values(1, 2, 4.5);
+insert into pontuacoes values(1, 1, 3);
+insert into pontuacoes values(1, 2, 4);
+update receitas set pontuacao_media = (select avg(qty) from pontuacoes where id_receita = 1) where id = 1;
 insert into pontuacoes values(2, 2, 2);
+update receitas set pontuacao_media = (select avg(qty) from pontuacoes where id_receita = 2) where id = 2;
 insert into pontuacoes values(3, 2, 5);
+update receitas set pontuacao_media = (select avg(qty) from pontuacoes where id_receita = 3) where id = 3;
 
 insert into receitas_tags values(1, 1);
 insert into receitas_tags values(1, 2);
 insert into receitas_tags values(2, 3);
 insert into receitas_tags values(3, 1);
 insert into receitas_tags values(3, 3);
+
+update receitas set views = views + 1 where id = 1;
 
 commit;
