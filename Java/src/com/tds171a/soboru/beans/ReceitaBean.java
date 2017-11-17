@@ -10,7 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -156,6 +155,17 @@ public class ReceitaBean  extends BeanBase<Receita> {
 			vo.setReceitaIngredientes(receitaIngredienteController.selecionarPorReceita(vo.getId()));
 		
 		return super.exibir(vo);
+	}
+	
+	@Override
+	public String editar(Receita vo) {
+		setCategorias(categoriaController.listar());
+		setIngredientes(ingredienteController.listar());
+		setMedidas(medidaController.listar());
+		setUtensilios(utensilioController.listar());
+		setTags(tagController.listar());
+		
+		return super.editar(vo);
 	}
 
 	/**

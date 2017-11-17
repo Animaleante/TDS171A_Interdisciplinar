@@ -138,6 +138,8 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	 */
 	@Override
 	public String exibir(Receita vo) {
+		vo = controller.selecionar(vo.getId());
+		
 		if(vo.getCategoria() == null)
 			vo.setCategoria(categoriaController.selecionar(vo.getCategoriaId()));
 		

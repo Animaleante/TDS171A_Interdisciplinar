@@ -113,15 +113,15 @@ public class PesquisaBean implements Serializable {
 	 * recebe a rota para a pesquisa.
 	 */
 	public String pesquisar() {
-		lista.add(1);
-		lista.add(3);
+//		lista.add(1);
+//		lista.add(3);
 		
 		if(!getTermoBusca().isEmpty() && getLista().size() > 0) {
 			setResultados(receitaController.selecionarPorNomeEIngredientes(getTermoBusca(), getLista()));
 		} else if(!getTermoBusca().isEmpty()) {
 			setResultados(receitaController.selecionarPorNome(getTermoBusca()));
 		} else if(getLista().size() > 0) {
-			receitaController.selecionarPorIngredientes(getLista());
+			setResultados(receitaController.selecionarPorIngredientes(getLista()));
 		}
 
 		return ROUTE_BASE+BeanBase.INDEX_PAGE+BeanBase.FACES_REDIRECT;

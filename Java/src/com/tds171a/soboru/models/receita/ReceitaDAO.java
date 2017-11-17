@@ -3,7 +3,6 @@
  */
 package com.tds171a.soboru.models.receita;
 
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -360,7 +359,7 @@ public class ReceitaDAO implements IDAO<Receita> {
 		try {
 			connection = Utils.createConnection();
 			
-			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" where lower(nome) like lower(?)");
+			PreparedStatement sttm = connection.prepareStatement("select id, nome, img_path, pontuacao_media, favs from "+tableName+" where lower(nome) like lower(?) and aprovado = 1");
 			sttm.setString(1, "%"+termoBusca+"%");
 
 			ResultSet rs = sttm.executeQuery();
@@ -372,17 +371,17 @@ public class ReceitaDAO implements IDAO<Receita> {
 
 				receita.setId(rs.getInt("id"));
 				receita.setNome(rs.getString("nome"));
-				receita.setCategoriaId(rs.getInt("id_categoria"));
-				receita.setUsuarioId(rs.getInt("id_usuario"));
-				receita.setPorcao(rs.getInt("porcao"));
-				receita.setTempoPreparo(rs.getDouble("tempo_preparo"));
-				receita.setModoPreparo(rs.getString("modo_preparo"));
+//				receita.setCategoriaId(rs.getInt("id_categoria"));
+//				receita.setUsuarioId(rs.getInt("id_usuario"));
+//				receita.setPorcao(rs.getInt("porcao"));
+//				receita.setTempoPreparo(rs.getDouble("tempo_preparo"));
+//				receita.setModoPreparo(rs.getString("modo_preparo"));
 				receita.setImgPath(rs.getString("img_path"));
 				receita.setPontuacaoMedia(rs.getDouble("pontuacao_media"));
-				receita.setViews(rs.getInt("views"));
+//				receita.setViews(rs.getInt("views"));
 				receita.setFavs(rs.getInt("favs"));
-				receita.setSlug(rs.getString("slug"));
-				receita.setAprovado(rs.getBoolean("aprovado"));
+//				receita.setSlug(rs.getString("slug"));
+//				receita.setAprovado(rs.getBoolean("aprovado"));
 				
 				list.add(receita);
 			}
@@ -418,16 +417,22 @@ public class ReceitaDAO implements IDAO<Receita> {
 			for(int i = 0; i < ingredientes.size(); i++) {
 				idsArray += "?,";
 			}
-			idsArray = idsArray.substring(0, idsArray.length());
-			PreparedStatement sttm = connection.prepareStatement(
-					"select distinct r.id, r.nome, r.id_categoria, r.id_usuario, r.porcao, r.tempo_preparo, r.modo_preparo, r.img_path, r.pontuacao_media, r.views, r.favs, r.slug, r.aprovado "
-					+ "from "+tableName+" r inner join receitas_ingredientes ri on r.id = ri.id_receita where ri.id_ingrediente in ("+idsArray+")");
+			idsArray = idsArray.substring(0, idsArray.length()-1);
 			
-			System.out.println("select distinct r.id, r.nome, r.id_categoria, r.id_usuario, r.porcao, r.tempo_preparo, r.modo_preparo, r.img_path, r.pontuacao_media, r.views, r.favs, r.slug, r.aprovado "
-					+ "from "+tableName+" r inner join receitas_ingredientes ri on r.id = ri.id_receita where ri.id_ingrediente in ("+idsArray+")");
+			/*PreparedStatement sttm = connection.prepareStatement(
+					"select r.id, r.nome, r.id_categoria, r.id_usuario, r.porcao, r.tempo_preparo, r.modo_preparo, r.img_path, r.pontuacao_media, r.views, r.favs, r.slug, r.aprovado "
+					+ "from "+tableName+" r inner join receitas_ingredientes ri on r.id = ri.id_receita where ri.id_ingrediente in ("+idsArray+") "
+					+ "group by (r.id, r.nome, r.id_categoria, r.id_usuario, r.porcao, r.tempo_preparo, r.modo_preparo, r.img_path, r.pontuacao_media, r.views, r.favs, r.slug, r.aprovado)");*/
+			/*PreparedStatement sttm = connection.prepareStatement(
+					"select r.id, r.nome, r.img_path, r.pontuacao_media, r.favs "
+							+ "from "+tableName+" r inner join receitas_ingredientes ri on r.id = ri.id_receita where ri.id_ingrediente in ("+idsArray+") and r.aprovado = 1 "
+							+ "group by (r.id, r.nome, r.img_path, r.pontuacao_media, r.favs)");*/
+			PreparedStatement sttm = connection.prepareStatement(
+					"select distinct r.id, r.nome, r.img_path, r.pontuacao_media, r.favs "
+					+ "from "+tableName+" r inner join receitas_ingredientes ri on r.id = ri.id_receita where ri.id_ingrediente in ("+idsArray+") and r.aprovado = 1 ");
+			
 			int conta = 1;
 			for(Integer i : ingredientes) {
-				System.out.println("Setting: " + i + " to " + conta);
 				sttm.setInt(conta, i);
 				conta++;
 			}
@@ -441,20 +446,22 @@ public class ReceitaDAO implements IDAO<Receita> {
 
 				receita.setId(rs.getInt("id"));
 				receita.setNome(rs.getString("nome"));
-				receita.setCategoriaId(rs.getInt("id_categoria"));
-				receita.setUsuarioId(rs.getInt("id_usuario"));
-				receita.setPorcao(rs.getInt("porcao"));
-				receita.setTempoPreparo(rs.getDouble("tempo_preparo"));
-				receita.setModoPreparo(rs.getString("modo_preparo"));
+//				receita.setCategoriaId(rs.getInt("id_categoria"));
+//				receita.setUsuarioId(rs.getInt("id_usuario"));
+//				receita.setPorcao(rs.getInt("porcao"));
+//				receita.setTempoPreparo(rs.getDouble("tempo_preparo"));
+//				receita.setModoPreparo(rs.getString("modo_preparo"));
 				receita.setImgPath(rs.getString("img_path"));
 				receita.setPontuacaoMedia(rs.getDouble("pontuacao_media"));
-				receita.setViews(rs.getInt("views"));
+//				receita.setViews(rs.getInt("views"));
 				receita.setFavs(rs.getInt("favs"));
-				receita.setSlug(rs.getString("slug"));
-				receita.setAprovado(rs.getBoolean("aprovado"));
+//				receita.setSlug(rs.getString("slug"));
+//				receita.setAprovado(rs.getBoolean("aprovado"));
 				
 				list.add(receita);
 			}
+			
+			System.out.println("Size: " + list.size());
 
 			if (sttm != null)
 				sttm.close();
@@ -483,19 +490,26 @@ public class ReceitaDAO implements IDAO<Receita> {
 		try {
 			connection = Utils.createConnection();
 			
-			Object[] ingredienteIds = new Object[ingredientes.size()];
-			int count = 0;
-			for(Integer i : ingredientes) {
-				ingredienteIds[count] = i;
-				count++;
+
+			String idsArray = "";
+			for(int i = 0; i < ingredientes.size(); i++) {
+				idsArray += "?,";
 			}
-			Array array = connection.createArrayOf("NUMBER", ingredienteIds);
+			idsArray = idsArray.substring(0, idsArray.length()-1);
 			
-			PreparedStatement sttm = connection.prepareStatement(
+			/*PreparedStatement sttm = connection.prepareStatement(
 					"select distinct r.id, r.nome, r.id_categoria, r.id_usuario, r.porcao, r.tempo_preparo, r.modo_preparo, r.img_path, r.pontuacao_media, r.views, r.favs, r.slug, r.aprovado "
-					+ "from "+tableName+" r inner join receitas_ingredientes ri on r.id = ri.id_receita where ri.id_ingrediente in (?) and lower(r.nome) like lower(?)");
-			sttm.setArray(1, array);
-			sttm.setString(1, "%"+termoBusca+"%");
+					+ "from "+tableName+" r inner join receitas_ingredientes ri on r.id = ri.id_receita where ri.id_ingrediente in (?) and lower(r.nome) like lower(?)");*/
+			PreparedStatement sttm = connection.prepareStatement(
+					"select distinct r.id, r.nome, r.img_path, r.pontuacao_media, r.favs "
+					+ "from "+tableName+" r inner join receitas_ingredientes ri on r.id = ri.id_receita where ri.id_ingrediente in ("+idsArray+") and lower(r.nome) like lower(?) and r.aprovado = 1");
+
+			int conta = 1;
+			for(Integer i : ingredientes) {
+				sttm.setInt(conta, i);
+				conta++;
+			}
+			sttm.setString(conta, "%"+termoBusca+"%");
 
 			ResultSet rs = sttm.executeQuery();
 
