@@ -3,6 +3,7 @@
  */
 package com.tds171a.soboru.models.receita;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -143,9 +144,6 @@ public class ReceitaDAO implements IDAO<Receita> {
 		try {
 			connection = Utils.createConnection();
 			
-			/*PreparedStatement sttm = connection.prepareStatement(
-					"select r.ID, r.NOME, r.ID_CATEGORIA, r.ID_USUARIO, r.PORCAO, r.TEMPO_PREPARO, r.MODO_PREPARO, r.IMG_PATH, r.PONTUACAO_MEDIA, r.VIEWS, FAVS, r.SLUG, r.APROVADO, c.NOME, u.NOME from "+tableName+" r "+
-					"inner join categorias c on r.ID_CATEGORIA = c.ID inner join usuarios u on r.ID_USUARIO = u.ID");*/
 			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" where id = ?");
 			sttm.setInt(1, receitaId);
 			
@@ -333,6 +331,194 @@ public class ReceitaDAO implements IDAO<Receita> {
 				tag.setNome(rs.getString("nome"));
 				
 				list.add(tag);
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return null;
+	}
+
+	public List<Receita> selecionarPorNome(String termoBusca) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+			
+			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" where lower(nome) like lower(?)");
+			sttm.setString(1, "%"+termoBusca+"%");
+
+			ResultSet rs = sttm.executeQuery();
+
+			List<Receita> list = new ArrayList<Receita>();
+			Receita receita;
+			while(rs.next()) {
+				receita = new Receita();
+
+				receita.setId(rs.getInt("id"));
+				receita.setNome(rs.getString("nome"));
+				receita.setCategoriaId(rs.getInt("id_categoria"));
+				receita.setUsuarioId(rs.getInt("id_usuario"));
+				receita.setPorcao(rs.getInt("porcao"));
+				receita.setTempoPreparo(rs.getDouble("tempo_preparo"));
+				receita.setModoPreparo(rs.getString("modo_preparo"));
+				receita.setImgPath(rs.getString("img_path"));
+				receita.setPontuacaoMedia(rs.getDouble("pontuacao_media"));
+				receita.setViews(rs.getInt("views"));
+				receita.setFavs(rs.getInt("favs"));
+				receita.setSlug(rs.getString("slug"));
+				receita.setAprovado(rs.getBoolean("aprovado"));
+				
+				list.add(receita);
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return null;
+	}
+
+	public List<Receita> selecionarPorIngredientes(List<Integer> ingredientes) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+			
+			String idsArray = "";
+			for(int i = 0; i < ingredientes.size(); i++) {
+				idsArray += "?,";
+			}
+			idsArray = idsArray.substring(0, idsArray.length());
+			PreparedStatement sttm = connection.prepareStatement(
+					"select distinct r.id, r.nome, r.id_categoria, r.id_usuario, r.porcao, r.tempo_preparo, r.modo_preparo, r.img_path, r.pontuacao_media, r.views, r.favs, r.slug, r.aprovado "
+					+ "from "+tableName+" r inner join receitas_ingredientes ri on r.id = ri.id_receita where ri.id_ingrediente in ("+idsArray+")");
+			
+			System.out.println("select distinct r.id, r.nome, r.id_categoria, r.id_usuario, r.porcao, r.tempo_preparo, r.modo_preparo, r.img_path, r.pontuacao_media, r.views, r.favs, r.slug, r.aprovado "
+					+ "from "+tableName+" r inner join receitas_ingredientes ri on r.id = ri.id_receita where ri.id_ingrediente in ("+idsArray+")");
+			int conta = 1;
+			for(Integer i : ingredientes) {
+				System.out.println("Setting: " + i + " to " + conta);
+				sttm.setInt(conta, i);
+				conta++;
+			}
+
+			ResultSet rs = sttm.executeQuery();
+
+			List<Receita> list = new ArrayList<Receita>();
+			Receita receita;
+			while(rs.next()) {
+				receita = new Receita();
+
+				receita.setId(rs.getInt("id"));
+				receita.setNome(rs.getString("nome"));
+				receita.setCategoriaId(rs.getInt("id_categoria"));
+				receita.setUsuarioId(rs.getInt("id_usuario"));
+				receita.setPorcao(rs.getInt("porcao"));
+				receita.setTempoPreparo(rs.getDouble("tempo_preparo"));
+				receita.setModoPreparo(rs.getString("modo_preparo"));
+				receita.setImgPath(rs.getString("img_path"));
+				receita.setPontuacaoMedia(rs.getDouble("pontuacao_media"));
+				receita.setViews(rs.getInt("views"));
+				receita.setFavs(rs.getInt("favs"));
+				receita.setSlug(rs.getString("slug"));
+				receita.setAprovado(rs.getBoolean("aprovado"));
+				
+				list.add(receita);
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return null;
+	}
+
+	public List<Receita> selecionarPorNomeEIngredientes(String termoBusca, List<Integer> ingredientes) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+			
+			Object[] ingredienteIds = new Object[ingredientes.size()];
+			int count = 0;
+			for(Integer i : ingredientes) {
+				ingredienteIds[count] = i;
+				count++;
+			}
+			Array array = connection.createArrayOf("NUMBER", ingredienteIds);
+			
+			PreparedStatement sttm = connection.prepareStatement(
+					"select distinct r.id, r.nome, r.id_categoria, r.id_usuario, r.porcao, r.tempo_preparo, r.modo_preparo, r.img_path, r.pontuacao_media, r.views, r.favs, r.slug, r.aprovado "
+					+ "from "+tableName+" r inner join receitas_ingredientes ri on r.id = ri.id_receita where ri.id_ingrediente in (?) and lower(r.nome) like lower(?)");
+			sttm.setArray(1, array);
+			sttm.setString(1, "%"+termoBusca+"%");
+
+			ResultSet rs = sttm.executeQuery();
+
+			List<Receita> list = new ArrayList<Receita>();
+			Receita receita;
+			while(rs.next()) {
+				receita = new Receita();
+
+				receita.setId(rs.getInt("id"));
+				receita.setNome(rs.getString("nome"));
+				receita.setCategoriaId(rs.getInt("id_categoria"));
+				receita.setUsuarioId(rs.getInt("id_usuario"));
+				receita.setPorcao(rs.getInt("porcao"));
+				receita.setTempoPreparo(rs.getDouble("tempo_preparo"));
+				receita.setModoPreparo(rs.getString("modo_preparo"));
+				receita.setImgPath(rs.getString("img_path"));
+				receita.setPontuacaoMedia(rs.getDouble("pontuacao_media"));
+				receita.setViews(rs.getInt("views"));
+				receita.setFavs(rs.getInt("favs"));
+				receita.setSlug(rs.getString("slug"));
+				receita.setAprovado(rs.getBoolean("aprovado"));
+				
+				list.add(receita);
 			}
 
 			if (sttm != null)

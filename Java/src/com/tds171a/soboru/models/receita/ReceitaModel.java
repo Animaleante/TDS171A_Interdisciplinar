@@ -22,4 +22,16 @@ public class ReceitaModel extends ModelBase<Receita> {
 	public List<Tag> listarTags(Receita receita) {
 		return ((ReceitaDAO) dao).listarTags(receita);
 	}
+	
+	public List<Receita> selecionarPorNome(String termoBusca) {
+		return ((ReceitaDAO) dao).selecionarPorNome(termoBusca);
+	}
+	
+	public List<Receita> selecionarPorIngredientes(List<Integer> ingredientes) {
+		return ((ReceitaDAO) dao).selecionarPorIngredientes(ingredientes);
+	}
+
+	public List<Receita> selecionarPorNomeEIngredientes(String termoBusca, List<Integer> ingredientes) {
+		return ((ReceitaDAO) dao).selecionarPorNomeEIngredientes(termoBusca, ingredientes);
+	}
 }

@@ -3,6 +3,8 @@
  */
 package com.tds171a.soboru.controllers;
 
+import java.util.List;
+
 import com.tds171a.soboru.models.comentario.ComentarioModel;
 import com.tds171a.soboru.vos.Comentario;
 
@@ -18,5 +20,12 @@ public class ComentarioController extends ControllerBase<Comentario> {
      */
 	public ComentarioController() {
 		model = new ComentarioModel();
+	}
+
+	/**
+	 * returna uma lista de receita
+	 */
+	public List<Comentario> selecionarPorReceita(int receitaId) {
+		return ((ComentarioModel) model).selecionarPorReceita(receitaId);
 	}
 }

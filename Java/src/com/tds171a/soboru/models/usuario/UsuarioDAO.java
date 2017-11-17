@@ -302,4 +302,54 @@ public class UsuarioDAO implements IDAO<Usuario> {
 
 		return null;
 	}
+
+	public List<Usuario> selecionarUsuariosQueFavoritaram(int receitaId) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+
+			PreparedStatement sttm = connection.prepareStatement(
+					"select u.id, u.nome, u.email, u.senha, u.nasc, u.sexo, u.id_role, u.notificacao_email, r.nome tipo from "+tableName+" u inner join roles r on u.id_role = r.id inner join receitas_fav rf on rf.id_usuario = u.id where rf.id_receita = ?");
+			sttm.setInt(1, receitaId);
+
+			ResultSet rs = sttm.executeQuery();
+
+			List<Usuario> list = new ArrayList<Usuario>();
+			Usuario usuario;
+			while(rs.next()) {
+				usuario = new Usuario();
+				usuario.setId(rs.getInt("id"));
+				usuario.setNome(rs.getString("nome"));
+				usuario.setEmail(rs.getString("email"));
+				usuario.setSenha(rs.getString("senha"));
+				usuario.setNasc(rs.getDate("nasc"));
+				usuario.setSexo(rs.getInt("sexo"));
+				usuario.setRoleId(rs.getInt("id_role"));
+				usuario.setNotificacaoEmail(rs.getBoolean("notificacao_email"));
+				usuario.setTipo(rs.getString("tipo"));
+				
+				list.add(usuario);
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return null;
+	}
 }

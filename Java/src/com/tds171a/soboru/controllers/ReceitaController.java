@@ -30,4 +30,16 @@ public class ReceitaController extends ControllerBase<Receita>{
 	public List<Tag> listarTags(Receita receita) {
 		return ((ReceitaModel) model).listarTags(receita);
 	}
+
+	public List<Receita> selecionarPorNome(String termoBusca) {
+		return ((ReceitaModel) model).selecionarPorNome(termoBusca);
+	}
+	
+	public List<Receita> selecionarPorIngredientes(List<Integer> ingredientes) {
+		return ((ReceitaModel) model).selecionarPorIngredientes(ingredientes);
+	}
+
+	public List<Receita> selecionarPorNomeEIngredientes(String termoBusca, List<Integer> ingredientes) {
+		return ((ReceitaModel) model).selecionarPorNomeEIngredientes(termoBusca, ingredientes);
+	}
 }

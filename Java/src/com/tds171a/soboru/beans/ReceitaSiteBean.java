@@ -1,5 +1,5 @@
 /**
- *
+ * 
  */
 package com.tds171a.soboru.beans;
 
@@ -10,7 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -38,19 +37,18 @@ import com.tds171a.soboru.vos.Receita;
 import com.tds171a.soboru.vos.Tag;
 import com.tds171a.soboru.vos.Utensilio;
 
-@Named("receitaBean")
+@Named("receitaSiteBean")
 @SessionScoped
 /**
- * Criação do bean herando de beanbase passando
- * o vo utilizada.
+ * @author Diogo
+ *
  */
-public class ReceitaBean  extends BeanBase<Receita> {
+public class ReceitaSiteBean extends BeanBase<Receita> {
 
 	/**
-     *criando o serial do bean
-     */
-	private static final long serialVersionUID = 1877717137441387967L;
-
+	 * 
+	 */
+	private static final long serialVersionUID = -5362181648251196256L;
 	private CategoriaController categoriaController;
 	private UsuarioController usuarioController;
 	private UtensilioController utensilioController;
@@ -74,10 +72,10 @@ public class ReceitaBean  extends BeanBase<Receita> {
      *Construtor setando a rota e qual
      *será passado para o navegador.
      */
-	public ReceitaBean() {
-		route_base = "/cadastro/receita/";
+	public ReceitaSiteBean() {
+		route_base = "/receita/";
 		controller = new ReceitaController();
-
+		
 		categoriaController = new CategoriaController();
 		usuarioController = new UsuarioController();
 		utensilioController = new UtensilioController();
@@ -118,7 +116,7 @@ public class ReceitaBean  extends BeanBase<Receita> {
 		
 		getVo().setUsuarioId(SessionContext.getInstance().getUsuarioLogado().getId());
 		getVo().setSlug(Utils.toSlug(getVo().getNome()));
-		getVo().setAprovado(true);
+		getVo().setAprovado(false);
 		
 		try (InputStream input = imgFile.getInputStream()) {
 			File file = File.createTempFile("receita_",  ".jpg", new File(System.getProperty("jboss.server.data.dir"), "images"));
@@ -154,6 +152,12 @@ public class ReceitaBean  extends BeanBase<Receita> {
 		
 		if(vo.getReceitaIngredientes() == null)
 			vo.setReceitaIngredientes(receitaIngredienteController.selecionarPorReceita(vo.getId()));
+		
+		if(vo.getComentarios() == null)
+			vo.setComentarios(comentarioController.selecionarPorReceita(vo.getId()));
+		
+		if(vo.getUsuariosFavoritaram() == null)
+			vo.setUsuariosFavoritaram(usuarioController.selecionarUsuariosQueFavoritaram(vo.getId()));
 		
 		return super.exibir(vo);
 	}
@@ -207,6 +211,49 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	@Override
 	public void limparVo() {
 		setVo(new Receita());
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String favoritar() {
+		if(SessionContext.getInstance().isLogado()) {
+			// TODO - adicionar as receitas favoritas desse usuario
+			getVo().getUsuariosFavoritaram().add(SessionContext.getInstance().getUsuarioLogado());
+			// TODO - pegar receita novamente com novos dados
+			return exibir(getVo());
+		}
+		
+		return "/login/"+INDEX_PAGE+FACES_REDIRECT;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String reportar() {
+		if(SessionContext.getInstance().isLogado()) {
+			// TODO - criar report desse usuario para essa receita
+			return exibir(getVo());
+		}
+		
+		return "/login/"+INDEX_PAGE+FACES_REDIRECT;
+	}
+	
+	/**
+	 * 
+	 * @param pontos
+	 * @return
+	 */
+	public String pontuar(double pontos) {
+		if(SessionContext.getInstance().isLogado()) {
+			// TODO - adicionar pontuacao a essa receita atrelada a esse usuario, e recalcular pontuacao_media da receita
+			// TODO - pegar receita novamente com novos dados
+			return exibir(getVo());
+		}
+		
+		return "/login/"+INDEX_PAGE+FACES_REDIRECT;
 	}
 
 	/**
