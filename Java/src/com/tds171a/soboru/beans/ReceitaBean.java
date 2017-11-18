@@ -120,8 +120,7 @@ public class ReceitaBean  extends BeanBase<Receita> {
 		getVo().setAprovado(true);
 		
 		try (InputStream input = imgFile.getInputStream()) {
-			File file = File.createTempFile("receita_",  ".jpg", new File(System.getProperty("jboss.server.data.dir"), "images"));
-			// TODO - Se pasta não existe, criar ela
+			File file = File.createTempFile("receita_",  ".jpg", Utils.getImagerDir());
 			Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 			getVo().setImgPath(file.getName());
 		} catch (IOException e) {

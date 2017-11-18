@@ -114,6 +114,8 @@ public class Receita {
 	 */
 	private List<Usuario> usuariosFavoritaram;
 	
+	private int numComentarios;
+	
 	public Receita() {
 		this.id = -1;
 		this.nome = "";
@@ -139,6 +141,8 @@ public class Receita {
 		this.reports = null;
 		this.pontuacoes = null;
 		this.usuariosFavoritaram = null;
+		
+		this.numComentarios = 0;
 	}
 
 	/**
@@ -447,5 +451,19 @@ public class Receita {
 	 */
 	public void setUsuariosFavoritaram(List<Usuario> usuariosFavoritaram) {
 		this.usuariosFavoritaram = usuariosFavoritaram;
+	}
+
+	/**
+	 * @return the numComentarios
+	 */
+	public int getNumComentarios() {
+		return numComentarios;
+	}
+
+	/**
+	 * @param numComentarios the numComentarios to set
+	 */
+	public void setNumComentarios(int numComentarios) {
+		this.numComentarios = numComentarios;
 	}
 }

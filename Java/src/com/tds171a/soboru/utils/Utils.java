@@ -1,5 +1,6 @@
 package com.tds171a.soboru.utils;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -69,5 +70,14 @@ public class Utils {
 		String normalized = Normalizer.normalize(nowhitespace, Form.NFD);
 		String slug = NONLATIN.matcher(normalized).replaceAll("");
 		return slug.toLowerCase(Locale.ENGLISH);
+	}
+	
+	public static File getImagerDir() {
+//		File dest = new File(System.getProperty("jboss.server.data.dir"), "images");
+		File dest = new File(System.getProperty("jboss.home.dir"), "images");
+		if(!dest.exists()) {
+			dest.mkdirs();
+		}
+		return dest;
 	}
 }

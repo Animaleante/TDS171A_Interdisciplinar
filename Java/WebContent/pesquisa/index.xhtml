@@ -89,7 +89,7 @@
 							<c:forEach items="#{pesquisaBean.resultados}" var="receita" begin="0" end="8">
 								<div class="entry one-fourth">
 									<figure>
-										<h:graphicImage value="#{resource['images:img6.jpg']}"/>
+										<h:graphicImage value="/images/#{receita.imgPath}" />
 										<figcaption>
 											<h:form>
 												<h:commandLink action="#{receitaSiteBean.exibir(receita)}" value="">
@@ -109,8 +109,8 @@
 										<div class="actions">
 											<div>
 												<div class="difficulty"><i class="ico i-medium"></i><a href="#">medium</a></div>
-												<div class="likes"><i class="fa fa-heart"></i><a href="#">10</a></div>
-												<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments">27</a></div>
+												<div class="likes"><i class="fa fa-heart"></i><a href="#"><h:outputText value="#{receita.favs}" /></a></div>
+												<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments"><h:outputText value="#{receita.numComentarios}" /></a></div>
 											</div>
 										</div>
 									</div>

@@ -200,7 +200,7 @@ public class ReceitaDAO implements IDAO<Receita> {
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("update "+tableName+" set NOME = ?, CATEGORIA_ID = ?, USER_ID = ?, PORCAO = ?, TEMPO_PREPARO = ?, MODO_PREPARO = ?, IMG_PATH = ?, PONTUACAO_MEDIA = ?, VIEWS = ?, FAVS = ?, SLUG = ?, APROVADO = ? where id = ?");
+			PreparedStatement sttm = connection.prepareStatement("update "+tableName+" set NOME = ?, id_categoria = ?, id_usuario = ?, PORCAO = ?, TEMPO_PREPARO = ?, MODO_PREPARO = ?, IMG_PATH = ?, PONTUACAO_MEDIA = ?, VIEWS = ?, FAVS = ?, SLUG = ?, APROVADO = ? where id = ?");
 			sttm.setString(1, vo.getNome());
 			sttm.setInt(2, vo.getCategoriaId());
 			sttm.setInt(3, vo.getUsuarioId());
@@ -359,8 +359,11 @@ public class ReceitaDAO implements IDAO<Receita> {
 		try {
 			connection = Utils.createConnection();
 			
-			PreparedStatement sttm = connection.prepareStatement("select id, nome, img_path, pontuacao_media, favs from "+tableName+" where lower(nome) like lower(?) and aprovado = 1");
+			PreparedStatement sttm = connection.prepareStatement(
+					"select id, nome, img_path, pontuacao_media, favs, (select count(id) from comentarios group by id_receita having id_receita = a.id) comentarios from "+tableName+" a where lower(nome) like lower(?) and aprovado = 1");
 			sttm.setString(1, "%"+termoBusca+"%");
+			
+			System.out.println("select id, nome, img_path, pontuacao_media, favs, (select count(id) from comentarios group by id_receita having id_receita = a.id) comentarios from "+tableName+" a where lower(nome) like lower('%"+termoBusca+"%') and aprovado = 1");
 
 			ResultSet rs = sttm.executeQuery();
 
@@ -382,6 +385,10 @@ public class ReceitaDAO implements IDAO<Receita> {
 				receita.setFavs(rs.getInt("favs"));
 //				receita.setSlug(rs.getString("slug"));
 //				receita.setAprovado(rs.getBoolean("aprovado"));
+				receita.setNumComentarios(rs.getInt("comentarios"));
+				System.out.println(rs.getInt("id"));
+				System.out.println(rs.getString("nome"));
+				System.out.println(rs.getInt("comentarios"));
 				
 				list.add(receita);
 			}
@@ -520,17 +527,17 @@ public class ReceitaDAO implements IDAO<Receita> {
 
 				receita.setId(rs.getInt("id"));
 				receita.setNome(rs.getString("nome"));
-				receita.setCategoriaId(rs.getInt("id_categoria"));
-				receita.setUsuarioId(rs.getInt("id_usuario"));
-				receita.setPorcao(rs.getInt("porcao"));
-				receita.setTempoPreparo(rs.getDouble("tempo_preparo"));
-				receita.setModoPreparo(rs.getString("modo_preparo"));
+//				receita.setCategoriaId(rs.getInt("id_categoria"));
+//				receita.setUsuarioId(rs.getInt("id_usuario"));
+//				receita.setPorcao(rs.getInt("porcao"));
+//				receita.setTempoPreparo(rs.getDouble("tempo_preparo"));
+//				receita.setModoPreparo(rs.getString("modo_preparo"));
 				receita.setImgPath(rs.getString("img_path"));
 				receita.setPontuacaoMedia(rs.getDouble("pontuacao_media"));
-				receita.setViews(rs.getInt("views"));
+//				receita.setViews(rs.getInt("views"));
 				receita.setFavs(rs.getInt("favs"));
-				receita.setSlug(rs.getString("slug"));
-				receita.setAprovado(rs.getBoolean("aprovado"));
+//				receita.setSlug(rs.getString("slug"));
+//				receita.setAprovado(rs.getBoolean("aprovado"));
 				
 				list.add(receita);
 			}

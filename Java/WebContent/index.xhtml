@@ -19,11 +19,15 @@
 					<!--row-->
 					<div class="row">
 						<article class="three-fourth text">
-							<h1>Welcome to SocialChef!</h1>
+							<h:form>
+							<h1>Welcome to Soboru!</h1>
 							<p>SocialChef is the ultimate <strong>cooking social community</strong>, where recipes come to life. Wanna know what you will gain by joining us? Lorem ipsum dolor sit amet, this is some teaser text.</p>
 							<p>You will win awesome prizes, make new friends and share delicious recipes. </p>
-							<a href="register.html" class="button white more medium">Join our community <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
-							<p>Already a member? Click <a href="login.html">here</a> to login.</p>
+<!-- 							<a href="register.html" class="button white more medium">Join our community <i class="fa fa-chevron-right" aria-hidden="true"></i></a> -->
+							<h:commandLink action="#{registroBean.index()}" styleClass="button white more medium">Join our community <i class="fa fa-chevron-right" aria-hidden="true"></i></h:commandLink>
+<!-- 							<p>Already a member? Click <a href="login.html">here</a> to login.</p> -->
+							<p>Already a member? Click <h:commandLink action="#{loginBean.index()}">here</h:commandLink> to login.</p>
+							</h:form>
 						</article>
 						
 						<!--search recipes widget-->

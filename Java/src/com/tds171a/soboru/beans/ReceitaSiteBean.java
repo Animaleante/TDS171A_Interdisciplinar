@@ -140,6 +140,8 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	public String exibir(Receita vo) {
 		vo = controller.selecionar(vo.getId());
 		
+//		vo.setImgPath(vo.getImgPath());
+		
 		if(vo.getCategoria() == null)
 			vo.setCategoria(categoriaController.selecionar(vo.getCategoriaId()));
 		
