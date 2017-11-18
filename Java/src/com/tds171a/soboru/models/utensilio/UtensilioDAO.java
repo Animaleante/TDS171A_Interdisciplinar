@@ -239,7 +239,9 @@ public class UtensilioDAO implements IDAO<Utensilio> {
         try {
             connection = Utils.createConnection();
 
-            PreparedStatement sttm = connection.prepareStatement("select u.id, u.nome from "+tableName+" u inner join receitas_utensilios ru on ru.id_receita = ?");
+            
+            PreparedStatement sttm = connection.prepareStatement("select u.id, u.nome from "+tableName+" u inner join receitas_utensilios ru on ru.id_utensilio = u.id where ru.id_receita = ?");
+            //PreparedStatement sttm = connection.prepareStatement("select u.id, u.nome from "+tableName+" u inner join receitas_utensilios ru on ru.id_receita = ?");
             sttm.setInt(1, receitaId);
 
             ResultSet rs = sttm.executeQuery();
@@ -250,7 +252,8 @@ public class UtensilioDAO implements IDAO<Utensilio> {
             	utensilio = new Utensilio();
             	utensilio.setId(rs.getInt("id"));
             	utensilio.setNome(rs.getString("nome"));
-
+            	System.out.println(rs.getInt("id"));
+            	System.out.println(rs.getString("nome"));
                 list.add(utensilio);
             }
 

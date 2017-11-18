@@ -19,34 +19,35 @@
 		
 		        <div class="row">
 		            <header class="s-title">
-		                <h1>Criar</h1>
+		                <h1>Utensilios</h1>
 		            </header>
 		
 		            <section class="content full-width">
 		                <div class="container">
 		                	<h:form id="receitaUtensilioForm">
-							    <ui:repeat value="#{receitaUtensilioBean.lista}" var="utensilio" varStatus="listaItem">
+								<h:messages globalOnly="true" errorClass="error"/>
+								
+							    <c:forEach items="#{receitaUtensilioBean.lista}" var="utensilio">
 									<div class="f-row">
-										<div class="large">
-											<h:selectOneMenu value="#{utensilio.id}" required="true">
-												<f:selectItem itemValue="0" itemLabel="Selecione um utensilio" a:disabled="disabled" a:selected="selected"/>
+										<div class="large" style="width: 95%; float:left;">
+											<h:message for="select_#{utensilio.id}" errorClass="error"/>
+											
+											<h:selectOneMenu id="select_#{utensilio.id}" value="#{utensilio.id}" required="true" requiredMessage="Esse valor precisa ser preenchido">
+												<f:selectItem itemValue="-1" itemLabel="Selecione um utensilio" a:disabled="disabled"/>
 												<f:selectItems value="#{receitaUtensilioBean.listaUtensilios}" />
 											</h:selectOneMenu>
 										</div>
-									    <h:commandButton value="-" action="#{receitaUtensilioBean.remover(listaItem.index)}" immediate="true" execute="@this">
-									        <f:ajax render="receitaUtensilioForm" />
-									    </h:commandButton>
+									    <h:commandButton value="-" action="#{receitaUtensilioBean.remover(utensilio)}" style="float: right; font-size: 37px; padding: 0; width: 37px; height: 37px; line-height: 37px;"/>
 									</div>
-							    </ui:repeat>
+							    </c:forEach>
 							    
                         		<div class="f-row">
-								    <h:commandButton value="Add" action="#{receitaUtensilioBean.adicionar()}" immediate="true" execute="@this">
-								        <f:ajax render="receitaUtensilioForm" />
-								    </h:commandButton>
+								    <h:commandButton value="Add" action="#{receitaUtensilioBean.adicionar}" />
                         		</div>
                         		
                         		<div class="f-row submit">
-								    <h:commandButton value="Salvar" action="#{receitaUtensilioBean.salvar()}" />
+								    <h:commandButton value="Salvar" action="#{receitaUtensilioBean.salvar}" />
+									<h:commandLink immediate="true" action="#{receitaBean.listar()}" value="Cancelar" />
 							    </div>
 							</h:form>
 		                </div>

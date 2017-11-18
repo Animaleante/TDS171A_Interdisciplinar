@@ -42,10 +42,6 @@ public class ReceitaUtensilioBean implements Serializable {
 		setLista(receitaController.listarUtensilios(getReceita()));
 		setListaUtensilios(utensilioController.listar());
 
-		System.out.println("ReceitaId: " + getReceita().getId());
-		System.out.println("Current num tags: " + getLista().size());
-		System.out.println("Available tags: " + getListaUtensilios().size());
-
 		return "/cadastro/receita-utensilio/criar?faces-redirect=true";
 	}
 
@@ -53,14 +49,13 @@ public class ReceitaUtensilioBean implements Serializable {
 		lista.add(new Utensilio());
 	}
 
-	public void remover(int index) {
-	    lista.remove(index);
+	public void remover(Utensilio utensilio) {
+	    lista.remove(utensilio);
 	}
 
 	public String salvar() {
-		System.out.println("Salvar: " + lista.size());
 		receitaController.registrarUtensilios(getReceita().getId(), getLista());
-		return "";
+		return "/cadastro/receita/"+BeanBase.INDEX_PAGE+BeanBase.FACES_REDIRECT;
 	}
 
 	/**

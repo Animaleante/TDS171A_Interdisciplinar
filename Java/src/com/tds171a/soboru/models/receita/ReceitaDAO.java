@@ -329,7 +329,6 @@ public class ReceitaDAO implements IDAO<Receita> {
 
 				utensilio.setId(rs.getInt("id"));
 				utensilio.setNome(rs.getString("nome"));
-				
 				list.add(utensilio);
 			}
 
