@@ -42,4 +42,8 @@ public class ReceitaController extends ControllerBase<Receita>{
 	public List<Receita> selecionarPorNomeEIngredientes(String termoBusca, List<Integer> ingredientes) {
 		return ((ReceitaModel) model).selecionarPorNomeEIngredientes(termoBusca, ingredientes);
 	}
+
+	public void registrarTags(List<Tag> lista) {
+		((ReceitaModel) model).registrarTags(lista);
+	}
 }

@@ -34,4 +34,8 @@ public class ReceitaModel extends ModelBase<Receita> {
 	public List<Receita> selecionarPorNomeEIngredientes(String termoBusca, List<Integer> ingredientes) {
 		return ((ReceitaDAO) dao).selecionarPorNomeEIngredientes(termoBusca, ingredientes);
 	}
+
+	public void registrarTags(List<Tag> lista) {
+		((ReceitaDAO) dao).registrarTags(lista);
+	}
 }

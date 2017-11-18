@@ -43,15 +43,10 @@ public class ReceitaTagBean implements Serializable {
 		setListaTags(tagController.listar());
 
 		System.out.println("ReceitaId: " + getReceita().getId());
-		System.out.println("Cutrent num tags: " + getLista().size());
+		System.out.println("Current num tags: " + getLista().size());
 		System.out.println("Available tags: " + getListaTags().size());
 
 		return "/cadastro/receita-tag/criar?faces-redirect=true";
-	}
-
-	public String salvar() {
-		System.out.println("Salvar: " + lista.size());
-		return "";
 	}
 
 	public void adicionar() {
@@ -60,6 +55,12 @@ public class ReceitaTagBean implements Serializable {
 
 	public void remover(int index) {
 	    lista.remove(index);
+	}
+
+	public String salvar() {
+		System.out.println("Salvar: " + lista.size());
+		receitaController.registrarTags(getLista());
+		return "";
 	}
 
 	/**
