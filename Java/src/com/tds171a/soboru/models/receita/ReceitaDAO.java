@@ -363,8 +363,6 @@ public class ReceitaDAO implements IDAO<Receita> {
 					"select id, nome, img_path, pontuacao_media, favs, (select count(id) from comentarios group by id_receita having id_receita = a.id) comentarios from "+tableName+" a where lower(nome) like lower(?) and aprovado = 1");
 			sttm.setString(1, "%"+termoBusca+"%");
 			
-			System.out.println("select id, nome, img_path, pontuacao_media, favs, (select count(id) from comentarios group by id_receita having id_receita = a.id) comentarios from "+tableName+" a where lower(nome) like lower('%"+termoBusca+"%') and aprovado = 1");
-
 			ResultSet rs = sttm.executeQuery();
 
 			List<Receita> list = new ArrayList<Receita>();
@@ -386,9 +384,6 @@ public class ReceitaDAO implements IDAO<Receita> {
 //				receita.setSlug(rs.getString("slug"));
 //				receita.setAprovado(rs.getBoolean("aprovado"));
 				receita.setNumComentarios(rs.getInt("comentarios"));
-				System.out.println(rs.getInt("id"));
-				System.out.println(rs.getString("nome"));
-				System.out.println(rs.getInt("comentarios"));
 				
 				list.add(receita);
 			}
@@ -426,14 +421,6 @@ public class ReceitaDAO implements IDAO<Receita> {
 			}
 			idsArray = idsArray.substring(0, idsArray.length()-1);
 			
-			/*PreparedStatement sttm = connection.prepareStatement(
-					"select r.id, r.nome, r.id_categoria, r.id_usuario, r.porcao, r.tempo_preparo, r.modo_preparo, r.img_path, r.pontuacao_media, r.views, r.favs, r.slug, r.aprovado "
-					+ "from "+tableName+" r inner join receitas_ingredientes ri on r.id = ri.id_receita where ri.id_ingrediente in ("+idsArray+") "
-					+ "group by (r.id, r.nome, r.id_categoria, r.id_usuario, r.porcao, r.tempo_preparo, r.modo_preparo, r.img_path, r.pontuacao_media, r.views, r.favs, r.slug, r.aprovado)");*/
-			/*PreparedStatement sttm = connection.prepareStatement(
-					"select r.id, r.nome, r.img_path, r.pontuacao_media, r.favs "
-							+ "from "+tableName+" r inner join receitas_ingredientes ri on r.id = ri.id_receita where ri.id_ingrediente in ("+idsArray+") and r.aprovado = 1 "
-							+ "group by (r.id, r.nome, r.img_path, r.pontuacao_media, r.favs)");*/
 			PreparedStatement sttm = connection.prepareStatement(
 					"select distinct r.id, r.nome, r.img_path, r.pontuacao_media, r.favs "
 					+ "from "+tableName+" r inner join receitas_ingredientes ri on r.id = ri.id_receita where ri.id_ingrediente in ("+idsArray+") and r.aprovado = 1 ");
