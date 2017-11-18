@@ -288,31 +288,31 @@ CREATE TABLE pontuacoes (
 --  START WITH 1
 --  NOCACHE;
 
-CREATE TABLE tags (
-    id NUMBER(11) NOT NULL,
-    nome VARCHAR2(80) NOT NULL,
-    -- created_at DATE NOT NULL,
-    -- updated_at DATE NOT NULL,
-    -- deleted_at DATE NULL,
-    CONSTRAINT tag_pk PRIMARY KEY (id),
-    CONSTRAINT tag_nome_unique UNIQUE (nome)
-);
+-- CREATE TABLE tags (
+--     id NUMBER(11) NOT NULL,
+--     nome VARCHAR2(80) NOT NULL,
+--     -- created_at DATE NOT NULL,
+--     -- updated_at DATE NOT NULL,
+--     -- deleted_at DATE NULL,
+--     CONSTRAINT tag_pk PRIMARY KEY (id),
+--     CONSTRAINT tag_nome_unique UNIQUE (nome)
+-- );
 
-CREATE SEQUENCE tag_seq
-    INCREMENT BY 1
-    START WITH 1
-    NOCACHE;
+-- CREATE SEQUENCE tag_seq
+--     INCREMENT BY 1
+--     START WITH 1
+--     NOCACHE;
 
-CREATE TABLE receitas_tags (
-    id_receita NUMBER(11) NOT NULL,
-    id_tag NUMBER(11) NOT NULL,
-    -- created_at DATE NOT NULL,
-    -- updated_at DATE NOT NULL,
-    -- deleted_at DATE NULL,
-    CONSTRAINT rec_tag_pk PRIMARY KEY (id_receita, id_tag),
-    CONSTRAINT rec_tags_rec_fk FOREIGN KEY (id_receita) REFERENCES receitas(id),
-    CONSTRAINT rec_tags_tag_fk FOREIGN KEY (id_tag) REFERENCES tags(id)
-);
+-- CREATE TABLE receitas_tags (
+--     id_receita NUMBER(11) NOT NULL,
+--     id_tag NUMBER(11) NOT NULL,
+--     -- created_at DATE NOT NULL,
+--     -- updated_at DATE NOT NULL,
+--     -- deleted_at DATE NULL,
+--     CONSTRAINT rec_tag_pk PRIMARY KEY (id_receita, id_tag),
+--     CONSTRAINT rec_tags_rec_fk FOREIGN KEY (id_receita) REFERENCES receitas(id),
+--     CONSTRAINT rec_tags_tag_fk FOREIGN KEY (id_tag) REFERENCES tags(id)
+-- );
 
 --CREATE SEQUENCE receita_tag_seq
 --  INCREMENT BY 1
@@ -345,9 +345,9 @@ insert into categorias values(categoria_seq.NEXTVAL, 'categoria2', 1, 1, 'catego
 insert into categorias values(categoria_seq.NEXTVAL, 'categoria3', 1, 1, 'categoria3');
 insert into categorias values(categoria_seq.NEXTVAL, 'categoria4', null, 0, 'categoria4');
 
-insert into tags values(tag_seq.NEXTVAL, 'tag1');
-insert into tags values(tag_seq.NEXTVAL, 'tag2');
-insert into tags values(tag_seq.NEXTVAL, 'tag3');
+-- insert into tags values(tag_seq.NEXTVAL, 'tag1');
+-- insert into tags values(tag_seq.NEXTVAL, 'tag2');
+-- insert into tags values(tag_seq.NEXTVAL, 'tag3');
 
 insert into receitas values(receita_seq.NEXTVAL, 'receita1', 2, 1, 2, 2, 'Modo de Preparo da Receita 1', 'teste.jpg', 0, 0, 0, 'receita1', 1);
 insert into receitas values(receita_seq.NEXTVAL, 'receita2', 3, 1, 4, 1.5, 'Modo de Preparo da Receita 2', 'teste.jpg', 0, 0, 0, 'receita2', 1);
@@ -397,11 +397,11 @@ update receitas set pontuacao_media = (select avg(qty) from pontuacoes where id_
 insert into pontuacoes values(3, 2, 5);
 update receitas set pontuacao_media = (select avg(qty) from pontuacoes where id_receita = 3) where id = 3;
 
-insert into receitas_tags values(1, 1);
-insert into receitas_tags values(1, 2);
-insert into receitas_tags values(2, 3);
-insert into receitas_tags values(3, 1);
-insert into receitas_tags values(3, 3);
+-- insert into receitas_tags values(1, 1);
+-- insert into receitas_tags values(1, 2);
+-- insert into receitas_tags values(2, 3);
+-- insert into receitas_tags values(3, 1);
+-- insert into receitas_tags values(3, 3);
 
 update receitas set views = views + 1 where id = 1;
 

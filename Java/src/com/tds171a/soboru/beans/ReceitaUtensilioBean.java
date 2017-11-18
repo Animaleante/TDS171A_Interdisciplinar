@@ -9,15 +9,15 @@ import javax.faces.model.SelectItem;
 import javax.inject.Named;
 
 import com.tds171a.soboru.controllers.ReceitaController;
-import com.tds171a.soboru.controllers.TagController;
+import com.tds171a.soboru.controllers.UtensilioController;
 import com.tds171a.soboru.vos.Receita;
-import com.tds171a.soboru.vos.Tag;
+import com.tds171a.soboru.vos.Utensilio;
 
 //@ManagedBean(name="receitaTagBean")
 //@ViewScoped
-@Named("receitaTagBean")
+@Named("receitaUtensilioBean")
 @SessionScoped
-public class ReceitaTagBean implements Serializable {
+public class ReceitaUtensilioBean implements Serializable {
 
 	/**
 	 *
@@ -26,31 +26,31 @@ public class ReceitaTagBean implements Serializable {
 
 	private Receita receita;
 	private ReceitaController receitaController;
-	private TagController tagController;
-	private List<Tag> lista;
-	private List<Tag> listaTags;
+	private UtensilioController utensilioController;
+	private List<Utensilio> lista;
+	private List<Utensilio> listaUtensilios;
 
-	public ReceitaTagBean() {
+	public ReceitaUtensilioBean() {
 		receitaController = new ReceitaController();
-		tagController = new TagController();
-		lista = new ArrayList<Tag>();
-		listaTags = new ArrayList<Tag>();
+		utensilioController = new UtensilioController();
+		lista = new ArrayList<Utensilio>();
+		listaUtensilios = new ArrayList<Utensilio>();
 	}
 
 	public String criar(int receitaId) {
 		setReceita(receitaController.selecionar(receitaId));
-		setLista(receitaController.listarTags(getReceita()));
-		setListaTags(tagController.listar());
+		setLista(receitaController.listarUtensilios(getReceita()));
+		setListaUtensilios(utensilioController.listar());
 
 		System.out.println("ReceitaId: " + getReceita().getId());
 		System.out.println("Current num tags: " + getLista().size());
-		System.out.println("Available tags: " + getListaTags().size());
+		System.out.println("Available tags: " + getListaUtensilios().size());
 
-		return "/cadastro/receita-tag/criar?faces-redirect=true";
+		return "/cadastro/receita-utensilio/criar?faces-redirect=true";
 	}
 
 	public void adicionar() {
-		lista.add(new Tag());
+		lista.add(new Utensilio());
 	}
 
 	public void remover(int index) {
@@ -59,21 +59,21 @@ public class ReceitaTagBean implements Serializable {
 
 	public String salvar() {
 		System.out.println("Salvar: " + lista.size());
-		receitaController.registrarTags(getLista());
+		receitaController.registrarUtensilios(getReceita().getId(), getLista());
 		return "";
 	}
 
 	/**
 	 * @return the lista
 	 */
-	public List<Tag> getLista() {
+	public List<Utensilio> getLista() {
 		return lista;
 	}
 
 	/**
 	 * @param lista the lista to set
 	 */
-	public void setLista(List<Tag> lista) {
+	public void setLista(List<Utensilio> lista) {
 		this.lista = lista;
 	}
 
@@ -94,19 +94,19 @@ public class ReceitaTagBean implements Serializable {
 	/**
 	 * @return the listaTags
 	 */
-	public List<SelectItem> getListaTags() {
+	public List<SelectItem> getListaUtensilios() {
 		List<SelectItem> items = new ArrayList<SelectItem>();
-	    for (Tag t : this.listaTags) {
-	        items.add(new SelectItem(t.getId(), t.getNome()));
+	    for (Utensilio u : this.listaUtensilios) {
+	        items.add(new SelectItem(u.getId(), u.getNome()));
 	    }
 	    return items;
 	}
 
 	/**
-	 * @param listaTags the listaTags to set
+	 * @param listaUtensilios the listaTags to set
 	 */
-	public void setListaTags(List<Tag> listaTags) {
-		this.listaTags = listaTags;
+	public void setListaUtensilios(List<Utensilio> listaUtensilios) {
+		this.listaUtensilios = listaUtensilios;
 	}
 
 }

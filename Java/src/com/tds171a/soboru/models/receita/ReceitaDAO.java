@@ -14,6 +14,7 @@ import com.tds171a.soboru.models.IDAO;
 import com.tds171a.soboru.utils.Utils;
 import com.tds171a.soboru.vos.Receita;
 import com.tds171a.soboru.vos.Tag;
+import com.tds171a.soboru.vos.Utensilio;
 
 /**
  * @author Sony
@@ -311,25 +312,25 @@ public class ReceitaDAO implements IDAO<Receita> {
 		return false;
 	}
 
-	public List<Tag> listarTags(Receita receita) {
+	public List<Utensilio> listarUtensilios(Receita receita) {
 		Connection connection = null;
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("select t.id,t.nome from tags t inner join receitas_tags rt on rt.id_receita = ? and rt.id_tag = t.id");
+			PreparedStatement sttm = connection.prepareStatement("select u.id, u.nome from utensilios u inner join receitas_utensilios ru on ru.id_receita = ? and ru.id_utensilio = u.id");
 			sttm.setInt(1, receita.getId());
 
 			ResultSet rs = sttm.executeQuery();
 
-			List<Tag> list = new ArrayList<Tag>();
-			Tag tag = null;
+			List<Utensilio> list = new ArrayList<Utensilio>();
+			Utensilio utensilio = null;
 			while(rs.next()) {
-				tag = new Tag();
+				utensilio = new Utensilio();
 
-				tag.setId(rs.getInt("id"));
-				tag.setNome(rs.getString("nome"));
+				utensilio.setId(rs.getInt("id"));
+				utensilio.setNome(rs.getString("nome"));
 				
-				list.add(tag);
+				list.add(utensilio);
 			}
 
 			if (sttm != null)
@@ -551,8 +552,59 @@ public class ReceitaDAO implements IDAO<Receita> {
 		return null;
 	}
 
-	public void registrarTags(List<Tag> lista) {
-		// TODO Auto-generated method stub
-		
+	public void registrarUtensilios(int receitaId, List<Utensilio> lista) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+			
+			PreparedStatement sttm = connection.prepareStatement("delete from receitas_utensilios where id_receita = ?");
+			sttm.setInt(1, receitaId);
+
+			sttm.executeUpdate();
+
+			if (sttm != null)
+				sttm.close();
+			
+			
+			String query = "insert all ";
+
+			for(Utensilio u : lista) {
+				query += "into receitas_utensilios values (?, ?) ";
+			}
+			
+			query += "select 1 from dual";
+			
+			sttm = connection.prepareStatement(query);
+			int index = 1;
+			for(Utensilio u : lista) {
+				sttm.setInt(index++, receitaId);
+				sttm.setInt(index++, u.getId());
+			}
+
+			int rowsAffected = sttm.executeUpdate();
+			System.out.println("Linhas afetadas: " + rowsAffected);
+
+			if (sttm != null)
+				sttm.close();
+			
+			if(rowsAffected == 0) {
+				throw new Exception("Não foi possivel cadastras todos os utensilios com essa receita.");
+			}
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
 	}
 }
