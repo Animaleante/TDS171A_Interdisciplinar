@@ -550,4 +550,9 @@ public class ReceitaDAO implements IDAO<Receita> {
 
 		return null;
 	}
+
+	public void registrarTags(List<Tag> lista) {
+		// TODO Auto-generated method stub
+		
+	}
 }

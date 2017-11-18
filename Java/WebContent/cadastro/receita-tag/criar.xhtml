@@ -25,18 +25,27 @@
 		            <section class="content full-width">
 		                <div class="container">
 		                	<h:form id="receitaTagForm">
-							    <ui:repeat value="#{receitaTagBean.lista}" var="tag">
+							    <ui:repeat value="#{receitaTagBean.lista}" var="tag" varStatus="listaItem">
 									<div class="f-row">
-										<h:selectOneMenu value="#{tag.id}" required="true">
-											<f:selectItem itemValue="0" itemLabel="Selecione uma tag" a:disabled="disabled" a:selected="selected"/>
-											<f:selectItems value="#{receitaTagBean.listaTags}" />
-										</h:selectOneMenu>
+										<div class="large">
+											<h:selectOneMenu value="#{tag.id}" required="true">
+												<f:selectItem itemValue="0" itemLabel="Selecione uma tag" a:disabled="disabled" a:selected="selected"/>
+												<f:selectItems value="#{receitaTagBean.listaTags}" />
+											</h:selectOneMenu>
+										</div>
+									    <h:commandButton value="-" action="#{receitaTagBean.remover(listaItem.index)}" immediate="true" execute="@this">
+									        <f:ajax render="receitaTagForm" />
+									    </h:commandButton>
 									</div>
 							    </ui:repeat>
-                        		<div class="f-row submit">
-								    <h:commandButton value="Add" action="#{receitaTagBean.add()}" immediate="true" execute="@this">
+							    
+                        		<div class="f-row">
+								    <h:commandButton value="Add" action="#{receitaTagBean.adicionar()}" immediate="true" execute="@this">
 								        <f:ajax render="receitaTagForm" />
 								    </h:commandButton>
+                        		</div>
+                        		
+                        		<div class="f-row submit">
 								    <h:commandButton value="Salvar" action="#{receitaTagBean.salvar()}" />
 							    </div>
 							</h:form>

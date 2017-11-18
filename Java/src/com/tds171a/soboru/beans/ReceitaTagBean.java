@@ -36,27 +36,31 @@ public class ReceitaTagBean implements Serializable {
 		lista = new ArrayList<Tag>();
 		listaTags = new ArrayList<Tag>();
 	}
-	
+
 	public String criar(int receitaId) {
 		setReceita(receitaController.selecionar(receitaId));
 		setLista(receitaController.listarTags(getReceita()));
 		setListaTags(tagController.listar());
-		
+
 		System.out.println("ReceitaId: " + getReceita().getId());
-		System.out.println("Cutrent num tags: " + getLista().size());
+		System.out.println("Current num tags: " + getLista().size());
 		System.out.println("Available tags: " + getListaTags().size());
-		
+
 		return "/cadastro/receita-tag/criar?faces-redirect=true";
 	}
-	
-	public String salvar() {
-		System.out.println("Salvar: " + lista.size());
-		return "";
+
+	public void adicionar() {
+		lista.add(new Tag());
 	}
 
-	public void add() {
-		System.out.println("add");
-		lista.add(new Tag());
+	public void remover(int index) {
+	    lista.remove(index);
+	}
+
+	public String salvar() {
+		System.out.println("Salvar: " + lista.size());
+		receitaController.registrarTags(getLista());
+		return "";
 	}
 
 	/**
@@ -91,7 +95,6 @@ public class ReceitaTagBean implements Serializable {
 	 * @return the listaTags
 	 */
 	public List<SelectItem> getListaTags() {
-		System.out.println("getlistatags: " + this.listaTags.size());
 		List<SelectItem> items = new ArrayList<SelectItem>();
 	    for (Tag t : this.listaTags) {
 	        items.add(new SelectItem(t.getId(), t.getNome()));

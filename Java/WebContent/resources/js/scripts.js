@@ -11,7 +11,6 @@
 		init: function () {
 			//CUSTOM FORM ELEMENTS
 			$('select, input[type=radio],input[type=checkbox],input[type=file]').uniform();
-			// $('input[type=radio],input[type=checkbox],input[type=file]').uniform();
 			
 			//MOBILE MENU
 			$('.main-nav').slicknav({
