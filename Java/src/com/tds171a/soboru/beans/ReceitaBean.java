@@ -19,22 +19,11 @@ import javax.inject.Named;
 import javax.servlet.http.Part;
 
 import com.tds171a.soboru.controllers.CategoriaController;
-import com.tds171a.soboru.controllers.ComentarioController;
-import com.tds171a.soboru.controllers.IngredienteController;
-import com.tds171a.soboru.controllers.MedidaController;
-import com.tds171a.soboru.controllers.PontuacaoController;
 import com.tds171a.soboru.controllers.ReceitaController;
-import com.tds171a.soboru.controllers.ReceitaIngredienteController;
-import com.tds171a.soboru.controllers.ReportController;
 import com.tds171a.soboru.controllers.UsuarioController;
-import com.tds171a.soboru.controllers.UtensilioController;
 import com.tds171a.soboru.utils.Utils;
 import com.tds171a.soboru.vos.Categoria;
-import com.tds171a.soboru.vos.Ingrediente;
-import com.tds171a.soboru.vos.Medida;
 import com.tds171a.soboru.vos.Receita;
-import com.tds171a.soboru.vos.Tag;
-import com.tds171a.soboru.vos.Utensilio;
 
 @Named("receitaBean")
 @SessionScoped
