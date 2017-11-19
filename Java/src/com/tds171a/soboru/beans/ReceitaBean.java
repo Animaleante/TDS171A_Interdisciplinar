@@ -51,19 +51,8 @@ public class ReceitaBean  extends BeanBase<Receita> {
 
 	private CategoriaController categoriaController;
 	private UsuarioController usuarioController;
-	private UtensilioController utensilioController;
-	private ComentarioController comentarioController;
-	private ReceitaIngredienteController receitaIngredienteController;
-	private IngredienteController ingredienteController;
-	private MedidaController medidaController;
-	private ReportController reportController;
-	private PontuacaoController pontuacaoController;
-
-	private List<Categoria> categorias;
-	private List<Ingrediente> ingredientes;
-	private List<Medida> medidas;
-	private List<Utensilio> utensilios;
-	private List<Tag> tags;
+	
+	private List<Categoria> categorias;	
 	
 	private Part imgFile;
 
@@ -77,14 +66,6 @@ public class ReceitaBean  extends BeanBase<Receita> {
 
 		categoriaController = new CategoriaController();
 		usuarioController = new UsuarioController();
-		utensilioController = new UtensilioController();
-		comentarioController = new ComentarioController();
-		receitaIngredienteController = new ReceitaIngredienteController();
-		ingredienteController = new IngredienteController();
-		medidaController = new MedidaController();
-		reportController = new ReportController();
-		pontuacaoController = new PontuacaoController();
-		
 		setVo(new Receita());
 	}
 
@@ -96,9 +77,6 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	@Override
 	public String criar() {
 		setCategorias(categoriaController.listar());
-		setIngredientes(ingredienteController.listar());
-		setMedidas(medidaController.listar());
-		setUtensilios(utensilioController.listar());
 
 		return super.criar();
 	}
@@ -139,22 +117,14 @@ public class ReceitaBean  extends BeanBase<Receita> {
 		
 		if(vo.getUsuario() == null)
 			vo.setUsuario(usuarioController.selecionar(vo.getUsuarioId()));
-		
-		if(vo.getUtensilios() == null)
-			vo.setUtensilios(utensilioController.selecionarPorReceita(vo.getId()));
-		
-		if(vo.getReceitaIngredientes() == null)
-			vo.setReceitaIngredientes(receitaIngredienteController.selecionarPorReceita(vo.getId()));
-		
+				
 		return super.exibir(vo);
 	}
 	
 	@Override
 	public String editar(Receita vo) {
+		
 		setCategorias(categoriaController.listar());
-		setIngredientes(ingredienteController.listar());
-		setMedidas(medidaController.listar());
-		setUtensilios(utensilioController.listar());
 		
 		return super.editar(vo);
 	}
@@ -232,74 +202,6 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	 */
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
-	}
-
-	/**
-	 * @return the ingredientes
-	 */
-	public List<SelectItem> getIngredientes() {
-		List<SelectItem> items = new ArrayList<SelectItem>();
-	    for (Ingrediente c : this.ingredientes) {
-	        items.add(new SelectItem(c.getId(), c.getNome()));
-	    }
-	    return items;
-	}
-
-	/**
-	 * @param ingredientes the ingredientes to set
-	 */
-	public void setIngredientes(List<Ingrediente> ingredientes) {
-		this.ingredientes = ingredientes;
-	}
-
-	/**
-	 * @return the medidas
-	 */
-	public List<SelectItem> getMedidas() {
-		List<SelectItem> items = new ArrayList<SelectItem>();
-	    for (Medida c : this.medidas) {
-	        items.add(new SelectItem(c.getId(), c.getNome()));
-	    }
-	    return items;
-	}
-
-	/**
-	 * @param medidas the medidas to set
-	 */
-	public void setMedidas(List<Medida> medidas) {
-		this.medidas = medidas;
-	}
-
-	/**
-	 * @return the utensilios
-	 */
-	public List<SelectItem> getUtensilios() {
-		List<SelectItem> items = new ArrayList<SelectItem>();
-	    for (Utensilio c : this.utensilios) {
-	        items.add(new SelectItem(c.getId(), c.getNome()));
-	    }
-	    return items;
-	}
-
-	/**
-	 * @param utensilios the utensilios to set
-	 */
-	public void setUtensilios(List<Utensilio> utensilios) {
-		this.utensilios = utensilios;
-	}
-
-	/**
-	 * @return the tags
-	 */
-	public List<Tag> getTags() {
-		return tags;
-	}
-
-	/**
-	 * @param tags the tags to set
-	 */
-	public void setTags(List<Tag> tags) {
-		this.tags = tags;
 	}
 
 	/**
