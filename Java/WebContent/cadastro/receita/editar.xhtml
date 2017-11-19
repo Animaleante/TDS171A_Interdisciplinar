@@ -63,30 +63,7 @@
 									</div>
 				                </section>
 		            
-					            <!-- <section id="ingredientes">
-										<h2>Ingredientes</h2>
-										<div class="f-row ingredient">
-			                                   <div class="large">
-			                                       <input class="ingrediente-input" type="text" placeholder="Ingrediente" name="nome_ingrediente[]" autocomplete="off" value="" />
-			                                   </div>
-			                                   <div class="small">
-			                                       <input type="text" placeholder="SubSession" name="receita_ingrediente[subsessao][]" value="" />
-			                                   </div>
-			                                   <div class="small">
-			                                       <input type="text" placeholder="Quantity" name="receita_ingrediente[qty][]" value="" />
-			                                   </div>
-			                                   <div class="small">
-													<h:selectOneMenu value="" required="true">
-		   												<f:selectItem itemValue="0" itemLabel="Selecione uma medida" a:disabled="disabled" a:selected="selected"/>
-														<f:selectItems value="#{receitaBean.medidas}" />
-													</h:selectOneMenu>
-			                                   </div>
-			                                   <button class="remove">-</button>
-			                               </div>
-									<div class="f-row full add-ingredient">
-										<button class="add">Adicionar um ingrediente</button>
-									</div>
-								</section> -->
+					            
 								
 								<section>
 									<h2>Modo de Preparo</h2>
@@ -114,17 +91,6 @@
 		                                </label>
 									</div>
 								</section>
-								
-								<section>
-									<h2>Teste</h2>
-									<div class="f-row full">
-									    <c:forEach items="#{receitaTagBean.lista}" var="itemId">
-									    	<div>teste</div>
-									    </c:forEach>
-									    <h:commandButton immediate="true" action="#{receitaTagBean.add}" value="Add" />
-									</div>
-								</section>
-							            	
 								
                         		<div class="f-row submit">
 									<h:commandButton action="#{receitaBean.editar()}" value="Salvar" />

@@ -18,10 +18,12 @@ public class Usuario {
 	private int roleId;
 	private boolean notificacaoEmail;
 	private Role role;
+	private String senhaConfirmacao;
+	
 	
 	public Usuario() {
 		id = -1;
-		sexo = -1;
+		sexo = 3;
 		roleId = -1;
 		notificacaoEmail = true;
 		
@@ -166,5 +168,19 @@ public class Usuario {
 	 */
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	/**
+	 * @return the senhaConfirmacao
+	 */
+	public String getSenhaConfirmacao() {
+		return senhaConfirmacao;
+	}
+
+	/**
+	 * @param senhaConfirmacao the senhaConfirmacao to set
+	 */
+	public void setSenhaConfirmacao(String senhaConfirmacao) {
+		this.senhaConfirmacao = senhaConfirmacao;
 	}
 }

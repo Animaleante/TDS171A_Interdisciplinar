@@ -28,10 +28,10 @@
 							
 							<h:outputText value="Tem certeza que deseja deletar o usuario '#{usuarioBean.vo.nome}'?" />
 	
-		                    <div class="bwrap">
+							<div class="f-row submit">
 								<h:form>
 									<h:commandButton action="#{usuarioBean.deletar()}" value="Confirmar exclusão" />
-									<h:commandButton immediate="true" action="#{usuarioBean.listar()}" value="Voltar" />
+									<h:commandLink immediate="true" action="#{usuarioBean.listar()}" value="Voltar" />
 								</h:form>
 		                    </div>
 						</div>
