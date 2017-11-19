@@ -99,6 +99,13 @@ public class LoginBean implements Serializable {
 	public boolean isLogado() {
 		return SessionContext.getInstance().isLogado();
 	}
+	
+	/**
+	 * método que verifica se a sessão está válida e o usuario é admin
+	 */ 
+	public boolean isAdminLogado() {
+		return SessionContext.getInstance().isAdminLogado();
+	}
 
 	/**
 	 * adiquirir o email

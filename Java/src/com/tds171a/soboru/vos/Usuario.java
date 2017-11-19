@@ -17,9 +17,15 @@ public class Usuario {
 	private int sexo;
 	private int roleId;
 	private boolean notificacaoEmail;
+	private Role role;
 	
 	public Usuario() {
+		id = -1;
+		sexo = -1;
+		roleId = -1;
+		notificacaoEmail = true;
 		
+		setRole(null);
 	}
 
 	/**
@@ -146,5 +152,19 @@ public class Usuario {
 	 */
 	public void setNotificacaoEmail(boolean notificacaoEmail) {
 		this.notificacaoEmail = notificacaoEmail;
+	}
+
+	/**
+	 * @return the role
+	 */
+	public Role getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role the role to set
+	 */
+	public void setRole(Role role) {
+		this.role = role;
 	}
 }

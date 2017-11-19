@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -247,6 +249,11 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 		}
 
 		return "/login/" + INDEX_PAGE + FACES_REDIRECT;
+	}
+	
+	public String formatDouble(Double num) {
+		NumberFormat nf = new DecimalFormat("##.##");
+		return nf.format(num);
 	}
 
 	/**

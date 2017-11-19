@@ -56,6 +56,14 @@ public class SessionContext {
 	}
 	
 	/**
+	 * retorna se o cliente está logado.
+	 */
+	public boolean isAdminLogado() {
+		Usuario usuario = getUsuarioLogado();
+		return usuario != null && usuario.getRole().getIsAdmin();
+	}
+	
+	/**
 	 * seta o usuáro
 	 */
 	public void setUsuarioLogado(Usuario usuario) {

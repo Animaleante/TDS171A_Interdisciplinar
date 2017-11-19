@@ -12,6 +12,8 @@ import java.util.List;
 
 import com.tds171a.soboru.models.IDAO;
 import com.tds171a.soboru.utils.Utils;
+import com.tds171a.soboru.vos.Ingrediente;
+import com.tds171a.soboru.vos.Medida;
 import com.tds171a.soboru.vos.ReceitaIngrediente;
 
 /**
@@ -228,7 +230,12 @@ public class ReceitaIngredienteDAO implements IDAO<ReceitaIngrediente> {
         try {
             connection = Utils.createConnection();
 
-            PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" where id_receita = ?");
+//            PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" where id_receita = ?");
+            PreparedStatement sttm = connection.prepareStatement(
+            		"select ri.id, ri.id_receita, ri.id_ingrediente, ri.id_medida, ri.sub_sessao, ri.qty, m.id medida_id, m.nome medida_nome, m.abreviacao, i.id ingrediente_id, i.nome ingrediente_nome from "+tableName+" ri "
+            				+ "inner join medidas m on m.id = ri.id_medida "
+            				+ "inner join ingredientes i on i.id = ri.id_ingrediente "
+            				+ "where id_receita = ?");
             sttm.setInt(1, receitaId);
 
             ResultSet rs = sttm.executeQuery();
@@ -243,6 +250,15 @@ public class ReceitaIngredienteDAO implements IDAO<ReceitaIngrediente> {
             	receitaIngrediente.setId_medida(rs.getInt("id_medida"));
             	receitaIngrediente.setSub_sessao(rs.getString("sub_sessao"));
             	receitaIngrediente.setQty(rs.getDouble("qty"));
+            	
+            	receitaIngrediente.setIngrediente(new Ingrediente());
+            	receitaIngrediente.getIngrediente().setId(rs.getInt("ingrediente_id"));
+            	receitaIngrediente.getIngrediente().setNome(rs.getString("ingrediente_nome"));
+            	
+            	receitaIngrediente.setMedida(new Medida());
+            	receitaIngrediente.getMedida().setId(rs.getInt("medida_id"));
+            	receitaIngrediente.getMedida().setNome(rs.getString("medida_nome"));
+            	receitaIngrediente.getMedida().setAbreviacao(rs.getString("abreviacao"));
 
                 list.add(receitaIngrediente);
             }

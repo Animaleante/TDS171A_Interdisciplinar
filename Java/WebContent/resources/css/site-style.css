@@ -1836,11 +1836,13 @@ dl {
 }
 
 .basic dt {
-    width: 65%;
+    /*width: 65%;*/
+    width: 60%;
 }
 
 .basic dd {
-    width: 35%;
+    /*width: 35%;*/
+    width: 40%;
     background: #FF8E88;
 }
 
@@ -1865,6 +1867,7 @@ dl {
 
 .ingredients dd {
     width: 65%;
+    text-transform: capitalize;
 }
 
 .nutrition table {
