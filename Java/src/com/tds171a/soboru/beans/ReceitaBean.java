@@ -117,6 +117,22 @@ public class ReceitaBean  extends BeanBase<Receita> {
 		
 		return super.editar(vo);
 	}
+	
+	@Override
+	public String editar() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		
+		try (InputStream input = imgFile.getInputStream()) {
+		File file = File.createTempFile("receita_",  ".jpg", Utils.getImagerDir());
+		Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		getVo().setImgPath(file.getName());
+	} catch (IOException e) {
+		e.printStackTrace();
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro ao tentar fazer upload da imagem: " + e.getMessage(), null));
+        return route_base + CRIAR_PAGE;
+	}
+		return super.editar();
+	}
 
 	/**
      * Override do deletar, onde verifica a sessao, 

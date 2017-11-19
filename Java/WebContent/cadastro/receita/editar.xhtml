@@ -28,6 +28,15 @@
 				                <section>
 									<h:messages globalOnly="true" errorClass="error"/>
 									
+									<section>
+									<div class="f-row full">
+		                                <label>
+		                                	<strong>Aprovado  </strong>
+		                                    <h:selectBooleanCheckbox value="#{receitaBean.vo.aprovado}"></h:selectBooleanCheckbox>
+		                                </label>
+									</div>
+								</section>
+								
 									<div class="f-row">
 					                    <div class="full">
 					                    <h:message for="nome" errorClass="error"/><br/>
@@ -88,22 +97,15 @@
 									<div class="f-row full">
 									<h:message for="receita-foto" errorClass="error"/><br/>
 										<label for="receita-foto" class="btn">Selecionar uma foto</label>
-										<h:inputFile id="receita-foto" value="#{receitaBean.imgFile}"
-										required="true" 
-										requiredMessage="Foto da receita é obrigatório"
-										/>
-										<h:graphicImage value="/images/#{receitaSiteBean.vo.imgPath}" />
+										<h:inputFile id="receita-foto" value="#{receitaBean.imgFile}"/>
+										<br/>
+										<br/>
+										<br/>
+										<h:graphicImage class="imgreceita" value="/images/#{receitaBean.vo.imgPath}" />
 									</div>
 								</section>
 								
-								<section>
-									<div class="f-row full">
-		                                <label>
-		                                	Aprovado
-		                                    <h:selectBooleanCheckbox value="#{receitaBean.vo.aprovado}"></h:selectBooleanCheckbox>
-		                                </label>
-									</div>
-								</section>
+								
 								
                         		<div class="f-row submit">
 									<h:commandButton action="#{receitaBean.editar()}" value="Salvar" />
