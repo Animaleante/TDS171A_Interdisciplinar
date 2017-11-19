@@ -15,6 +15,16 @@
 		                <li id="nav_home">
 		                    <a href="#{request.contextPath}/" title="Home"><span>Home</span></a>
 		                </li>
+		                <li id="nav_receitas">
+		                    <h:commandLink action="#{receitaSiteBean.listar()}" value="">
+		                    	<span>Receitas</span>
+		                    </h:commandLink>
+		                </li>
+		                <li id="nav_pesquisar">
+		                    <h:commandLink action="#{pesquisaBean.index()}" value="">
+		                    	<span>Pesquisar</span>
+		                    </h:commandLink>
+		                </li>
 						<c:if test="#{loginBean.adminLogado}">
 			                <li id="nav_cadastro">
 			                    <a href="#" title="Cadastro"><span>Cadastro</span></a>

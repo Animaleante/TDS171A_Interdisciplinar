@@ -13,6 +13,7 @@ import java.util.List;
 
 import com.tds171a.soboru.models.IDAO;
 import com.tds171a.soboru.utils.Utils;
+import com.tds171a.soboru.vos.Ingrediente;
 import com.tds171a.soboru.vos.Receita;
 import com.tds171a.soboru.vos.ReceitaIngrediente;
 import com.tds171a.soboru.vos.Tag;
@@ -433,7 +434,7 @@ public class ReceitaDAO implements IDAO<Receita> {
 	 * @param ingredientes
 	 * @return
 	 */
-	public List<Receita> selecionarPorIngredientes(List<Integer> ingredientes) {
+	public List<Receita> selecionarPorIngredientes(List<Ingrediente> ingredientes) {
 		Connection connection = null;
 		try {
 			connection = Utils.createConnection();
@@ -449,8 +450,8 @@ public class ReceitaDAO implements IDAO<Receita> {
 					+ "from "+tableName+" r inner join receitas_ingredientes ri on r.id = ri.id_receita where ri.id_ingrediente in ("+idsArray+") and r.aprovado = 1 ");
 			
 			int conta = 1;
-			for(Integer i : ingredientes) {
-				sttm.setInt(conta, i);
+			for(Ingrediente i : ingredientes) {
+				sttm.setInt(conta, i.getId());
 				conta++;
 			}
 
@@ -506,7 +507,7 @@ public class ReceitaDAO implements IDAO<Receita> {
 	 * @param ingredientes
 	 * @return
 	 */
-	public List<Receita> selecionarPorNomeEIngredientes(String termoBusca, List<Integer> ingredientes) {
+	public List<Receita> selecionarPorNomeEIngredientes(String termoBusca, List<Ingrediente> ingredientes) {
 		Connection connection = null;
 		try {
 			connection = Utils.createConnection();
@@ -526,8 +527,8 @@ public class ReceitaDAO implements IDAO<Receita> {
 					+ "from "+tableName+" r inner join receitas_ingredientes ri on r.id = ri.id_receita where ri.id_ingrediente in ("+idsArray+") and lower(r.nome) like lower(?) and r.aprovado = 1");
 
 			int conta = 1;
-			for(Integer i : ingredientes) {
-				sttm.setInt(conta, i);
+			for(Ingrediente i : ingredientes) {
+				sttm.setInt(conta, i.getId());
 				conta++;
 			}
 			sttm.setString(conta, "%"+termoBusca+"%");

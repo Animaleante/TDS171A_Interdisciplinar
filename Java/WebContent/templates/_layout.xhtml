@@ -46,10 +46,10 @@
 			function setActivePage(pageId, categoryName) {
 	            //criado variável que recebe a categoria e concatena
 	            //com os parâmetros esperados para setactivepage
-	            var bag = 'nav ul li#nav_' + categoryName.toLowerCase();
+	            var bag = 'nav ul ul li#nav_' + categoryName.toLowerCase();
 	
 	            $('nav ul li').removeClass('current-menu-item');
-	            $('nav ul li#'+pageId).addClass("current-menu-item");
+	            $('nav>ul>li#'+pageId).addClass("current-menu-item");
 	            /*if (pageId === "nav_home")
 	                $('nav ul li#nav_home').addClass("current-menu-item");
 	            else

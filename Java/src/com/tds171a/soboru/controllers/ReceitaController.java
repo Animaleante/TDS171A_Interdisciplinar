@@ -6,6 +6,7 @@ package com.tds171a.soboru.controllers;
 import java.util.List;
 
 import com.tds171a.soboru.models.receita.ReceitaModel;
+import com.tds171a.soboru.vos.Ingrediente;
 import com.tds171a.soboru.vos.Receita;
 import com.tds171a.soboru.vos.ReceitaIngrediente;
 import com.tds171a.soboru.vos.Tag;
@@ -37,11 +38,11 @@ public class ReceitaController extends ControllerBase<Receita>{
 		return ((ReceitaModel) model).selecionarPorNome(termoBusca);
 	}
 	
-	public List<Receita> selecionarPorIngredientes(List<Integer> ingredientes) {
+	public List<Receita> selecionarPorIngredientes(List<Ingrediente> ingredientes) {
 		return ((ReceitaModel) model).selecionarPorIngredientes(ingredientes);
 	}
 
-	public List<Receita> selecionarPorNomeEIngredientes(String termoBusca, List<Integer> ingredientes) {
+	public List<Receita> selecionarPorNomeEIngredientes(String termoBusca, List<Ingrediente> ingredientes) {
 		return ((ReceitaModel) model).selecionarPorNomeEIngredientes(termoBusca, ingredientes);
 	}
 
