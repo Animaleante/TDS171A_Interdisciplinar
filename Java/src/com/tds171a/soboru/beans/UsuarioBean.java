@@ -53,6 +53,13 @@ public class UsuarioBean extends BeanBase<Usuario> {
 
 		return super.criar();
 	}
+	
+	@Override
+	public String editar(Usuario vo) {
+		setRoles(roleController.listar());
+
+		return super.editar(vo);
+	}
 	/**
 	 * Método para verificar os dados no cadastro do usuário. Verifica os dados,
 	 * se tiver erro ele apresenta para o cliente,
