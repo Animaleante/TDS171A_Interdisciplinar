@@ -29,58 +29,54 @@
 					<section class="content full-width">
 						<!--recipefinder-->
 						<div class="container recipefinder">
-							<div class="left">
-								<h3>Procurar por ingredientes</h3>
-<!-- 								<p>Click the ‘-’ to remove an ingredient, or click the ingredient itself to emphasize</p> -->
-								<p>Clique no '-' para remover um ingrediente</p>
-								<div class="f-row">
-									<input type="text" placeholder="Adicionar ingredientes (um por vez)" />
-									<button class="add">+</button>
+							<h:form>
+								<div class="left">
+									<h3>Procurar por ingredientes</h3>
+	<!-- 								<p>Click the ‘-’ to remove an ingredient, or click the ingredient itself to emphasize</p> -->
+									<p>Clique no '-' para remover um ingrediente</p>
+									<div class="f-row">
+	<!-- 									<input type="text" placeholder="Adicionar ingredientes (um por vez)" /> -->
+											<h:selectOneMenu value="#{pesquisaBean.serAdicionado}">
+												<f:selectItem itemValue="0"
+													itemLabel="Adicionar ingredientes (um por vez)" a:disabled="disabled"
+													a:selected="selected" />
+												<f:selectItems value="#{pesquisaBean.listaIngredientes}" />
+											</h:selectOneMenu>
+									    	<h:commandLink action="#{pesquisaBean.adicionar()}">
+									    		<button class="add">+</button>
+									    	</h:commandLink>
+									</div>
+									<c:forEach items="#{pesquisaBean.lista}" var="ingrediente">
+										<div class="f-row">
+											<div style="width: 100% !important; border: 1px solid #ddd; color: #666; font-size: 13px; font-weight: 400; padding: 9px 10px; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; vertical-align: baseline;">
+												<h:outputText value="#{ingrediente.nome}" />
+											</div>
+									    	<h:commandLink action="#{pesquisaBean.remover(ingrediente)}">
+									    		<button class="remove">-</button>
+									    	</h:commandLink>
+										</div>
+									</c:forEach>
 								</div>
-								<div class="f-row">
-									<input type="text" value="garlic" />
-									<button class="remove">-</button>
-								</div>
-								<div class="f-row">
-									<input type="submit" value="Search" />
-								</div>
-							</div>
-							<div class="right">
-								<div class="ingredients">
-									<h3>Do you also have?</h3>
-									<a href="#" class="button gold">Olive oil</a>
-									<a href="#" class="button gold">Parsley</a>
-									<a href="#" class="button gold">Tomato</a>
-									<a href="#" class="button gold">Olive oil</a>
-									<a href="#" class="button gold">Parsley</a>
-									<a href="#" class="button gold">Tomato</a>
-									<a href="#" class="button gold">Parsley</a>
-									<a href="#" class="button gold">Tomato</a>
-									<a href="#" class="button gold">Olive oil</a>
-									<a href="#" class="button gold">Parsley</a>
-									<a href="#" class="button gold">Tomato</a>
-								</div>
-								
-<!-- 								<h3>Or you might want to search directly</h3> -->
-								<h3>Ou você talvez queira procurar diretamente</h3>
-								<div class="row">
-									<div class="search one-half">
-										<h:form>
-<!-- 											<input type="search" placeholder="Encontrar receita por nome" /> -->
+								<div class="right">
+									<h3>Ou você talvez queira procurar diretamente</h3>
+									<div class="row">
+										<div class="search one-half">
 											<h:inputText value="#{pesquisaBean.termoBusca}" a:placeholder="Encontrar receita por nome" a:type="search"/>
-<!-- 											<input type="submit" value="Search" /> -->
 											<h:commandButton action="#{pesquisaBean.pesquisar()}" value="Procurar" />
-										</h:form>
-									</div>
-									
-									<div class="one-half">
-										<h:selectOneMenu value="#{pesquisaBean.categoriaId}">
-  												<f:selectItem itemValue="0" itemLabel="Selecione uma categoria" a:disabled="disabled" a:selected="selected"/>
-											<f:selectItems value="#{pesquisaBean.listaCategorias}" />
-										</h:selectOneMenu>
+										</div>
+										
+										<div class="one-half">
+											<h:selectOneMenu value="#{pesquisaBean.categoriaId}">
+	  												<f:selectItem itemValue="0" itemLabel="Selecione uma categoria" a:disabled="disabled" a:selected="selected"/>
+												<f:selectItems value="#{pesquisaBean.listaCategorias}" />
+											</h:selectOneMenu>
+										</div>
 									</div>
 								</div>
-							</div>
+								<div class="f-row">
+									<h:commandButton action="#{pesquisaBean.pesquisar()}" value="Procurar" />
+								</div>
+							</h:form>
 						</div>
 						<!--//recipefinder-->
 					
@@ -118,7 +114,7 @@
 							</c:forEach>
 							
 							<div class="quicklinks">
-								<a href="#" class="button">More recipes</a>
+<!-- 								<a href="#" class="button">More recipes</a> -->
 								<a href="javascript:void(0)" class="button scroll-to-top">Back to top</a>
 							</div>
 						</div>
@@ -135,7 +131,7 @@
 	
 	<ui:define name="script">
 		<h:outputScript>
-			navName = "home";
+			navName = "pesquisar";
 		</h:outputScript>
 	</ui:define>
 </ui:composition>

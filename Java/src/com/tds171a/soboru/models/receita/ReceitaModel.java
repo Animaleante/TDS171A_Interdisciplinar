@@ -3,6 +3,7 @@ package com.tds171a.soboru.models.receita;
 import java.util.List;
 
 import com.tds171a.soboru.models.ModelBase;
+import com.tds171a.soboru.vos.Ingrediente;
 import com.tds171a.soboru.vos.Receita;
 import com.tds171a.soboru.vos.ReceitaIngrediente;
 import com.tds171a.soboru.vos.Tag;
@@ -29,11 +30,11 @@ public class ReceitaModel extends ModelBase<Receita> {
 		return ((ReceitaDAO) dao).selecionarPorNome(termoBusca);
 	}
 	
-	public List<Receita> selecionarPorIngredientes(List<Integer> ingredientes) {
+	public List<Receita> selecionarPorIngredientes(List<Ingrediente> ingredientes) {
 		return ((ReceitaDAO) dao).selecionarPorIngredientes(ingredientes);
 	}
 
-	public List<Receita> selecionarPorNomeEIngredientes(String termoBusca, List<Integer> ingredientes) {
+	public List<Receita> selecionarPorNomeEIngredientes(String termoBusca, List<Ingrediente> ingredientes) {
 		return ((ReceitaDAO) dao).selecionarPorNomeEIngredientes(termoBusca, ingredientes);
 	}
 

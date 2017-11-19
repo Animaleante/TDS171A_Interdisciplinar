@@ -52,9 +52,14 @@ public class PesquisaBean implements Serializable {
 	private CategoriaController categoriaController;
 	
 	/**
+	 * Ingrediente a ser adicionado a pesquisa
+	 */
+	private int serAdicionado;
+	
+	/**
 	 * Recebe os ingredientes a serem usados na pesquisa
 	 */
-	private List<Integer> lista;
+	private List<Ingrediente> lista;
 	
 	/**
 	 * Recebe os termos usados para pesquisar
@@ -91,7 +96,8 @@ public class PesquisaBean implements Serializable {
 		ingredienteController = new IngredienteController();
 		categoriaController = new CategoriaController();
 		
-		setLista(new ArrayList<Integer>());
+		setSerAdicionado(0);
+		setLista(new ArrayList<Ingrediente>());
 		setTermoBusca("");
 		setCategoriaId(0);
 		setResultados(new ArrayList<Receita>());
@@ -100,7 +106,8 @@ public class PesquisaBean implements Serializable {
 	}
 	
 	public String index() {
-		setLista(new ArrayList<Integer>());
+		setSerAdicionado(0);
+		setLista(new ArrayList<Ingrediente>());
 		setTermoBusca("");
 		setCategoriaId(0);
 		setResultados(new ArrayList<Receita>());
@@ -110,12 +117,31 @@ public class PesquisaBean implements Serializable {
 		return ROUTE_BASE+BeanBase.INDEX_PAGE+BeanBase.FACES_REDIRECT;
 	}
 	
+	public void adicionar() {
+		Ingrediente ingrediente = null;
+		for (int i = 0; i < listaIngredientes.size(); i++) {
+			if(listaIngredientes.get(i).getId() == serAdicionado) {
+				ingrediente = listaIngredientes.get(i);
+				break;
+			}
+		}
+		
+		if(ingrediente != null) {
+			lista.add(ingrediente);
+			setSerAdicionado(0);
+		}
+	}
+	
+	public void remover(Ingrediente ingrediente) {
+		lista.remove(ingrediente);
+	}
+	
 	/**
 	 * recebe a rota para a pesquisa.
 	 */
 	public String pesquisar() {
-//		lista.add(1);
-//		lista.add(3);
+		if(serAdicionado != 0)
+			adicionar();
 		
 		if(!getTermoBusca().isEmpty() && getLista().size() > 0) {
 			setResultados(receitaController.selecionarPorNomeEIngredientes(getTermoBusca(), getLista()));
@@ -154,8 +180,12 @@ public class PesquisaBean implements Serializable {
 	/**
 	 * @return the listaIngredientes
 	 */
-	public List<Ingrediente> getListaIngredientes() {
-		return listaIngredientes;
+	public List<SelectItem> getListaIngredientes() {
+		List<SelectItem> items = new ArrayList<SelectItem>();
+	    for (Ingrediente i : this.listaIngredientes) {
+	        items.add(new SelectItem(i.getId(), i.getNome()));
+	    }
+	    return items;
 	}
 
 	/**
@@ -214,15 +244,29 @@ public class PesquisaBean implements Serializable {
 	/**
 	 * @return the lista
 	 */
-	public List<Integer> getLista() {
+	public List<Ingrediente> getLista() {
 		return lista;
 	}
 
 	/**
 	 * @param lista the lista to set
 	 */
-	public void setLista(List<Integer> lista) {
+	public void setLista(List<Ingrediente> lista) {
 		this.lista = lista;
+	}
+
+	/**
+	 * @return the serAdicionado
+	 */
+	public int getSerAdicionado() {
+		return serAdicionado;
+	}
+
+	/**
+	 * @param serAdicionado the serAdicionado to set
+	 */
+	public void setSerAdicionado(int serAdicionado) {
+		this.serAdicionado = serAdicionado;
 	}
 
 }
