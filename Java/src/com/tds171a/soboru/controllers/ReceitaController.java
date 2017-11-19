@@ -52,4 +52,35 @@ public class ReceitaController extends ControllerBase<Receita>{
 	public List<ReceitaIngrediente> listarIngredientes(Receita receita) {
 		return ((ReceitaModel) model).listarIngredientes(receita);
 	}
+
+	public List<Receita> selecionarPorUsuario(int usuarioId) {
+		return ((ReceitaModel) model).selecionarPorUsuario(usuarioId);
+	}
+
+	public List<Receita> selecionarPorFavoritosDeUsuario(int usuarioId) {
+		return ((ReceitaModel) model).selecionarPorFavoritosDeUsuario(usuarioId);
+	}
+	
+	public boolean incluirFavorito(int receitaId, int usuarioId) {
+		return((ReceitaModel) model).incluirFavorito(receitaId, usuarioId);
+	}
+
+	public boolean removerFavorito(int receitaId, int usuarioId) {
+		return ((ReceitaModel) model).removerFavorito(receitaId, usuarioId);
+	}
+
+	public boolean isReceitaFavoritada(int receitaId, int usuarioId) {
+		return ((ReceitaModel) model).isReceitaFavoritada(receitaId, usuarioId);
+	}
+
+	public boolean incluirReport(int receitaId, int usuarioId) {
+		return ((ReceitaModel) model).incluirReport(receitaId, usuarioId);
+		
+	}
+
+	public boolean incluirPontuacao(int receitaId, int usuarioId, int pontos) {
+		boolean sucesso = ((ReceitaModel) model).incluirPontuacao(receitaId, usuarioId, pontos);
+		((ReceitaModel) model).atualizarPontuacaoMedia(receitaId);
+		return sucesso;
+	}
 }

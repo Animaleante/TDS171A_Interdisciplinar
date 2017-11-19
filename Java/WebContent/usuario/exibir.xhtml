@@ -26,10 +26,10 @@
 						<!--profile left part-->
 						<div class="my_account one-fourth">
 							<figure>
-								<img src="images/avatar4.jpg" alt="">
+								<h:graphicImage value="#{resource['images:avatar4.jpg']}"/>
 							</figure>
 							<div class="container">
-								<h2>Anabelle Q.</h2> 
+								<h2><h:outputText value="#{usuarioSiteBean.vo.nome}" /></h2> 
 							</div>
 						</div>
 						<!--//profile left part-->
@@ -37,109 +37,45 @@
 						<div class="three-fourth">
 							<nav class="tabs">
 								<ul>
-									<li class="active"><a href="#about" title="About me">About me</a></li>
-									<li><a href="#recipes" title="My recipes">My recipes</a></li>
-									<li><a href="#favorites" title="My favorites">My favorites</a></li>
-									<li><a href="#posts" title="My posts">My posts</a></li>
+									<li class="active"><a href="#recipes" title="My recipes">Minhas receitas</a></li>
+									<li><a href="#favorites" title="My favorites">Meus favoritos</a></li>
 								</ul>
 							</nav>
-							
-							<!--about-->
-							<div class="tab-content" id="about" style="">
-								<div class="row">
-									<dl class="basic two-third">
-										<dt>Name</dt>
-										<dd>Anabelle Q.</dd>
-										<dt>Favorite cusine</dt>
-										<dd>Thai, Mexican</dd>
-										<dt>Favorite appliances</dt>
-										<dd>Blender, sharp knife</dd>
-										<dt>Favorite spices</dt>
-										<dd>Chilli, Oregano, Basil</dd>
-										<dt>Recipes submitted</dt>
-										<dd>9</dd>
-										<dt>Posts submitted</dt>
-										<dd>9</dd>
-									</dl>
-									
-									<div class="one-third">
-										<ul class="boxed gold">
-											<li class="light"><a href="#" title="Best recipe"><i class="icon icon-themeenergy_crown"></i> <span>Had a best recipe</span></a></li>
-											<li class="medium"><a href="#" title="Was featured"><i class="icon icon-themeenergy_top-rankings"></i> <span>Was featured</span></a></li>
-											<li class="dark"><a href="#" title="Added a first recipe"><i class="icon  icon-themeenergy_medal-first-place"></i> <span>Added a first recipe</span></a></li>
-											
-											<li class="medium"><a href="#" title="Added 10-20 recipes"><i class="icon icon-themeenergy_medal-8"></i> <span>Added 10-20 recipes</span></a></li>
-											<li class="dark"><a href="recipes.html" title="Events"><i class="icon icon-themeenergy_pencil"></i> <span>Wrote a blog post</span></a></li>
-											<li class="light"><a href="recipes.html" title="Fish"><i class="icon icon-themeenergy_chat-bubbles"></i> <span>Wrote a comment</span></a></li>
-											
-											<li class="dark"><a href="recipes.html" title="Fish"><i class="icon icon-themeenergy_cup2"></i> <span>Won a contest</span></a></li>
-											<li class="light"><a href="recipes.html" title="Healthy"><i class="icon icon-themeenergy_share3"></i> <span>Shared a recipe</span></a></li>
-											<li class="medium"><a href="#" title="Was featured"><i class="icon icon-themeenergy_top-rankings"></i> <span>Was featured</span></a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<!--//about-->
 						
 							<!--my recipes-->
 							<div class="tab-content" id="recipes" style="display: none;">
 								<div class="entries row">
-									<!--item-->
-									<div class="entry one-third">
-										<figure>
-											<img src="images/img6.jpg" alt="">
-											<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-										</figure>
-										<div class="container">
-											<h2><a href="recipe.html">Thai fried rice with fruit and vegetables</a></h2> 
-											<div class="actions">
-												<div>
-													<div class="difficulty"><i class="ico i-medium"></i><a href="#">medium</a></div>
-													<div class="likes"><i class="fa fa-heart" aria-hidden="true"></i><a href="#">10</a></div>
-													<div class="comments"><i class="fa fa-comment" aria-hidden="true"></i><a href="recipe.html#comments">27</a></div>
+									<c:forEach items="#{usuarioSiteBean.listaReceitas}" var="receita">
+										<!--item-->
+										<div class="entry one-third">
+											<figure>
+												<h:graphicImage value="/images/#{receita.imgPath}" />
+												<figcaption>
+													<h:form>
+														<h:commandLink action="#{receitaSiteBean.exibir(receita)}" value="">
+															<i class="icon icon-themeenergy_eye2"></i> <span>Ver receita</span>
+														</h:commandLink>
+													</h:form>
+												</figcaption>
+											</figure>
+											<div class="container">
+												<h2>
+													<h:form>
+														<h:commandLink action="#{receitaSiteBean.exibir(receita)}" value="">
+															<h:outputText value="#{receita.nome}" />
+														</h:commandLink>
+													</h:form>
+												</h2> 
+												<div class="actions">
+													<div>
+														<div class="likes"><i class="fa fa-heart"></i><a href="#"><h:outputText value="#{receita.favs}" /></a></div>
+														<div class="comments"><i class="fa fa-comment"></i><a href="recipe.html#comments"><h:outputText value="#{receita.numComentarios}" /></a></div>
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-									<!--item-->
-									
-									<!--item-->
-									<div class="entry one-third">
-										<figure>
-											<img src="images/img5.jpg" alt="">
-											<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-										</figure>
-										<div class="container">
-											<h2><a href="recipe.html">Spicy Morroccan prawns with cherry tomatoes</a></h2> 
-											<div class="actions">
-												<div>
-													<div class="difficulty"><i class="ico i-hard"></i><a href="#">hard</a></div>
-													<div class="likes"><i class="fa fa-heart" aria-hidden="true"></i><a href="#">10</a></div>
-													<div class="comments"><i class="fa fa-comment" aria-hidden="true"></i><a href="recipe.html#comments">27</a></div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<!--item-->
-									
-									<!--item-->
-									<div class="entry one-third">
-										<figure>
-											<img src="images/img8.jpg" alt="">
-											<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-										</figure>
-										<div class="container">
-											<h2><a href="recipe.html">Super easy blueberry cheesecake</a></h2> 
-											<div class="actions">
-												<div>
-													<div class="difficulty"><i class="ico i-easy"></i><a href="#">easy</a></div>
-													<div class="likes"><i class="fa fa-heart" aria-hidden="true"></i><a href="#">10</a></div>
-													<div class="comments"><i class="fa fa-comment" aria-hidden="true"></i><a href="recipe.html#comments">27</a></div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<!--item-->
+										<!--item-->
+									</c:forEach>
 								</div>
 							</div>
 							<!--//my recipes-->
@@ -148,136 +84,29 @@
 							<!--my favorites-->
 							<div class="tab-content" id="favorites" style="display: none;">
 								<div class="entries row">
-									<!--item-->
-									<div class="entry one-third">
-										<figure>
-											<img src="images/img6.jpg" alt="">
-											<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-										</figure>
-										<div class="container">
-											<h2><a href="recipe.html">Thai fried rice with fruit and vegetables</a></h2> 
-											<div class="actions">
-												<div>
-													<div class="difficulty"><i class="ico i-medium"></i><a href="#">medium</a></div>
-													<div class="likes"><i class="fa fa-heart" aria-hidden="true"></i><a href="#">10</a></div>
-													<div class="comments"><i class="fa fa-comment" aria-hidden="true"></i><a href="recipe.html#comments">27</a></div>
+									<c:forEach items="#{usuarioSiteBean.listaFavoritos}" var="receita">
+										<!--item-->
+										<div class="entry one-third">
+											<figure>
+												<h:graphicImage value="/images/#{receita.imgPath}" />
+												<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
+											</figure>
+											<div class="container">
+												<h2><a href="recipe.html">Thai fried rice with fruit and vegetables</a></h2> 
+												<div class="actions">
+													<div>
+														<div class="difficulty"><i class="ico i-medium"></i><a href="#">medium</a></div>
+														<div class="likes"><i class="fa fa-heart" aria-hidden="true"></i><a href="#">10</a></div>
+														<div class="comments"><i class="fa fa-comment" aria-hidden="true"></i><a href="recipe.html#comments">27</a></div>
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-									<!--item-->
-									
-									<!--item-->
-									<div class="entry one-third">
-										<figure>
-											<img src="images/img5.jpg" alt="">
-											<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-										</figure>
-										<div class="container">
-											<h2><a href="recipe.html">Spicy Morroccan prawns with cherry tomatoes</a></h2> 
-											<div class="actions">
-												<div>
-													<div class="difficulty"><i class="ico i-hard"></i><a href="#">hard</a></div>
-													<div class="likes"><i class="fa fa-heart" aria-hidden="true"></i><a href="#">10</a></div>
-													<div class="comments"><i class="fa fa-comment" aria-hidden="true"></i><a href="recipe.html#comments">27</a></div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<!--item-->
-									
-									<!--item-->
-									<div class="entry one-third">
-										<figure>
-											<img src="images/img8.jpg" alt="">
-											<figcaption><a href="recipe.html"><i class="icon icon-themeenergy_eye2"></i> <span>View recipe</span></a></figcaption>
-										</figure>
-										<div class="container">
-											<h2><a href="recipe.html">Super easy blueberry cheesecake</a></h2> 
-											<div class="actions">
-												<div>
-													<div class="difficulty"><i class="ico i-easy"></i><a href="#">easy</a></div>
-													<div class="likes"><i class="fa fa-heart" aria-hidden="true"></i><a href="#">10</a></div>
-													<div class="comments"><i class="fa fa-comment" aria-hidden="true"></i><a href="recipe.html#comments">27</a></div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<!--item-->
+										<!--item-->
+									</c:forEach>
 								</div>
 							</div>
 							<!--//my favorites-->
-							
-							<!--my posts-->
-							<div class="tab-content" id="posts" style="display: none;">
-								<!--entries-->
-								<div class="entries row">
-									<!--item-->
-									<div class="entry one-third">
-										<figure>
-											<img src="images/img12.jpg" alt="">
-											<figcaption><a href="blog_single.html"><i class="icon icon-themeenergy_eye2"></i> <span>View post</span></a></figcaption>
-										</figure>
-										<div class="container">
-											<h2><a href="blog_single.html">Barbeque party</a></h2> 
-											<div class="actions">
-												<div>
-													<div class="date"><i class="fa fa-calendar" aria-hidden="true"></i><a href="#">22 Dec 2014</a></div>
-													<div class="comments"><i class="fa fa-comment" aria-hidden="true"></i><a href="blog_single.html#comments">27</a></div>
-												</div>
-											</div>
-											<div class="excerpt">
-												<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod. Lorem ipsum dolor sit amet . . . </p>
-											</div>
-										</div>
-									</div>
-									<!--item-->
-									
-									<!--item-->
-									<div class="entry one-third">
-										<figure>
-											<img src="images/img11.jpg" alt="">
-											<figcaption><a href="blog_single.html"><i class="icon icon-themeenergy_eye2"></i> <span>View post</span></a></figcaption>
-										</figure>
-										<div class="container">
-											<h2><a href="blog_single.html">How to make sushi</a></h2> 
-											<div class="actions">
-												<div>
-													<div class="date"><i class="fa fa-calendar" aria-hidden="true"></i><a href="#">22 Dec 2014</a></div>
-													<div class="comments"><i class="fa fa-comment" aria-hidden="true"></i><a href="blog_single.html#comments">27</a></div>
-												</div>
-											</div>
-											<div class="excerpt">
-												<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod. Lorem ipsum dolor sit amet . . . </p>
-											</div>
-										</div>
-									</div>
-									<!--item-->
-									
-									<!--item-->
-									<div class="entry one-third">
-										<figure>
-											<img src="images/img10.jpg" alt="">
-											<figcaption><a href="blog_single.html"><i class="icon icon-themeenergy_eye2"></i> <span>View post</span></a></figcaption>
-										</figure>
-										<div class="container">
-											<h2><a href="blog_single.html">Make your own bread</a></h2> 
-											<div class="actions">
-												<div>
-													<div class="date"><i class="fa fa-calendar" aria-hidden="true"></i><a href="#">22 Dec 2014</a></div>
-													<div class="comments"><i class="fa fa-comment" aria-hidden="true"></i><a href="blog_single.html#comments">27</a></div>
-												</div>
-											</div>
-											<div class="excerpt">
-												<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod. Lorem ipsum dolor sit amet . . . </p>
-											</div>
-										</div>
-									</div>
-									<!--item-->
-								</div>
-								<!--//entries-->
-							</div>
-							<!--//my posts-->
 						</div>
 					</div>
 					<!--//row-->

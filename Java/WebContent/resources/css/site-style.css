@@ -4149,3 +4149,25 @@ div.uploader.disabled.active span.action {
         margin: 0 0 15px;
     }
 }
+
+.share li a span i.fa:last-child {
+	display:none;
+}
+
+.share li a:hover span i.fa:first-child {
+	display:none;
+}
+.share li a:hover span i.fa:last-child {
+	display:inline-block;
+}
+
+.score a i.fa:last-child {
+	display:none;
+}
+
+.score a:hover i.fa:first-child {
+	display:none;
+}
+.score a:hover i.fa:last-child {
+	display:inline-block;
+}

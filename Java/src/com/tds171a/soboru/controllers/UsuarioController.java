@@ -30,4 +30,12 @@ public class UsuarioController extends ControllerBase<Usuario> {
 	public List<Usuario> selecionarUsuariosQueFavoritaram(int receitaId) {
 		return ((UsuarioModel) model).selecionarUsuariosQueFavoritaram(receitaId);
 	}
+
+	public boolean reportou(int usuarioId, int receitaId) {
+		return ((UsuarioModel) model).reportou(usuarioId, receitaId);
+	}
+
+	public boolean pontuou(int usuarioId, int receitaId) {
+		return ((UsuarioModel) model).pontuou(usuarioId, receitaId);
+	}
 }

@@ -358,4 +358,84 @@ public class UsuarioDAO implements IDAO<Usuario> {
 
 		return null;
 	}
+
+	public boolean reportou(int usuarioId, int receitaId) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+			
+			PreparedStatement sttm = connection.prepareStatement(
+					"select count(id_receita) count from reports where id_receita = ? and id_usuario = ?");
+			sttm.setInt(1, receitaId);
+			sttm.setInt(1, usuarioId);
+			
+			ResultSet rs = sttm.executeQuery();
+			
+			boolean favoritada = false;
+
+			while(rs.next()) {
+				favoritada = rs.getInt("count") > 0;
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return favoritada;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return false;
+	}
+
+	public boolean pontuou(int usuarioId, int receitaId) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+			
+			PreparedStatement sttm = connection.prepareStatement(
+					"select count(id_receita) count from pontuacoes where id_receita = ? and id_usuario = ?");
+			sttm.setInt(1, receitaId);
+			sttm.setInt(1, usuarioId);
+			
+			ResultSet rs = sttm.executeQuery();
+			
+			boolean favoritada = false;
+
+			while(rs.next()) {
+				favoritada = rs.getInt("count") > 0;
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return favoritada;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return false;
+	}
 }
