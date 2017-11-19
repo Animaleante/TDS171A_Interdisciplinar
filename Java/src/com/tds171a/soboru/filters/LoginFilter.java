@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.tds171a.soboru.vos.Usuario;
+
 /**
  * @author Diogo
  *
@@ -44,6 +46,9 @@ public class LoginFilter implements Filter {
 		if(sessao.getAttribute("usuarioLogado") == null) {
 			String contextPath = ((HttpServletRequest) request).getContextPath();
 			((HttpServletResponse) response).sendRedirect(contextPath + "/login/");
+		} else if(!((Usuario)sessao.getAttribute("usuarioLogado")).getRole().getIsAdmin()) {
+			String contextPath = ((HttpServletRequest) request).getContextPath();
+			((HttpServletResponse) response).sendRedirect(contextPath + "/404.xhtml");
 		} else {
 			chain.doFilter(request, response);
 		}

@@ -13,6 +13,7 @@ import java.util.List;
 
 import com.tds171a.soboru.models.IDAO;
 import com.tds171a.soboru.utils.Utils;
+import com.tds171a.soboru.vos.Role;
 import com.tds171a.soboru.vos.Usuario;
 
 /**
@@ -215,7 +216,7 @@ public class UsuarioDAO implements IDAO<Usuario> {
 			connection = Utils.createConnection();
 
 			PreparedStatement sttm = connection.prepareStatement(
-					"select u.id, u.nome, u.email, u.senha, u.nasc, u.sexo, u.id_role, u.notificacao_email, r.nome tipo from "+tableName+" u inner join roles r on u.id_role = r.id where u.email = ? and u.senha = ?");
+					"select u.id, u.nome, u.email, u.senha, u.nasc, u.sexo, u.id_role, u.notificacao_email, r.id role_id, r.nome tipo, r.is_admin from "+tableName+" u inner join roles r on u.id_role = r.id where u.email = ? and u.senha = ?");
 			sttm.setString(1, email);
 			sttm.setString(2, senha);
 
@@ -232,6 +233,11 @@ public class UsuarioDAO implements IDAO<Usuario> {
 				usuario.setRoleId(rs.getInt("id_role"));
 				usuario.setNotificacaoEmail(rs.getBoolean("notificacao_email"));
 				usuario.setTipo(rs.getString("tipo"));
+				
+				usuario.setRole(new Role());
+				usuario.getRole().setId(rs.getInt("role_id"));
+				usuario.getRole().setNome(rs.getString("tipo"));
+				usuario.getRole().setIsAdmin(rs.getBoolean("is_admin"));
 			}
 
 			if (sttm != null)
