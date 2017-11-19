@@ -232,6 +232,8 @@ public class UsuarioDAO implements IDAO<Usuario> {
 				usuario.setRoleId(rs.getInt("id_role"));
 				usuario.setNotificacaoEmail(rs.getBoolean("notificacao_email"));
 				usuario.setTipo(rs.getString("tipo"));
+				System.out.println(rs.getString("email"));
+				System.out.println(rs.getString("senha"));
 			}
 
 			if (sttm != null)
