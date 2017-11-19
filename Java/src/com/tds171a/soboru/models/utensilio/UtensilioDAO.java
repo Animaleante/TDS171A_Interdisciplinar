@@ -252,8 +252,6 @@ public class UtensilioDAO implements IDAO<Utensilio> {
             	utensilio = new Utensilio();
             	utensilio.setId(rs.getInt("id"));
             	utensilio.setNome(rs.getString("nome"));
-            	System.out.println(rs.getInt("id"));
-            	System.out.println(rs.getString("nome"));
                 list.add(utensilio);
             }
 

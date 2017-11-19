@@ -33,15 +33,15 @@
 							            <thead>
 							                <tr>
 							                    <th>Nome</th>
+							                    <th>Aprovado</th>
 							                    <th>Ações</th>
 							                </tr>
 							            </thead>
 							            <tbody>
 							            	<c:forEach items="#{receitaBean.lista}" var="receita">
 							                    <tr>
-							                        <td>
-							                            #{receita.nome}
-							                        </td>
+							                        <td>#{receita.nome}</td>
+							                        <td>#{receitaBean.isAprovado(receita)}</td>
 							                        <td>
 														<h:form>
 															<h:commandLink action="#{receitaBean.exibir(receita)}" value="Detalhes"></h:commandLink> |

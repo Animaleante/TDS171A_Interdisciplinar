@@ -26,7 +26,6 @@ import com.tds171a.soboru.controllers.PontuacaoController;
 import com.tds171a.soboru.controllers.ReceitaController;
 import com.tds171a.soboru.controllers.ReceitaIngredienteController;
 import com.tds171a.soboru.controllers.ReportController;
-import com.tds171a.soboru.controllers.TagController;
 import com.tds171a.soboru.controllers.UsuarioController;
 import com.tds171a.soboru.controllers.UtensilioController;
 import com.tds171a.soboru.utils.Utils;
@@ -52,7 +51,6 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	private CategoriaController categoriaController;
 	private UsuarioController usuarioController;
 	private UtensilioController utensilioController;
-	private TagController tagController;
 	private ComentarioController comentarioController;
 	private ReceitaIngredienteController receitaIngredienteController;
 	private IngredienteController ingredienteController;
@@ -65,35 +63,32 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	private List<Medida> medidas;
 	private List<Utensilio> utensilios;
 	private List<Tag> tags;
-	
+
 	private Part imgFile;
 
 	/**
-     *Construtor setando a rota e qual
-     *será passado para o navegador.
-     */
+	 * Construtor setando a rota e qual será passado para o navegador.
+	 */
 	public ReceitaSiteBean() {
 		route_base = "/receita/";
 		controller = new ReceitaController();
-		
+
 		categoriaController = new CategoriaController();
 		usuarioController = new UsuarioController();
 		utensilioController = new UtensilioController();
-		tagController = new TagController();
 		comentarioController = new ComentarioController();
 		receitaIngredienteController = new ReceitaIngredienteController();
 		ingredienteController = new IngredienteController();
 		medidaController = new MedidaController();
 		reportController = new ReportController();
 		pontuacaoController = new PontuacaoController();
-		
+
 		setVo(new Receita());
 	}
 
 	/**
-	 * recebe listas de controllers especificas
-	 * para passar ao cliente e ele selecionar 
-	 * quais anexar na receita.
+	 * recebe listas de controllers especificas para passar ao cliente e ele
+	 * selecionar quais anexar na receita.
 	 */
 	@Override
 	public String criar() {
@@ -101,163 +96,157 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 		setIngredientes(ingredienteController.listar());
 		setMedidas(medidaController.listar());
 		setUtensilios(utensilioController.listar());
-		setTags(tagController.listar());
 
 		return super.criar();
 	}
-	
+
 	/**
-	 * POST do criar, onde é verificado a sessão
-	 * e se válida gera a inclusão da receita.
+	 * POST do criar, onde é verificado a sessão e se válida gera a inclusão da
+	 * receita.
 	 */
 	@Override
 	public String incluir() {
 		FacesContext context = FacesContext.getCurrentInstance();
-		
+
 		getVo().setUsuarioId(SessionContext.getInstance().getUsuarioLogado().getId());
 		getVo().setSlug(Utils.toSlug(getVo().getNome()));
 		getVo().setAprovado(false);
-		
+
 		try (InputStream input = imgFile.getInputStream()) {
-			File file = File.createTempFile("receita_",  ".jpg", new File(System.getProperty("jboss.server.data.dir"), "images"));
-			// TODO - Se pasta não existe, criar ela
+			File file = File.createTempFile("receita_", ".jpg", Utils.getImagerDir());
 			Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 			getVo().setImgPath(file.getName());
 		} catch (IOException e) {
 			e.printStackTrace();
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro ao tentar fazer upload da imagem: " + e.getMessage(), null));
-            return route_base + CRIAR_PAGE;
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Ocorreu um erro ao tentar fazer upload da imagem: " + e.getMessage(), null));
+			return route_base + CRIAR_PAGE;
 		}
-		
+
 		return super.incluir();
 	}
-	
+
 	/**
-	 * Override do exibir, onde recebe o id de todas as controllers
-	 * e exibe a receita ao cliente.
+	 * Override do exibir, onde recebe o id de todas as controllers e exibe a
+	 * receita ao cliente.
 	 */
 	@Override
 	public String exibir(Receita vo) {
 		vo = controller.selecionar(vo.getId());
-		
-		System.out.println(vo.getImgPath());
-		
-		if(vo.getCategoria() == null)
+
+		if (vo.getCategoria() == null)
 			vo.setCategoria(categoriaController.selecionar(vo.getCategoriaId()));
-		
-		if(vo.getUsuario() == null)
+
+		if (vo.getUsuario() == null)
 			vo.setUsuario(usuarioController.selecionar(vo.getUsuarioId()));
-		
-		if(vo.getUtensilios() == null)
+
+		if (vo.getUtensilios() == null)
 			vo.setUtensilios(utensilioController.selecionarPorReceita(vo.getId()));
-		
-		if(vo.getTags() == null)
-			vo.setTags(tagController.selecionarPorReceita(vo.getId()));
-		
-		if(vo.getReceitaIngredientes() == null)
+
+		if (vo.getReceitaIngredientes() == null)
 			vo.setReceitaIngredientes(receitaIngredienteController.selecionarPorReceita(vo.getId()));
-		
-		if(vo.getComentarios() == null)
+
+		if (vo.getComentarios() == null)
 			vo.setComentarios(comentarioController.selecionarPorReceita(vo.getId()));
-		
-		if(vo.getUsuariosFavoritaram() == null)
+
+		if (vo.getUsuariosFavoritaram() == null)
 			vo.setUsuariosFavoritaram(usuarioController.selecionarUsuariosQueFavoritaram(vo.getId()));
-		
+
 		return super.exibir(vo);
 	}
 
 	/**
-     * Override do deletar, onde verifica a sessao, 
-     * se existe um ítem válido e se não houver, retorna a 
-     * pagina de criação.
-     */
+	 * Override do deletar, onde verifica a sessao, se existe um ítem válido e se
+	 * não houver, retorna a pagina de criação.
+	 */
 	@Override
 	public String deletar() {
-	    FacesContext context = FacesContext.getCurrentInstance();
+		FacesContext context = FacesContext.getCurrentInstance();
 
-	    if(getVo().getId() == -1) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Item nao pode ser vazio!", null));
-	        return route_base + DELETAR_PAGE;
-	    }
+		if (getVo().getId() == -1) {
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Item nao pode ser vazio!", null));
+			return route_base + DELETAR_PAGE;
+		}
 
-		if(controller.remover(getVo().getId())) {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Deletado com sucesso!", null));
-	    } else {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel deletar.", null));
-            return route_base + DELETAR_PAGE;
+		if (controller.remover(getVo().getId())) {
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Deletado com sucesso!", null));
+		} else {
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel deletar.", null));
+			return route_base + DELETAR_PAGE;
 		}
 
 		limparVo();
 
-	    return listar();
+		return listar();
 	}
 
 	/**
-	 * Verifica os dados da pagina de interação e se faltar algum dado 
-	 * informa ao cliente.
+	 * Verifica os dados da pagina de interação e se faltar algum dado informa ao
+	 * cliente.
 	 */
 	@Override
 	public boolean validarDados() {
 		FacesContext context = FacesContext.getCurrentInstance();
 
-		if(getVo().getNome().isEmpty()) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
-	        return false;
-	    }
+		if (getVo().getNome().isEmpty()) {
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
+			return false;
+		}
 
 		return true;
 	}
 
 	/**
-	 * Cria uma nova vo para limpar os campos para um novo registro
-	 * sem interferencia de dados cadastrados anteriormente.
+	 * Cria uma nova vo para limpar os campos para um novo registro sem
+	 * interferencia de dados cadastrados anteriormente.
 	 */
 	@Override
 	public void limparVo() {
 		setVo(new Receita());
 	}
-	
+
 	/**
 	 * 
 	 * @return
 	 */
 	public String favoritar() {
-		if(SessionContext.getInstance().isLogado()) {
+		if (SessionContext.getInstance().isLogado()) {
 			// TODO - adicionar as receitas favoritas desse usuario
 			getVo().getUsuariosFavoritaram().add(SessionContext.getInstance().getUsuarioLogado());
 			// TODO - pegar receita novamente com novos dados
 			return exibir(getVo());
 		}
-		
-		return "/login/"+INDEX_PAGE+FACES_REDIRECT;
+
+		return "/login/" + INDEX_PAGE + FACES_REDIRECT;
 	}
-	
+
 	/**
 	 * 
 	 * @return
 	 */
 	public String reportar() {
-		if(SessionContext.getInstance().isLogado()) {
+		if (SessionContext.getInstance().isLogado()) {
 			// TODO - criar report desse usuario para essa receita
 			return exibir(getVo());
 		}
-		
-		return "/login/"+INDEX_PAGE+FACES_REDIRECT;
+
+		return "/login/" + INDEX_PAGE + FACES_REDIRECT;
 	}
-	
+
 	/**
 	 * 
 	 * @param pontos
 	 * @return
 	 */
 	public String pontuar(double pontos) {
-		if(SessionContext.getInstance().isLogado()) {
-			// TODO - adicionar pontuacao a essa receita atrelada a esse usuario, e recalcular pontuacao_media da receita
+		if (SessionContext.getInstance().isLogado()) {
+			// TODO - adicionar pontuacao a essa receita atrelada a esse usuario, e
+			// recalcular pontuacao_media da receita
 			// TODO - pegar receita novamente com novos dados
 			return exibir(getVo());
 		}
-		
-		return "/login/"+INDEX_PAGE+FACES_REDIRECT;
+
+		return "/login/" + INDEX_PAGE + FACES_REDIRECT;
 	}
 
 	/**
@@ -265,14 +254,15 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	 */
 	public List<SelectItem> getCategorias() {
 		List<SelectItem> items = new ArrayList<SelectItem>();
-	    for (Categoria c : this.categorias) {
-	        items.add(new SelectItem(c.getId(), c.getNome()));
-	    }
-	    return items;
+		for (Categoria c : this.categorias) {
+			items.add(new SelectItem(c.getId(), c.getNome()));
+		}
+		return items;
 	}
 
 	/**
-	 * @param categorias the categorias to set
+	 * @param categorias
+	 *            the categorias to set
 	 */
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
@@ -283,14 +273,15 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	 */
 	public List<SelectItem> getIngredientes() {
 		List<SelectItem> items = new ArrayList<SelectItem>();
-	    for (Ingrediente c : this.ingredientes) {
-	        items.add(new SelectItem(c.getId(), c.getNome()));
-	    }
-	    return items;
+		for (Ingrediente c : this.ingredientes) {
+			items.add(new SelectItem(c.getId(), c.getNome()));
+		}
+		return items;
 	}
 
 	/**
-	 * @param ingredientes the ingredientes to set
+	 * @param ingredientes
+	 *            the ingredientes to set
 	 */
 	public void setIngredientes(List<Ingrediente> ingredientes) {
 		this.ingredientes = ingredientes;
@@ -301,14 +292,15 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	 */
 	public List<SelectItem> getMedidas() {
 		List<SelectItem> items = new ArrayList<SelectItem>();
-	    for (Medida c : this.medidas) {
-	        items.add(new SelectItem(c.getId(), c.getNome()));
-	    }
-	    return items;
+		for (Medida c : this.medidas) {
+			items.add(new SelectItem(c.getId(), c.getNome()));
+		}
+		return items;
 	}
 
 	/**
-	 * @param medidas the medidas to set
+	 * @param medidas
+	 *            the medidas to set
 	 */
 	public void setMedidas(List<Medida> medidas) {
 		this.medidas = medidas;
@@ -319,14 +311,15 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	 */
 	public List<SelectItem> getUtensilios() {
 		List<SelectItem> items = new ArrayList<SelectItem>();
-	    for (Utensilio c : this.utensilios) {
-	        items.add(new SelectItem(c.getId(), c.getNome()));
-	    }
-	    return items;
+		for (Utensilio c : this.utensilios) {
+			items.add(new SelectItem(c.getId(), c.getNome()));
+		}
+		return items;
 	}
 
 	/**
-	 * @param utensilios the utensilios to set
+	 * @param utensilios
+	 *            the utensilios to set
 	 */
 	public void setUtensilios(List<Utensilio> utensilios) {
 		this.utensilios = utensilios;
@@ -340,7 +333,8 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	}
 
 	/**
-	 * @param tags the tags to set
+	 * @param tags
+	 *            the tags to set
 	 */
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
@@ -354,7 +348,8 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	}
 
 	/**
-	 * @param imgFile the imgFile to set
+	 * @param imgFile
+	 *            the imgFile to set
 	 */
 	public void setImgFile(Part imgFile) {
 		this.imgFile = imgFile;

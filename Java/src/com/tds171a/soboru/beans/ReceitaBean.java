@@ -26,7 +26,6 @@ import com.tds171a.soboru.controllers.PontuacaoController;
 import com.tds171a.soboru.controllers.ReceitaController;
 import com.tds171a.soboru.controllers.ReceitaIngredienteController;
 import com.tds171a.soboru.controllers.ReportController;
-import com.tds171a.soboru.controllers.TagController;
 import com.tds171a.soboru.controllers.UsuarioController;
 import com.tds171a.soboru.controllers.UtensilioController;
 import com.tds171a.soboru.utils.Utils;
@@ -53,7 +52,6 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	private CategoriaController categoriaController;
 	private UsuarioController usuarioController;
 	private UtensilioController utensilioController;
-	private TagController tagController;
 	private ComentarioController comentarioController;
 	private ReceitaIngredienteController receitaIngredienteController;
 	private IngredienteController ingredienteController;
@@ -80,7 +78,6 @@ public class ReceitaBean  extends BeanBase<Receita> {
 		categoriaController = new CategoriaController();
 		usuarioController = new UsuarioController();
 		utensilioController = new UtensilioController();
-		tagController = new TagController();
 		comentarioController = new ComentarioController();
 		receitaIngredienteController = new ReceitaIngredienteController();
 		ingredienteController = new IngredienteController();
@@ -102,7 +99,6 @@ public class ReceitaBean  extends BeanBase<Receita> {
 		setIngredientes(ingredienteController.listar());
 		setMedidas(medidaController.listar());
 		setUtensilios(utensilioController.listar());
-		setTags(tagController.listar());
 
 		return super.criar();
 	}
@@ -147,9 +143,6 @@ public class ReceitaBean  extends BeanBase<Receita> {
 		if(vo.getUtensilios() == null)
 			vo.setUtensilios(utensilioController.selecionarPorReceita(vo.getId()));
 		
-		if(vo.getTags() == null)
-			vo.setTags(tagController.selecionarPorReceita(vo.getId()));
-		
 		if(vo.getReceitaIngredientes() == null)
 			vo.setReceitaIngredientes(receitaIngredienteController.selecionarPorReceita(vo.getId()));
 		
@@ -162,7 +155,6 @@ public class ReceitaBean  extends BeanBase<Receita> {
 		setIngredientes(ingredienteController.listar());
 		setMedidas(medidaController.listar());
 		setUtensilios(utensilioController.listar());
-		setTags(tagController.listar());
 		
 		return super.editar(vo);
 	}
@@ -216,6 +208,12 @@ public class ReceitaBean  extends BeanBase<Receita> {
 	@Override
 	public void limparVo() {
 		setVo(new Receita());
+	}
+
+	public String isAprovado(Receita receita) {
+		if(!receita.getAprovado())
+			return "Não";
+		return "Sim";
 	}
 
 	/**

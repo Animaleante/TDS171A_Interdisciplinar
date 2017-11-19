@@ -92,7 +92,6 @@
 									<h2>Modo de Preparo</h2>
 									<div class="full">
 										<div class="f-row instruction">
-<!-- 											<textarea type="text" name="modo_preparo" value=""></textarea> -->
 											<h:inputTextarea value="#{receitaBean.vo.modoPreparo}"></h:inputTextarea>
 										</div>
 									</div>
@@ -102,8 +101,8 @@
 									<h2>Foto</h2>
 									<div class="f-row full">
 										<label for="receita-foto" class="btn">Selecionar uma foto</label>
-<!-- 										<input id="receita-foto" type="file" name="img_path" style="display: none;" value="" /> -->
 										<h:inputFile id="receita-foto" value="#{receitaBean.imgFile}"/>
+										<h:graphicImage value="/images/#{receitaSiteBean.vo.imgPath}" />
 									</div>
 								</section>
 								

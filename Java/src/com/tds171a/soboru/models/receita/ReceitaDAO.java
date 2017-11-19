@@ -455,8 +455,6 @@ public class ReceitaDAO implements IDAO<Receita> {
 				
 				list.add(receita);
 			}
-			
-			System.out.println("Size: " + list.size());
 
 			if (sttm != null)
 				sttm.close();
