@@ -35,3 +35,9 @@
 .error{
 	color: #FF7B74;
 }
+.imgreceita{
+	border-style: solid;
+	border-width: 2px;
+	border-color: #FF7B74;
+	width: 350px;
+}
