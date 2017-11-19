@@ -17,6 +17,10 @@ public class ReceitaModel extends ModelBase<Receita> {
 	public ReceitaModel() {
 		dao = new ReceitaDAO();
 	}
+	
+	public List<Receita> listarAdmin() {
+		return ((ReceitaDAO) dao).listarAdmin();
+	}
 
 	public boolean incluirTag(Receita receita, Tag tag) {
 		return ((ReceitaDAO) dao).incluirTag(receita, tag);

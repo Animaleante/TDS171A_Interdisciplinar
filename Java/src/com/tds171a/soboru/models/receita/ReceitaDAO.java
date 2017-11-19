@@ -167,6 +167,63 @@ public class ReceitaDAO implements IDAO<Receita> {
 	}
 
 	/**
+	 * Metodo para trazer uma lista de todos as Receitas
+	 * @return
+	 */
+	public List<Receita> listarAdmin() {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+
+			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName);
+
+			ResultSet rs = sttm.executeQuery();
+
+			List<Receita> list = new ArrayList<Receita>();
+			Receita receita = null;
+			while(rs.next()) {
+				receita = new Receita();
+
+				receita.setId(rs.getInt("id"));
+				receita.setNome(rs.getString("nome"));
+				receita.setCategoriaId(rs.getInt("id_categoria"));
+				receita.setUsuarioId(rs.getInt("id_usuario"));
+				receita.setPorcao(rs.getInt("porcao"));
+				receita.setTempoPreparo(rs.getDouble("tempo_preparo"));
+				receita.setModoPreparo(rs.getString("modo_preparo"));
+				receita.setImgPath(rs.getString("img_path"));
+				receita.setPontuacaoMedia(rs.getDouble("pontuacao_media"));
+				receita.setViews(rs.getInt("views"));
+				receita.setFavs(rs.getInt("favs"));
+				receita.setSlug(rs.getString("slug"));
+				receita.setAprovado(rs.getBoolean("aprovado"));
+				
+				list.add(receita);
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return null;
+	}
+
+	/**
 	 * Metodo para trazer uma Receita
 	 * @return
 	 */
