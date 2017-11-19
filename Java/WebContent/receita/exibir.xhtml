@@ -222,7 +222,13 @@
 	                        <ul class="boxed">
 	                            <li class="light"><a href="#" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i> <span>Share on Facebook</span></a></li>
 	                            <li class="medium"><a href="#" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i> <span>Share on Twitter</span></a></li>
-	                            <li class="dark"><a href="#" title="Favourites"><i class="fa fa-heart" aria-hidden="true"></i> <span>Add to Favourites</span></a></li>
+	                            <li class="dark">
+	                            	<h:form>
+		                            	<h:commandLink action="#{receitaSiteBean.favoritar()}" style="height: 90px;">
+		                            		<i class="fa fa-heart" aria-hidden="true"></i> <span>Favoritar</span>
+		                            	</h:commandLink>
+	                            	</h:form>
+	                            </li>
 	                        </ul>
 	                    </div>
 	                    
