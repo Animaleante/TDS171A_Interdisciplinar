@@ -13,6 +13,7 @@ import java.util.List;
 import com.tds171a.soboru.models.IDAO;
 import com.tds171a.soboru.utils.Utils;
 import com.tds171a.soboru.vos.Comentario;
+import com.tds171a.soboru.vos.Pontuacao;
 import com.tds171a.soboru.vos.Usuario;
 
 /**
@@ -31,7 +32,50 @@ public class ComentarioDAO implements IDAO<Comentario> {
 
 	@Override
 	public List<Comentario> listar() {
-		// TODO Auto-generated method stub
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+
+			PreparedStatement sttm = connection.prepareStatement(
+					"select c.id, c.id_usuario, c.id_receita, c.body, u.nome nome_usuario, r.nome nome_receita from "+tableName+" c "
+							+ "inner join usuarios u on c.id_usuario = u.id inner join receitas r on c.id_receita = r.id");
+
+			ResultSet rs = sttm.executeQuery();
+
+			List<Comentario> list = new ArrayList<Comentario>();
+			Comentario comentario = null;
+			while(rs.next()) {
+				comentario = new Comentario();
+
+				comentario.setId(rs.getInt("id"));
+				comentario.setReceitaId(rs.getInt("id_receita"));
+				comentario.setUsuarioId(rs.getInt("id_usuario"));
+				comentario.setBody(rs.getString("body"));
+				comentario.setReceitaNome(rs.getString("nome_receita"));
+				comentario.setUsuarioNome(rs.getString("nome_usuario"));
+				
+				list.add(comentario);
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
 		return null;
 	}
 
@@ -45,6 +89,39 @@ public class ComentarioDAO implements IDAO<Comentario> {
 	public boolean remover(int voId) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	public boolean remover(int receitaId, int usuarioId) {
+        Connection connection = null;
+        try {
+            connection = Utils.createConnection();
+
+            PreparedStatement sttm = connection.prepareStatement("delete from "+tableName+" where id_receita = ? and id_usuario = ?");
+            sttm.setInt(1, receitaId);
+            sttm.setInt(2, usuarioId);
+
+            int rowsAffected = sttm.executeUpdate();
+
+            if (sttm != null)
+                sttm.close();
+
+            sttm = null;
+
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null)
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
+
+        return false;
 	}
 
 	@Override

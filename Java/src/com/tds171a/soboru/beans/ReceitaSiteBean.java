@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +22,8 @@ import com.tds171a.soboru.controllers.CategoriaController;
 import com.tds171a.soboru.controllers.ComentarioController;
 import com.tds171a.soboru.controllers.IngredienteController;
 import com.tds171a.soboru.controllers.MedidaController;
-import com.tds171a.soboru.controllers.PontuacaoController;
 import com.tds171a.soboru.controllers.ReceitaController;
 import com.tds171a.soboru.controllers.ReceitaIngredienteController;
-import com.tds171a.soboru.controllers.ReportController;
 import com.tds171a.soboru.controllers.UsuarioController;
 import com.tds171a.soboru.controllers.UtensilioController;
 import com.tds171a.soboru.utils.Utils;
@@ -59,8 +55,6 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	private ReceitaIngredienteController receitaIngredienteController;
 	private IngredienteController ingredienteController;
 	private MedidaController medidaController;
-	private ReportController reportController;
-	private PontuacaoController pontuacaoController;
 
 	private List<Categoria> categorias;
 	private List<Ingrediente> ingredientes;
@@ -84,8 +78,6 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 		receitaIngredienteController = new ReceitaIngredienteController();
 		ingredienteController = new IngredienteController();
 		medidaController = new MedidaController();
-		reportController = new ReportController();
-		pontuacaoController = new PontuacaoController();
 
 		setVo(new Receita());
 	}

@@ -90,7 +90,7 @@ public class ReceitaDAO implements IDAO<Receita> {
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName);
+			/*PreparedStatement sttm = connection.prepareStatement("select * from "+tableName);
 
 			ResultSet rs = sttm.executeQuery();
 
@@ -112,6 +112,34 @@ public class ReceitaDAO implements IDAO<Receita> {
 				receita.setFavs(rs.getInt("favs"));
 				receita.setSlug(rs.getString("slug"));
 				receita.setAprovado(rs.getBoolean("aprovado"));
+				
+				list.add(receita);
+			}*/
+			
+			PreparedStatement sttm = connection.prepareStatement(
+					"select id, nome, img_path, pontuacao_media, favs, (select count(id) from comentarios group by id_receita having id_receita = r.id) comentarios from "+tableName+" r where aprovado = 1");
+			
+			ResultSet rs = sttm.executeQuery();
+
+			List<Receita> list = new ArrayList<Receita>();
+			Receita receita;
+			while(rs.next()) {
+				receita = new Receita();
+
+				receita.setId(rs.getInt("id"));
+				receita.setNome(rs.getString("nome"));
+//				receita.setCategoriaId(rs.getInt("id_categoria"));
+//				receita.setUsuarioId(rs.getInt("id_usuario"));
+//				receita.setPorcao(rs.getInt("porcao"));
+//				receita.setTempoPreparo(rs.getDouble("tempo_preparo"));
+//				receita.setModoPreparo(rs.getString("modo_preparo"));
+				receita.setImgPath(rs.getString("img_path"));
+				receita.setPontuacaoMedia(rs.getDouble("pontuacao_media"));
+//				receita.setViews(rs.getInt("views"));
+				receita.setFavs(rs.getInt("favs"));
+//				receita.setSlug(rs.getString("slug"));
+//				receita.setAprovado(rs.getBoolean("aprovado"));
+				receita.setNumComentarios(rs.getInt("comentarios"));
 				
 				list.add(receita);
 			}
@@ -1020,7 +1048,7 @@ public class ReceitaDAO implements IDAO<Receita> {
 		try {
 			connection = Utils.createConnection();
 			
-			PreparedStatement sttm = connection.prepareStatement("update receitas set pontuacao_media = (select avg(qty) from pontuacoes where id_receita = ?) where id = ?");
+			PreparedStatement sttm = connection.prepareStatement("update receitas set pontuacao_media = (select nvl(avg(qty),0) from pontuacoes where id_receita = ?) where id = ?");
 			sttm.setInt(1, receitaId);
 			sttm.setInt(2, receitaId);
 			

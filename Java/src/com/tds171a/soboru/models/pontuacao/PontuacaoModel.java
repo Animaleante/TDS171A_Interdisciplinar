@@ -19,4 +19,8 @@ public class PontuacaoModel extends ModelBase<Pontuacao> {
 		dao = new PontuacaoDAO();
 	}
 
+	public boolean remover(int receitaId, int usuarioId) {
+        return ((PontuacaoDAO)dao).remover(receitaId, usuarioId);
+    }
+
 }

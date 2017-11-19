@@ -1,6 +1,8 @@
 package com.tds171a.soboru.beans;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import com.tds171a.soboru.controllers.ComentarioController;
@@ -36,19 +38,18 @@ public class ComentarioBean extends BeanBase<Comentario> {
      */
 	@Override
 	public String deletar() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        FacesContext context = FacesContext.getCurrentInstance();
 
-		
-	/**
-	 * Verifica os dados da pagina de interação e se faltar algum dado 
-	 * informa ao cliente.
-	 */
-	@Override
-	public boolean validarDados() {
-		// TODO Auto-generated method stub
-		return super.validarDados();
+        if(((ComentarioController)controller).remover(getVo().getReceitaId(), getVo().getUsuarioId())) {
+            context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Deletado com sucesso!", null));
+        } else {
+            context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel deletar.", null));
+            return route_base + DELETAR_PAGE;
+        }
+
+        limparVo();
+
+        return listar();
 	}
 
 	/**

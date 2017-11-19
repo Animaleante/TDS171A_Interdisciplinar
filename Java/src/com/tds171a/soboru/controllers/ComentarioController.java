@@ -28,4 +28,12 @@ public class ComentarioController extends ControllerBase<Comentario> {
 	public List<Comentario> selecionarPorReceita(int receitaId) {
 		return ((ComentarioModel) model).selecionarPorReceita(receitaId);
 	}
+
+	/**
+	 * remove a pontuacao tirando o id da receita
+	 * e o id do usuário.
+	 */
+	public boolean remover(int receitaId, int usuarioId) {
+	    return ((ComentarioModel)model).remover(receitaId, usuarioId);
+	}
 }

@@ -13,6 +13,9 @@ public class Comentario {
 	private int usuarioId;
 	private String body;
 	
+	private String receitaNome;
+	private String usuarioNome;
+	
 	private Receita receita;
 	private Usuario usuario;
 	
@@ -20,6 +23,8 @@ public class Comentario {
 		id = -1;
 		receitaId = -1;
 		usuarioId = -1;
+		receitaNome = "";
+		usuarioNome = "";
 		receita = null;
 		usuario = null;
 	}
@@ -99,5 +104,33 @@ public class Comentario {
 	 */
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	/**
+	 * @return the receitaNome
+	 */
+	public String getReceitaNome() {
+		return receitaNome;
+	}
+
+	/**
+	 * @param receitaNome the receitaNome to set
+	 */
+	public void setReceitaNome(String receitaNome) {
+		this.receitaNome = receitaNome;
+	}
+
+	/**
+	 * @return the usuarioNome
+	 */
+	public String getUsuarioNome() {
+		return usuarioNome;
+	}
+
+	/**
+	 * @param usuarioNome the usuarioNome to set
+	 */
+	public void setUsuarioNome(String usuarioNome) {
+		this.usuarioNome = usuarioNome;
 	}
 }

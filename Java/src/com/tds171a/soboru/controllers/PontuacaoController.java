@@ -19,4 +19,12 @@ public class PontuacaoController extends ControllerBase<Pontuacao> {
 	public PontuacaoController() {
 		model = new PontuacaoModel();
 	}
+
+	/**
+	 * remove a pontuacao tirando o id da receita
+	 * e o id do usuário.
+	 */
+	public boolean remover(int receitaId, int usuarioId) {
+	    return ((PontuacaoModel)model).remover(receitaId, usuarioId);
+	}
 }

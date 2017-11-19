@@ -32,23 +32,19 @@
 									<table class="table table-stiped table-hover">
 							            <thead>
 							                <tr>
-							                    <th>ID</th>
 							                    <th>Receita</th>
 							                    <th>Usuario</th>
-							                    <th>Texto</th>
 							                    <th>Ações</th>
 							                </tr>
 							            </thead>
 							            <tbody>
 							            	<c:forEach items="#{comentarioBean.lista}" var="comentario">
 							                    <tr>
-							                        <td>#{comentario.id}</td>
 							                        <td>#{comentario.receitaNome}</td>
 							                        <td>#{comentario.usuarioNome}</td>
-							                        <td>#{comentario.body}</td>
 							                        <td>
 														<h:form>
-															<h:commandLink action="#{comentarioBean.editar(comentario)}" value="Editar"></h:commandLink> |
+															<h:commandLink action="#{comentarioBean.exibir(comentario)}" value="Detalhes"></h:commandLink> |
 															<h:commandLink action="#{comentarioBean.deletar(comentario)}" value="Deletar"></h:commandLink>
 														</h:form>
 							                        </td>

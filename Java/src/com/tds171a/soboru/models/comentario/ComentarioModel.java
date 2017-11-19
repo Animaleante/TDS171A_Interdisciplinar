@@ -24,4 +24,8 @@ public class ComentarioModel extends ModelBase<Comentario> {
 	public List<Comentario> selecionarPorReceita(int receitaId) {
 		return ((ComentarioDAO) dao).selecionarPorReceita(receitaId);
 	}
+
+	public boolean remover(int receitaId, int usuarioId) {
+        return ((ComentarioDAO) dao).remover(receitaId, usuarioId);
+    }
 }
