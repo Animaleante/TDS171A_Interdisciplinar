@@ -367,7 +367,7 @@ public class UsuarioDAO implements IDAO<Usuario> {
 			PreparedStatement sttm = connection.prepareStatement(
 					"select count(id_receita) count from reports where id_receita = ? and id_usuario = ?");
 			sttm.setInt(1, receitaId);
-			sttm.setInt(1, usuarioId);
+			sttm.setInt(2, usuarioId);
 			
 			ResultSet rs = sttm.executeQuery();
 			
@@ -407,7 +407,7 @@ public class UsuarioDAO implements IDAO<Usuario> {
 			PreparedStatement sttm = connection.prepareStatement(
 					"select count(id_receita) count from pontuacoes where id_receita = ? and id_usuario = ?");
 			sttm.setInt(1, receitaId);
-			sttm.setInt(1, usuarioId);
+			sttm.setInt(2, usuarioId);
 			
 			ResultSet rs = sttm.executeQuery();
 			
