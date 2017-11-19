@@ -44,4 +44,36 @@ public class ReceitaModel extends ModelBase<Receita> {
 	public List<ReceitaIngrediente> listarIngredientes(Receita receita) {
 		return ((ReceitaDAO) dao).listarIngredientes(receita);
 	}
+
+	public List<Receita> selecionarPorUsuario(int usuarioId) {
+		return ((ReceitaDAO) dao).selecionarPorUsuario(usuarioId);
+	}
+
+	public List<Receita> selecionarPorFavoritosDeUsuario(int usuarioId) {
+		return ((ReceitaDAO) dao).selecionarPorFavoritosDeUsuario(usuarioId);
+	}
+	
+	public boolean incluirFavorito(int receitaId, int usuarioId) {
+		return ((ReceitaDAO) dao).incluirFavorito(receitaId, usuarioId);
+	}
+
+	public boolean removerFavorito(int receitaId, int usuarioId) {
+		return ((ReceitaDAO) dao).removerFavorito(receitaId, usuarioId);
+	}
+
+	public boolean isReceitaFavoritada(int receitaId, int usuarioId) {
+		return ((ReceitaDAO) dao).isReceitaFavoritada(receitaId, usuarioId);
+	}
+
+	public boolean incluirReport(int receitaId, int usuarioId) {
+		return ((ReceitaDAO) dao).incluirReport(receitaId, usuarioId);
+	}
+
+	public boolean incluirPontuacao(int receitaId, int usuarioId, int pontos) {
+		return ((ReceitaDAO) dao).incluirPontuacao(receitaId, usuarioId, pontos);
+	}
+
+	public void atualizarPontuacaoMedia(int receitaId) {
+		((ReceitaDAO) dao).atualizarPontuacaoMedia(receitaId);
+	}
 }

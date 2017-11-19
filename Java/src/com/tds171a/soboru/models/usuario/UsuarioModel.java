@@ -28,4 +28,12 @@ public class UsuarioModel extends ModelBase<Usuario> {
 	public List<Usuario> selecionarUsuariosQueFavoritaram(int receitaId) {
 		return ((UsuarioDAO) dao).selecionarUsuariosQueFavoritaram(receitaId);
 	}
+
+	public boolean reportou(int usuarioId, int receitaId) {
+		return ((UsuarioDAO) dao).reportou(usuarioId, receitaId);
+	}
+
+	public boolean pontuou(int usuarioId, int receitaId) {
+		return ((UsuarioDAO) dao).pontuou(usuarioId, receitaId);
+	}
 }

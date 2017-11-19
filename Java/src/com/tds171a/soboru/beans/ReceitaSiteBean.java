@@ -36,6 +36,7 @@ import com.tds171a.soboru.vos.Ingrediente;
 import com.tds171a.soboru.vos.Medida;
 import com.tds171a.soboru.vos.Receita;
 import com.tds171a.soboru.vos.Tag;
+import com.tds171a.soboru.vos.Usuario;
 import com.tds171a.soboru.vos.Utensilio;
 
 @Named("receitaSiteBean")
@@ -50,6 +51,7 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	 * 
 	 */
 	private static final long serialVersionUID = -5362181648251196256L;
+	
 	private CategoriaController categoriaController;
 	private UsuarioController usuarioController;
 	private UtensilioController utensilioController;
@@ -154,6 +156,12 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 		if (vo.getUsuariosFavoritaram() == null)
 			vo.setUsuariosFavoritaram(usuarioController.selecionarUsuariosQueFavoritaram(vo.getId()));
 
+		if (SessionContext.getInstance().isLogado()) {
+			Usuario usuario = SessionContext.getInstance().getUsuarioLogado();
+			vo.setReportou(usuarioController.reportou(usuario.getId(), vo.getId()));
+			vo.setPontuou(usuarioController.pontuou(usuario.getId(), vo.getId()));
+		}
+
 		return super.exibir(vo);
 	}
 
@@ -213,9 +221,15 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	 */
 	public String favoritar() {
 		if (SessionContext.getInstance().isLogado()) {
-			// TODO - adicionar as receitas favoritas desse usuario
-			getVo().getUsuariosFavoritaram().add(SessionContext.getInstance().getUsuarioLogado());
-			// TODO - pegar receita novamente com novos dados
+			if(!isReceitaFavoritada()) {
+				((ReceitaController) controller).incluirFavorito(getVo().getId(), SessionContext.getInstance().getUsuarioLogado().getId());
+				getVo().getUsuariosFavoritaram().add(SessionContext.getInstance().getUsuarioLogado());
+			} else {
+				((ReceitaController) controller).removerFavorito(getVo().getId(), SessionContext.getInstance().getUsuarioLogado().getId());
+				// TODO - check if this is working
+				getVo().getUsuariosFavoritaram().remove(SessionContext.getInstance().getUsuarioLogado());
+			}
+
 			return exibir(getVo());
 		}
 
@@ -228,7 +242,7 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	 */
 	public String reportar() {
 		if (SessionContext.getInstance().isLogado()) {
-			// TODO - criar report desse usuario para essa receita
+			((ReceitaController) controller).incluirReport(getVo().getId(), SessionContext.getInstance().getUsuarioLogado().getId());
 			return exibir(getVo());
 		}
 
@@ -240,15 +254,34 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	 * @param pontos
 	 * @return
 	 */
-	public String pontuar(double pontos) {
+	public String pontuar(int pontos) {
 		if (SessionContext.getInstance().isLogado()) {
 			// TODO - adicionar pontuacao a essa receita atrelada a esse usuario, e
 			// recalcular pontuacao_media da receita
+			((ReceitaController) controller).incluirPontuacao(getVo().getId(), SessionContext.getInstance().getUsuarioLogado().getId(), pontos);
 			// TODO - pegar receita novamente com novos dados
 			return exibir(getVo());
 		}
 
 		return "/login/" + INDEX_PAGE + FACES_REDIRECT;
+	}
+	
+	public boolean isReceitaFavoritada() {
+		if(SessionContext.getInstance().isLogado()) {
+//			return ((ReceitaController) controller).isReceitaFavoritada(getVo().getId(), SessionContext.getInstance().getUsuarioLogado().getId());
+			boolean favoritada = false;
+			int usuarioLogadoId = SessionContext.getInstance().getUsuarioLogado().getId();
+			List<Usuario> usuariosFavoritaram = getVo().getUsuariosFavoritaram();
+			for (int i = 0; i < getVo().getUsuariosFavoritaram().size(); i++) {
+				if(usuariosFavoritaram.get(i).getId() == usuarioLogadoId) {
+					favoritada = true;
+					break;
+				}
+			}
+			
+			return favoritada;
+		}
+		return false;
 	}
 	
 	public String formatDouble(Double num) {

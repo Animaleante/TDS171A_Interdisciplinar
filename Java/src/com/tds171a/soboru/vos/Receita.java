@@ -69,6 +69,9 @@ public class Receita {
 	 */
 	private boolean aprovado;
 	
+	private boolean reportou;
+	private boolean pontuou;
+	
 	/**
 	 * 
 	 */
@@ -130,6 +133,9 @@ public class Receita {
 		this.favs = 0;
 		this.slug = "";
 		this.aprovado = false;
+		
+		this.setReportou(false);
+		this.setPontuou(false);
 		
 		this.categoria = null;
 		this.usuario = null;
@@ -465,5 +471,33 @@ public class Receita {
 	 */
 	public void setNumComentarios(int numComentarios) {
 		this.numComentarios = numComentarios;
+	}
+
+	/**
+	 * @return the reportou
+	 */
+	public boolean isReportou() {
+		return reportou;
+	}
+
+	/**
+	 * @param reportou the reportou to set
+	 */
+	public void setReportou(boolean reportou) {
+		this.reportou = reportou;
+	}
+
+	/**
+	 * @return the pontuou
+	 */
+	public boolean isPontuou() {
+		return pontuou;
+	}
+
+	/**
+	 * @param pontuou the pontuou to set
+	 */
+	public void setPontuou(boolean pontuou) {
+		this.pontuou = pontuou;
 	}
 }

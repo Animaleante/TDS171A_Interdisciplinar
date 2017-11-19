@@ -279,6 +279,12 @@ public class ReceitaDAO implements IDAO<Receita> {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @param receita
+	 * @param tag
+	 * @return
+	 */
 	public boolean incluirTag(Receita receita, Tag tag) {
 		Connection connection = null;
 		try {
@@ -313,6 +319,11 @@ public class ReceitaDAO implements IDAO<Receita> {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @param receita
+	 * @return
+	 */
 	public List<Utensilio> listarUtensilios(Receita receita) {
 		Connection connection = null;
 		try {
@@ -355,6 +366,11 @@ public class ReceitaDAO implements IDAO<Receita> {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param termoBusca
+	 * @return
+	 */
 	public List<Receita> selecionarPorNome(String termoBusca) {
 		Connection connection = null;
 		try {
@@ -411,6 +427,11 @@ public class ReceitaDAO implements IDAO<Receita> {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param ingredientes
+	 * @return
+	 */
 	public List<Receita> selecionarPorIngredientes(List<Integer> ingredientes) {
 		Connection connection = null;
 		try {
@@ -478,6 +499,12 @@ public class ReceitaDAO implements IDAO<Receita> {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param termoBusca
+	 * @param ingredientes
+	 * @return
+	 */
 	public List<Receita> selecionarPorNomeEIngredientes(String termoBusca, List<Integer> ingredientes) {
 		Connection connection = null;
 		try {
@@ -550,6 +577,11 @@ public class ReceitaDAO implements IDAO<Receita> {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param receitaId
+	 * @param lista
+	 */
 	public void registrarUtensilios(int receitaId, List<Utensilio> lista) {
 		Connection connection = null;
 		try {
@@ -604,6 +636,11 @@ public class ReceitaDAO implements IDAO<Receita> {
 		}
 	}
 
+	/**
+	 * 
+	 * @param receita
+	 * @return
+	 */
 	public List<ReceitaIngrediente> listarIngredientes(Receita receita) {
 		Connection connection = null;
 		try {
@@ -649,5 +686,328 @@ public class ReceitaDAO implements IDAO<Receita> {
 		}
 
 		return null;
+	}
+
+	/**
+	 * 
+	 * @param usuarioId
+	 * @return
+	 */
+	public List<Receita> selecionarPorUsuario(int usuarioId) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+			
+			PreparedStatement sttm = connection.prepareStatement(
+					"select id, nome, img_path, pontuacao_media, favs, (select count(id) from comentarios group by id_receita having id_receita = a.id) comentarios from "+tableName+" a where id_usuario = ? and aprovado = 1");
+			sttm.setInt(1, usuarioId);
+			
+			ResultSet rs = sttm.executeQuery();
+
+			List<Receita> list = new ArrayList<Receita>();
+			Receita receita;
+			while(rs.next()) {
+				receita = new Receita();
+
+				receita.setId(rs.getInt("id"));
+				receita.setNome(rs.getString("nome"));
+//				receita.setCategoriaId(rs.getInt("id_categoria"));
+//				receita.setUsuarioId(rs.getInt("id_usuario"));
+//				receita.setPorcao(rs.getInt("porcao"));
+//				receita.setTempoPreparo(rs.getDouble("tempo_preparo"));
+//				receita.setModoPreparo(rs.getString("modo_preparo"));
+				receita.setImgPath(rs.getString("img_path"));
+				receita.setPontuacaoMedia(rs.getDouble("pontuacao_media"));
+//				receita.setViews(rs.getInt("views"));
+				receita.setFavs(rs.getInt("favs"));
+//				receita.setSlug(rs.getString("slug"));
+//				receita.setAprovado(rs.getBoolean("aprovado"));
+				receita.setNumComentarios(rs.getInt("comentarios"));
+				
+				list.add(receita);
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return null;
+	}
+
+	public List<Receita> selecionarPorFavoritosDeUsuario(int usuarioId) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+			
+			PreparedStatement sttm = connection.prepareStatement(
+					"select r.id, r.nome, r.img_path, r.pontuacao_media, r.favs, (select count(id) from comentarios group by id_receita having id_receita = r.id) comentarios from "+tableName+" r inner join receitas_fav rf on rf.id_receita = r.id where rf.id_receita = ? and aprovado = 1");
+			sttm.setInt(1, usuarioId);
+			
+			ResultSet rs = sttm.executeQuery();
+
+			List<Receita> list = new ArrayList<Receita>();
+			Receita receita;
+			while(rs.next()) {
+				receita = new Receita();
+
+				receita.setId(rs.getInt("id"));
+				receita.setNome(rs.getString("nome"));
+//				receita.setCategoriaId(rs.getInt("id_categoria"));
+//				receita.setUsuarioId(rs.getInt("id_usuario"));
+//				receita.setPorcao(rs.getInt("porcao"));
+//				receita.setTempoPreparo(rs.getDouble("tempo_preparo"));
+//				receita.setModoPreparo(rs.getString("modo_preparo"));
+				receita.setImgPath(rs.getString("img_path"));
+				receita.setPontuacaoMedia(rs.getDouble("pontuacao_media"));
+//				receita.setViews(rs.getInt("views"));
+				receita.setFavs(rs.getInt("favs"));
+//				receita.setSlug(rs.getString("slug"));
+//				receita.setAprovado(rs.getBoolean("aprovado"));
+				receita.setNumComentarios(rs.getInt("comentarios"));
+				
+				list.add(receita);
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return null;
+	}
+	
+	public boolean incluirFavorito(int receitaId, int usuarioId) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+			
+			PreparedStatement sttm = connection.prepareStatement(
+					"insert into receitas_favs values(?,?)");
+			sttm.setInt(1, receitaId);
+			sttm.setInt(2, usuarioId);
+			
+			int rowsAffected = sttm.executeUpdate();
+			
+			if (sttm != null)
+				sttm.close();
+			
+			sttm = null;
+			
+			return rowsAffected > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+		
+		return false;
+	}
+
+	public boolean removerFavorito(int receitaId, int usuarioId) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+
+			PreparedStatement sttm = connection.prepareStatement(
+				"delete from receitas_favs where id_receita = ? and id_usuario = ?");
+			sttm.setInt(1, receitaId);
+			sttm.setInt(2, usuarioId);
+
+			int rowsAffected = sttm.executeUpdate();
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return rowsAffected > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return false;
+	}
+
+	public boolean isReceitaFavoritada(int receitaId, int usuarioId) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+			
+			PreparedStatement sttm = connection.prepareStatement(
+					"select count(id_receita) count from receitas_fav where id_receita = ? and id_usuario = ?");
+			sttm.setInt(1, receitaId);
+			sttm.setInt(1, usuarioId);
+			
+			ResultSet rs = sttm.executeQuery();
+			
+			boolean favoritada = false;
+
+			while(rs.next()) {
+				favoritada = rs.getInt("count") > 0;
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return favoritada;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return false;
+	}
+
+	public boolean incluirReport(int receitaId, int usuarioId) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+			
+			PreparedStatement sttm = connection.prepareStatement(
+					"insert into reports(id_receita, id_usuario) values(?,?)");
+			sttm.setInt(1, receitaId);
+			sttm.setInt(2, usuarioId);
+			
+			int rowsAffected = sttm.executeUpdate();
+			
+			if (sttm != null)
+				sttm.close();
+			
+			sttm = null;
+			
+			return rowsAffected > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+		
+		return false;
+	}
+
+	public boolean incluirPontuacao(int receitaId, int usuarioId, int pontos) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+			
+			PreparedStatement sttm = connection.prepareStatement(
+					"insert into pontuacoes values(?,?,?)");
+			sttm.setInt(1, receitaId);
+			sttm.setInt(2, usuarioId);
+			sttm.setInt(3, pontos);
+			
+			int rowsAffected = sttm.executeUpdate();
+			
+			if (sttm != null)
+				sttm.close();
+			
+			sttm = null;
+			
+			return rowsAffected > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+		
+		return false;
+	}
+	
+	public void atualizarPontuacaoMedia(int receitaId) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+			
+			PreparedStatement sttm = connection.prepareStatement("update receitas set pontuacao_media = (select avg(qty) from pontuacoes where id_receita = ?) where id = ?");
+			sttm.setInt(1, receitaId);
+			sttm.setInt(2, receitaId);
+			
+			int rowsAffected = sttm.executeUpdate();
+			
+			if (sttm != null)
+				sttm.close();
+			
+			sttm = null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
 	}
 }
