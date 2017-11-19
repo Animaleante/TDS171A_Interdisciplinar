@@ -125,7 +125,7 @@ CREATE TABLE receitas (
     -- updated_at DATE NOT NULL,
     -- deleted_at DATE NULL,
     CONSTRAINT receita_pk PRIMARY KEY (id),
-    CONSTRAINT receita_nome_unique UNIQUE (nome),
+    -- CONSTRAINT receita_nome_unique UNIQUE (nome),
     CONSTRAINT receita_cat_fk FOREIGN KEY (id_categoria) REFERENCES categorias(id),
     CONSTRAINT receita_usr_fk FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
 );
