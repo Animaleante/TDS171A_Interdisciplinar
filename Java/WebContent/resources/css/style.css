@@ -32,3 +32,6 @@
 .score a:hover i.fa:last-child {
 	display:inline-block;
 }
+.error{
+	color: #FF7B74;
+}

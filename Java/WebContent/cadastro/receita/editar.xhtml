@@ -30,6 +30,7 @@
 									
 									<div class="f-row">
 					                    <div class="full">
+					                    <h:message for="nome" errorClass="error"/><br/>
 					                        <h:inputText id="nome"  value="#{receitaBean.vo.nome}" size="80"
 											             required="true" a:placeholder="Nome da Receita"
 											             validatorMessage="Nome deve ter no máximo 80 caracteres"
@@ -41,6 +42,7 @@
 				                    
 				                    <div class="f-row">
 										<div class="third">
+										<h:message for="tempo_preparo" errorClass="error"/><br/>
 					                        <h:inputText id="tempo_preparo"  value="#{receitaBean.vo.tempoPreparo}" size="80"
 											             required="true" a:placeholder="Tempo de preparo"
 											             validatorMessage="Nome deve ter no máximo 80 caracteres"
@@ -49,13 +51,15 @@
 											</h:inputText>
 										</div>
 										<div class="third">
+										<h:message for="porcao" errorClass="error"/><br/>
 					                        <h:inputText id="porcao"  value="#{receitaBean.vo.porcao}" size="80"
 											             required="true" a:placeholder="Serve quantas porções?"
 											             requiredMessage="Número de porções é obrigatório">
 											</h:inputText>
 										</div>
 										<div class="third">
-											<h:selectOneMenu value="#{receitaBean.vo.categoriaId}" required="true">
+										<h:message for="categoria" errorClass="error"/><br/>
+											<h:selectOneMenu id="categoria" value="#{receitaBean.vo.categoriaId}" required="true">
    												<f:selectItem itemValue="0" itemLabel="Selecione uma categoria" a:disabled="disabled" a:selected="selected"/>
 												<f:selectItems value="#{receitaBean.categorias}" />
 											</h:selectOneMenu>
@@ -69,7 +73,12 @@
 									<h2>Modo de Preparo</h2>
 									<div class="full">
 										<div class="f-row instruction">
-											<h:inputTextarea value="#{receitaBean.vo.modoPreparo}"></h:inputTextarea>
+										<h:message for="modo_preparo" errorClass="error"/><br/>
+											<h:inputTextarea id="modo_preparo" value="#{receitaBean.vo.modoPreparo}"
+											validatorMessage="Modo de preparo não pode ser vazio"
+											>
+											<f:validateLength minimum="1"></f:validateLength>
+											</h:inputTextarea>
 										</div>
 									</div>
 								</section>
@@ -77,8 +86,12 @@
 								<section>
 									<h2>Foto</h2>
 									<div class="f-row full">
+									<h:message for="receita-foto" errorClass="error"/><br/>
 										<label for="receita-foto" class="btn">Selecionar uma foto</label>
-										<h:inputFile id="receita-foto" value="#{receitaBean.imgFile}"/>
+										<h:inputFile id="receita-foto" value="#{receitaBean.imgFile}"
+										required="true" 
+										requiredMessage="Foto da receita é obrigatório"
+										/>
 										<h:graphicImage value="/images/#{receitaSiteBean.vo.imgPath}" />
 									</div>
 								</section>

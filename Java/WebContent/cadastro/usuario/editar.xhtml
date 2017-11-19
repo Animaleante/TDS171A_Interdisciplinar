@@ -21,12 +21,13 @@
 			<div class="row">
 				<section class="content center full-width">
 					<div class="modal-soboru container">
-						<h3>Registrar</h3>
+						<h3>Editar usuário</h3>
 
 						<h:form styleClass="form-horizontal">
 							<h:messages globalOnly="true" errorClass="error" />
 
 							<div class="f-row">
+							<h:message for="nome" errorClass="error"/><br/>
 								<h:inputText id="nome" value="#{usuarioBean.vo.nome}" size="80"
 									required="true" a:placeholder="Nome"
 									validatorMessage="Nome deve ter no máximo 80 caracteres"
@@ -36,29 +37,15 @@
 							</div>
 
 							<div class="f-row">
+							<h:message for="email" errorClass="error"/><br/>
 								<h:inputText id="email" value="#{usuarioBean.vo.email}"
 									required="true" a:placeholder="E-mail"
 									requiredMessage="E-mail é obrigatório">
 								</h:inputText>
 							</div>
-
 							<div class="f-row">
-								<h:inputSecret id="senha" value="#{usuarioBean.vo.senha}"
-									required="true" a:placeholder="Senha"
-									requiredMessage="Senha é obrigatório">
-								</h:inputSecret>
-							</div>
-
-							<div class="f-row">
-								<h:inputSecret id="senhaConfirmacao"
-									value="#{usuarioBean.vo.senhaConfirmacao}" required="true"
-									a:placeholder="Repetir Senha"
-									requiredMessage="Confirmacao da Senha é obrigatório">
-								</h:inputSecret>
-							</div>
-
-							<div class="f-row">
-								<label> Data de Nascimento: </label>
+							<h:message for="nasc" errorClass="error"/><br/>
+								<label> Data de Nascimento: </label><br/>
 								<h:inputText id="nasc" value="#{usuarioBean.nasc}" a:type="date"
 									required="true" a:placeholder="Data de Nascimento"
 									requiredMessage="Data de Nascimento é obrigatória">
@@ -66,6 +53,7 @@
 							</div>
 
 							<div class="f-row">
+							<h:message for="#{usuarioBean.vo.sexo}" errorClass="error"/><br/>
 								<label>Sexo:</label>
 								<h:selectOneRadio value="#{usuarioBean.vo.sexo}" required="true">
 									<f:selectItem itemValue="1" itemLabel="Feminino" />
@@ -80,6 +68,7 @@
 								</label> 
 								</div>
 								<div class="f-row">
+								<h:message for="#{usuarioBean.vo.roleId}" errorClass="error"/><br/>
 								<div> 
 									<h:selectOneMenu value="#{usuarioBean.vo.roleId}" required="true">
 											<f:selectItem itemValue="0" itemLabel="Tipo do usuário" a:disabled="disabled" a:selected="selected"/>

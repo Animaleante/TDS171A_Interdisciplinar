@@ -18,6 +18,7 @@
 								<h:messages globalOnly="true" errorClass="error"/>
 								
 	                            <div class="f-row">
+	                            <h:message for="nome" errorClass="error"/><br/>
 	                                <h:inputText id="nome"  value="#{registroBean.nome}" size="80"
 									             required="true" a:placeholder="Nome"
 									             validatorMessage="Nome deve ter no máximo 80 caracteres"
@@ -27,6 +28,7 @@
 	                            </div>
 	                            
 	                            <div class="f-row">
+	                            <h:message for="email" errorClass="error"/><br/>
 	                                <h:inputText id="email"  value="#{registroBean.email}"
 									             required="true" a:placeholder="E-mail"
 									             requiredMessage="E-mail é obrigatório">
@@ -34,6 +36,7 @@
 	                            </div>
 	                            
 	                            <div class="f-row">
+	                            <h:message for="senha" errorClass="error"/><br/>
 	                                <h:inputSecret id="senha"  value="#{registroBean.senha}"
 									             required="true" a:placeholder="Senha"
 									             requiredMessage="Senha é obrigatório">
@@ -41,6 +44,7 @@
 	                            </div>
 	                            
 	                            <div class="f-row">
+	                            <h:message for="senhaConfirmacao" errorClass="error"/><br/>
 	                                <h:inputSecret id="senhaConfirmacao"  value="#{registroBean.senhaConfirmacao}"
 									             required="true" a:placeholder="Repetir Senha"
 									             requiredMessage="Confirmacao da Senha é obrigatório">
@@ -48,9 +52,8 @@
 	                            </div>
 	                            
 	                            <div class="f-row">
-	                                <label>
-	                                    Data de Nascimento: 
-	                                </label>
+							<h:message for="nasc" errorClass="error"/><br/>
+	                                <label>Data de Nascimento:</label><br/>
 	                                <h:inputText id="nasc"  value="#{registroBean.nasc}" a:type="date"
 									             required="true" a:placeholder="Data de Nascimento"
 									             requiredMessage="Data de Nascimento é obrigatória">
