@@ -62,11 +62,15 @@ public class ReceitaController extends ControllerBase<Receita>{
 	}
 	
 	public boolean incluirFavorito(int receitaId, int usuarioId) {
-		return((ReceitaModel) model).incluirFavorito(receitaId, usuarioId);
+		boolean sucesso = ((ReceitaModel) model).incluirFavorito(receitaId, usuarioId);
+		((ReceitaModel) model).atualizarFavs(receitaId);
+		return sucesso;
 	}
 
 	public boolean removerFavorito(int receitaId, int usuarioId) {
-		return ((ReceitaModel) model).removerFavorito(receitaId, usuarioId);
+		boolean sucesso = ((ReceitaModel) model).removerFavorito(receitaId, usuarioId);
+		((ReceitaModel) model).atualizarFavs(receitaId);
+		return sucesso;
 	}
 
 	public boolean isReceitaFavoritada(int receitaId, int usuarioId) {

@@ -14,6 +14,7 @@ import javax.inject.Named;
 import com.tds171a.soboru.controllers.CategoriaController;
 import com.tds171a.soboru.controllers.IngredienteController;
 import com.tds171a.soboru.controllers.ReceitaController;
+import com.tds171a.soboru.utils.Utils;
 import com.tds171a.soboru.vos.Categoria;
 import com.tds171a.soboru.vos.Ingrediente;
 import com.tds171a.soboru.vos.Receita;
@@ -125,6 +126,15 @@ public class PesquisaBean implements Serializable {
 		}
 
 		return ROUTE_BASE+BeanBase.INDEX_PAGE+BeanBase.FACES_REDIRECT;
+	}
+	
+	/**
+	 * 
+	 * @param num
+	 * @return
+	 */
+	public String formatDouble(Double num) {
+		return Utils.formatDouble(num);
 	}
 
 	/**

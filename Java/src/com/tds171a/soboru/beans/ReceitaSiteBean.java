@@ -256,16 +256,17 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	 */
 	public String pontuar(int pontos) {
 		if (SessionContext.getInstance().isLogado()) {
-			// TODO - adicionar pontuacao a essa receita atrelada a esse usuario, e
-			// recalcular pontuacao_media da receita
 			((ReceitaController) controller).incluirPontuacao(getVo().getId(), SessionContext.getInstance().getUsuarioLogado().getId(), pontos);
-			// TODO - pegar receita novamente com novos dados
 			return exibir(getVo());
 		}
 
 		return "/login/" + INDEX_PAGE + FACES_REDIRECT;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isReceitaFavoritada() {
 		if(SessionContext.getInstance().isLogado()) {
 //			return ((ReceitaController) controller).isReceitaFavoritada(getVo().getId(), SessionContext.getInstance().getUsuarioLogado().getId());
@@ -284,9 +285,13 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param num
+	 * @return
+	 */
 	public String formatDouble(Double num) {
-		NumberFormat nf = new DecimalFormat("##.##");
-		return nf.format(num);
+		return Utils.formatDouble(num);
 	}
 
 	/**

@@ -72,6 +72,10 @@ public class ReceitaModel extends ModelBase<Receita> {
 	public boolean incluirPontuacao(int receitaId, int usuarioId, int pontos) {
 		return ((ReceitaDAO) dao).incluirPontuacao(receitaId, usuarioId, pontos);
 	}
+	
+	public void atualizarFavs(int receitaId) {
+		((ReceitaDAO) dao).atualizarFavs(receitaId);
+	}
 
 	public void atualizarPontuacaoMedia(int receitaId) {
 		((ReceitaDAO) dao).atualizarPontuacaoMedia(receitaId);

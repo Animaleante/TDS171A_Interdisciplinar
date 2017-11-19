@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -811,7 +812,7 @@ public class ReceitaDAO implements IDAO<Receita> {
 			connection = Utils.createConnection();
 			
 			PreparedStatement sttm = connection.prepareStatement(
-					"insert into receitas_favs values(?,?)");
+					"insert into receitas_fav values(?,?)");
 			sttm.setInt(1, receitaId);
 			sttm.setInt(2, usuarioId);
 			
@@ -845,7 +846,7 @@ public class ReceitaDAO implements IDAO<Receita> {
 			connection = Utils.createConnection();
 
 			PreparedStatement sttm = connection.prepareStatement(
-				"delete from receitas_favs where id_receita = ? and id_usuario = ?");
+				"delete from receitas_fav where id_receita = ? and id_usuario = ?");
 			sttm.setInt(1, receitaId);
 			sttm.setInt(2, usuarioId);
 
@@ -871,6 +872,35 @@ public class ReceitaDAO implements IDAO<Receita> {
 		}
 
 		return false;
+	}
+
+	public void atualizarFavs(int receitaId) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+			
+			PreparedStatement sttm = connection.prepareStatement("update receitas set favs = (select count(id_receita) from receitas_fav where id_receita = ?) where id = ?");
+			sttm.setInt(1, receitaId);
+			sttm.setInt(2, receitaId);
+			
+			int rowsAffected = sttm.executeUpdate();
+			
+			if (sttm != null)
+				sttm.close();
+			
+			sttm = null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
 	}
 
 	public boolean isReceitaFavoritada(int receitaId, int usuarioId) {
@@ -931,6 +961,8 @@ public class ReceitaDAO implements IDAO<Receita> {
 			sttm = null;
 			
 			return rowsAffected > 0;
+		} catch (SQLIntegrityConstraintViolationException e) {
+			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

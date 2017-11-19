@@ -172,10 +172,27 @@
 	                    <div class="widget share">
 	                        <ul class="boxed">
 	                            <li class="light">
-	                            	<a href="#" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i> <span>Share on Facebook</span></a>
+		                            <c:choose>
+		                            	<c:when test="#{receitaSiteBean.vo.reportou}">
+			                            	<i class="fa fa-flag" aria-hidden="true"></i>
+		                            		<span>Reportada</span>
+                            			</c:when>
+                            			<c:otherwise>
+			                            	<h:form>
+				                            	<h:commandLink action="#{receitaSiteBean.reportar()}" style="height: 90px;">
+		                            				<span>
+					                            		<i class="fa fa-flag-o" aria-hidden="true"></i>
+					                            		<i class="fa fa-flag" aria-hidden="true"></i>
+				                            		</span>
+				                            		<span>Reportar</span>
+				                            	</h:commandLink>
+			                            	</h:form>
+		                            	</c:otherwise>
+		                            </c:choose>
 	                            </li>
 	                            <li class="medium">
-	                            	<a href="#" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i> <span>Share on Twitter</span></a>
+<!-- 	                            	<a href="#" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i> <span>Share on Twitter</span></a> -->
+	                            	<span></span>
 	                            </li>
 	                            <li class="dark">
 	                            	<h:form>

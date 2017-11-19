@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.Normalizer;
+import java.text.NumberFormat;
 import java.text.Normalizer.Form;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -79,5 +81,10 @@ public class Utils {
 			dest.mkdirs();
 		}
 		return dest;
+	}
+	
+	public static String formatDouble(Double num) {
+		NumberFormat nf = new DecimalFormat("##.##");
+		return nf.format(num);
 	}
 }
