@@ -3,7 +3,7 @@
 --insert into ingredientes values (ingrediente_seq.NEXTVAL,'NOME INGREDIENTE');
 
 --Ingredientes - Arroz de Lentilha
-insert into ingredientes values (ingrediente_seq.NEXTVAL,'água fervente');
+insert into ingredientes values (ingrediente_seq.NEXTVAL,'agua fervente');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'lentilha');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'picados');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'azeite');
@@ -13,16 +13,16 @@ insert into ingredientes values (ingrediente_seq.NEXTVAL,'sal');
 --Ingredientes - Cebola Frita
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'cebola');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'farinha de trigo');
-insert into ingredientes values (ingrediente_seq.NEXTVAL,'óleo');
+insert into ingredientes values (ingrediente_seq.NEXTVAL,'oleo');
 
 --Ingredientes - Torta
-insert into ingredientes values (ingrediente_seq.NEXTVAL,'pimentão verde');
-insert into ingredientes values (ingrediente_seq.NEXTVAL,'pimenta dedo-de-moça');
+insert into ingredientes values (ingrediente_seq.NEXTVAL,'pimentao verde');
+insert into ingredientes values (ingrediente_seq.NEXTVAL,'pimenta dedo-de-moca');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'ovo');
-insert into ingredientes values (ingrediente_seq.NEXTVAL,'muçarela ralada');
+insert into ingredientes values (ingrediente_seq.NEXTVAL,'mucarela ralada');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'iogurte natural');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'salsinha');
-insert into ingredientes values (ingrediente_seq.NEXTVAL,'fermento em pó');
+insert into ingredientes values (ingrediente_seq.NEXTVAL,'fermento em po');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'tomate');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'calabresa');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'azeitona');
@@ -32,7 +32,7 @@ insert into ingredientes values (ingrediente_seq.NEXTVAL,'azeitona');
 
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'queijo cremoso');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'cream cheese');
-insert into ingredientes values (ingrediente_seq.NEXTVAL,'parmesão ralado');
+insert into ingredientes values (ingrediente_seq.NEXTVAL,'parmesao ralado');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'manteiga');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'gemas');
 
@@ -46,7 +46,7 @@ insert into medidas values (medida_seq.NEXTVAL,'dentes','dentes');
 insert into medidas values (medida_seq.NEXTVAL,'fio','fio');
 insert into medidas values (medida_seq.NEXTVAL,'a gosto','a gosto');
 insert into medidas values (medida_seq.NEXTVAL,'unidade','uni');
-insert into medidas values (medida_seq.NEXTVAL,'xícara (chá)','xic');
+insert into medidas values (medida_seq.NEXTVAL,'xicara (cha)','xic');
 insert into medidas values (medida_seq.NEXTVAL,'colher (sopa)','csp');
 insert into medidas values (medida_seq.NEXTVAL,'copo','cp');
 insert into medidas values (medida_seq.NEXTVAL,'fatias','fatias');
@@ -58,12 +58,12 @@ insert into medidas values (medida_seq.NEXTVAL,'mililitro','ml');
 
 insert into utensilios values (utensilio_seq.NEXTVAL, 'Abridor de garrafa');
 insert into utensilios values (utensilio_seq.NEXTVAL, 'Saca-rolhas');
-insert into utensilios values (utensilio_seq.NEXTVAL, 'Assadeiras alumínio');
+insert into utensilios values (utensilio_seq.NEXTVAL, 'Assadeiras aluminio');
 insert into utensilios values (utensilio_seq.NEXTVAL, 'Socador de alho');
 insert into utensilios values (utensilio_seq.NEXTVAL, 'Funil');
-insert into utensilios values (utensilio_seq.NEXTVAL, 'Escorredor de macarrão');
-insert into utensilios values (utensilio_seq.NEXTVAL, 'Pá para bolo');
-insert into utensilios values (utensilio_seq.NEXTVAL, 'Espátula de silicone');
+insert into utensilios values (utensilio_seq.NEXTVAL, 'Escorredor de macarrao');
+insert into utensilios values (utensilio_seq.NEXTVAL, 'Pa para bolo');
+insert into utensilios values (utensilio_seq.NEXTVAL, 'Espatula de silicone');
 insert into utensilios values (utensilio_seq.NEXTVAL, 'Espremedor de alho');
 insert into utensilios values (utensilio_seq.NEXTVAL, 'Espremedor de batata');
 
@@ -75,15 +75,15 @@ insert into utensilios values (utensilio_seq.NEXTVAL, 'Espremedor de batata');
 --1
 insert into categorias values(categoria_seq.NEXTVAL, 'Salgados', null, 0, 'Salgados');
 --2
-insert into categorias values(categoria_seq.NEXTVAL, 'Tortas', 1, 1, 'Salgados/Tortas');
+insert into categorias values(categoria_seq.NEXTVAL, 'Tortas', 1, 1, 'Tortas');
 --3
-insert into categorias values(categoria_seq.NEXTVAL, 'Petiscos', 1, 1, 'Salgados/Petiscos');
+insert into categorias values(categoria_seq.NEXTVAL, 'Petiscos', 1, 1, 'Petiscos');
 --4
-insert into categorias values(categoria_seq.NEXTVAL, 'Cotidiano', 1, 1, 'Salgados/Cotidiano');
+insert into categorias values(categoria_seq.NEXTVAL, 'Cotidiano', 1, 1, 'Cotidiano');
 --5
 insert into categorias values(categoria_seq.NEXTVAL, 'Gourmet', null, 0, 'Gourmet');
 --6
-insert into categorias values(categoria_seq.NEXTVAL, 'Petit gâteau', 2, 1, 'Gourmet/Petit gâteau');
+insert into categorias values(categoria_seq.NEXTVAL, 'Petit gateau', 2, 1, 'Petit gateau');
 
 --receitas
 --insert into receitas values (receita_seq.NEXTVAL, 'NOME RECEITA', 2, 1, 2, 2, 'Modo de Preparo', 'teste.jpg', 0, 0, 0, 'receita1', 1);
@@ -100,11 +100,11 @@ Numa tigela com a farinha de trigo tempere com sal a gosto, passe as fatias de c
 Retire do óleo com a ajuda de uma escumadeira e coloque em papel absorvente
 Montagem: Sirva o arroz com lentilha, o kibe assado e a cebola frita', 'teste.jpg', 0, 0, 0, 'receita1', 1);
 
-insert into receitas values (receita_seq.NEXTVAL, 'Torta salgada da vovó', 2, 1, 5, 160, 'Misture numa tigela ¼ xícara (chá) de azeite, ¼ xícara (chá) de pimentão verde bem picadinho, ¼ xícara (chá) de cebola picada, 1 colher (sopa) de pimenta dedo-de-moça sem semente picadinha, 2 ovos, 1 xícara (chá) de muçarela ralada no ralo grosso, ½ copo de iogurte natural e salsinha picadinha a gosto. Adicione 1 xícara (chá) de farinha de trigo, ½ colher (sopa) de sal, ½ colher (sopa) de fermento em pó e mexa bem.
+insert into receitas values (receita_seq.NEXTVAL, 'Torta salgada da vovo', 2, 1, 5, 160, 'Misture numa tigela ¼ xícara (chá) de azeite, ¼ xícara (chá) de pimentão verde bem picadinho, ¼ xícara (chá) de cebola picada, 1 colher (sopa) de pimenta dedo-de-moça sem semente picadinha, 2 ovos, 1 xícara (chá) de muçarela ralada no ralo grosso, ½ copo de iogurte natural e salsinha picadinha a gosto. Adicione 1 xícara (chá) de farinha de trigo, ½ colher (sopa) de sal, ½ colher (sopa) de fermento em pó e mexa bem.
 Espalhe a massa numa forma para pizza redonda (30 cm de diâmetro) untada com manteiga e enfarinhada. Leve para assar em forno pré-aquecido a 200° C por 15 minutos.
 Retire do forno e sobre a massa assada distribua muçarela ralada no ralo grosso, rodelas de tomate, fatias de ovo cozido, linguiça calabresa refogada e fatiada e azeitona verde fatiada a gosto. Regue o azeite e leve ao forno a 200° C por 15 minutos ou até derreter o queijo. Retire do forno e sirva em seguida.', 'teste.jpg', 0, 0, 0, 'receita1', 1);
 
-insert into receitas values (receita_seq.NEXTVAL, 'Petit gâteau de queijo', 6, 1, 1, 80, 'Misture o queijo com o cream cheese, o parmesão, a manteiga, os ovos e as gemas e leve ao banho-maria, mexendo sempre, até ficar homogêneo.
+insert into receitas values (receita_seq.NEXTVAL, 'Petit gateau de queijo', 6, 1, 1, 80, 'Misture o queijo com o cream cheese, o parmesão, a manteiga, os ovos e as gemas e leve ao banho-maria, mexendo sempre, até ficar homogêneo.
 Fora do fogo, acrescente a farinha e sal a gosto e misture bem até obter um creme. Cubra com filme plástico e leve à geladeira por no mínimo 1 hora.
 Distribua em forminhas de petit gâteau ou de empada untadas com manteiga, sem encher totalmente, e leve ao forno quente preaquecido (250°C) por 7 a 10 minutos ou até a borda ficar firme e o centro, molinho. 
 Desenforme e sirva em seguida.', 'teste.jpg', 0, 0, 0, 'receita1', 1);
