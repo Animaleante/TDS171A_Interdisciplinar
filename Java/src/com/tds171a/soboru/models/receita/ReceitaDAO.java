@@ -13,6 +13,7 @@ import java.util.List;
 import com.tds171a.soboru.models.IDAO;
 import com.tds171a.soboru.utils.Utils;
 import com.tds171a.soboru.vos.Receita;
+import com.tds171a.soboru.vos.ReceitaIngrediente;
 import com.tds171a.soboru.vos.Tag;
 import com.tds171a.soboru.vos.Utensilio;
 
@@ -605,5 +606,52 @@ public class ReceitaDAO implements IDAO<Receita> {
 					e.printStackTrace();
 				}
 		}
+	}
+
+	public List<ReceitaIngrediente> listarIngredientes(Receita receita) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+
+			PreparedStatement sttm = connection.prepareStatement("select * from receitas_ingredientes where id_receita = ?");
+			sttm.setInt(1, receita.getId());
+
+			ResultSet rs = sttm.executeQuery();
+
+			List<ReceitaIngrediente> list = new ArrayList<ReceitaIngrediente>();
+			ReceitaIngrediente receitaIngrediente = null;
+			while(rs.next()) {
+				receitaIngrediente = new ReceitaIngrediente();
+
+				receitaIngrediente.setId(rs.getInt("id"));
+				receitaIngrediente.setId_receita(rs.getInt("id_receita"));
+				receitaIngrediente.setId_ingrediente(rs.getInt("id_ingrediente"));
+				receitaIngrediente.setId_medida(rs.getInt("id_medida"));
+				receitaIngrediente.setQty(rs.getDouble("qty"));
+				receitaIngrediente.setSub_sessao(rs.getString("sub_sessao"));
+				
+				list.add(receitaIngrediente);
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return null;
 	}
 }

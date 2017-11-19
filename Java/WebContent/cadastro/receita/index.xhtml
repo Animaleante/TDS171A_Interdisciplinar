@@ -45,6 +45,7 @@
 							                        <td>
 														<h:form>
 															<h:commandLink action="#{receitaBean.exibir(receita)}" value="Detalhes"></h:commandLink> |
+															<h:commandLink action="#{receitaIngredienteBean.criar(receita.id)}" value="Ingredientes"></h:commandLink> |
 															<h:commandLink action="#{receitaUtensilioBean.criar(receita.id)}" value="Utensilios"></h:commandLink> |
 															<h:commandLink action="#{receitaBean.editar(receita)}" value="Editar"></h:commandLink> |
 															<h:commandLink action="#{receitaBean.deletar(receita)}" value="Deletar"></h:commandLink>

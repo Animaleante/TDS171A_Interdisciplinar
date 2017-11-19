@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.tds171a.soboru.models.receita.ReceitaModel;
 import com.tds171a.soboru.vos.Receita;
+import com.tds171a.soboru.vos.ReceitaIngrediente;
 import com.tds171a.soboru.vos.Tag;
 import com.tds171a.soboru.vos.Utensilio;
 
@@ -46,5 +47,9 @@ public class ReceitaController extends ControllerBase<Receita>{
 
 	public void registrarUtensilios(int receitaId, List<Utensilio> lista) {
 		((ReceitaModel) model).registrarUtensilios(receitaId, lista);
+	}
+
+	public List<ReceitaIngrediente> listarIngredientes(Receita receita) {
+		return ((ReceitaModel) model).listarIngredientes(receita);
 	}
 }

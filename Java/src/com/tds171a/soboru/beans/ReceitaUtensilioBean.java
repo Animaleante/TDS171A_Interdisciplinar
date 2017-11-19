@@ -13,10 +13,13 @@ import com.tds171a.soboru.controllers.UtensilioController;
 import com.tds171a.soboru.vos.Receita;
 import com.tds171a.soboru.vos.Utensilio;
 
-//@ManagedBean(name="receitaTagBean")
-//@ViewScoped
 @Named("receitaUtensilioBean")
 @SessionScoped
+/**
+ * 
+ * @author PC970
+ *
+ */
 public class ReceitaUtensilioBean implements Serializable {
 
 	/**

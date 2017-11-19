@@ -20,4 +20,8 @@ public class ReceitaIngredienteModel extends ModelBase<ReceitaIngrediente> {
 	public List<ReceitaIngrediente> selecionarPorReceita(int receitaId) {
 		return ((ReceitaIngredienteDAO) dao).selecionarPorReceita(receitaId);
 	}
+
+	public void incluirLista(int receitaId, List<ReceitaIngrediente> lista) {
+		((ReceitaIngredienteDAO) dao).incluirLista(receitaId, lista);
+	}
 }

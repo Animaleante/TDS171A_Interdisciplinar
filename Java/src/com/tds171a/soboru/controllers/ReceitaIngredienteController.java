@@ -24,4 +24,8 @@ public class ReceitaIngredienteController extends ControllerBase<ReceitaIngredie
 	public List<ReceitaIngrediente> selecionarPorReceita(int receitaId) {
 		return ((ReceitaIngredienteModel) model).selecionarPorReceita(receitaId);
 	}
+
+	public void incluirLista(int receitaId, List<ReceitaIngrediente> lista) {
+		((ReceitaIngredienteModel) model).incluirLista(receitaId, lista);
+	}
 }
