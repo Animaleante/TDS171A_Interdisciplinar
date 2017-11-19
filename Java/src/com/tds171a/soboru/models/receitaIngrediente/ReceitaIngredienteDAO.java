@@ -282,36 +282,25 @@ public class ReceitaIngredienteDAO implements IDAO<ReceitaIngrediente> {
 			if (sttm != null)
 				sttm.close();
 			
-			
-			String query = "insert all ";
-
 			for(ReceitaIngrediente ri : lista) {
-				query += "into receitas_ingredientes values (receita_ingrediente_seq.NEXTVAL, ?, ?, ?, ?, ?) ";
+				sttm = connection.prepareStatement("insert into receitas_ingredientes values (receita_ingrediente_seq.NEXTVAL, ?, ?, ?, ?, ?)");
+				sttm.setInt(1, receitaId);
+				sttm.setInt(2, ri.getId_ingrediente());
+				sttm.setInt(3, ri.getId_medida());
+				sttm.setString(4, ri.getSub_sessao());
+				sttm.setDouble(5, ri.getQty());
+
+				int rowsAffected = sttm.executeUpdate();
+
+				if (sttm != null)
+					sttm.close();
+				
+				if(rowsAffected == 0) {
+					throw new Exception("Não foi possivel cadastras todos os relacionamentos com essa receita.");
+				}
 			}
 			
-			query += "select 1 from dual";
-			
-			sttm = connection.prepareStatement(query);
-			int index = 1;
-			for(ReceitaIngrediente ri : lista) {
-				sttm.setInt(index++, receitaId);
-				sttm.setInt(index++, ri.getId_ingrediente());
-				sttm.setInt(index++, ri.getId_medida());
-				sttm.setString(index++, ri.getSub_sessao());
-				sttm.setDouble(index++, ri.getQty());
-			}
-
-			int rowsAffected = sttm.executeUpdate();
-			System.out.println("Linhas afetadas: " + rowsAffected);
-
-			if (sttm != null)
-				sttm.close();
-			
-			if(rowsAffected == 0) {
-				throw new Exception("Não foi possivel cadastras todos os relacionamentos com essa receita.");
-			}
-
-			
+			sttm = null;			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

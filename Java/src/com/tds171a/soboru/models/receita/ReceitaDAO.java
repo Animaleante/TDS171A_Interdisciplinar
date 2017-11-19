@@ -565,7 +565,6 @@ public class ReceitaDAO implements IDAO<Receita> {
 			if (sttm != null)
 				sttm.close();
 			
-			
 			String query = "insert all ";
 
 			for(Utensilio u : lista) {
@@ -582,7 +581,6 @@ public class ReceitaDAO implements IDAO<Receita> {
 			}
 
 			int rowsAffected = sttm.executeUpdate();
-			System.out.println("Linhas afetadas: " + rowsAffected);
 
 			if (sttm != null)
 				sttm.close();
