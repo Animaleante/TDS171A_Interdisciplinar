@@ -258,7 +258,7 @@ CREATE TABLE comentarios (
     id_receita NUMBER(11) NOT NULL,
     id_usuario NUMBER(11) NOT NULL,
     body CLOB NOT NULL,
-    created_at DATE NOT NULL,
+    -- created_at DATE NOT NULL,
     -- updated_at DATE NOT NULL,
     -- deleted_at DATE NULL,
     CONSTRAINT comentarios_pk PRIMARY KEY (id),

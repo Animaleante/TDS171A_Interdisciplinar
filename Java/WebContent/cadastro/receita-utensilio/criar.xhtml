@@ -32,7 +32,8 @@
 										<div class="full">
 											<h:message for="select_#{utensilio.id}" errorClass="error"/>
 											
-											<h:selectOneMenu id="select_#{utensilio.id}" value="#{utensilio.id}" required="true" requiredMessage="Esse valor precisa ser preenchido">
+											<h:selectOneMenu id="select_#{utensilio.id}" value="#{utensilio.id}" required="true" 
+												requiredMessage="Esse valor precisa ser preenchido">
 												<f:selectItem itemValue="-1" itemLabel="Selecione um utensilio" a:disabled="disabled"/>
 												<f:selectItems value="#{receitaUtensilioBean.listaUtensilios}" />
 											</h:selectOneMenu>
