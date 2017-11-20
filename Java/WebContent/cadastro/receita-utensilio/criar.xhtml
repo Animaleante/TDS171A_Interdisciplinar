@@ -28,8 +28,8 @@
 								<h:messages globalOnly="true" errorClass="error"/>
 								
 							    <c:forEach items="#{receitaUtensilioBean.lista}" var="utensilio">
-									<div class="f-row">
-										<div class="large" style="width: 95%; float:left;">
+									<div class="f-row utensilio">
+										<div class="full">
 											<h:message for="select_#{utensilio.id}" errorClass="error"/>
 											
 											<h:selectOneMenu id="select_#{utensilio.id}" value="#{utensilio.id}" required="true" requiredMessage="Esse valor precisa ser preenchido">
@@ -37,12 +37,16 @@
 												<f:selectItems value="#{receitaUtensilioBean.listaUtensilios}" />
 											</h:selectOneMenu>
 										</div>
-									    <h:commandButton value="-" action="#{receitaUtensilioBean.remover(utensilio)}" style="float: right; font-size: 37px; padding: 0; width: 37px; height: 37px; line-height: 37px;"/>
+										<h:commandLink action="#{receitaUtensilioBean.remover(utensilio)}">
+											<button class="remove">-</button>
+										</h:commandLink>
 									</div>
 							    </c:forEach>
 							    
-                        		<div class="f-row">
-								    <h:commandButton value="Add" action="#{receitaUtensilioBean.adicionar}" />
+                        		<div class="f-row full">
+									<h:commandLink action="#{receitaUtensilioBean.adicionar}" immediate="true">
+										<button class="add">Adicionar</button>
+									</h:commandLink>
                         		</div>
                         		
                         		<div class="f-row submit">

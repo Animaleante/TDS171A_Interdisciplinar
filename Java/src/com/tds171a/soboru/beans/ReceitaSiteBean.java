@@ -19,7 +19,6 @@ import javax.inject.Named;
 import javax.servlet.http.Part;
 
 import com.tds171a.soboru.controllers.CategoriaController;
-import com.tds171a.soboru.controllers.ComentarioController;
 import com.tds171a.soboru.controllers.IngredienteController;
 import com.tds171a.soboru.controllers.MedidaController;
 import com.tds171a.soboru.controllers.ReceitaController;
@@ -31,7 +30,7 @@ import com.tds171a.soboru.vos.Categoria;
 import com.tds171a.soboru.vos.Ingrediente;
 import com.tds171a.soboru.vos.Medida;
 import com.tds171a.soboru.vos.Receita;
-import com.tds171a.soboru.vos.Tag;
+import com.tds171a.soboru.vos.ReceitaIngrediente;
 import com.tds171a.soboru.vos.Usuario;
 import com.tds171a.soboru.vos.Utensilio;
 
@@ -50,8 +49,18 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	
 	private CategoriaController categoriaController;
 	private UsuarioController usuarioController;
+	private IngredienteController ingredienteController;
+	private MedidaController medidaController;
+	private ReceitaIngredienteController receitaIngredienteController;
+	private UtensilioController utensilioController;
+	
+	private List<ReceitaIngrediente> listaIngredientes;
+	private List<Utensilio> listaUtensilios;
 
 	private List<Categoria> categorias;
+	private List<Ingrediente> ingredientes;
+	private List<Medida> medidas;
+	private List<Utensilio> utensilios;
 
 	private Part imgFile;
 
@@ -64,8 +73,15 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 
 		categoriaController = new CategoriaController();
 		usuarioController = new UsuarioController();
+		ingredienteController = new IngredienteController();
+		medidaController = new MedidaController();
+		receitaIngredienteController = new ReceitaIngredienteController();
+		utensilioController = new UtensilioController();
 
 		setVo(new Receita());
+		setListaIngredientes(new ArrayList<ReceitaIngrediente>());
+		setIngredientes(new ArrayList<Ingrediente>());
+		setMedidas(new ArrayList<Medida>());
 	}
 
 	/**
@@ -74,9 +90,32 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	 */
 	@Override
 	public String criar() {
-		setCategorias(categoriaController.listar());
+		if(SessionContext.getInstance().isLogado()) {
+			setCategorias(categoriaController.listarSelecionaveis());
+			setIngredientes(ingredienteController.listar());
+			setMedidas(medidaController.listar());
+			setUtensilios(utensilioController.listar());
+			return super.criar();
+		}
+		return "/login/"+BeanBase.INDEX_PAGE+BeanBase.FACES_REDIRECT;
+	}
 
-		return super.criar();
+	public void adicionarReceitaIngrediente() {
+		listaIngredientes.add(new ReceitaIngrediente());
+		
+	}
+
+	public void removerReceitaIngrediente(ReceitaIngrediente receitaIngrediente) {
+		listaIngredientes.remove(receitaIngrediente);
+	}
+
+	public void adicionarUtensilio() {
+		listaUtensilios.add(new Utensilio());
+		
+	}
+
+	public void removerUtensilio(Utensilio utensilio) {
+		listaUtensilios.remove(utensilio);
 	}
 
 	/**
@@ -102,7 +141,30 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 			return route_base + CRIAR_PAGE;
 		}
 
-		return super.incluir();
+//		return super.incluir();
+		
+	    if(!validarDados())
+	    	return route_base + CRIAR_PAGE;
+
+	    if(controller.incluir(getVo())) {
+	    	try {
+		    	int receitaId = ((ReceitaController) controller).selecionarUltimoIdInserido();
+		    	System.out.println("ReceitaId: " + receitaId);
+				receitaIngredienteController.incluirLista(receitaId, getListaIngredientes());
+				((ReceitaController) controller).registrarUtensilios(receitaId, getListaUtensilios());
+	    	} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso!", null));
+	    } else {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel fazer o cadastro!", null));
+            return route_base + CRIAR_PAGE;
+	    }
+
+	    limparVo();
+
+	    return listar();
 	}
 
 	/**
@@ -179,6 +241,10 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	@Override
 	public void limparVo() {
 		setVo(new Receita());
+		setListaIngredientes(new ArrayList<ReceitaIngrediente>());
+		adicionarReceitaIngrediente();
+		setListaUtensilios(new ArrayList<Utensilio>());
+		adicionarUtensilio();
 	}
 
 	/**
@@ -261,6 +327,49 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	}
 
 	/**
+	 * @return the imgFile
+	 */
+	public Part getImgFile() {
+		return imgFile;
+	}
+
+	/**
+	 * @param imgFile
+	 *            the imgFile to set
+	 */
+	public void setImgFile(Part imgFile) {
+		this.imgFile = imgFile;
+	}
+
+	/**
+	 * @return the listaIngredientes
+	 */
+	public List<ReceitaIngrediente> getListaIngredientes() {
+		return listaIngredientes;
+	}
+
+	/**
+	 * @param listaIngredientes the listaIngredientes to set
+	 */
+	public void setListaIngredientes(List<ReceitaIngrediente> listaIngredientes) {
+		this.listaIngredientes = listaIngredientes;
+	}
+
+	/**
+	 * @return the listaUtensilios
+	 */
+	public List<Utensilio> getListaUtensilios() {
+		return listaUtensilios;
+	}
+
+	/**
+	 * @param listaUtensilios the listaUtensilios to set
+	 */
+	public void setListaUtensilios(List<Utensilio> listaUtensilios) {
+		this.listaUtensilios = listaUtensilios;
+	}
+
+	/**
 	 * @return the categorias
 	 */
 	public List<SelectItem> getCategorias() {
@@ -280,17 +389,56 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	}
 
 	/**
-	 * @return the imgFile
+	 * @return the ingredientes
 	 */
-	public Part getImgFile() {
-		return imgFile;
+	public List<SelectItem> getIngredientes() {
+		List<SelectItem> items = new ArrayList<SelectItem>();
+		for (Ingrediente i : this.ingredientes) {
+			items.add(new SelectItem(i.getId(), i.getNome()));
+		}
+		return items;
 	}
 
 	/**
-	 * @param imgFile
-	 *            the imgFile to set
+	 * @param ingredientes the ingredientes to set
 	 */
-	public void setImgFile(Part imgFile) {
-		this.imgFile = imgFile;
+	public void setIngredientes(List<Ingrediente> ingredientes) {
+		this.ingredientes = ingredientes;
+	}
+
+	/**
+	 * @return the medidas
+	 */
+	public List<SelectItem> getMedidas() {
+		List<SelectItem> items = new ArrayList<SelectItem>();
+		for (Medida m : this.medidas) {
+			items.add(new SelectItem(m.getId(), m.getNome()));
+		}
+		return items;
+	}
+
+	/**
+	 * @param medidas the medidas to set
+	 */
+	public void setMedidas(List<Medida> medidas) {
+		this.medidas = medidas;
+	}
+
+	/**
+	 * @return the utensilios
+	 */
+	public List<SelectItem> getUtensilios() {
+		List<SelectItem> items = new ArrayList<SelectItem>();
+		for (Utensilio u : this.utensilios) {
+			items.add(new SelectItem(u.getId(), u.getNome()));
+		}
+		return items;
+	}
+
+	/**
+	 * @param utensilios the utensilios to set
+	 */
+	public void setUtensilios(List<Utensilio> utensilios) {
+		this.utensilios = utensilios;
 	}
 }

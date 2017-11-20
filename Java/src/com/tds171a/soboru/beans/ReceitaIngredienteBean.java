@@ -65,14 +65,11 @@ public class ReceitaIngredienteBean implements Serializable {
 	}
 
 	public void adicionar() {
-		System.out.println("Adicionar");
 		lista.add(new ReceitaIngrediente());
 		
 	}
 
 	public void remover(ReceitaIngrediente receitaIngrediente) {
-		System.out.println("Remover");
-		System.out.println(receitaIngrediente.getId());
 		lista.remove(receitaIngrediente);
 	}
 

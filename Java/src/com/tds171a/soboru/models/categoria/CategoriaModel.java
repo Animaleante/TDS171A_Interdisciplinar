@@ -19,6 +19,10 @@ public class CategoriaModel extends ModelBase<Categoria> {
         dao = new CategoriaDAO();
     }
     
+    public List<Categoria> listarSelecionaveis() {
+    	return ((CategoriaDAO)dao).listarSelecionaveis();
+    }
+    
 	public List<Categoria> listarGrupos() {
 		return ((CategoriaDAO)dao).listarGrupos();
 	}

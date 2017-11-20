@@ -5,7 +5,6 @@ package com.tds171a.soboru.controllers;
 
 import java.util.List;
 
-import com.tds171a.soboru.models.receita.ReceitaDAO;
 import com.tds171a.soboru.models.receita.ReceitaModel;
 import com.tds171a.soboru.vos.Ingrediente;
 import com.tds171a.soboru.vos.Receita;
@@ -26,6 +25,10 @@ public class ReceitaController extends ControllerBase<Receita>{
     public ReceitaController() {
         model = new ReceitaModel();
     }
+	
+	public int selecionarUltimoIdInserido() {
+		return ((ReceitaModel) model).selecionarUltimoIdInserido();
+	}
 	
 	public List<Receita> listarAdmin() {
 		return ((ReceitaModel) model).listarAdmin();

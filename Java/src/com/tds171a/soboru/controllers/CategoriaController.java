@@ -18,6 +18,10 @@ public class CategoriaController extends ControllerBase<Categoria> {
     public CategoriaController() {
         model = new CategoriaModel();
     }
+    
+    public List<Categoria> listarSelecionaveis() {
+    	return ((CategoriaModel)model).listarSelecionaveis();
+    }
 
 	public List<Categoria> listarGrupos() {
 		return ((CategoriaModel)model).listarGrupos();

@@ -73,11 +73,10 @@
 									<h2>Modo de Preparo</h2>
 									<div class="full">
 										<div class="f-row instruction">
-										<h:message for="modo" errorClass="error"/><br/>
+											<h:message for="modo" errorClass="error"/><br/>
 											<h:inputTextarea id="modo" value="#{receitaBean.vo.modoPreparo}"
-											validatorMessage="Modo de preparo não pode ser vazio"
-											>
-											<f:validateLength minimum="1"></f:validateLength>
+											validatorMessage="Modo de preparo não pode ser vazio">
+												<f:validateLength minimum="1"></f:validateLength>
 											</h:inputTextarea>
 										</div>
 									</div>
@@ -86,11 +85,9 @@
 								<section>
 									<h2>Foto</h2>
 									<div class="f-row full">
-									<h:message for="receita-foto" errorClass="error"/><br/>
-										<label for="receita-foto" class="btn">Selecionar uma foto</label>
+										<h:message for="receita-foto" errorClass="error"/><br/>
 										<h:inputFile id="receita-foto" class="imgreceita" value="#{receitaBean.imgFile}" required="true" 
-										requiredMessage="Foto da receita é obrigatório"
-										/>
+										requiredMessage="Foto da receita é obrigatório"/>
 									</div>
 								</section>
 								
