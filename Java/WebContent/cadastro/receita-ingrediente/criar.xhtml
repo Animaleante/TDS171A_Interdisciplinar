@@ -21,12 +21,28 @@
 		            <header class="s-title">
 		                <h1><h:outputText value="#{receitaIngredienteBean.receita.nome}"/> - Ingredientes</h1>
 		            </header>
-		
 		            <section class="content full-width">
 		                <div class="submit_recipe container">
 		                	<h:form>
 								<h:messages globalOnly="true" errorClass="error"/>
-								
+								<div class="f-row ingredient">
+										<div class="large">
+											<h:outputText value="Selecione o ingrediente" />
+										</div>
+	
+<!-- 										<div class="small"> -->
+<!-- 											<h:inputText value="#{recIng.sub_sessao}" a:placeholder="SubSessão" /> -->
+<!-- 										</div> -->
+
+										<div class="small">
+											<h:outputText value="Quantidade" />
+										</div>
+<!-- 										<div class="small" style="width:22%;"> -->
+										<div class="third">
+											<h:outputText value="Tipo de medida" />
+										</div>
+									</div>
+									
 							    <c:forEach items="#{receitaIngredienteBean.lista}" var="recIng">
 									<div class="f-row ingredient">
 										<div class="large">
