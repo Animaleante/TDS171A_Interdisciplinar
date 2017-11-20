@@ -19,10 +19,20 @@ public class CategoriaModel extends ModelBase<Categoria> {
         dao = new CategoriaDAO();
     }
     
+    /**
+     * Lista todas as categorias que podem
+     * ser selecionadas pelo usuário.
+     * @return
+     */
     public List<Categoria> listarSelecionaveis() {
     	return ((CategoriaDAO)dao).listarSelecionaveis();
     }
     
+    /**
+     * Lista todas as categorias que são grupos
+     * (não selecionaveis)
+     * @return
+     */
 	public List<Categoria> listarGrupos() {
 		return ((CategoriaDAO)dao).listarGrupos();
 	}

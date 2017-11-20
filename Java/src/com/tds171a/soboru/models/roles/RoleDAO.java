@@ -26,7 +26,7 @@ public class RoleDAO implements IDAO<Role> {
 	private String tableName = "roles";
 
 	/**
-	 * Metodo para incluir um novo Role
+	 * Metodo para incluir um novo perfil(Role)
 	 * @param role
 	 * @return
 	 */
@@ -189,6 +189,10 @@ public class RoleDAO implements IDAO<Role> {
 		return false;
 	}
 
+	/**
+	 * Método que trás as informações do id pesquisado para anexar
+	 *  no cliente.
+	 */
 	@Override
 	public Role selecionar(int voId) {
 		Connection connection = null;

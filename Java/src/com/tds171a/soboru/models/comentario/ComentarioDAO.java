@@ -17,13 +17,18 @@ import com.tds171a.soboru.vos.Pontuacao;
 import com.tds171a.soboru.vos.Usuario;
 
 /**
- * @author Diogo
+ * Dao de comentários.
+ * @author luiz.palte
  *
  */
 public class ComentarioDAO implements IDAO<Comentario> {
 	
 	private String tableName = "comentarios";
 
+	/**
+	 * Inclui um comentário passando
+	 * o body e a receita.
+	 */
 	@Override
 	public boolean incluir(Comentario vo) {
 		
@@ -61,6 +66,9 @@ public class ComentarioDAO implements IDAO<Comentario> {
 		return false;
 	}
 
+	/**
+	 * Método que lista os comentários existentes para admin.
+	 */
 	@Override
 	public List<Comentario> listar() {
 		Connection connection = null;
@@ -110,18 +118,33 @@ public class ComentarioDAO implements IDAO<Comentario> {
 		return null;
 	}
 
+	/**
+	 * Método não implementado para não ter
+	 * alterações externas.
+	 */
 	@Override
 	public boolean atualizar(Comentario vo) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/**
+	 * Método não implementado para não ter
+	 * alterações externas.
+	 */
 	@Override
 	public boolean remover(int voId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 	
+	/**
+	 * Remove um determinado comentário
+	 * de uma receita.
+	 * @param receitaId
+	 * @param usuarioId
+	 * @return
+	 */
 	public boolean remover(int receitaId, int usuarioId) {
         Connection connection = null;
         try {
@@ -155,12 +178,22 @@ public class ComentarioDAO implements IDAO<Comentario> {
         return false;
 	}
 
+	/**
+	 * Método não implementado para não ter
+	 * alterações externas.
+	 */
 	@Override
 	public Comentario selecionar(int voId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Trás os comentários de uma determinada
+	 * receita.
+	 * @param receitaId
+	 * @return
+	 */
 	public List<Comentario> selecionarPorReceita(int receitaId) {
         Connection connection = null;
         try {

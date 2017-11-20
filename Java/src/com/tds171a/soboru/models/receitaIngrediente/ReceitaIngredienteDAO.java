@@ -64,6 +64,10 @@ public class ReceitaIngredienteDAO implements IDAO<ReceitaIngrediente> {
         return false;
 	}
 
+	/**
+	 * Método que lista todos os ingredientes
+	 * linkados a uma receita 
+	 */
 	@Override
 	public List<ReceitaIngrediente> listar() {
         Connection connection = null;
@@ -110,6 +114,10 @@ public class ReceitaIngredienteDAO implements IDAO<ReceitaIngrediente> {
         return null;
 	}
 
+	/**
+	 * Atualiza dados do vinculo do
+	 * ingredeinte com a receita.
+	 */
 	@Override
 	public boolean atualizar(ReceitaIngrediente vo) {
         Connection connection = null;
@@ -148,6 +156,10 @@ public class ReceitaIngredienteDAO implements IDAO<ReceitaIngrediente> {
         return false;
 	}
 
+	/**
+	 * Remove o vínculo de um ingrediente
+	 * com uma receita.
+	 */
 	@Override
 	public boolean remover(int voId) {
         Connection connection = null;
@@ -181,6 +193,10 @@ public class ReceitaIngredienteDAO implements IDAO<ReceitaIngrediente> {
         return false;
 	}
 
+	
+	/**
+	 * Seleciona os vínculos e apresenta retorna a aplicação.
+	 */
 	@Override
 	public ReceitaIngrediente selecionar(int voId) {
         Connection connection = null;
@@ -225,12 +241,17 @@ public class ReceitaIngredienteDAO implements IDAO<ReceitaIngrediente> {
         return null;
 	}
 
+	/**
+	 * Trás uma lista com os vínculos efetuando a 
+	 * pesquisa por um id de receita.
+	 * @param receitaId
+	 * @return
+	 */
 	public List<ReceitaIngrediente> selecionarPorReceita(int receitaId) {
         Connection connection = null;
         try {
             connection = Utils.createConnection();
 
-//            PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" where id_receita = ?");
             PreparedStatement sttm = connection.prepareStatement(
             		"select ri.id, ri.id_receita, ri.id_ingrediente, ri.id_medida, ri.sub_sessao, ri.qty, m.id medida_id, m.nome medida_nome, m.abreviacao, i.id ingrediente_id, i.nome ingrediente_nome from "+tableName+" ri "
             				+ "inner join medidas m on m.id = ri.id_medida "
@@ -285,6 +306,12 @@ public class ReceitaIngredienteDAO implements IDAO<ReceitaIngrediente> {
         return null;
 	}
 
+	/**
+	 * Método que inclui a lista de ingredientes cadastrados 
+	 * na receita.
+	 * @param receitaId
+	 * @param lista
+	 */
 	public void incluirLista(int receitaId, List<ReceitaIngrediente> lista) {
 		Connection connection = null;
 		try {

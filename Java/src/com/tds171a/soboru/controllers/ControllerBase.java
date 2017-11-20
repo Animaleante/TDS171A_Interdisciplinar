@@ -14,7 +14,6 @@ public abstract class ControllerBase<T> {
 	 * Construtor da classe abstrata de controller
 	 */
 	public ControllerBase() {
-//		model = new IDAO<T>();
 	}
 
 	/**

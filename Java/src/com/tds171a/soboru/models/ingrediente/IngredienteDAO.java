@@ -187,6 +187,10 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 		return false;
 	}
 
+	/**
+	 * Seleciona um ingrediente pelo ID e monta
+	 * o objeto
+	 */
 	@Override
 	public Ingrediente selecionar(int voId) {
 		Connection connection = null;

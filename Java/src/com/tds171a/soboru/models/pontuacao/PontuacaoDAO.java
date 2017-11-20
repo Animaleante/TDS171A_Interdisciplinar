@@ -20,15 +20,23 @@ import com.tds171a.soboru.vos.Receita;
  *
  */
 public class PontuacaoDAO implements IDAO<Pontuacao> {
-	
+	/**
+	 * Variável com o nome da tabela.
+	 */
 	private String tableName = "pontuacoes";
-
+	
+	/**
+	 * Não implementado para não haver alterações externas.
+	 */
 	@Override
 	public boolean incluir(Pontuacao vo) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/**
+	 * Lista todas as pontuações existentes.
+	 */
 	@Override
 	public List<Pontuacao> listar() {
 		Connection connection = null;
@@ -76,18 +84,30 @@ public class PontuacaoDAO implements IDAO<Pontuacao> {
 		return null;
 	}
 
+	/**
+	 * Não implementado para não haver alterações externas.
+	 */
 	@Override
 	public boolean atualizar(Pontuacao vo) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/**
+	 * Não implementado para não haver alterações externas.
+	 */
 	@Override
 	public boolean remover(int voId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 	
+	/**
+	 * Remove a pontuação da receita.
+	 * @param receitaId
+	 * @param usuarioId
+	 * @return
+	 */
 	public boolean remover(int receitaId, int usuarioId) {
         Connection connection = null;
         try {
@@ -121,6 +141,9 @@ public class PontuacaoDAO implements IDAO<Pontuacao> {
         return false;
 	}
 
+	/**
+	 * Não implementado para não haver alterações externas.
+	 */
 	@Override
 	public Pontuacao selecionar(int voId) {
 		return null;

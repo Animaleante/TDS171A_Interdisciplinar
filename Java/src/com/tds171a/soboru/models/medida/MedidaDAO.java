@@ -187,6 +187,9 @@ public class MedidaDAO implements IDAO<Medida> {
 		return false;
 	}
 
+	/**
+	 * Seleciona uma medida e cria o objeto
+	 */
 	@Override
 	public Medida selecionar(int voId) {
 		Connection connection = null;

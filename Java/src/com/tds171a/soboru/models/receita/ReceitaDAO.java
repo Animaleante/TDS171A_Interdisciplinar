@@ -80,12 +80,16 @@ public class ReceitaDAO implements IDAO<Receita> {
 		return false;
 	}
 	
+	/**
+	 * Seleciona o último id inserido para anexar aos
+	 * ingredientes e utensilios
+	 * @return
+	 */
 	public int selecionarUltimoIdInserido() {
 		Connection connection = null;
 		try {
 			connection = Utils.createConnection();
 
-//			PreparedStatement sttm = connection.prepareStatement("select receita_seq.currval id from dual");
 			PreparedStatement sttm = connection.prepareStatement("select max(id) id from "+tableName);
 
 			ResultSet rs = sttm.executeQuery();
@@ -378,7 +382,7 @@ public class ReceitaDAO implements IDAO<Receita> {
 	}
 
 	/**
-	 * 
+	 * Método que cadastra tags na receita
 	 * @param receita
 	 * @param tag
 	 * @return
@@ -418,7 +422,7 @@ public class ReceitaDAO implements IDAO<Receita> {
 	}
 
 	/**
-	 * 
+	 * Método que lista os utensilios anexados na receita
 	 * @param receita
 	 * @return
 	 */
@@ -465,7 +469,8 @@ public class ReceitaDAO implements IDAO<Receita> {
 	}
 
 	/**
-	 * 
+	 * Método que trás do banco as receitas
+	 * pesquisadas por nome 
 	 * @param termoBusca
 	 * @return
 	 */
@@ -487,17 +492,9 @@ public class ReceitaDAO implements IDAO<Receita> {
 
 				receita.setId(rs.getInt("id"));
 				receita.setNome(rs.getString("nome"));
-//				receita.setCategoriaId(rs.getInt("id_categoria"));
-//				receita.setUsuarioId(rs.getInt("id_usuario"));
-//				receita.setPorcao(rs.getInt("porcao"));
-//				receita.setTempoPreparo(rs.getDouble("tempo_preparo"));
-//				receita.setModoPreparo(rs.getString("modo_preparo"));
 				receita.setImgPath(rs.getString("img_path"));
 				receita.setPontuacaoMedia(rs.getDouble("pontuacao_media"));
-//				receita.setViews(rs.getInt("views"));
 				receita.setFavs(rs.getInt("favs"));
-//				receita.setSlug(rs.getString("slug"));
-//				receita.setAprovado(rs.getBoolean("aprovado"));
 				receita.setNumComentarios(rs.getInt("comentarios"));
 				
 				list.add(receita);
@@ -526,7 +523,8 @@ public class ReceitaDAO implements IDAO<Receita> {
 	}
 
 	/**
-	 * 
+	 * Método que trás do banco
+	 * as receitas pesquisadas por ingredientes
 	 * @param ingredientes
 	 * @return
 	 */
@@ -560,17 +558,9 @@ public class ReceitaDAO implements IDAO<Receita> {
 
 				receita.setId(rs.getInt("id"));
 				receita.setNome(rs.getString("nome"));
-//				receita.setCategoriaId(rs.getInt("id_categoria"));
-//				receita.setUsuarioId(rs.getInt("id_usuario"));
-//				receita.setPorcao(rs.getInt("porcao"));
-//				receita.setTempoPreparo(rs.getDouble("tempo_preparo"));
-//				receita.setModoPreparo(rs.getString("modo_preparo"));
 				receita.setImgPath(rs.getString("img_path"));
 				receita.setPontuacaoMedia(rs.getDouble("pontuacao_media"));
-//				receita.setViews(rs.getInt("views"));
 				receita.setFavs(rs.getInt("favs"));
-//				receita.setSlug(rs.getString("slug"));
-//				receita.setAprovado(rs.getBoolean("aprovado"));
 				
 				list.add(receita);
 			}
@@ -598,7 +588,8 @@ public class ReceitaDAO implements IDAO<Receita> {
 	}
 
 	/**
-	 * 
+	 * Método que trás do banco as receitas
+	 * pesquisando por nome e por ingrediente
 	 * @param termoBusca
 	 * @param ingredientes
 	 * @return
@@ -614,10 +605,7 @@ public class ReceitaDAO implements IDAO<Receita> {
 				idsArray += "?,";
 			}
 			idsArray = idsArray.substring(0, idsArray.length()-1);
-			
-			/*PreparedStatement sttm = connection.prepareStatement(
-					"select distinct r.id, r.nome, r.id_categoria, r.id_usuario, r.porcao, r.tempo_preparo, r.modo_preparo, r.img_path, r.pontuacao_media, r.views, r.favs, r.slug, r.aprovado "
-					+ "from "+tableName+" r inner join receitas_ingredientes ri on r.id = ri.id_receita where ri.id_ingrediente in (?) and lower(r.nome) like lower(?)");*/
+						
 			PreparedStatement sttm = connection.prepareStatement(
 					"select distinct r.id, r.nome, r.img_path, r.pontuacao_media, r.favs "
 					+ "from "+tableName+" r inner join receitas_ingredientes ri on r.id = ri.id_receita where ri.id_ingrediente in ("+idsArray+") and lower(r.nome) like lower(?) and r.aprovado = 1");
@@ -638,17 +626,9 @@ public class ReceitaDAO implements IDAO<Receita> {
 
 				receita.setId(rs.getInt("id"));
 				receita.setNome(rs.getString("nome"));
-//				receita.setCategoriaId(rs.getInt("id_categoria"));
-//				receita.setUsuarioId(rs.getInt("id_usuario"));
-//				receita.setPorcao(rs.getInt("porcao"));
-//				receita.setTempoPreparo(rs.getDouble("tempo_preparo"));
-//				receita.setModoPreparo(rs.getString("modo_preparo"));
 				receita.setImgPath(rs.getString("img_path"));
 				receita.setPontuacaoMedia(rs.getDouble("pontuacao_media"));
-//				receita.setViews(rs.getInt("views"));
 				receita.setFavs(rs.getInt("favs"));
-//				receita.setSlug(rs.getString("slug"));
-//				receita.setAprovado(rs.getBoolean("aprovado"));
 				
 				list.add(receita);
 			}
@@ -676,7 +656,8 @@ public class ReceitaDAO implements IDAO<Receita> {
 	}
 
 	/**
-	 * 
+	 * Método que registra o utensilio na
+	 * receita
 	 * @param receitaId
 	 * @param lista
 	 */
@@ -735,7 +716,7 @@ public class ReceitaDAO implements IDAO<Receita> {
 	}
 
 	/**
-	 * 
+	 * Método que lista os ingredientes da receita.
 	 * @param receita
 	 * @return
 	 */
@@ -787,7 +768,8 @@ public class ReceitaDAO implements IDAO<Receita> {
 	}
 
 	/**
-	 * 
+	 * Método que trás as receitas postadas 
+	 * por um usuário
 	 * @param usuarioId
 	 * @return
 	 */
@@ -809,17 +791,9 @@ public class ReceitaDAO implements IDAO<Receita> {
 
 				receita.setId(rs.getInt("id"));
 				receita.setNome(rs.getString("nome"));
-//				receita.setCategoriaId(rs.getInt("id_categoria"));
-//				receita.setUsuarioId(rs.getInt("id_usuario"));
-//				receita.setPorcao(rs.getInt("porcao"));
-//				receita.setTempoPreparo(rs.getDouble("tempo_preparo"));
-//				receita.setModoPreparo(rs.getString("modo_preparo"));
 				receita.setImgPath(rs.getString("img_path"));
 				receita.setPontuacaoMedia(rs.getDouble("pontuacao_media"));
-//				receita.setViews(rs.getInt("views"));
 				receita.setFavs(rs.getInt("favs"));
-//				receita.setSlug(rs.getString("slug"));
-//				receita.setAprovado(rs.getBoolean("aprovado"));
 				receita.setNumComentarios(rs.getInt("comentarios"));
 				
 				list.add(receita);
@@ -847,6 +821,12 @@ public class ReceitaDAO implements IDAO<Receita> {
 		return null;
 	}
 
+	/**
+	 * Método que seleciona as receitas
+	 * pelo favorito de um usuário
+	 * @param usuarioId
+	 * @return
+	 */
 	public List<Receita> selecionarPorFavoritosDeUsuario(int usuarioId) {
 		Connection connection = null;
 		try {
@@ -865,17 +845,9 @@ public class ReceitaDAO implements IDAO<Receita> {
 
 				receita.setId(rs.getInt("id"));
 				receita.setNome(rs.getString("nome"));
-//				receita.setCategoriaId(rs.getInt("id_categoria"));
-//				receita.setUsuarioId(rs.getInt("id_usuario"));
-//				receita.setPorcao(rs.getInt("porcao"));
-//				receita.setTempoPreparo(rs.getDouble("tempo_preparo"));
-//				receita.setModoPreparo(rs.getString("modo_preparo"));
 				receita.setImgPath(rs.getString("img_path"));
 				receita.setPontuacaoMedia(rs.getDouble("pontuacao_media"));
-//				receita.setViews(rs.getInt("views"));
 				receita.setFavs(rs.getInt("favs"));
-//				receita.setSlug(rs.getString("slug"));
-//				receita.setAprovado(rs.getBoolean("aprovado"));
 				receita.setNumComentarios(rs.getInt("comentarios"));
 				
 				list.add(receita);
@@ -903,6 +875,12 @@ public class ReceitaDAO implements IDAO<Receita> {
 		return null;
 	}
 	
+	/**
+	 * Método que inclui o favorito na receita.
+	 * @param receitaId
+	 * @param usuarioId
+	 * @return
+	 */
 	public boolean incluirFavorito(int receitaId, int usuarioId) {
 		Connection connection = null;
 		try {
@@ -937,6 +915,12 @@ public class ReceitaDAO implements IDAO<Receita> {
 		return false;
 	}
 
+	/**
+	 * método que remove o favorito da receita
+	 * @param receitaId
+	 * @param usuarioId
+	 * @return
+	 */
 	public boolean removerFavorito(int receitaId, int usuarioId) {
 		Connection connection = null;
 		try {
@@ -971,6 +955,11 @@ public class ReceitaDAO implements IDAO<Receita> {
 		return false;
 	}
 
+	/**
+	 * Método que atualiza a estatística de favoritos
+	 * da receita.
+	 * @param receitaId
+	 */
 	public void atualizarFavs(int receitaId) {
 		Connection connection = null;
 		try {
@@ -1000,6 +989,13 @@ public class ReceitaDAO implements IDAO<Receita> {
 		}
 	}
 
+	/**
+	 * método que verifica se a receita é favorita
+	 * do usuário 
+	 * @param receitaId
+	 * @param usuarioId
+	 * @return
+	 */
 	public boolean isReceitaFavoritada(int receitaId, int usuarioId) {
 		Connection connection = null;
 		try {
@@ -1040,6 +1036,12 @@ public class ReceitaDAO implements IDAO<Receita> {
 		return false;
 	}
 
+	/**
+	 * Método que inclui um report na receita.
+	 * @param receitaId
+	 * @param usuarioId
+	 * @return
+	 */
 	public boolean incluirReport(int receitaId, int usuarioId) {
 		Connection connection = null;
 		try {
@@ -1076,6 +1078,14 @@ public class ReceitaDAO implements IDAO<Receita> {
 		return false;
 	}
 
+	/**
+	 * Método que inclui uma nova pontuação na
+	 * receita.
+	 * @param receitaId
+	 * @param usuarioId
+	 * @param pontos
+	 * @return
+	 */
 	public boolean incluirPontuacao(int receitaId, int usuarioId, int pontos) {
 		Connection connection = null;
 		try {
@@ -1111,6 +1121,10 @@ public class ReceitaDAO implements IDAO<Receita> {
 		return false;
 	}
 	
+	/**
+	 * Método que atualiza a média da receita
+	 * @param receitaId
+	 */
 	public void atualizarPontuacaoMedia(int receitaId) {
 		Connection connection = null;
 		try {

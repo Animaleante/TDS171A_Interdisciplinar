@@ -210,6 +210,13 @@ public class UsuarioDAO implements IDAO<Usuario> {
 		return false;
 	}
 
+	/**
+	 * Método que loga o usuário
+	 * verificando email e senha
+	 * @param email
+	 * @param senha
+	 * @return
+	 */
 	public Usuario loginUsuario(String email, String senha) {
 		Connection connection = null;
 		try {
@@ -261,6 +268,9 @@ public class UsuarioDAO implements IDAO<Usuario> {
 		return null;
 	}
 
+	/**
+	 * Trás os usuários válidos e os perfis
+	 */
 	@Override
 	public Usuario selecionar(int voId) {
 		Connection connection = null;
@@ -309,6 +319,12 @@ public class UsuarioDAO implements IDAO<Usuario> {
 		return null;
 	}
 
+	/**
+	 * Trás uma lista de usuários que favoritaram
+	 * determinada receita.
+	 * @param receitaId
+	 * @return
+	 */
 	public List<Usuario> selecionarUsuariosQueFavoritaram(int receitaId) {
 		Connection connection = null;
 		try {
@@ -359,6 +375,13 @@ public class UsuarioDAO implements IDAO<Usuario> {
 		return null;
 	}
 
+	/**
+	 * Verifica se existe repot do usuário
+	 * para determinada receita.
+	 * @param usuarioId
+	 * @param receitaId
+	 * @return
+	 */
 	public boolean reportou(int usuarioId, int receitaId) {
 		Connection connection = null;
 		try {
@@ -399,6 +422,13 @@ public class UsuarioDAO implements IDAO<Usuario> {
 		return false;
 	}
 
+	/**
+	 * Verifica se existe pontuação do usuário
+	 * para determinada receita.
+	 * @param usuarioId
+	 * @param receitaId
+	 * @return
+	 */
 	public boolean pontuou(int usuarioId, int receitaId) {
 		Connection connection = null;
 		try {

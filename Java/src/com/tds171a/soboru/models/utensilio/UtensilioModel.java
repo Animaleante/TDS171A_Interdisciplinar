@@ -19,6 +19,12 @@ public class UtensilioModel extends ModelBase<Utensilio> {
 		dao = new UtensilioDAO();
 	}
 
+	/**
+	 * trás a lista de utensilios de uma 
+	 * determinada receita.
+	 * @param receitaId
+	 * @return
+	 */
 	public List<Utensilio> selecionarPorReceita(int receitaId) {
 		return ((UtensilioDAO) dao).selecionarPorReceita(receitaId);
 	}

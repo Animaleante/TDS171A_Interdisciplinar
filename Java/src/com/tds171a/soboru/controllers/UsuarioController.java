@@ -27,14 +27,33 @@ public class UsuarioController extends ControllerBase<Usuario> {
 		return ((UsuarioModel)model).loginUsuario(email, senha);
 	}
 
+	/**
+	 * Trás lista de usuários que favoritaram 
+	 * determinada receita.
+	 * @param receitaId
+	 * @return
+	 */
 	public List<Usuario> selecionarUsuariosQueFavoritaram(int receitaId) {
 		return ((UsuarioModel) model).selecionarUsuariosQueFavoritaram(receitaId);
 	}
 
+	/**
+	 * Verifica se o cliente reportou
+	 * a receita.
+	 * @param usuarioId
+	 * @param receitaId
+	 * @return
+	 */
 	public boolean reportou(int usuarioId, int receitaId) {
 		return ((UsuarioModel) model).reportou(usuarioId, receitaId);
 	}
 
+	/**
+	 * Verifica se o cliente pontuou a receita.
+	 * @param usuarioId
+	 * @param receitaId
+	 * @return
+	 */
 	public boolean pontuou(int usuarioId, int receitaId) {
 		return ((UsuarioModel) model).pontuou(usuarioId, receitaId);
 	}

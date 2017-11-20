@@ -13,12 +13,18 @@ import com.tds171a.soboru.vos.Pontuacao;
 public class PontuacaoModel extends ModelBase<Pontuacao> {
 	
 	/**
-	 * 
+	 * Construtor iniciando a DAO
 	 */
 	public PontuacaoModel() {
 		dao = new PontuacaoDAO();
 	}
 
+	/**
+	 * Remove a pontuação
+	 * @param receitaId
+	 * @param usuarioId
+	 * @return
+	 */
 	public boolean remover(int receitaId, int usuarioId) {
         return ((PontuacaoDAO)dao).remover(receitaId, usuarioId);
     }

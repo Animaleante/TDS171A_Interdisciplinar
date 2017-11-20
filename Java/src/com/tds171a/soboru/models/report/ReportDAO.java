@@ -15,7 +15,9 @@ import com.tds171a.soboru.utils.Utils;
 import com.tds171a.soboru.vos.Report;
 
 /**
- * @author Diogo
+ * Classe DAO que irá tratar da conexão
+ * com o banco para os reports
+ * @author luiz.palte
  *
  */
 public class ReportDAO implements IDAO<Report> {
@@ -25,6 +27,10 @@ public class ReportDAO implements IDAO<Report> {
      */
     private String tableName = "reports";
 
+    /**
+     * Método que inclui no banco o report
+     * do cliente.
+     */
 	@Override
 	public boolean incluir(Report vo) {
         Connection connection = null;
@@ -59,6 +65,10 @@ public class ReportDAO implements IDAO<Report> {
         return false;
 	}
 
+	/**
+	 * Método que lista todos os reports
+	 * existentes
+	 */
 	@Override
 	public List<Report> listar() {
 	    Connection connection = null;
@@ -115,6 +125,12 @@ public class ReportDAO implements IDAO<Report> {
 	    return false;
 	}
 
+	/**
+	 * Método que remove o report de uma receita.
+	 * @param receitaId
+	 * @param usuarioId
+	 * @return
+	 */
 	public boolean remover(int receitaId, int usuarioId) {
         Connection connection = null;
         try {
@@ -148,9 +164,12 @@ public class ReportDAO implements IDAO<Report> {
         return false;
 	}
 
+	/**
+	 * Método não implantado para evitar
+	 * alterações indesejadas.
+	 */
 	@Override
 	public Report selecionar(int voId) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

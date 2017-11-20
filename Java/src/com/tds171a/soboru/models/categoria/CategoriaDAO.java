@@ -211,6 +211,11 @@ public class CategoriaDAO implements IDAO<Categoria> {
         return false;
     }
 
+    
+    /**
+     * Monta um objeto de categoria
+     * pegando os dados do banco.
+     */
 	@Override
 	public Categoria selecionar(int voId) {
         Connection connection = null;
@@ -254,6 +259,10 @@ public class CategoriaDAO implements IDAO<Categoria> {
         return null;
 	}
 	
+	/**
+	 * Lista todos as categorias selecionaveis
+	 * @return
+	 */
 	public List<Categoria> listarSelecionaveis() {
 		Connection connection = null;
 		try {
@@ -298,6 +307,11 @@ public class CategoriaDAO implements IDAO<Categoria> {
 		return null;
 	}
 
+	/**
+	 * Lista todos as categorias que não
+	 * são selecionaveis.
+	 * @return
+	 */
 	public List<Categoria> listarGrupos() {
         Connection connection = null;
         try {

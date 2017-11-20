@@ -19,10 +19,20 @@ public class CategoriaController extends ControllerBase<Categoria> {
         model = new CategoriaModel();
     }
     
+    /**
+     * Retorna uma lista de categorias selecionaveis
+     * modelo por cast.
+     * @return
+     */
     public List<Categoria> listarSelecionaveis() {
     	return ((CategoriaModel)model).listarSelecionaveis();
     }
 
+    /**
+     * Retorna uma lista de grupo de categoria
+     * modelo por cast.
+     * @return
+     */
 	public List<Categoria> listarGrupos() {
 		return ((CategoriaModel)model).listarGrupos();
 	}

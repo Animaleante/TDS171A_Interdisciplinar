@@ -19,6 +19,11 @@ public class UtensilioController extends ControllerBase<Utensilio> {
 		model = new UtensilioModel();
 	}
 
+	/**
+	 * Trás os utensilios existentes na receita.
+	 * @param receitaId
+	 * @return
+	 */
 	public List<Utensilio> selecionarPorReceita(int receitaId) {
 		return ((UtensilioModel) model).selecionarPorReceita(receitaId);
 	}

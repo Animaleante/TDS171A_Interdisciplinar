@@ -185,7 +185,7 @@ public class UtensilioDAO implements IDAO<Utensilio> {
 	}
 	
 	/**
-	 * 
+	 * Trás o objeto do banco.
 	 * @param voId
 	 * @return
 	 */
@@ -230,7 +230,7 @@ public class UtensilioDAO implements IDAO<Utensilio> {
 	}
 	
 	/**
-	 * 
+	 * Seleciona os utensilios de uma receita.
 	 * @param receitaId
 	 * @return
 	 */
