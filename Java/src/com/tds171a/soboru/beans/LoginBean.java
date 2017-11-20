@@ -97,6 +97,7 @@ public class LoginBean implements Serializable {
 	 * método que verifica se a sessão está válida
 	 */ 
 	public boolean isLogado() {
+		System.out.println(SessionContext.getInstance().isLogado());
 		return SessionContext.getInstance().isLogado();
 	}
 	

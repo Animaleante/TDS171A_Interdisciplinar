@@ -128,6 +128,11 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 			vo.setPontuou(usuarioController.pontuou(usuario.getId(), vo.getId()));
 		}
 
+		try{
+			System.out.println(vo.getComentarios().size());
+		}catch (Exception e) {
+			System.out.println("Erro coment size");
+		}
 		return super.exibir(vo);
 	}
 

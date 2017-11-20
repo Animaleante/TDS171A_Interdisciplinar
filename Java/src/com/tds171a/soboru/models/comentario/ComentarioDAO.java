@@ -26,7 +26,38 @@ public class ComentarioDAO implements IDAO<Comentario> {
 
 	@Override
 	public boolean incluir(Comentario vo) {
-		// TODO Auto-generated method stub
+		
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+
+			PreparedStatement sttm = connection.prepareStatement(
+				"insert into "+tableName+" values(comentario_seq.NEXTVAL,?,?,?)");
+			sttm.setInt(1, vo.getReceitaId());
+			sttm.setInt(2, vo.getUsuarioId());
+			sttm.setString(3, vo.getBody());
+
+			int rowsAffected = sttm.executeUpdate();
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return rowsAffected > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
 		return false;
 	}
 

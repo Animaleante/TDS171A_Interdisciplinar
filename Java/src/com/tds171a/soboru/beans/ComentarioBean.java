@@ -30,6 +30,20 @@ public class ComentarioBean extends BeanBase<Comentario> {
 		controller = new ComentarioController();
 		setVo(new Comentario());
 	}
+	
+	public String incluir(int receitaId){
+		getVo().setReceitaId(receitaId);
+		return incluir();
+	}
+	
+	public String incluir(){
+		getVo().setUsuarioId(SessionContext.getInstance().getUsuarioLogado().getId());
+		System.out.println("id usuario: "+SessionContext.getInstance().getUsuarioLogado().getId());
+		System.out.println("body: "+getVo().getBody());
+		System.out.println("usuarioId: "+getVo().getUsuarioId());
+		System.out.println("Receita: "+getVo().getReceitaId());
+		return super.incluir();
+	}
 
 	/**
      * Override do deletar, onde verifica a sessao, 
