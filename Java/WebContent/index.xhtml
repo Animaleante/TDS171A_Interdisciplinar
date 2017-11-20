@@ -44,12 +44,6 @@
 										<h:inputText value="#{pesquisaBean.termoBusca}" a:placeholder="Entre com seu termo de busca" />
 									</div>
 									
-									<div class="f-row">
-										<h:selectOneMenu value="#{pesquisaBean.categoriaId}">
-  												<f:selectItem itemValue="0" itemLabel="Selecione uma categoria" a:disabled="disabled" a:selected="selected"/>
-											<f:selectItems value="#{pesquisaBean.listaCategorias}" />
-										</h:selectOneMenu>
-									</div>
 									
 									<div class="f-row bwrap">
 										<h:commandButton action="#{pesquisaBean.pesquisar()}" value="Comece a cozinhar!" />
