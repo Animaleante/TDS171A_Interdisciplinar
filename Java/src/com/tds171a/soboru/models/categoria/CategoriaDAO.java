@@ -253,6 +253,50 @@ public class CategoriaDAO implements IDAO<Categoria> {
 
         return null;
 	}
+	
+	public List<Categoria> listarSelecionaveis() {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+			
+			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" where selecionavel = 1");
+			
+			ResultSet rs = sttm.executeQuery();
+			
+			List<Categoria> list = new ArrayList<Categoria>();
+			Categoria categoria;
+			while(rs.next()) {
+				categoria = new Categoria();
+				categoria.setId(rs.getInt("id"));
+				categoria.setNome(rs.getString("nome"));
+				categoria.setIdSuperCategoria(rs.getInt("id_super_categoria"));
+				categoria.setSelecionavel(rs.getBoolean("selecionavel"));
+				categoria.setSlug(rs.getString("slug"));
+				
+				list.add(categoria);
+			}
+			
+			if (sttm != null)
+				sttm.close();
+			
+			sttm = null;
+			
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+		
+		return null;
+	}
 
 	public List<Categoria> listarGrupos() {
         Connection connection = null;

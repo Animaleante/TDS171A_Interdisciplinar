@@ -74,7 +74,7 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName);
+			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" order by nome asc");
 
 			ResultSet rs = sttm.executeQuery();
 

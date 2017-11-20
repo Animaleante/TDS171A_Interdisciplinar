@@ -18,6 +18,10 @@ public class ReceitaModel extends ModelBase<Receita> {
 		dao = new ReceitaDAO();
 	}
 	
+	public int selecionarUltimoIdInserido() {
+		return ((ReceitaDAO) dao).selecionarUltimoIdInserido();
+	}
+	
 	public List<Receita> listarAdmin() {
 		return ((ReceitaDAO) dao).listarAdmin();
 	}

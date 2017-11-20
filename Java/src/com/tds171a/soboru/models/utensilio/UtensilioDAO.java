@@ -71,7 +71,7 @@ public class UtensilioDAO implements IDAO<Utensilio> {
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName);
+			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" order by nome");
 
 			ResultSet rs = sttm.executeQuery();
 
