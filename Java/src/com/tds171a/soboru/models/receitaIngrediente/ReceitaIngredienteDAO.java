@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.tds171a.soboru.models.receitaIngrediente;
 
@@ -33,7 +33,7 @@ public class ReceitaIngredienteDAO implements IDAO<ReceitaIngrediente> {
         try {
             connection = Utils.createConnection();
 
-            PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" values(receita_seq.NEXTVAL, ?, ?, ?, ?, ?)");
+            PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" values(receita_ingrediente_seq.NEXTVAL, ?, ?, ?, ?, ?)");
             sttm.setInt(1, vo.getId_receita());
             sttm.setInt(2, vo.getId_ingrediente());
             sttm.setInt(3, vo.getId_medida());
@@ -65,8 +65,8 @@ public class ReceitaIngredienteDAO implements IDAO<ReceitaIngrediente> {
 	}
 
 	/**
-	 * Método que lista todos os ingredientes
-	 * linkados a uma receita 
+	 * Mï¿½todo que lista todos os ingredientes
+	 * linkados a uma receita
 	 */
 	@Override
 	public List<ReceitaIngrediente> listar() {
@@ -157,7 +157,7 @@ public class ReceitaIngredienteDAO implements IDAO<ReceitaIngrediente> {
 	}
 
 	/**
-	 * Remove o vínculo de um ingrediente
+	 * Remove o vï¿½nculo de um ingrediente
 	 * com uma receita.
 	 */
 	@Override
@@ -193,9 +193,9 @@ public class ReceitaIngredienteDAO implements IDAO<ReceitaIngrediente> {
         return false;
 	}
 
-	
+
 	/**
-	 * Seleciona os vínculos e apresenta retorna a aplicação.
+	 * Seleciona os vï¿½nculos e apresenta retorna a aplicaï¿½ï¿½o.
 	 */
 	@Override
 	public ReceitaIngrediente selecionar(int voId) {
@@ -242,7 +242,7 @@ public class ReceitaIngredienteDAO implements IDAO<ReceitaIngrediente> {
 	}
 
 	/**
-	 * Trás uma lista com os vínculos efetuando a 
+	 * Trï¿½s uma lista com os vï¿½nculos efetuando a
 	 * pesquisa por um id de receita.
 	 * @param receitaId
 	 * @return
@@ -271,11 +271,11 @@ public class ReceitaIngredienteDAO implements IDAO<ReceitaIngrediente> {
             	receitaIngrediente.setId_medida(rs.getInt("id_medida"));
             	receitaIngrediente.setSub_sessao(rs.getString("sub_sessao"));
             	receitaIngrediente.setQty(rs.getDouble("qty"));
-            	
+
             	receitaIngrediente.setIngrediente(new Ingrediente());
             	receitaIngrediente.getIngrediente().setId(rs.getInt("ingrediente_id"));
             	receitaIngrediente.getIngrediente().setNome(rs.getString("ingrediente_nome"));
-            	
+
             	receitaIngrediente.setMedida(new Medida());
             	receitaIngrediente.getMedida().setId(rs.getInt("medida_id"));
             	receitaIngrediente.getMedida().setNome(rs.getString("medida_nome"));
@@ -307,7 +307,7 @@ public class ReceitaIngredienteDAO implements IDAO<ReceitaIngrediente> {
 	}
 
 	/**
-	 * Método que inclui a lista de ingredientes cadastrados 
+	 * Mï¿½todo que inclui a lista de ingredientes cadastrados
 	 * na receita.
 	 * @param receitaId
 	 * @param lista
@@ -316,7 +316,7 @@ public class ReceitaIngredienteDAO implements IDAO<ReceitaIngrediente> {
 		Connection connection = null;
 		try {
 			connection = Utils.createConnection();
-			
+
 			PreparedStatement sttm = connection.prepareStatement("delete from receitas_ingredientes where id_receita = ?");
 			sttm.setInt(1, receitaId);
 
@@ -324,7 +324,7 @@ public class ReceitaIngredienteDAO implements IDAO<ReceitaIngrediente> {
 
 			if (sttm != null)
 				sttm.close();
-			
+
 			for(ReceitaIngrediente ri : lista) {
 				sttm = connection.prepareStatement("insert into receitas_ingredientes values (receita_ingrediente_seq.NEXTVAL, ?, ?, ?, ?, ?)");
 				sttm.setInt(1, receitaId);
@@ -337,13 +337,13 @@ public class ReceitaIngredienteDAO implements IDAO<ReceitaIngrediente> {
 
 				if (sttm != null)
 					sttm.close();
-				
+
 				if(rowsAffected == 0) {
-					throw new Exception("Não foi possivel cadastras todos os relacionamentos com essa receita.");
+					throw new Exception("Nï¿½o foi possivel cadastras todos os relacionamentos com essa receita.");
 				}
 			}
-			
-			sttm = null;			
+
+			sttm = null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
