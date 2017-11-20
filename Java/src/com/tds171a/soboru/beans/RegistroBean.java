@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.tds171a.soboru.beans;
 
 import java.io.Serializable;
@@ -34,8 +31,12 @@ public class RegistroBean implements Serializable {
 	 */
 	private String route_base = "/registrar/";
 	
+	/**
+	 * controller do usuário 
+	 */
 	private UsuarioController controller;
 	
+	//Declaração de variáveis
 	private String nome;
 	private String email;
 	private String senha;

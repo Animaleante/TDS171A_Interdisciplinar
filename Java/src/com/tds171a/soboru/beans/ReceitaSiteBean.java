@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.tds171a.soboru.beans;
 
 import java.io.File;
@@ -45,10 +42,11 @@ import com.tds171a.soboru.vos.Utensilio;
 public class ReceitaSiteBean extends BeanBase<Receita> {
 
 	/**
-	 * 
+	 *Criação do serial único 
 	 */
 	private static final long serialVersionUID = -5362181648251196256L;
 	
+	//Declaração das variáveis e controllers utilizadas.
 	private CategoriaController categoriaController;
 	private UsuarioController usuarioController;
 	private IngredienteController ingredienteController;
@@ -57,6 +55,7 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	private UtensilioController utensilioController;
 	private ComentarioController comentarioController;
 	
+	//Definição das listas utilizadas.
 	private List<ReceitaIngrediente> listaIngredientes;
 	private List<Utensilio> listaUtensilios;
 
@@ -65,7 +64,9 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	private List<Medida> medidas;
 	private List<Utensilio> utensilios;
 	
-
+	/**
+	 * Variável de manipulação de imagem.
+	 */
 	private Part imgFile;
 
 	/**
@@ -105,20 +106,36 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 		return "/login/"+BeanBase.INDEX_PAGE+BeanBase.FACES_REDIRECT;
 	}
 
+	/**
+	 * Método que adiciona uma linha para incluir
+	 * ingredientes.
+	 */
 	public void adicionarReceitaIngrediente() {
 		listaIngredientes.add(new ReceitaIngrediente());
 		
 	}
 
+	/**
+	 * Método que remove um ingrediente cadastrado
+	 * @param receitaIngrediente
+	 */
 	public void removerReceitaIngrediente(ReceitaIngrediente receitaIngrediente) {
 		listaIngredientes.remove(receitaIngrediente);
 	}
 
+	/**
+	 * Método que trás a lista de utensilios 
+	 * e cria uma linha.
+	 */
 	public void adicionarUtensilio() {
 		listaUtensilios.add(new Utensilio());
 		
 	}
 
+	/**
+	 * Remove a um utensilio cadastrado.
+	 * @param utensilio
+	 */
 	public void removerUtensilio(Utensilio utensilio) {
 		listaUtensilios.remove(utensilio);
 	}
@@ -145,8 +162,6 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 					"Ocorreu um erro ao tentar fazer upload da imagem: " + e.getMessage(), null));
 			return route_base + CRIAR_PAGE;
 		}
-
-//		return super.incluir();
 		
 	    if(!validarDados())
 	    	return route_base + CRIAR_PAGE;
@@ -262,7 +277,9 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	}
 
 	/**
-	 * 
+	 * Método verifica se
+	 * usuário está logado e favorita a receita
+	 * no perfil 
 	 * @return
 	 */
 	public String favoritar() {
@@ -283,7 +300,8 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	}
 
 	/**
-	 * 
+	 * Método que verifica o usuário logado
+	 * e cria um report.
 	 * @return
 	 */
 	public String reportar() {
@@ -296,7 +314,8 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	}
 
 	/**
-	 * 
+	 * Método que verifica o ponto dado pelo cliente e 
+	 * soma na média da receita.
 	 * @param pontos
 	 * @return
 	 */
@@ -310,12 +329,12 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	}
 	
 	/**
-	 * 
+	 * Método verifica se a receita apresentada
+	 * esá favoritada e retorna verdadeiro ou falso.
 	 * @return
 	 */
 	public boolean isReceitaFavoritada() {
 		if(SessionContext.getInstance().isLogado()) {
-//			return ((ReceitaController) controller).isReceitaFavoritada(getVo().getId(), SessionContext.getInstance().getUsuarioLogado().getId());
 			boolean favoritada = false;
 			int usuarioLogadoId = SessionContext.getInstance().getUsuarioLogado().getId();
 			List<Usuario> usuariosFavoritaram = getVo().getUsuariosFavoritaram();
@@ -332,7 +351,9 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	}
 	
 	/**
-	 * 
+	 * Método que formata a apresentação da
+	 * quantidade, se for número inteiro 
+	 * não apresenta vírgula e zero.
 	 * @param num
 	 * @return
 	 */

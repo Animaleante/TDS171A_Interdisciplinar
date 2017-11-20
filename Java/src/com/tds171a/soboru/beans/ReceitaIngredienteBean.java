@@ -29,10 +29,14 @@ import com.tds171a.soboru.vos.ReceitaIngrediente;
 public class ReceitaIngredienteBean implements Serializable {
 
 	/**
-	 * 
+	 * Criação do serial único
 	 */
 	private static final long serialVersionUID = -8599053328988864924L;
 
+	/**
+	 * Criação de variáveis e controllers 
+	 * utilizadas no bean.
+	 */
 	private Receita receita;
 	private ReceitaController receitaController;
 	private IngredienteController ingredienteController;
@@ -43,7 +47,8 @@ public class ReceitaIngredienteBean implements Serializable {
 	private List<Medida> listaMedidas;
 
 	/**
-	 * 
+	 * Construtor da bean onde é iniciado as controllers
+	 * que serão utilizadas, além das listas.
 	 */
 	public ReceitaIngredienteBean() {
 		receitaController = new ReceitaController();
@@ -55,6 +60,13 @@ public class ReceitaIngredienteBean implements Serializable {
 		setListaMedidas(new ArrayList<Medida>());
 	}
 
+	/**
+	 * Método GET da receita onde é criada
+	 * as listas de ingredientes e medidas
+	 * e criada a tela para o cliente criar a receita.
+	 * @param receitaId
+	 * @return
+	 */
 	public String criar(int receitaId) {
 		setReceita(receitaController.selecionar(receitaId));
 		setLista(receitaController.listarIngredientes(getReceita()));
@@ -64,15 +76,28 @@ public class ReceitaIngredienteBean implements Serializable {
 		return "/cadastro/receita-ingrediente/criar?faces-redirect=true";
 	}
 
+	/**
+	 * Metodo que inclui um campo para um novo ingrediente.
+	 */
 	public void adicionar() {
 		lista.add(new ReceitaIngrediente());
 		
 	}
 
+	/**
+	 * Método que remove um ingrediente cadastrado.
+	 * @param receitaIngrediente
+	 */
 	public void remover(ReceitaIngrediente receitaIngrediente) {
 		lista.remove(receitaIngrediente);
 	}
 
+	/**
+	 * Método que salva o vínculo entre receita e ingrediente
+	 *  incluindo a lista de ingredientes e passado
+	 *  na tela de receita.
+	 * @return
+	 */
 	public String salvar() {
 		receitaIngredienteController.incluirLista(getReceita().getId(), getLista());
 		return "/cadastro/receita/"+BeanBase.INDEX_PAGE+BeanBase.FACES_REDIRECT;

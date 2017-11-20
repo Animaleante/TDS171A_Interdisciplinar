@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.tds171a.soboru.beans;
 
 import java.text.ParseException;
@@ -32,6 +29,7 @@ public class UsuarioBean extends BeanBase<Usuario> {
 	 */
 	private static final long serialVersionUID = 4490606218207822710L;
 
+	//Declaração de variáveis
 	private String nasc;
 	private RoleController roleController;
 	private List<Role> roles;
@@ -46,7 +44,11 @@ public class UsuarioBean extends BeanBase<Usuario> {
 		setVo(new Usuario());
 	}
 
-	
+	/**
+	 * Método GEt onde cria uma lista dos 
+	 * perfis de usuário disponíveis e
+	 * gera a tela de criação
+	 */
 	@Override
 	public String criar() {
 		setRoles(roleController.listar());
@@ -54,6 +56,10 @@ public class UsuarioBean extends BeanBase<Usuario> {
 		return super.criar();
 	}
 	
+	/**
+	 * Cria uma lista de perfis disponíveis
+	 * e abre a tela de editar.
+	 */
 	@Override
 	public String editar(Usuario vo) {
 		setRoles(roleController.listar());
@@ -61,8 +67,8 @@ public class UsuarioBean extends BeanBase<Usuario> {
 		return super.editar(vo);
 	}
 	/**
-	 * Método para verificar os dados no cadastro do usuário. Verifica os dados,
-	 * se tiver erro ele apresenta para o cliente,
+	 * Método POST onde verifica os dados
+	 * e tenta criar o usuário. Retornando para índex
 	 */
 	public String incluir() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -151,6 +157,11 @@ public class UsuarioBean extends BeanBase<Usuario> {
 		
 	}
 
+	/**
+	 * Pega uma lista com os perfis de usuário
+	 * disponíveis.
+	 * @return
+	 */
 	public List<SelectItem> getRoles() {
 		List<SelectItem> items = new ArrayList<SelectItem>();
 	    for (Role r : this.roles) {
@@ -159,7 +170,11 @@ public class UsuarioBean extends BeanBase<Usuario> {
 	    return items;
 	}
 	
-
+	
+	/**
+	 * Cria uma lista com os ítens válidos na tabela
+	 * @param roles
+	 */
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}

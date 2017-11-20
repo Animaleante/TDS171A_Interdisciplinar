@@ -134,6 +134,11 @@ public class ReceitaBean extends BeanBase<Receita> {
 		return super.exibir(vo);
 	}
 
+	/**
+	 * Override do método editar(GET)
+	 * cria a lista de categorias válidas e 
+	 * envia ao editar do super.
+	 */
 	@Override
 	public String editar(Receita vo) {
 
@@ -142,6 +147,13 @@ public class ReceitaBean extends BeanBase<Receita> {
 		return super.editar(vo);
 	}
 
+	/**
+	 * Override do método editar(POST)
+	 * Pega o id do usuário logado, tenta criar a imagem
+	 * da receita pegando a imagem original, criando uma 
+	 * temporária, copia ela para a pasta(se existir alguma com o mesmo nome
+	 * ele substitui, e então envia para o super editar.
+	 */
 	@Override
 	public String editar() {
 		FacesContext context = FacesContext.getCurrentInstance();

@@ -55,8 +55,8 @@ public class ReportBean extends BeanBase<Report> {
 	}
 
 	/**
-	 * override de incluir onde é pego o
-	 * id do usuário logado. 
+	 * override onde passa o usuário logado
+	 * e gera o GET do report
 	 */
 	@Override
 	public String incluir()

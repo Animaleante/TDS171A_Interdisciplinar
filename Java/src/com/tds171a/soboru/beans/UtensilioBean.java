@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.tds171a.soboru.beans;
 
 import javax.enterprise.context.SessionScoped;

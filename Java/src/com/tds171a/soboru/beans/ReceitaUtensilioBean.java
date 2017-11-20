@@ -23,16 +23,21 @@ import com.tds171a.soboru.vos.Utensilio;
 public class ReceitaUtensilioBean implements Serializable {
 
 	/**
-	 *
+	 *Criação do serial único
 	 */
 	private static final long serialVersionUID = -1219962404859468474L;
 
+	//Declaração das variáveis utilizadas no bean.
 	private Receita receita;
 	private ReceitaController receitaController;
 	private UtensilioController utensilioController;
+	//Declaração de listas.
 	private List<Utensilio> lista;
 	private List<Utensilio> listaUtensilios;
 
+	/**
+	 * Construtor que inicia as controllers.
+	 */
 	public ReceitaUtensilioBean() {
 		receitaController = new ReceitaController();
 		utensilioController = new UtensilioController();
@@ -40,6 +45,12 @@ public class ReceitaUtensilioBean implements Serializable {
 		listaUtensilios = new ArrayList<Utensilio>();
 	}
 
+	/**
+	 * Método GET em que trás as listas de ingredentte
+	 * e utensilios
+	 * @param receitaId
+	 * @return
+	 */
 	public String criar(int receitaId) {
 		setReceita(receitaController.selecionar(receitaId));
 		setLista(receitaController.listarUtensilios(getReceita()));
@@ -48,14 +59,28 @@ public class ReceitaUtensilioBean implements Serializable {
 		return "/cadastro/receita-utensilio/criar?faces-redirect=true";
 	}
 
+	/**
+	 * Adiciona um utensilio na tela de cadastro
+	 * de receita.
+	 */
 	public void adicionar() {
 		lista.add(new Utensilio());
 	}
 
+	/**
+	 * Remove um utensilio da tela de cadastro
+	 * da receita.
+	 * @param utensilio
+	 */
 	public void remover(Utensilio utensilio) {
 	    lista.remove(utensilio);
 	}
 
+	/**
+	 * Método que salva os utensilios cadastrados 
+	 * na receita.
+	 * @return
+	 */
 	public String salvar() {
 		receitaController.registrarUtensilios(getReceita().getId(), getLista());
 		return "/cadastro/receita/"+BeanBase.INDEX_PAGE+BeanBase.FACES_REDIRECT;

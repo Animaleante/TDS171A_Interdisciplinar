@@ -22,16 +22,17 @@ import com.tds171a.soboru.vos.Usuario;
 public class UsuarioSiteBean extends BeanBase<Usuario> {
 
 	/**
-	 * 
+	 * Criação do serial único
 	 */
 	private static final long serialVersionUID = 9063625419454028906L;
 	
+	//Declaração de variáveis.
 	private ReceitaController receitaController;
 	private List<Receita> listaReceitas;
 	private List<Receita> listaFavoritos;
 
 	/**
-	 * 
+	 * Construtor que inicia as controllers
 	 */
 	public UsuarioSiteBean() {
 		route_base = "/usuario/";
@@ -42,6 +43,11 @@ public class UsuarioSiteBean extends BeanBase<Usuario> {
 		setVo(new Usuario());
 	}
 	
+	/**
+	 * Método que cria a página de cadastro
+	 * de um novo usuário 
+	 * @return
+	 */
 	public String exibir() {
 		Usuario usuario = SessionContext.getInstance().getUsuarioLogado();
 		if(usuario != null)
@@ -49,6 +55,10 @@ public class UsuarioSiteBean extends BeanBase<Usuario> {
 		return "/login/"+BeanBase.INDEX_PAGE+BeanBase.FACES_REDIRECT;
 	}
 	
+	/**
+	 * Método POST que cria um usuário no banco.
+	 * Passando o tipo de usuário e os dados.
+	 */
 	@Override
 	public String exibir(Usuario vo) {
 		vo = controller.selecionar(vo.getId());
@@ -59,12 +69,20 @@ public class UsuarioSiteBean extends BeanBase<Usuario> {
 		return super.exibir(vo);
 	}
 
+	/**
+	 * Método vazio para não ser burlado
+	 * por invasão
+	 */
 	@Override
 	public String deletar() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Método vazio para não ser burlado
+	 * por invasão
+	 */
 	@Override
 	public void limparVo() {
 		// TODO Auto-generated method stub
