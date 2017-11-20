@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.tds171a.soboru.beans;
 
 import java.io.File;
@@ -37,15 +34,29 @@ public class ReceitaBean extends BeanBase<Receita> {
 	 */
 	private static final long serialVersionUID = 1877717137441387967L;
 
+	/**
+	 * Instância da controller Categoria
+	 */
 	private CategoriaController categoriaController;
+	/**
+	 * Intância da controller Usuario
+	 */
 	private UsuarioController usuarioController;
 
+	/**
+	 * Lista que recebe objetos do tipo categoria
+	 */
 	private List<Categoria> categorias;
 
+	/**
+	 * Variável que recebe o arquivo de imagem
+	 * para anexar receita
+	 */
 	private Part imgFile;
 
 	/**
-	 * Construtor setando a rota e qual será passado para o navegador.
+	 * Construtor onde é inciado as controllers usadas e
+	 * seta a rota e qual será passado para o navegador.
 	 */
 	public ReceitaBean() {
 		route_base = "/cadastro/receita/";
@@ -56,6 +67,11 @@ public class ReceitaBean extends BeanBase<Receita> {
 		setVo(new Receita());
 	}
 
+	/**
+	 * Override do método ao qual efetua a limpeza dos campos
+	 * faz cast da controller e efetua um método exclusivo para
+	 * admin, onde mostra todas as receitas. 
+	 */
 	@Override
 	public String listar() {
 
@@ -66,8 +82,9 @@ public class ReceitaBean extends BeanBase<Receita> {
 	}
 
 	/**
-	 * recebe listas de controllers especificas para passar ao cliente e ele
+	 * recebe listas de categorias disponívels e passa ao cliente
 	 * selecionar quais anexar na receita.
+	 * Envia ao super para enviar a tela de criar receita.
 	 */
 	@Override
 	public String criar() {

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.tds171a.soboru.beans;
 
 import javax.enterprise.context.SessionScoped;
@@ -38,6 +35,11 @@ public class PontuacaoBean extends BeanBase<Pontuacao> {
 		setVo(new Pontuacao());
 	}
 
+	/**
+	 * Override do método deletar
+	 * verifica se foi possível deletar ou não
+	 * a pontuação e retorna a mensagem.
+	 */
 	@Override
 	public String deletar() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -55,6 +57,10 @@ public class PontuacaoBean extends BeanBase<Pontuacao> {
         return listar();
 	}
 
+	/**
+	 * Método que limpa os campos
+	 * para evitar erro de dados errados.
+	 */
 	@Override
 	public void limparVo() {
 		setVo(new Pontuacao());

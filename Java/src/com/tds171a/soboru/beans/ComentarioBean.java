@@ -31,11 +31,23 @@ public class ComentarioBean extends BeanBase<Comentario> {
 		setVo(new Comentario());
 	}
 	
+	/**
+	 * Override do método incluir(GET)
+	 * Recebe o id da receita para setar no comentário. 
+	 * @param receitaId
+	 * @return
+	 */
 	public String incluir(int receitaId){
 		getVo().setReceitaId(receitaId);
 		return incluir();
 	}
 	
+	/**
+	 * Método que puxa o usuário logado e 
+	 * retorna para o incluir do super.
+	 * depois faz um redirect para a página da 
+	 * receita.
+	 */
 	public String incluir(){
 		getVo().setUsuarioId(SessionContext.getInstance().getUsuarioLogado().getId());
 		

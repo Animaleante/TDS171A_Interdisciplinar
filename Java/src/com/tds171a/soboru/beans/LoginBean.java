@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.tds171a.soboru.beans;
 
 import java.io.Serializable;

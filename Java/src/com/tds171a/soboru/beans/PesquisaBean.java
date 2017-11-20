@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.tds171a.soboru.beans;
 
 import java.io.Serializable;
@@ -105,6 +102,11 @@ public class PesquisaBean implements Serializable {
 		setListaCategorias(categoriaController.listar());
 	}
 	
+	/**
+	 * Limpa todos os forms e retorna a página com
+	 * as pesquisas para o cliente.
+	 * @return a rota do índex ao navegador
+	 */
 	public String index() {
 		setSerAdicionado(0);
 		setLista(new ArrayList<Ingrediente>());
@@ -117,6 +119,11 @@ public class PesquisaBean implements Serializable {
 		return ROUTE_BASE+BeanBase.INDEX_PAGE+BeanBase.FACES_REDIRECT;
 	}
 	
+	/**
+	 * Adiciona um ingrediente para a pesquisa.
+	 * Faz a verificação se tem ingredientes cadastrados
+	 * e se for cadastrado corretamente retorna a aplicação. 
+	 */
 	public void adicionar() {
 		Ingrediente ingrediente = null;
 		for (int i = 0; i < listaIngredientes.size(); i++) {
@@ -132,12 +139,17 @@ public class PesquisaBean implements Serializable {
 		}
 	}
 	
+	/**
+	 * Remove o ingrediente da pesquisa
+	 * @param ingrediente
+	 */
 	public void remover(Ingrediente ingrediente) {
 		lista.remove(ingrediente);
 	}
 	
 	/**
-	 * recebe a rota para a pesquisa.
+	 * Recebe os parâmetros para pesquisa
+	 * por nome e retorna a rota para a pesquisa.
 	 */
 	public String pesquisar() {
 		if(serAdicionado != 0)

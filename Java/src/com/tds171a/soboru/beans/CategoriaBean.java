@@ -40,7 +40,11 @@ public class CategoriaBean extends BeanBase<Categoria> {
         controller = new CategoriaController();
         setVo(new Categoria());
     }
-    
+    /**
+     * Override do método criar(GET)
+     * efetuando cast da basecontroller para CategoriaController
+     * para ser possível criar a lista de categorias.
+     */
     @Override
     public String criar() {
     	setCategorias(((CategoriaController)controller).listarGrupos());
@@ -48,6 +52,12 @@ public class CategoriaBean extends BeanBase<Categoria> {
 	    return route_base + CRIAR_PAGE + FACES_REDIRECT;
     }
     
+    /**
+     * Override da função incluir(POST)
+     * seta o Slug, e verifica se é uma categoria
+     * selecionável ou não, e manda para o
+     * método do super criar.
+     */
     @Override
     public String incluir() {
     	getVo().setSlug(Utils.toSlug(getVo().getNome()));
@@ -57,6 +67,11 @@ public class CategoriaBean extends BeanBase<Categoria> {
     	return super.incluir();
     }
     
+    /**
+     * Override do método Editar(GET)
+     * efetua um cast no controller para gerar
+     * a lista de categorias.
+     */
     @Override
     public String editar(Categoria vo) {
     	setCategorias(((CategoriaController)controller).listarGrupos());
@@ -64,6 +79,12 @@ public class CategoriaBean extends BeanBase<Categoria> {
     	return super.editar(vo);
     }
     
+    /**
+     * Override do Edtitar(POST)
+     * seta o Slug, e verifica se é uma categoria
+     * selecionável ou não, e manda para o
+     * método do super editar. 
+     */
     @Override
     public String editar() {
     	getVo().setSlug(Utils.toSlug(getVo().getNome()));
@@ -129,6 +150,12 @@ public class CategoriaBean extends BeanBase<Categoria> {
 		setVo(new Categoria());
 	}
 	
+	/**
+	 * Verifica se a opção selecionável está marcada
+	 * e se tiver, retorna sim.
+	 * @param categoria
+	 * @return
+	 */
 	public String isGrupo(Categoria categoria) {
 		if(categoria.getSelecionavel())
 			return "Não";

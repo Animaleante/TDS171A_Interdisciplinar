@@ -17,18 +17,38 @@ import javax.inject.Named;
 public class ContatoBean implements Serializable {
 
 	/**
-	 * 
+	 * Criação do serial único
 	 */
 	private static final long serialVersionUID = -4706081572950852709L;
 	
+	/**
+	 * variável do tipo String para guardar
+	 * o nome do contato.
+	 */
 	private String nome;
 	
+	/**
+	 * variável do tipo String para guardar
+	 * o email do contato.
+	 */
 	private String email;
 	
+	/**
+	 * variável do tipo Long para guardar
+	 * o número do contato.
+	 */
 	private Long telefone;
 	
+	/**
+	 * variável do tipo String para guardar
+	 * o texto da mensagem.
+	 */
 	private String mensagem;
 	
+	/**
+	 * variável que recebe a rota para o
+	 * navegador
+	 */
 	private String route_base = "/contato/";
 
 	/**
@@ -39,10 +59,20 @@ public class ContatoBean implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * Método que direciona
+	 * para o índex do contato.
+	 * @return
+	 */
 	public String index() {
 		return route_base + "index";
 	}
 	
+	/**
+	 * Método GET limpa os campos
+	 * e envia os forms para o cliente.
+	 * @return para o índex
+	 */
 	public String enviar() {
 		// TODO - enviar mensagem
 		
