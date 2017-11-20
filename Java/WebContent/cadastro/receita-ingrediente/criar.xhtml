@@ -38,20 +38,24 @@
 											</h:selectOneMenu>
 										</div>
 	
-										<div class="small">
-											<h:inputText value="#{recIng.sub_sessao}" a:placeholder="SubSessão" />
-										</div>
+<!-- 										<div class="small"> -->
+<!-- 											<h:inputText value="#{recIng.sub_sessao}" a:placeholder="SubSessão" /> -->
+<!-- 										</div> -->
+
 										<div class="small">
 											<h:inputText value="#{recIng.qty}" a:placeholder="Quantidade" />
 										</div>
-										<div class="small" style="width:22%;">
+<!-- 										<div class="small" style="width:22%;"> -->
+										<div class="third">
 											<h:selectOneMenu value="#{recIng.id_medida}" required="true">
 												<f:selectItem itemValue="0" itemLabel="Selecione a Medida"
 													a:disabled="disabled" a:selected="selected" />
 												<f:selectItems value="#{receitaIngredienteBean.listaMedidas}" />
 											</h:selectOneMenu>
 										</div>
-									<h:commandButton value="-" action="#{receitaIngredienteBean.remover(recIng)}" style="float: right; font-size: 37px; padding: 0; width: 37px; height: 37px; line-height: 37px;"/>
+										<h:commandLink action="#{receitaIngredienteBean.remover(recIng)}">
+											<button class="remove">-</button>
+										</h:commandLink>
 									</div>
 							    </c:forEach>
 							    
