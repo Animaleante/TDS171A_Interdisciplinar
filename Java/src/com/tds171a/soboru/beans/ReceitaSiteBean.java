@@ -19,6 +19,7 @@ import javax.inject.Named;
 import javax.servlet.http.Part;
 
 import com.tds171a.soboru.controllers.CategoriaController;
+import com.tds171a.soboru.controllers.ComentarioController;
 import com.tds171a.soboru.controllers.IngredienteController;
 import com.tds171a.soboru.controllers.MedidaController;
 import com.tds171a.soboru.controllers.ReceitaController;
@@ -27,6 +28,7 @@ import com.tds171a.soboru.controllers.UsuarioController;
 import com.tds171a.soboru.controllers.UtensilioController;
 import com.tds171a.soboru.utils.Utils;
 import com.tds171a.soboru.vos.Categoria;
+import com.tds171a.soboru.vos.Comentario;
 import com.tds171a.soboru.vos.Ingrediente;
 import com.tds171a.soboru.vos.Medida;
 import com.tds171a.soboru.vos.Receita;
@@ -53,6 +55,7 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	private MedidaController medidaController;
 	private ReceitaIngredienteController receitaIngredienteController;
 	private UtensilioController utensilioController;
+	private ComentarioController comentarioController;
 	
 	private List<ReceitaIngrediente> listaIngredientes;
 	private List<Utensilio> listaUtensilios;
@@ -61,6 +64,7 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	private List<Ingrediente> ingredientes;
 	private List<Medida> medidas;
 	private List<Utensilio> utensilios;
+	
 
 	private Part imgFile;
 
@@ -188,7 +192,17 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 			Usuario usuario = SessionContext.getInstance().getUsuarioLogado();
 			vo.setReportou(usuarioController.reportou(usuario.getId(), vo.getId()));
 			vo.setPontuou(usuarioController.pontuou(usuario.getId(), vo.getId()));
+			
+		if (vo.getUtensilios() == null)
+ 			vo.setUtensilios(utensilioController.selecionarPorReceita(vo.getId()));
+ 
+ 		if (vo.getReceitaIngredientes() == null)
+ 			vo.setReceitaIngredientes(receitaIngredienteController.selecionarPorReceita(vo.getId()));
+ 
+ 		if (vo.getComentarios() == null)
+ 			vo.setComentarios(comentarioController.selecionarPorReceita(vo.getId()));	
 		}
+		System.out.println("Comentarios bean rec "+ vo.getComentarios());
 
 		try{
 			System.out.println(vo.getComentarios().size());
