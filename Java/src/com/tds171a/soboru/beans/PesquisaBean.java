@@ -89,6 +89,7 @@ public class PesquisaBean implements Serializable {
 	 * null
 	 */
 	public PesquisaBean() {
+		
 		receitaController = new ReceitaController();
 		ingredienteController = new IngredienteController();
 		categoriaController = new CategoriaController();
@@ -115,6 +116,7 @@ public class PesquisaBean implements Serializable {
 		setResultados(new ArrayList<Receita>());
 		setListaIngredientes(ingredienteController.listar());
 		setListaCategorias(categoriaController.listar());
+		
 		
 		return ROUTE_BASE+BeanBase.INDEX_PAGE+BeanBase.FACES_REDIRECT;
 	}
@@ -152,6 +154,8 @@ public class PesquisaBean implements Serializable {
 	 * por nome e retorna a rota para a pesquisa.
 	 */
 	public String pesquisar() {
+		
+		setResultados(new ArrayList<Receita>());
 		if(serAdicionado != 0)
 			adicionar();
 		

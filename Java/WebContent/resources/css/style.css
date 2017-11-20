@@ -1,7 +1,9 @@
-.submit_recipe .f-row.ingredient:first-of-type .remove,
+/*.submit_recipe .f-row.ingredient:first-of-type .remove,
 .submit_recipe .f-row.utensilio:first-of-type .remove {
     display: none;
-}
+}*/
+
+
 
 .f-row.submit input[type="submit"] {
 	float: right;
