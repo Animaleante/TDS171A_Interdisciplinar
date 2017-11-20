@@ -1,6 +1,5 @@
---ingredientes
--- arroz com lentilha
---insert into ingredientes values (ingrediente_seq.NEXTVAL,'NOME INGREDIENTE');
+--Ingredientes
+--insert into ingredientes values (ingrediente_seq.NEXTVAL,'NOME');
 
 --Ingredientes - Arroz de Lentilha
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'agua fervente');
@@ -29,7 +28,6 @@ insert into ingredientes values (ingrediente_seq.NEXTVAL,'azeitona');
 
 
 --Ingredientes - Petit gâteau de queijo
-
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'queijo cremoso');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'cream cheese');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'parmesao ralado');
@@ -37,9 +35,7 @@ insert into ingredientes values (ingrediente_seq.NEXTVAL,'manteiga');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'gemas');
 
 --medidas
---insert into medidas values (medida_seq.NEXTVAL,'NOME MEDIDA','ABREVEACAO');
-
-
+--insert into medidas values (medida_seq.NEXTVAL,'NOME MEDIDA','ABREVIACAO');
 insert into medidas values (medida_seq.NEXTVAL,'litro','L');
 insert into medidas values (medida_seq.NEXTVAL,'gramas','g');
 insert into medidas values (medida_seq.NEXTVAL,'dentes','dentes');
@@ -55,7 +51,6 @@ insert into medidas values (medida_seq.NEXTVAL,'mililitro','ml');
 
 --utensilios
 --insert into utensilios values (utensilio_seq.NEXTVAL, 'NOME');
-
 insert into utensilios values (utensilio_seq.NEXTVAL, 'Abridor de garrafa');
 insert into utensilios values (utensilio_seq.NEXTVAL, 'Saca-rolhas');
 insert into utensilios values (utensilio_seq.NEXTVAL, 'Assadeiras aluminio');
@@ -69,9 +64,7 @@ insert into utensilios values (utensilio_seq.NEXTVAL, 'Espremedor de batata');
 
 
 --categorias
--- ID,NOME,ID_SUPER_CATEGORIA SELECIONAVEL,SLUG
---insert into categorias values(categoria_seq.NEXTVAL, 'categoria1', null, 0, 'NOME CATEGORIA');
-
+--insert into categorias values(categoria_seq.NEXTVAL, 'NOME CATEGORIA', SUPER CATEGRIA, SELECIONAVEL, 'SLUG');
 --1
 insert into categorias values(categoria_seq.NEXTVAL, 'Salgados', null, 0, 'Salgados');
 --2
@@ -96,7 +89,7 @@ insert into receitas values (receita_seq.NEXTVAL, 'Cebola Frita', 3, 1, 3, 19, '
 Numa tigela com a farinha de trigo tempere com sal a gosto, passe as fatias de cebola nessa mistura, retire o excesso de farinha de trigo e frite as fatias em óleo quente até dourar.
 Retire do óleo com a ajuda de uma escumadeira e coloque em papel absorvente.', 'teste.jpg', 0, 0, 0, 'receita1', 1);
 
-insert into receitas values (receita_seq.NEXTVAL, 'Torta salgada da vovo', 2, 1, 5, 160, 'Misture numa tigela ¼ xícara (chá) de azeite, ¼ xícara (chá) de pimentão verde bem picadinho, ¼ xícara (chá) de cebola picada, 1 colher (sopa) de pimenta dedo-de-moça sem semente picadinha, 2 ovos, 1 xícara (chá) de muçarela ralada no ralo grosso, ½ copo de iogurte natural e salsinha picadinha a gosto. Adicione 1 xícara (chá) de farinha de trigo, ½ colher (sopa) de sal, ½ colher (sopa) de fermento em pó e mexa bem.
+insert into receitas values (receita_seq.NEXTVAL, 'Torta a Portuguesa', 2, 1, 5, 160, 'Misture numa tigela ¼ xícara (chá) de azeite, ¼ xícara (chá) de pimentão verde bem picadinho, ¼ xícara (chá) de cebola picada, 1 colher (sopa) de pimenta dedo-de-moça sem semente picadinha, 2 ovos, 1 xícara (chá) de muçarela ralada no ralo grosso, ½ copo de iogurte natural e salsinha picadinha a gosto. Adicione 1 xícara (chá) de farinha de trigo, ½ colher (sopa) de sal, ½ colher (sopa) de fermento em pó e mexa bem.
 Espalhe a massa numa forma para pizza redonda (30 cm de diâmetro) untada com manteiga e enfarinhada. Leve para assar em forno pré-aquecido a 200° C por 15 minutos.
 Retire do forno e sobre a massa assada distribua muçarela ralada no ralo grosso, rodelas de tomate, fatias de ovo cozido, linguiça calabresa refogada e fatiada e azeitona verde fatiada a gosto. Regue o azeite e leve ao forno a 200° C por 15 minutos ou até derreter o queijo. Retire do forno e sirva em seguida.', 'teste.jpg', 0, 0, 0, 'receita1', 1);
 
@@ -119,7 +112,7 @@ insert into receitas_ingredientes values(receita_seq.NEXTVAL, 1, 6, 5, null, 0);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 2, 7, 6, null, 2);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 2, 8, 2, null, 500);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 2, 6, 5, null, 0);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 2, 9, 9, null, 5);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 2, 9, 12, null, 500);
 
 --torta
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 4, 12, null, 60);
@@ -127,15 +120,15 @@ insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 10, 2, null, 40
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 7, 2, null, 40);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 11, 8, null, 1);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 12, 6, null, 2);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 13, 7, null, 1);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 13, 2, null, 100);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 14, 2, null, 85);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 15, 5, null, 0);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 8, 7, null, 1);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 8, 2, null, 150);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 6, 8, null, 1/2);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 16, 8, null, 1/2);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 13, 5, null, 0);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 17, 5, null, 0);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 25, 5, null, 0);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 12, 5, null, 0);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 18, 5, null, 0);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 19, 5, null, 0);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 4, 5, null, 0);
@@ -146,5 +139,6 @@ insert into receitas_ingredientes values(receita_seq.NEXTVAL, 4, 21, 11, null, 4
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 4, 22, 8, null, 4);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 4, 23, 8, null, 5);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 4, 12, 6, null, 2);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 4, 24, 8, null, 2);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 4, 9, 8, null, 2);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 4, 24, 6, null, 2);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 4, 8, 8, null, 2);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 4, 6, 5, null, 0);
