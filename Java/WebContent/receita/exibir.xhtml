@@ -83,15 +83,15 @@
 								<dl class="ingredients">
 									<c:forEach items="#{receitaSiteBean.vo.receitaIngredientes}"
 										var="receitaIngrediente">
+										<dd>
+											<h:outputText value="#{receitaIngrediente.ingrediente.nome}" />
+										</dd>
 										<dt>
 											<h:outputText
 												value="#{receitaSiteBean.formatDouble(receitaIngrediente.qty)}" />
 											<span> </span>
 											<h:outputText value="#{receitaIngrediente.medida.abreviacao}" />
 										</dt>
-										<dd>
-											<h:outputText value="#{receitaIngrediente.ingrediente.nome}" />
-										</dd>
 									</c:forEach>
 								</dl>
 							</article>
