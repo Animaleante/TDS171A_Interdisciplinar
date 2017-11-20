@@ -62,11 +62,6 @@
 			                    </ul>
 			                </li>
 						</c:if>
-		                <li id="nav_contato">
-		                    <h:commandLink action="#{contatoBean.index()}" value="">
-		                    	<span>Contato</span>
-		                    </h:commandLink>
-		                </li>
 						<c:if test="#{loginBean.logado}">
 			                <li>
 			                    <h:commandLink action="#{loginBean.logout()}" value="">

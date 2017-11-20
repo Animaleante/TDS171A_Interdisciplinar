@@ -38,11 +38,10 @@ public class ComentarioBean extends BeanBase<Comentario> {
 	
 	public String incluir(){
 		getVo().setUsuarioId(SessionContext.getInstance().getUsuarioLogado().getId());
-		System.out.println("id usuario: "+SessionContext.getInstance().getUsuarioLogado().getId());
-		System.out.println("body: "+getVo().getBody());
-		System.out.println("usuarioId: "+getVo().getUsuarioId());
-		System.out.println("Receita: "+getVo().getReceitaId());
-		return super.incluir();
+		
+		super.incluir();
+		
+		return "/receita/"+EXIBIR_PAGE+FACES_REDIRECT;
 	}
 
 	/**
@@ -72,7 +71,6 @@ public class ComentarioBean extends BeanBase<Comentario> {
 	 */
 	@Override
 	public void limparVo() {
-		// TODO Auto-generated method stub
-		
+		setVo(new Comentario());
 	}
 }

@@ -81,6 +81,7 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 		medidaController = new MedidaController();
 		receitaIngredienteController = new ReceitaIngredienteController();
 		utensilioController = new UtensilioController();
+		comentarioController = new ComentarioController();
 
 		setVo(new Receita());
 		setListaIngredientes(new ArrayList<ReceitaIngrediente>());
@@ -177,6 +178,7 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	 */
 	@Override
 	public String exibir(Receita vo) {
+		System.out.println("Exibir");
 		vo = controller.selecionar(vo.getId());
 
 		if (vo.getCategoria() == null)
@@ -184,14 +186,6 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 
 		if (vo.getUsuario() == null)
 			vo.setUsuario(usuarioController.selecionar(vo.getUsuarioId()));
-
-		if (vo.getUsuariosFavoritaram() == null)
-			vo.setUsuariosFavoritaram(usuarioController.selecionarUsuariosQueFavoritaram(vo.getId()));
-
-		if (SessionContext.getInstance().isLogado()) {
-			Usuario usuario = SessionContext.getInstance().getUsuarioLogado();
-			vo.setReportou(usuarioController.reportou(usuario.getId(), vo.getId()));
-			vo.setPontuou(usuarioController.pontuou(usuario.getId(), vo.getId()));
 			
 		if (vo.getUtensilios() == null)
  			vo.setUtensilios(utensilioController.selecionarPorReceita(vo.getId()));
@@ -200,15 +194,17 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
  			vo.setReceitaIngredientes(receitaIngredienteController.selecionarPorReceita(vo.getId()));
  
  		if (vo.getComentarios() == null)
- 			vo.setComentarios(comentarioController.selecionarPorReceita(vo.getId()));	
-		}
-		System.out.println("Comentarios bean rec "+ vo.getComentarios());
+ 			vo.setComentarios(comentarioController.selecionarPorReceita(vo.getId()));
 
-		try{
-			System.out.println(vo.getComentarios().size());
-		}catch (Exception e) {
-			System.out.println("Erro coment size");
+		if (vo.getUsuariosFavoritaram() == null)
+			vo.setUsuariosFavoritaram(usuarioController.selecionarUsuariosQueFavoritaram(vo.getId()));
+
+		if (SessionContext.getInstance().isLogado()) {
+			Usuario usuario = SessionContext.getInstance().getUsuarioLogado();
+			vo.setReportou(usuarioController.reportou(usuario.getId(), vo.getId()));
+			vo.setPontuou(usuarioController.pontuou(usuario.getId(), vo.getId()));	
 		}
+		
 		return super.exibir(vo);
 	}
 

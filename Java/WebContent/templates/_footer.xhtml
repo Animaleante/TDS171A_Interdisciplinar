@@ -35,7 +35,6 @@
 	                	<h:form>
 		                    <ul>
 		                        <li><a href="#{request.contextPath}/" title="Home">Home</a></li>
-		                        <li><a href="#{request.contextPath}/contato/" title="Contato">Contato</a></li>
 		                        <li><h:commandLink action="#{pesquisaBean.index()}" value="Procurar receitas" /></li>
 								<c:if test="#{loginBean.logado == false}">
 			                        <li><h:commandLink action="#{loginBean.index()}" value="Login" /></li>

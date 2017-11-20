@@ -166,7 +166,7 @@ public class ComentarioDAO implements IDAO<Comentario> {
         try {
             connection = Utils.createConnection();
 
-            PreparedStatement sttm = connection.prepareStatement("select c.id, c.id_receita, c.id_usuario, c.body, u.nome from "+tableName+" c inner join usuarios u on c.id_usuario = u.id where c.id_receita = ?");
+            PreparedStatement sttm = connection.prepareStatement("select c.id, c.id_receita, c.id_usuario, c.body, u.nome from "+tableName+" c inner join usuarios u on c.id_usuario = u.id where c.id_receita = ? order by c.id");
 //            PreparedStatement sttm = connection.prepareStatement("select c.id, c.id_receita, c.id_usuario, c.body, c.created_at, u.nome, u.avatar_path from "+tableName+" c inner join usuarios u on c.id_usuario = u.id where c.id_receita = ?");
             sttm.setInt(1, receitaId);
             

@@ -37,19 +37,15 @@
 							<!--two-third-->
 							<article class="two-third">
 								<div class="image">
-									<a href="#"> <h:graphicImage
-											value="/images/#{receitaSiteBean.vo.imgPath}"
-											style="width: 100%;" />
+									<a href="#">
+										<h:graphicImage value="/images/#{receitaSiteBean.vo.imgPath}" style="width: 100%;" />
 									</a>
 								</div>
-								<!-- 	                                    <div class="intro"><p><strong>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas</strong></p> <p>Molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p></div> -->
 								<div class="instructions">
 									<ol>
-										<!-- 	                                            <li>Heat oven to 160C/140C fan/gas 3 and line a 12-hole muffin tin with cases. Gently melt the butter, chocolate, sugar and 100ml hot water together in a large saucepan, stirring occasionally, then set aside to cool a little while you weigh the other ingredients.</li> -->
-										<!-- 	                                            <li>Stir the eggs and vanilla into the chocolate mixture. Put the flour into a large mixing bowl, then stir in the chocolate mixture until smooth. Spoon into cases until just over three-quarters full (you may have a little mixture leftover), then set aside for 5 mins before putting on a low shelf in the oven and baking for 20-22 mins. Leave to cool.</li> -->
-										<!-- 	                                            <li>For the icing, melt the chocolate in a heatproof bowl over a pan of barely simmering water. Once melted, turn off the heat, stir in the double cream and sift in the icing sugar. When spreadable, top each cake with some and decorate with your favourite sprinkles and sweets.</li> -->
-										<li><h:outputText
-												value="#{receitaSiteBean.vo.modoPreparo}" /></li>
+										<li>
+											<h:outputText value="#{receitaSiteBean.vo.modoPreparo}" />
+										</li>
 									</ol>
 								</div>
 							</article>
@@ -60,16 +56,11 @@
 								<dl class="basic">
 									<dt>Tempo de preparo</dt>
 									<dd>
-										<h:outputText
-											value="#{receitaSiteBean.formatDouble(receitaSiteBean.vo.tempoPreparo)}" />
-										hora
-										<c:if test="#{receitaSiteBean.vo.tempoPreparo > 1}">s</c:if>
+										<h:outputText value="#{receitaSiteBean.formatDouble(receitaSiteBean.vo.tempoPreparo)}" /> hora<c:if test="#{receitaSiteBean.vo.tempoPreparo > 1}">s</c:if>
 									</dd>
 									<dt>Serve</dt>
 									<dd>
-										<h:outputText value="#{receitaSiteBean.vo.porcao}" />
-										pessoa
-										<c:if test="#{receitaSiteBean.vo.porcao>1}">s</c:if>
+										<h:outputText value="#{receitaSiteBean.vo.porcao}" /> pessoa<c:if test="#{receitaSiteBean.vo.porcao>1}">s</c:if>
 									</dd>
 								</dl>
 
@@ -113,24 +104,20 @@
 					<div class="comments" id="comments">
 						<!-- 	                            <h2>5 comments</h2> -->
 						<h2>
-							<h:outputText value="" />
-							comentário
-							<c:if test="#{receitaSiteBean.vo.comentarios.size()>1}">s</c:if>
+							<h:outputText value="#{receitaSiteBean.vo.comentarios.size()}" /> comentário<c:if test="#{receitaSiteBean.vo.comentarios.size()>1}">s</c:if>
 						</h2>
 						<ol class="comment-list">
 							<!--comment-->
-							<c:forEach items="#{receitaSiteBean.vo.comentarios}"
-								var="comentario">
+							<c:forEach items="#{receitaSiteBean.vo.comentarios}" var="comentario">
 								<li class="comment depth-1">
 									<div class="avatar">
-										<a href="my_profile.html"> <h:graphicImage
-												value="#{resource['images:avatar1.jpg']}" />
+										<a href="my_profile.html">
+											<h:graphicImage value="#{resource['images:avatar1.jpg']}" />
 										</a>
 									</div>
 									<div class="comment-box">
 										<div class="comment-author meta">
-											<strong><h:outputText
-													value="#{comentario.usuario.nome}" /></strong> said 1 month ago
+											<strong><h:outputText value="#{comentario.usuario.nome}" /></strong>
 										</div>
 										<div class="comment-text">
 											<p>
@@ -179,7 +166,7 @@
 
 									<div class="f-row">
 										<div class="third bwrap">
-											<h:commandButton action="#{comentarioBean.incluir(receitaSiteBean.vo.id)}" value="" />
+											<h:commandButton action="#{comentarioBean.incluir(receitaSiteBean.vo.id)}" value="Enviar" />
 										</div>
 									</div>
 								</h:form>
