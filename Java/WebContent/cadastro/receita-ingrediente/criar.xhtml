@@ -42,14 +42,17 @@
 											<h:outputText value="Tipo de medida" />
 										</div>
 									</div>
-									
-							    <c:forEach items="#{receitaIngredienteBean.lista}" var="recIng">
+		
+								
+							    <c:forEach items="#{receitaIngredienteBean.lista}" var="recIng" varStatus="recIngStatus">
+
 									<div class="f-row ingredient">
 										<div class="large">
-											<h:selectOneMenu value="#{recIng.id_ingrediente}" required="true">
-												<f:selectItem itemValue="0"
-													itemLabel="Selecione o ingrediente" a:disabled="disabled"
-													a:selected="selected" />
+											<h:message for="select_ingrediente_#{recIngStatus.index}" errorClass="error"/>
+											
+											<h:selectOneMenu id="select_ingrediente_#{recIngStatus.index}" value="#{recIng.id_ingrediente}" required="true"
+												 requiredMessage="Esse valor precisa ser preenchido">
+												<f:selectItem itemValue="0" itemLabel="Selecione o ingrediente" a:disabled="disabled" a:selected="selected" />
 												<f:selectItems value="#{receitaIngredienteBean.listaIngredientes}" />
 											</h:selectOneMenu>
 										</div>
@@ -63,20 +66,22 @@
 										</div>
 <!-- 										<div class="small" style="width:22%;"> -->
 										<div class="third">
-											<h:selectOneMenu value="#{recIng.id_medida}" required="true">
-												<f:selectItem itemValue="0" itemLabel="Selecione a Medida"
-													a:disabled="disabled" a:selected="selected" />
+											<h:message for="select_medida_#{recIngStatus.index}" errorClass="error"/>
+											
+											<h:selectOneMenu id="select_medida_#{recIngStatus.index}"  value="#{recIng.id_medida}" required="true"
+												 requiredMessage="Esse valor precisa ser preenchido">
+												<f:selectItem itemValue="0" itemLabel="Selecione a Medida" a:disabled="disabled" a:selected="selected" />
 												<f:selectItems value="#{receitaIngredienteBean.listaMedidas}" />
 											</h:selectOneMenu>
 										</div>
-										<h:commandLink action="#{receitaIngredienteBean.remover(recIng)}">
+										<h:commandLink action="#{receitaIngredienteBean.remover(recIng)}" immediate="true">
 											<button class="remove">-</button>
 										</h:commandLink>
 									</div>
 							    </c:forEach>
 							    
                         		<div class="f-row">
-								    <h:commandButton value="Add" action="#{receitaIngredienteBean.adicionar}" />
+								    <h:commandButton value="Add" action="#{receitaIngredienteBean.adicionar}" immediate="true" />
                         		</div>
                         		
                         		<div class="f-row submit">

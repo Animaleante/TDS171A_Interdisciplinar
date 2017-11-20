@@ -87,9 +87,8 @@
 											<h:outputText value="#{receitaIngrediente.ingrediente.nome}" />
 										</dd>
 										<dt>
-											<h:outputText
-												value="#{receitaSiteBean.formatDouble(receitaIngrediente.qty)}" />
-											<span> </span>
+											<c:if test="#{receitaIngrediente.qty > 0}"><h:outputText value="#{receitaSiteBean.formatDouble(receitaIngrediente.qty)}" />
+											<span> </span></c:if>
 											<h:outputText value="#{receitaIngrediente.medida.abreviacao}" />
 										</dt>
 									</c:forEach>

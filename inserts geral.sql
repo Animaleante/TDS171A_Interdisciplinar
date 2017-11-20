@@ -5,7 +5,7 @@
 --Ingredientes - Arroz de Lentilha
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'agua fervente');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'lentilha');
-insert into ingredientes values (ingrediente_seq.NEXTVAL,'picados');
+insert into ingredientes values (ingrediente_seq.NEXTVAL,'alho picado');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'azeite');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'arroz branco');
 insert into ingredientes values (ingrediente_seq.NEXTVAL,'sal');
@@ -90,15 +90,11 @@ insert into categorias values(categoria_seq.NEXTVAL, 'Petit gateau', 2, 1, 'Peti
 
 
 insert into receitas (id, nome, id_categoria, id_usuario, porcao, tempo_preparo, modo_preparo, img_path, pontuacao_media, views, favs, slug, aprovado) 
-values (receita_seq.NEXTVAL, 'Arroz de Lentilha', 4, 1, 5, 20, 'Numa panela com água fervente em fogo médio coloque a lentilha, tempere com sal, tampe a panela e cozinhe por 20 minutos.
-Escorra a lentilha, reserve a água do cozimento e a lentilha.
-Depois de refogar bem o alho no azeite e o arroz, tempere com sal, coloque a água do cozimento da lentilha, tampe a panela e cozinhe por +/- 15 minutos.
-Depois misture o arroz cozido com a lentilha cozida e reserve.', 'teste.jpg', 0, 0, 0, 'receita1', 1);
+values (receita_seq.NEXTVAL, 'Arroz de Lentilha', 4, 1, 5, 20, 'Numa panela com água fervente em fogo médio coloque a lentilha, tempere com sal, tampe a panela e cozinhe por 20 minutos.<br/> Escorra a lentilha, reserve a água do cozimento e a lentilha.<br/> Depois de refogar bem o alho no azeite e o arroz, tempere com sal, coloque a água do cozimento da lentilha, tampe a panela e cozinhe por +/- 15 minutos.<br/> Depois misture o arroz cozido com a lentilha cozida e reserve.', 'teste.jpg', 0, 0, 0, 'receita1', 1);
 
 insert into receitas values (receita_seq.NEXTVAL, 'Cebola Frita', 3, 1, 3, 19, 'Com uma faca afiada corte as cebolas em fatias bem finas e seque bem com um papel absorvente.
 Numa tigela com a farinha de trigo tempere com sal a gosto, passe as fatias de cebola nessa mistura, retire o excesso de farinha de trigo e frite as fatias em óleo quente até dourar.
-Retire do óleo com a ajuda de uma escumadeira e coloque em papel absorvente
-Montagem: Sirva o arroz com lentilha, o kibe assado e a cebola frita', 'teste.jpg', 0, 0, 0, 'receita1', 1);
+Retire do óleo com a ajuda de uma escumadeira e coloque em papel absorvente.', 'teste.jpg', 0, 0, 0, 'receita1', 1);
 
 insert into receitas values (receita_seq.NEXTVAL, 'Torta salgada da vovo', 2, 1, 5, 160, 'Misture numa tigela ¼ xícara (chá) de azeite, ¼ xícara (chá) de pimentão verde bem picadinho, ¼ xícara (chá) de cebola picada, 1 colher (sopa) de pimenta dedo-de-moça sem semente picadinha, 2 ovos, 1 xícara (chá) de muçarela ralada no ralo grosso, ½ copo de iogurte natural e salsinha picadinha a gosto. Adicione 1 xícara (chá) de farinha de trigo, ½ colher (sopa) de sal, ½ colher (sopa) de fermento em pó e mexa bem.
 Espalhe a massa numa forma para pizza redonda (30 cm de diâmetro) untada com manteiga e enfarinhada. Leve para assar em forno pré-aquecido a 200° C por 15 minutos.
@@ -110,45 +106,45 @@ Distribua em forminhas de petit gâteau ou de empada untadas com manteiga, sem e
 Desenforme e sirva em seguida.', 'teste.jpg', 0, 0, 0, 'receita1', 1);
 
 --receitasIngredientes
---cebola
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 20, 7, 6, null, 2);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 20, 8, 2, null, 500);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 20, 6, 5, null, 0);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 20, 9, 9, null, 5);
-
---torta
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 21, 4, 12, null, 60);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 21, 10, 2, null, 40);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 21, 7, 2, null, 40);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 21, 11, 8, null, 1);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 21, 12, 6, null, 2);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 21, 13, 7, null, 1);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 21, 14, 2, null, 85);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 21, 15, 5, null, 0);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 21, 8, 7, null, 1);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 21, 6, 8, null, 1/2);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 21, 16, 8, null, 1/2);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 21, 13, 5, null, 0);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 21, 17, 5, null, 0);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 21, 25, 5, null, 0);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 21, 18, 5, null, 0);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 21, 19, 5, null, 0);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 21, 4, 5, null, 0);
-
---petit
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 22, 20, 8, null, 5);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 22, 21, 11, null, 4);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 22, 22, 8, null, 4);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 22, 23, 8, null, 5);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 22, 12, 6, null, 2);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 22, 24, 8, null, 2);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 22, 9, 8, null, 2);
 
 --arroz
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 19, 20, 8, null, 5);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 19, 21, 11, null, 4);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 19, 22, 8, null, 2);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 19, 23, 8, null, 5);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 19, 12, 6, null, 2);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 19, 24, 6, null, 2);
-insert into receitas_ingredientes values(receita_seq.NEXTVAL, 19, 8, 8, null, 2);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 1, 1, 1, null, 1);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 1, 2, 2, null, 250);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 1, 3, 3, null, 2);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 1, 4, 4, null, 1);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 1, 5, 2, null, 250);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 1, 6, 5, null, 0);
+
+--cebola
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 2, 7, 6, null, 2);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 2, 8, 2, null, 500);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 2, 6, 5, null, 0);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 2, 9, 9, null, 5);
+
+--torta
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 4, 12, null, 60);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 10, 2, null, 40);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 7, 2, null, 40);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 11, 8, null, 1);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 12, 6, null, 2);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 13, 7, null, 1);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 14, 2, null, 85);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 15, 5, null, 0);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 8, 7, null, 1);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 6, 8, null, 1/2);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 16, 8, null, 1/2);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 13, 5, null, 0);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 17, 5, null, 0);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 25, 5, null, 0);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 18, 5, null, 0);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 19, 5, null, 0);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 3, 4, 5, null, 0);
+
+--petit
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 4, 20, 8, null, 5);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 4, 21, 11, null, 4);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 4, 22, 8, null, 4);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 4, 23, 8, null, 5);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 4, 12, 6, null, 2);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 4, 24, 8, null, 2);
+insert into receitas_ingredientes values(receita_seq.NEXTVAL, 4, 9, 8, null, 2);
