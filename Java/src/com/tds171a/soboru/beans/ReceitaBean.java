@@ -192,7 +192,7 @@ public class ReceitaBean extends BeanBase<Receita> {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Deletado com sucesso!", null));
 		} else {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel deletar. Verifique se existem ingredientes"
-					+ "ou utensilios anexados.", null));
+					+ ",utensilios, comentarios ou pontuações anexados.", null));
 			return route_base + DELETAR_PAGE;
 		}
 
