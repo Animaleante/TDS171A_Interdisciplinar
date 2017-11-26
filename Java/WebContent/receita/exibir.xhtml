@@ -103,7 +103,7 @@
 					<div class="comments" id="comments">
 						<!-- 	                            <h2>5 comments</h2> -->
 						<h2>
-							<h:outputText value="#{receitaSiteBean.vo.comentarios.size()}" /> comentário<c:if test="#{receitaSiteBean.vo.comentarios.size()>1}">s</c:if>
+							<h:outputText value="#{receitaSiteBean.vo.comentarios.size()}" /> comentário<c:if test="#{receitaSiteBean.vo.comentarios.size()==0 || receitaSiteBean.vo.comentarios.size()>1}">s</c:if>
 						</h2>
 						<ol class="comment-list">
 							<!--comment-->
