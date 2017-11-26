@@ -34,7 +34,7 @@ public class MedidaDAO implements IDAO<Medida> {
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" values(medidas_seq.NEXTVAL, ?,?)");
+			PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" values(medida_seq.NEXTVAL, ?,?)");
 			sttm.setString(1, medida.getNome());
 			sttm.setString(2, medida.getAbreviacao());
 
@@ -47,6 +47,8 @@ public class MedidaDAO implements IDAO<Medida> {
 
 			return rowsAffected > 0;
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
 			if (connection != null)
@@ -61,7 +63,7 @@ public class MedidaDAO implements IDAO<Medida> {
 	}
 
 	/**
-	 * M�todo para trazer uma lista de todos as Medidaa
+	 * M�todo para trazer uma lista de todos as Medida
 	 * @return
 	 */
 	@Override
@@ -70,7 +72,7 @@ public class MedidaDAO implements IDAO<Medida> {
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName);
+			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName + " order by nome");
 
 			ResultSet rs = sttm.executeQuery();
 
@@ -91,8 +93,10 @@ public class MedidaDAO implements IDAO<Medida> {
 			sttm = null;
 
 			return list;
-		} catch (SQLException Except) {
-			Except.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} finally {
 			if (connection != null)
 				try {
@@ -116,7 +120,7 @@ public class MedidaDAO implements IDAO<Medida> {
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("update "+tableName+" set nome = ?, abreveacao = ? where id = ?");
+			PreparedStatement sttm = connection.prepareStatement("update "+tableName+" set nome = ?, abreviacao = ? where id = ?");
 			sttm.setString(1, medida.getNome());
 			sttm.setString(2, medida.getAbreviacao());
 			sttm.setInt(3, medida.getId());
@@ -130,6 +134,8 @@ public class MedidaDAO implements IDAO<Medida> {
 
 			return rowsAffected > 0;
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
 			if (connection != null)
@@ -167,6 +173,8 @@ public class MedidaDAO implements IDAO<Medida> {
 			return rowsAffected > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} finally {
 			if (connection != null)
 				try {
@@ -177,5 +185,49 @@ public class MedidaDAO implements IDAO<Medida> {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Seleciona uma medida e cria o objeto
+	 */
+	@Override
+	public Medida selecionar(int voId) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+
+			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" where id = ?");
+			sttm.setInt(1, voId);
+
+			ResultSet rs = sttm.executeQuery();
+
+			Medida medida = null;
+			while(rs.next()) {
+				medida = new Medida();
+				medida.setId(rs.getInt("id"));
+				medida.setNome(rs.getString("nome"));
+				medida.setAbreviacao(rs.getString("abreviacao"));
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return medida;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return null;
 	}
 }

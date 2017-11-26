@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Soboru.Models.Sexo>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = ViewBag.ControllerName;
+    ViewBag.Categoria = ViewBag.categoria;
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Message"]
+    </div>
+}
+
+<main class="main" role="main">
+    <div class="wrap clearfix">
+        <nav class="breadcrumbs">
+            <ul>
+                <li><a href="/" title="Home">Home</a></li>
+                <li><a href="#">Cadastro</a></li>
+                <li>Sexo</li>
+            </ul>
+        </nav>
+
+        <div class="row">
+            <header class="s-title">
+                <h1>Sexos</h1>
+            </header>
+
+            <section class="content full-width">
+                <div class="container">
+                    <table class="table table-stiped table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Nome)
+                                </th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nome)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                                        @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
+                                        <a href="#" class="modelItemRemove" data-toggle="modal"
+                                           data-target="#deleteConfirmationModal" data-modelitemid="@item.Id" data-modelitemname="@item.Nome">Remover</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <p class="bwrap">
+                        @Html.ActionLink("Criar Novo", "Create", null, new { @class = "button" })
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+
+@Html.Partial("~/Views/Shared/_DeleteModal.cshtml")
+
+@section Scripts {
+    <script src="@Url.Content("~/Scripts/DataTables/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/DataTables/dataTables.bootstrap.min.js")"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$(".table").dataTable({
+            //    "order": [[1, "asc"]]
+            //});
+
+            registerDeleteModalInfo();
+        });
+    </script>
+}

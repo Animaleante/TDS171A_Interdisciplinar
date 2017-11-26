@@ -1,14 +1,66 @@
-﻿<ul class="nav nav-pills nav-stacked">
-    <li role="presentation" id="nav_home">
-        @Html.ActionLink("Home", "Index", "Home")
-    </li>
-    <li role="presentation" id="nav_ingredientes">
-        @Html.ActionLink("Ingredientes", "Index", "Ingredientes")
-    </li>
-    <li role="presentation" id="nav_utensilios">
-        @Html.ActionLink("Utensilios", "Index", "Utensilios")
-    </li>
-    <li role="presentation" id="nav_tags">
-        @Html.ActionLink("Tags", "Index", "Tags")
-    </li>
-</ul>
+﻿<header class="head" role="banner">
+    <div class="wrap clearfix">
+        <a href="index.html" title="SocialChef" class="logo"><img src="/images/ico/logo.png" alt="SocialChef logo" /></a>
+
+        <nav class="main-nav" role="navigation" id="menu">
+            <ul>
+                <li class="current-menu-item" id="nav_home">
+                    <a href="/" title="Home"><span>Home</span></a>
+                </li>
+                <li id="nav_cadastro">
+                    @*<a href="recipes.html" title="Cadastro"><span>Recipes</span></a>*@
+                    <a href="#" title="Cadastro"><span>Cadastro</span></a>
+                    <ul>
+                        <li role="presentation" id="nav_ingredientes">
+                            @Html.ActionLink("Ingredientes", "Index", "Ingredientes")
+                        </li>
+                        <li role="presentation" id="nav_utensilios">
+                            @Html.ActionLink("Utensilios", "Index", "Utensilios")
+                        </li>
+                        <li role="presentation" id="nav_tags">
+                            @Html.ActionLink("Categorias", "Index", "Categorias")
+                        </li>
+                        <li role="presentation" id="nav_tags">
+                            @Html.ActionLink("Medidas", "Index", "Medidas")
+                        </li>
+                        <li role="presentation" id="nav_tags">
+                            @Html.ActionLink("Tags", "Index", "Tags")
+                        </li>
+                        <li role="presentation" id="nav_tags">
+                            @Html.ActionLink("Sexos", "Index", "Sexos")
+                        </li>
+                        <li role="presentation" id="nav_tags">
+                            @Html.ActionLink("Usuarios", "Index", "Usuarios")
+                        </li>
+
+                    </ul>
+                </li>
+                <li id="nav_contact">                    
+                    @*@Html.ActionLink("Contato", "Index", "Contato")*@
+                    <a href="/contato" title="Contato"><span>Contato</span></a>
+                </li>
+
+            </ul>
+        </nav>
+
+        <nav class="user-nav" role="navigation">
+            <ul>
+                <li class="light">
+                    <a href="#" title="Search for recipes">
+                        <i class="icon icon-themeenergy_search"></i> <span>Search for recipes</span>
+                    </a>
+                </li>
+                <li class="medium">
+                    <a href="#" title="My account">
+                        <i class="icon icon-themeenergy_chef-hat"></i> <span>My account</span>
+                    </a>
+                </li>
+                <li class="dark">
+                    <a href="#" title="Submit a recipe">
+                        <i class="icon icon-themeenergy_fork-spoon"></i> <span>Submit a recipe</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

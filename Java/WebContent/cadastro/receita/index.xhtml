@@ -1,0 +1,82 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	template="/templates/_layout.xhtml">
+	<ui:define name="content">
+		<main class="main" role="main">
+		    <div class="wrap clearfix">
+		        <nav class="breadcrumbs">
+		            <ul>
+		                <li><a href="/" title="Home">Home</a></li>
+		                <li><a href="#">Cadastro</a></li>
+		                <li>Receita</li>
+		            </ul>
+		        </nav>
+		
+		        <div class="row">
+		            <header class="s-title">
+		                <h1>Receitas</h1>
+		            </header>
+		
+		            <section class="content full-width">
+		                <div class="container">
+							<h:form>
+								<h:messages globalOnly="true" errorClass="error"/>
+							</h:form>
+							
+							<c:choose>
+								<c:when test="${not empty receitaBean.lista}">
+									<table class="table table-stiped table-hover">
+							            <thead>
+							                <tr>
+							                    <th>Nome</th>
+							                    <th>Aprovado</th>
+							                    <th>Ações</th>
+							                </tr>
+							            </thead>
+							            <tbody>
+							            	<c:forEach items="#{receitaBean.lista}" var="receita">
+							                    <tr>
+							                        <td>#{receita.nome}</td>
+							                        <td>#{receitaBean.isAprovado(receita)}</td>
+							                        <td>
+														<h:form>
+															<h:commandLink action="#{receitaBean.exibir(receita)}" value="Detalhes"></h:commandLink> |
+															<h:commandLink action="#{receitaIngredienteBean.criar(receita.id)}" value="Ingredientes"></h:commandLink> |
+															<h:commandLink action="#{receitaUtensilioBean.criar(receita.id)}" value="Utensilios"></h:commandLink> |
+															<h:commandLink action="#{receitaBean.editar(receita)}" value="Editar"></h:commandLink> |
+															<h:commandLink action="#{receitaBean.deletar(receita)}" value="Deletar"></h:commandLink>
+														</h:form>
+							                        </td>
+							                    </tr>
+							                </c:forEach>
+							            </tbody>
+							        </table>
+						        </c:when>
+						        <c:otherwise>
+						        	<p>A lista está vazia.</p>
+						        </c:otherwise>
+					        </c:choose>
+								
+							<div class="f-row">
+								<h:form>
+									<h:commandButton action="#{receitaBean.criar()}" immediate="true" value="Criar novo" />
+								</h:form>
+							</div>
+		                </div>
+		            </section>
+		        </div>
+		    </div>
+		</main>
+	</ui:define>
+	
+	<ui:define name="script">
+		<h:outputScript>
+			navName = "cadastro";
+			subNavName = "receitas";
+		</h:outputScript>
+	</ui:define>
+</ui:composition>

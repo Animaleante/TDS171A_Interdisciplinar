@@ -10,12 +10,7 @@ import com.tds171a.soboru.vos.Utensilio;
  * @author Diogo
  *
  */
-public class UtensilioController {
-
-	/**
-	 * Parï¿½metro de model do Utensilio
-	 */
-	private UtensilioModel model;
+public class UtensilioController extends ControllerBase<Utensilio> {
 
 	/**
 	 * Construtor da classe de controller do Utensilio
@@ -25,37 +20,11 @@ public class UtensilioController {
 	}
 
 	/**
-	 * Mï¿½todo para incluir um novo Utensilio
-	 * @param utensilio
+	 * Trás os utensilios existentes na receita.
+	 * @param receitaId
 	 * @return
 	 */
-	public boolean incluir(Utensilio utensilio) {
-		return model.incluir(utensilio);
-	}
-
-	/**
-	 * Mï¿½todo para trazer uma lista de todos os Utensilios
-	 * @return
-	 */
-	public List<Utensilio> listar() {
-		return model.listar();
-	}
-
-	/**
-	 * Mï¿½todo para atualizar um Utensilio jï¿½ registrado
-	 * @param utensilio
-	 * @return
-	 */
-	public boolean atualizar(Utensilio utensilio) {
-		return model.atualizar(utensilio);
-	}
-
-	/**
-	 * Mï¿½todo para remover um Utensilio
-	 * @param utensilioId
-	 * @return
-	 */
-	public boolean remover(int utensilioId) {
-		return model.remover(utensilioId);
+	public List<Utensilio> selecionarPorReceita(int receitaId) {
+		return ((UtensilioModel) model).selecionarPorReceita(receitaId);
 	}
 }

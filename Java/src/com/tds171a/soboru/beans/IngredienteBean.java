@@ -1,10 +1,4 @@
-/**
- *
- */
 package com.tds171a.soboru.beans;
-
-import java.io.Serializable;
-import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -17,132 +11,74 @@ import com.tds171a.soboru.vos.Ingrediente;
 @Named("ingredienteBean")
 @SessionScoped
 /**
- * @author Sony
- *
+ * Criação do bean herando de beanbase passando
+ * o vo utilizada.
  */
-public class IngredienteBean implements Serializable {
+public class IngredienteBean extends BeanBase<Ingrediente> {
 
-	/**
-	 *
-	 */
+	 /**
+     *criando o serial do bean
+     */
 	private static final long serialVersionUID = 8410408634179869866L;
 
-	private String routeBase = "/ingrediente/";
-
-	private IngredienteController controller;
-	private Ingrediente ingrediente;
-	private List<Ingrediente> ingredienteLista;
+	/**
+     *Construtor setando a rota e qual
+     *será passado para o navegador.
+     */
+	public IngredienteBean() {
+		route_base = "/cadastro/ingrediente/";
+		controller = new IngredienteController();
+		setVo(new Ingrediente());
+	}
 
 	/**
-	 *
-	 */
-	public IngredienteBean() {
-		controller = new IngredienteController();
-		setIngrediente(new Ingrediente());
-	}
-
-	public String listar() {
-		setIngredienteLista(controller.listar());
-
-		return routeBase + "index";
-	}
-
-	public String incluir() {
-	    FacesContext context = FacesContext.getCurrentInstance();
-	    System.out.println("passou incluir ingrediente.");
-	    if(getIngrediente().getNome().isEmpty()) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
-	        return routeBase + "criar";
-	    }
-
-	    if(controller.incluir(getIngrediente())) {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Ingrediente cadastrado com sucesso!", null));
-	    } else {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingrediente nao foi cadastrado!", null));
-            return routeBase + "criar";
-	    }
-
-	    setIngrediente(new Ingrediente());
-
-	    return listar();
-	}
-
-	public String editar(Ingrediente ingrediente) {
-		setIngrediente(ingrediente);
-		return routeBase + "editar";
-	}
-
-	public String editar() {
-	    FacesContext context = FacesContext.getCurrentInstance();
-
-	    if(getIngrediente().getNome().isEmpty()) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
-	        return routeBase + "criar";
-	    }
-
-		if(controller.atualizar(getIngrediente())) {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Ingrediente atualizado com sucesso!", null));
-	    } else {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingrediente nao foi atualizado.", null));
-            return routeBase + "editar";
-		}
-
-		setIngrediente(new Ingrediente());
-
-	    return listar();
-	}
-
-	public String deletar(Ingrediente ingrediente) {
-		setIngrediente(ingrediente);
-		return routeBase + "deletar";
-	}
-
+     * Override do deletar, onde verifica a sessao, 
+     * se existe um ítem válido e se não houver, retorna a 
+     * pagina de criação.
+     */
+	@Override
 	public String deletar() {
 	    FacesContext context = FacesContext.getCurrentInstance();
 
-	    if(getIngrediente().getId() == -1) {
-	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingrediente nao pode ser vazio!", null));
-	        return routeBase + "criar";
+	    if(getVo().getId() == -1) {
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Item nao pode ser vazio!", null));
+	        return route_base + CRIAR_PAGE;
 	    }
 
-		if(controller.remover(getIngrediente().getId())) {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Ingrediente deletado com sucesso!", null));
+		if(controller.remover(getVo().getId())) {
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Deletado com sucesso!", null));
 	    } else {
-	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingrediente nao foi deletado.", null));
-            return routeBase + "deletar";
+	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel deletar.", null));
+            return route_base + DELETAR_PAGE;
 		}
 
-		setIngrediente(new Ingrediente());
+		limparVo();
 
 	    return listar();
 	}
-
+	
 	/**
-	 * @return the ingrediente
+	 * Verifica os dados da pagina de interação e se faltar algum dado 
+	 * informa ao cliente.
 	 */
-	public Ingrediente getIngrediente() {
-		return ingrediente;
+	@Override
+	public boolean validarDados() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		
+		if(getVo().getNome().isEmpty()) {
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome nao pode ser vazio!", null));
+	        return false;
+	    }
+		
+		return true;
 	}
 
 	/**
-	 * @param ingrediente the ingrediente to set
+	 * Cria uma nova vo para limpar os campos para um novo registro
+	 * sem interferencia de dados cadastrados anteriormente.
 	 */
-	public void setIngrediente(Ingrediente ingrediente) {
-		this.ingrediente = ingrediente;
+	@Override
+	public void limparVo() {
+		setVo(new Ingrediente());
 	}
-
-	/**
-	 * @return the ingredienteLista
-	 */
-	public List<Ingrediente> getIngredienteLista() {
-		return ingredienteLista;
-	}
-
-	/**
-	 * @param ingredienteLista the ingredienteLista to set
-	 */
-	public void setIngredienteLista(List<Ingrediente> ingredienteLista) {
-		this.ingredienteLista = ingredienteLista;
-	}
-
 }

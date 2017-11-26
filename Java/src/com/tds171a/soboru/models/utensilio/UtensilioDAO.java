@@ -34,7 +34,7 @@ public class UtensilioDAO implements IDAO<Utensilio> {
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" values(utensilios_seq.NEXTVAL, ?)");
+			PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" values(utensilio_seq.NEXTVAL, ?)");
 			sttm.setString(1, utensilio.getNome());
 
 			int rowsAffected = sttm.executeUpdate();
@@ -46,6 +46,8 @@ public class UtensilioDAO implements IDAO<Utensilio> {
 
 			return rowsAffected > 0;
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
 			if (connection != null)
@@ -69,7 +71,7 @@ public class UtensilioDAO implements IDAO<Utensilio> {
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName);
+			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" order by nome");
 
 			ResultSet rs = sttm.executeQuery();
 
@@ -89,8 +91,10 @@ public class UtensilioDAO implements IDAO<Utensilio> {
 			sttm = null;
 
 			return list;
-		} catch (SQLException Except) {
-			Except.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} finally {
 			if (connection != null)
 				try {
@@ -128,6 +132,8 @@ public class UtensilioDAO implements IDAO<Utensilio> {
 			return rowsAffected > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} finally {
 			if (connection != null)
 				try {
@@ -164,6 +170,8 @@ public class UtensilioDAO implements IDAO<Utensilio> {
 			return rowsAffected > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} finally {
 			if (connection != null)
 				try {
@@ -174,5 +182,98 @@ public class UtensilioDAO implements IDAO<Utensilio> {
 		}
 
 		return false;
+	}
+	
+	/**
+	 * Trás o objeto do banco.
+	 * @param voId
+	 * @return
+	 */
+	@Override
+	public Utensilio selecionar(int voId) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+
+			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" where id = ?");
+			sttm.setInt(1, voId);
+
+			ResultSet rs = sttm.executeQuery();
+
+			Utensilio utensilio = null;
+			while(rs.next()) {
+				utensilio = new Utensilio();
+				utensilio.setId(rs.getInt("id"));
+				utensilio.setNome(rs.getString("nome"));
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return utensilio;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return null;
+	}
+	
+	/**
+	 * Seleciona os utensilios de uma receita.
+	 * @param receitaId
+	 * @return
+	 */
+	public List<Utensilio> selecionarPorReceita(int receitaId) {
+        Connection connection = null;
+        try {
+            connection = Utils.createConnection();
+
+            
+            PreparedStatement sttm = connection.prepareStatement("select u.id, u.nome from "+tableName+" u inner join receitas_utensilios ru on ru.id_utensilio = u.id where ru.id_receita = ?");
+            //PreparedStatement sttm = connection.prepareStatement("select u.id, u.nome from "+tableName+" u inner join receitas_utensilios ru on ru.id_receita = ?");
+            sttm.setInt(1, receitaId);
+
+            ResultSet rs = sttm.executeQuery();
+
+            List<Utensilio> list = new ArrayList<Utensilio>();
+            Utensilio utensilio;
+            while(rs.next()) {
+            	utensilio = new Utensilio();
+            	utensilio.setId(rs.getInt("id"));
+            	utensilio.setNome(rs.getString("nome"));
+                list.add(utensilio);
+            }
+
+            if (sttm != null)
+                sttm.close();
+
+            sttm = null;
+
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+            if (connection != null)
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
+
+        return null;
 	}
 }

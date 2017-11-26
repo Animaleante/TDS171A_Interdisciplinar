@@ -1,5 +1,4 @@
 <header class="head" role="banner">
-    <!--wrap-->
     <div class="wrap clearfix">
         <a href="/" title="SocialChef" class="logo"><img src="/images/ico/logo.png" alt="SocialChef logo" /></a>
         

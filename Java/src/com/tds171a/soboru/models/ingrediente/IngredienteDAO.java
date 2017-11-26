@@ -19,12 +19,12 @@ import com.tds171a.soboru.vos.Ingrediente;
 public class IngredienteDAO implements IDAO<Ingrediente> {
 
 	/**
-	 * Par�metro com nome da tabela referente a esse DAO
+	 * Parametro com nome da tabela referente a esse DAO
 	 */
 	private String tableName = "ingredientes";
 
 	/**
-	 * M�todo para incluir um novo Ingrediente
+	 * Metodo para incluir um novo Ingrediente
 	 * @param ingrediente
 	 * @return
 	 */
@@ -34,7 +34,7 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" (id, nome) values(ingredientes_seq.NEXTVAL, ?)");
+			PreparedStatement sttm = connection.prepareStatement("insert into "+tableName+" (id, nome) values(ingrediente_seq.NEXTVAL, ?)");
 			sttm.setString(1, ingrediente.getNome());
 
 			int rowsAffected = sttm.executeUpdate();
@@ -45,7 +45,12 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 			sttm = null;
 
 			return rowsAffected > 0;
-		} catch (SQLException e) {
+		} /*catch(SQLIntegrityConstraintViolationException e) {
+			e.printStackTrace();
+			// TODO - Warn user that name already exists
+		}*/ catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
 			if (connection != null)
@@ -60,7 +65,7 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 	}
 
 	/**
-	 * M�todo para trazer uma lista de todos os Ingredientes
+	 * Metodo para trazer uma lista de todos os Ingredientes
 	 * @return
 	 */
 	@Override
@@ -69,7 +74,7 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 		try {
 			connection = Utils.createConnection();
 
-			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName);
+			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" order by nome asc");
 
 			ResultSet rs = sttm.executeQuery();
 
@@ -89,8 +94,10 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 			sttm = null;
 
 			return list;
-		} catch (SQLException Except) {
-			Except.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} finally {
 			if (connection != null)
 				try {
@@ -104,7 +111,7 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 	}
 
 	/**
-	 * M�todo para atualizar um Ingrediente j� registrado
+	 * Metodo para atualizar um Ingrediente ja registrado
 	 * @param ingrediente
 	 * @return
 	 */
@@ -128,6 +135,8 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 			return rowsAffected > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} finally {
 			if (connection != null)
 				try {
@@ -141,7 +150,7 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 	}
 
 	/**
-	 * M�todo para remover um Ingrediente
+	 * Metodo para remover um Ingrediente
 	 * @param ingredienteId
 	 * @return
 	 */
@@ -164,6 +173,8 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 			return rowsAffected > 0;
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} finally {
 			if (connection != null)
 				try {
@@ -174,5 +185,49 @@ public class IngredienteDAO implements IDAO<Ingrediente> {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Seleciona um ingrediente pelo ID e monta
+	 * o objeto
+	 */
+	@Override
+	public Ingrediente selecionar(int voId) {
+		Connection connection = null;
+		try {
+			connection = Utils.createConnection();
+
+			PreparedStatement sttm = connection.prepareStatement("select * from "+tableName+" where id = ?");
+			sttm.setInt(1, voId);
+
+			ResultSet rs = sttm.executeQuery();
+
+			Ingrediente ingrediente = null;
+			while(rs.next()) {
+				ingrediente = new Ingrediente();
+				ingrediente.setId(rs.getInt("id"));
+				ingrediente.setNome(rs.getString("nome"));
+			}
+
+			if (sttm != null)
+				sttm.close();
+
+			sttm = null;
+
+			return ingrediente;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+
+		return null;
 	}
 }
