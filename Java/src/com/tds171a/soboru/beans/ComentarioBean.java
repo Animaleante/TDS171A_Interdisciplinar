@@ -48,6 +48,7 @@ public class ComentarioBean extends BeanBase<Comentario> {
 	 * depois faz um redirect para a página da 
 	 * receita.
 	 */
+	@Override
 	public String incluir(){
 		getVo().setUsuarioId(SessionContext.getInstance().getUsuarioLogado().getId());
 		

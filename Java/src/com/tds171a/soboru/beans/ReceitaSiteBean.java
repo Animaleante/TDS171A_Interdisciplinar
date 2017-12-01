@@ -64,6 +64,8 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	private List<Medida> medidas;
 	private List<Utensilio> utensilios;
 	
+	private Comentario comentario;
+	
 	/**
 	 * Variável de manipulação de imagem.
 	 */
@@ -85,9 +87,12 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 		comentarioController = new ComentarioController();
 
 		setVo(new Receita());
+		
 		setListaIngredientes(new ArrayList<ReceitaIngrediente>());
 		setIngredientes(new ArrayList<Ingrediente>());
 		setMedidas(new ArrayList<Medida>());
+		
+		setComentario(new Comentario());
 	}
 
 	/**
@@ -274,6 +279,30 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 		adicionarReceitaIngrediente();
 		setListaUtensilios(new ArrayList<Utensilio>());
 		adicionarUtensilio();
+	}
+	
+	/**
+	 * Método que inclui um novo comentario nessa receita com o usuario logado
+	 * @param receitaId
+	 * @return
+	 */
+	public String incluirComentario(int receitaId) {
+		getComentario().setUsuarioId(SessionContext.getInstance().getUsuarioLogado().getId());
+		getComentario().setReceitaId(getVo().getId());
+
+//		FacesContext context = FacesContext.getCurrentInstance();
+
+	    if(comentarioController.incluir(getComentario())) {
+		    setComentario(new Comentario());
+//	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_INFO, "Cadastrado com sucesso!", null));
+	    } else {
+//	        context.addMessage(null,  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nao foi possivel fazer o cadastro!", null));
+//			return exibir(getVo());
+	    }
+	    
+//	    setComentario(new Comentario());
+		
+		return exibir(getVo());
 	}
 
 	/**
@@ -475,5 +504,19 @@ public class ReceitaSiteBean extends BeanBase<Receita> {
 	 */
 	public void setUtensilios(List<Utensilio> utensilios) {
 		this.utensilios = utensilios;
+	}
+
+	/**
+	 * @return the comentario
+	 */
+	public Comentario getComentario() {
+		return comentario;
+	}
+
+	/**
+	 * @param comentario the comentario to set
+	 */
+	public void setComentario(Comentario comentario) {
+		this.comentario = comentario;
 	}
 }

@@ -160,12 +160,12 @@
 								</p>
 								<h:form>
 									<div class="f-row">
-										<h:inputTextarea value="#{comentarioBean.vo.body}" />
+										<h:inputTextarea value="#{receitaSiteBean.comentario.body}" required="true" />
 									</div>
 
 									<div class="f-row">
 										<div class="third bwrap">
-											<h:commandButton action="#{comentarioBean.incluir(receitaSiteBean.vo.id)}" value="Enviar" />
+											<h:commandButton action="#{receitaSiteBean.incluirComentario(receitaSiteBean.vo.id)}" value="Enviar" />
 										</div>
 									</div>
 								</h:form>
