@@ -38,7 +38,8 @@
 							<article class="two-third">
 								<div class="image">
 									<a href="#">
-										<h:graphicImage value="/images/#{receitaSiteBean.vo.imgPath}" style="width: 100%;" />
+										<h:graphicImage value="/images/#{receitaSiteBean.vo.imgPath}" style="width: 100%;" rendered="#{receitaSiteBean.vo.imgPath != null}" />
+										<h:graphicImage value="http://via.placeholder.com/640x480" style="width: 100%;" rendered="#{receitaSiteBean.vo.imgPath == null}" />
 									</a>
 								</div>
 								<div class="instructions">

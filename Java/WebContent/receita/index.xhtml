@@ -32,7 +32,8 @@
 								<!--item-->
 								<div class="entry one-fourth">
 									<figure>
-										<h:graphicImage value="/images/#{receita.imgPath}" />
+										<h:graphicImage value="/images/#{receita.imgPath}" rendered="#{receita.imgPath != null}" />
+										<h:graphicImage value="http://via.placeholder.com/640x480" rendered="#{receita.imgPath == null}" />
 										<figcaption>
 											<h:form>
 												<h:commandLink action="#{receitaSiteBean.exibir(receita)}" value="">
