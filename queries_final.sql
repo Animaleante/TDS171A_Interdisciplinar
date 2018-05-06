@@ -356,3 +356,5 @@ insert into receitas_ingredientes values(receita_seq.NEXTVAL, 4, 12, 6, null, 2)
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 4, 24, 6, null, 2);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 4, 8, 8, null, 2);
 insert into receitas_ingredientes values(receita_seq.NEXTVAL, 4, 6, 5, null, 0);
+
+commit;
